@@ -1,0 +1,1166 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGH Studio - Кинематографическая визуализация</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        
+        :root {
+            --color-dark: #0A0A0A;
+            --color-dark-alt: #121212;
+            --color-dark-light: #1A1A1A;
+            --color-gold: #D4AF37;
+            --color-silver: #C0C0C0;
+            --color-white: #FFFFFF;
+            --max-width: 1200px;
+            --transition-fast: 180ms;
+            --transition-medium: 320ms;
+            --header-height: 72px;
+            --topbar-height: 36px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--color-dark);
+            color: var(--color-white);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+        /* Top bar */
+        .top-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: var(--topbar-height);
+            background: var(--color-dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+            z-index: 1400;
+            display: flex;
+            align-items: center
+        }
+
+        .top-bar .top-bar-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            font-size: 0.92rem
+        }
+
+        .top-bar a {
+            color: var(--color-silver)
+        }
+
+        /* Header */
+        .main-header {
+            position: fixed;
+            top: var(--topbar-height);
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            z-index: 1300;
+            padding: 0 20px;
+            transition: background-color var(--transition-medium) ease, box-shadow var(--transition-medium) ease
+        }
+
+        .main-header.scrolled {
+            background: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5)
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%
+        }
+
+        .logo a {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--color-gold);
+            font-size: 1.6rem
+        }
+
+        .main-nav ul {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .main-nav ul li {
+            list-style: none;
+            position: relative
+        }
+
+        .main-nav ul li a {
+            display: inline-block;
+            padding: 8px 6px;
+            font-weight: 600;
+            position: relative;
+            color: var(--color-silver);
+            transition: color var(--transition-fast)
+        }
+
+        /* underline on hover, do NOT change bg color to gold to prevent text invisibility */
+        .main-nav ul li a::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -6px;
+            height: 2px;
+            width: 0;
+            background: var(--color-gold);
+            transition: width var(--transition-fast)
+        }
+
+        .main-nav ul li a:hover::after,
+        .main-nav ul li a.active::after {
+            width: 100%
+        }
+
+        .main-nav ul li a:hover {
+            color: var(--color-white)
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            background: rgba(10, 10, 10, 0.98);
+            border-top: 3px solid var(--color-gold);
+            min-width: 200px;
+            padding: 6px 0;
+            border-radius: 6px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5)
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 14px;
+            color: var(--color-silver)
+        }
+
+        .header-cta {
+            margin-left: 14px
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 1.3rem;
+            color: var(--color-gold);
+            cursor: pointer
+        }
+
+        /* Hero */
+        .hero-section {
+            position: relative;
+            min-height: calc(100vh - var(--topbar-height) - var(--header-height));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px 0;
+            overflow: hidden
+        }
+
+        .hero-video {
+            position: absolute;
+            inset: -10% -10% auto -10%;
+            min-width: 120%;
+            min-height: 120%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.6);
+            transition: transform var(--transition-medium)
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: -1
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 920px;
+            padding: 0 16px
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            color: var(--color-white)
+        }
+
+        .hero-sub {
+            color: var(--color-silver);
+            margin-bottom: 18px
+        }
+
+        .hero-cta-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 10px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: transform var(--transition-fast), box-shadow var(--transition-fast)
+        }
+
+        .btn-primary {
+            background: var(--color-gold);
+            color: #0a0a0a
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-gold);
+            border: 2px solid var(--color-gold);
+            font-weight: 600
+        }
+
+        .btn:hover {
+            transform: translateY(-4px)
+        }
+
+        .btn-hero {
+            padding: 12px 26px;
+            border-radius: 10px
+        }
+
+        /* Sections */
+        section {
+            padding: 70px 0
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            color: var(--color-gold);
+            text-align: center;
+            margin-bottom: 28px
+        }
+
+        p {
+            color: var(--color-silver)
+        }
+
+        .mgh-cards {
+            display: flex;
+            gap: 22px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .mgh-card {
+            background: var(--color-dark-light);
+            padding: 26px;
+            border-radius: 10px;
+            max-width: 320px;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+            border: 1px solid transparent;
+            transition: transform var(--transition-medium), box-shadow var(--transition-medium)
+        }
+
+        .mgh-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-gold);
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65)
+        }
+
+        /* Portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-bottom: 18px
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+            transition: transform 500ms
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 700ms
+        }
+
+        .portfolio-item .overlay-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.6));
+            opacity: 0;
+            transform: translateY(12px);
+            transition: opacity 350ms, transform 350ms
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.06)
+        }
+
+        .portfolio-item:hover .overlay-content {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .portfolio-item h4 {
+            color: var(--color-white);
+            margin-bottom: 6px
+        }
+
+        .portfolio-item span {
+            color: var(--color-silver)
+        }
+
+        /* Centered section CTA wrapper (fix for centering two buttons) */
+        .section-cta {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: 18px
+        }
+
+        /* Services */
+        .services-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap
+        }
+
+        .service-item {
+            background: var(--color-dark-light);
+            padding: 24px;
+            border-radius: 10px;
+            max-width: 360px;
+            text-align: center;
+            transition: transform var(--transition-medium);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45)
+        }
+
+        .service-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5)
+        }
+
+        /* Testimonials (Carousel style) */
+        .testimonials-section {
+            position: relative;
+            background: linear-gradient(180deg, rgba(10, 10, 10, 0.95), rgba(6, 6, 6, 0.95));
+            padding: 80px 0
+        }
+
+        .testimonial-wrap {
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative
+        }
+
+        .testimonial-inner {
+            overflow: hidden;
+            border-radius: 12px
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 600ms cubic-bezier(.22, .9, .28, 1);
+            will-change: transform
+        }
+
+        .testimonial-item {
+            min-width: 100%;
+            padding: 34px;
+            background: linear-gradient(180deg, rgba(26, 26, 26, 0.9), rgba(18, 18, 18, 0.95));
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6)
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            color: var(--color-silver);
+            font-size: 1.05rem;
+            margin-bottom: 18px
+        }
+
+        .client-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px
+        }
+
+        .client-info img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 3px solid var(--color-gold);
+            object-fit: cover
+        }
+
+        .client-info span {
+            color: var(--color-white);
+            font-weight: 600
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 16px
+        }
+
+        .testimonial-controls button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid var(--color-gold);
+            background: var(--color-dark-light);
+            color: var(--color-gold);
+            cursor: pointer;
+            transition: transform var(--transition-fast)
+        }
+
+        .testimonial-controls button:hover {
+            transform: scale(1.05);
+            background: var(--color-gold);
+            color: #0a0a0a
+        }
+
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-top: 24px
+        }
+
+        .contact-form-wrapper {
+            background: var(--color-dark-light);
+            padding: 22px;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(255, 217, 0, 0.233)
+            
+        }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 12px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--color-white);
+            border-radius: 6px
+            
+        }
+        .contact-form option{
+            color: #000;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: var(--color-gold);
+            box-shadow: 0 6px 18px rgba(212, 175, 55, 0.08)
+        }
+
+        footer {
+            padding: 34px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            background: var(--color-dark)
+        }
+
+        .footer-logo {
+            font-size: 1.6rem;
+            color: var(--color-gold);
+            font-weight: 700;
+            margin-bottom: 8px
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            margin: 8px 0
+        }
+
+        .footer-links li {
+            list-style: none
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .hero-title {
+                font-size: 1.9rem
+            }
+        }
+
+        @media (max-width: 992px) {
+            :root {
+                --header-height: 64px;
+                --topbar-height: 0
+            }
+
+            .top-bar {
+                display: none
+            }
+
+            .main-header {
+                top: 0
+            }
+
+            .mobile-menu-toggle {
+                display: block
+            }
+
+            .main-nav {
+                display: none
+            }
+
+            .main-nav.active {
+                display: flex;
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                right: 0;
+                background: rgba(8, 8, 8, 0.98);
+                flex-direction: column;
+                padding: 18px 0;
+                gap: 12px;
+                z-index: 1500
+            }
+
+            .main-nav.active ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px
+            }
+
+            .header-cta {
+                display: none
+            }
+
+            .hero-section {
+                min-height: 60vh
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media (max-width:768px) {
+            h2 {
+                font-size: 1.6rem
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr
+            }
+
+            .testimonial-item {
+                padding: 18px
+            }
+
+            .client-info img {
+                width: 56px;
+                height: 56px
+            }
+
+            .hero-video {
+                min-width: 140%;
+                min-height: 140%
+            }
+        }
+
+        /* accessibility focus */
+        a:focus,
+        button:focus,
+        input:focus {
+            outline: 3px solid rgba(212, 175, 55, 0.14);
+            outline-offset: 2px
+        }
+
+
+        /* --- Gradient backgrounds for sections --- */
+        .why-mgh-section {
+            background: linear-gradient(180deg, rgb(0, 0, 0) 0%, rgba(12, 12, 12, 1) 100%);
+        }
+
+        .portfolio-section {
+            background: linear-gradient(180deg, rgba(12, 12, 12, 1) 0%, rgba(18, 18, 18, 1) 100%);
+        }
+
+        .services-section {
+            background: linear-gradient(190deg, rgb(0, 0, 0) 0%, rgba(12, 12, 12, 1) 100%);
+        }
+
+        .contact-section {
+            background: linear-gradient(190deg, rgb(0, 0, 0) 0%, rgb(17, 17, 17) 100%);
+        }
+
+        /* --- Micro-interactions --- */
+        /* Portfolio hover scaling with shadow pulse */
+        .portfolio-item:hover {
+            transform: scale(1.07);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.7);
+            transition: transform 450ms ease, box-shadow 450ms ease;
+        }
+
+        /* Overlay text animation */
+        .portfolio-item .overlay-content {
+            opacity: 0;
+            transform: translateY(14px);
+            transition: opacity 400ms ease, transform 400ms ease;
+        }
+
+        .portfolio-item:hover .overlay-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Services hover pulse */
+        .service-item:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 16px 42px rgba(0, 0, 0, 0.55);
+            transition: transform 350ms ease, box-shadow 350ms ease;
+        }
+
+        /* Hero buttons hover glow */
+        .btn-primary:hover {
+            box-shadow: 0 0 20px var(--color-gold), 0 4px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 20px var(--color-gold), 0 4px 12px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Smooth section entrance (fade + slight move) */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 600ms ease, transform 600ms ease;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Testimonial scale effect on hover */
+        .testimonial-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.65);
+            transition: transform 400ms ease, box-shadow 400ms ease;
+        }
+
+        /* Footer gradient subtle */
+        footer {
+            background: linear-gradient(180deg, rgb(17, 17, 17) 0%, rgb(0, 0, 0) 100%);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar" role="region" aria-label="topbar">
+        <div class="container top-bar-inner">
+            <div class="contact-info">
+                <span><i class="fas fa-phone-alt"></i> <a href="tel:+79891156946">+79891156946</a></span>
+                <span style="margin-left:12px"><i class="fas fa-envelope"></i> <a
+                        href="mailto:info@mgh.studio">info@mgh.studio</a></span>
+            </div>
+            <div class="location-info"><span>Москва, Россия | Круглосуточно</span></div>
+            <div class="language-switcher"><span>RU</span></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="main-header" id="mainHeader">
+        <div class="container header-inner">
+            <div class="logo"><a href="#">MGH <small
+                        style="display:block;font-weight:400;font-size:12px;color:var(--color-silver)">Кинематографическая
+                        визуализация</small></a></div>
+
+            <nav class="main-nav" aria-label="Главное меню">
+                <ul>
+                    <li><a href="#home" class="nav-link active">Главная</a></li>
+                    <li class="dropdown">
+                        <a href="portfolio.html" class="nav-link">Портфолио  
+     <!-- 
+                        <div class="dropdown-content" role="menu" aria-hidden="true">
+                        
+                            <a href="#">Продукты</a>
+                            <a href="#">Реклама</a>
+                            <a href="#">Корпоратив</a>
+                           
+                        </div>
+  -->
+                    </li>
+                    <li class="dropdown">
+                        <a href="services.html" class="nav-link">Услуги 
+<!--
+                        <div class="dropdown-content" role="menu" aria-hidden="true">
+                            <a href="#">Фотография продуктов</a>
+                            <a href="#">Рекламные видео</a>
+                            <a href="#">Корпоративные съемки</a>
+                        </div>
+  -->
+
+                    </li>
+                    <li><a href="about.html" class="nav-link">O нас</a></li>
+                    <li><a href="contact.html" class="nav-link">Контакты</a></li>
+                </ul>
+            </nav>
+
+            <a href="#contact" class="btn btn-primary header-cta">Записаться на сессию</a>
+            <div class="mobile-menu-toggle" aria-hidden="false" title="Меню">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero-section" aria-label="hero">
+        <video autoplay muted loop playsinline class="hero-video" aria-hidden="true">
+            <!-- fallback: if you have a file replace src with your video -->
+            <source src="back-g.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content container">
+            <h1 class="hero-title">MGH Studio: Визия встречает кинематографическую реальность</h1>
+            <p class="hero-sub">Создаем впечатляющие визуальные истории для продуктов, брендов и бизнеса.</p>
+            <div class="hero-cta-group">
+                <a href="#portfolio" class="btn btn-primary btn-hero">Посмотреть портфолио</a>
+                <a href="#contact" class="btn btn-secondary">Записаться на сессию</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why MGH -->
+    <section id="why-mgh" class="why-mgh-section">
+        <div class="container">
+            <h2>Почему выбирают MGH?</h2>
+            <div class="mgh-cards">
+                <div class="mgh-card">
+                    <i class="fas fa-camera-retro"
+                        style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
+                    <h3>Креатив без границ</h3>
+                    <p>Мы превращаем ваши идеи в впечатляющие визуальные истории, которые работают на ваш бренд.</p>
+                </div>
+                <div class="mgh-card">
+                    <i class="fas fa-film" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
+                    <h3>Кинематографическое качество</h3>
+                    <p>Профессиональное оборудование и внимание к деталям — каждый кадр как произведение искусства.</p>
+                </div>
+                <div class="mgh-card">
+                    <i class="fas fa-video" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
+                    <h3>Комплексные решения</h3>
+                    <p>От идеи до пост-продакшн — полный цикл услуг для вашего проекта.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio" class="portfolio-section">
+        <div class="container">
+            <h2>Наши последние работы</h2>
+            <div class="portfolio-grid" aria-live="polite">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1503602642458-232111445657?q=80&w=1200&auto=format&fit=crop&crop=entropy"
+                        alt="Роскошные часы" loading="lazy">
+                    <div class="overlay-content">
+                        <h4>Роскошные часы</h4>
+                        <span>Фотография продукта</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?q=80&w=1200&auto=format&fit=crop&crop=entropy"
+                        alt="Рекламная кампания бренда" loading="lazy">
+                    <div class="overlay-content">
+                        <h4>Рекламная кампания</h4>
+                        <span>Рекламное видео</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="Корпоративная-съемка-1.jpg"
+                        alt="Корпоративная съемка" loading="lazy">
+                    <div class="overlay-content">
+                        <h4>Корпоративная съемка</h4>
+                        <span>Профиль компании</span>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?q=80&w=1200&auto=format&fit=crop&crop=entropy"
+                        alt="Косметика" loading="lazy">
+                    <div class="overlay-content">
+                        <h4>Линия косметики</h4>
+                        <span>Фотография продукта</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- centered buttons -->
+            <div class="section-cta">
+                <a href="portfolio.html" class="btn btn-secondary" id="viewAllWorks">Посмотреть все работы</a>
+                <a href="#services" class="btn btn-secondary" id="viewAllServices">Все услуги</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="services-section">
+        <div class="container">
+            <h2>Наши услуги: Реализуем вашу идею</h2>
+            <div class="services-grid" role="list">
+                <div class="service-item" role="listitem">
+                    <i class="fas fa-box-open" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
+                    <h3>Фотография продуктов</h3>
+                    <p>Запечатлеваем суть ваших продуктов с потрясающими визуалами высокого разрешения.</p>
+                </div>
+                <div class="service-item" role="listitem">
+                    <i class="fas fa-ad" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
+                    <h3>Рекламные видео</h3>
+                    <p>Захватывающие рекламные ролики, которые рассказывают историю вашего бренда и повышают
+                        вовлеченность.</p>
+                </div>
+                <div class="service-item" role="listitem">
+                    <i class="fas fa-building" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
+                    <h3>Корпоративные съемки</h3>
+                    <p>Профессиональный визуальный контент для бизнеса, который улучшает корпоративный имидж.</p>
+                </div>
+            </div>
+            <div class="section-cta" style="margin-top:22px">
+                <a href="#services" class="btn btn-primary">Все услуги</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials (Carousel) -->
+    <section id="testimonials" class="testimonials-section" aria-label="Отзывы">
+        <div class="container">
+            <h2>Отзывы наших клиентов</h2>
+            <div class="testimonial-wrap">
+                <div class="testimonial-inner" id="testimonialInner">
+                    <div class="testimonial-track" id="testimonialTrack" aria-live="polite">
+                        <!-- slide 1 -->
+                        <div class="testimonial-item" role="group" aria-roledescription="slide" aria-label="1 из 4">
+                            <p>"MGH Studio превзошли все наши ожидания! Отличное чувство композиции и профессиональный
+                                подход."</p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop&crop=faces"
+                                    alt="Алексей П">
+                                <span>Алексей П.</span>
+                                <span style="font-size:13px;color:var(--color-silver)">CEO, Tech Solutions</span>
+                            </div>
+                        </div>
+                        <!-- slide 2 -->
+                        <div class="testimonial-item" role="group" aria-roledescription="slide" aria-label="2 из 4">
+                            <p>"Видео для нашей рекламной кампании было просто невероятным. Полный профессионализм."</p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1545996124-5e96f3c3b3c6?q=80&w=800&auto=format&fit=crop&crop=faces"
+                                    alt="Екатерина С">
+                                <span>Екатерина С.</span>
+                                <span style="font-size:13px;color:var(--color-silver)">Маркетинг Директор</span>
+                            </div>
+                        </div>
+                        <!-- slide 3 -->
+                        <div class="testimonial-item" role="group" aria-roledescription="slide" aria-label="3 из 4">
+                            <p>"Лучшие фотографы продуктов в Москве! Наши изделия засияли на фото и продажи выросли."
+                            </p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=800&auto=format&fit=crop&crop=faces"
+                                    alt="Игорь М">
+                                <span>Игорь М.</span>
+                                <span style="font-size:13px;color:var(--color-silver)">Владелец, Luxury Watches</span>
+                            </div>
+                        </div>
+                        <!-- slide 4 -->
+                        <div class="testimonial-item" role="group" aria-roledescription="slide" aria-label="4 из 4">
+                            <p>"Кинематографические видео, которые привлекают клиентов и повышают продажи. Рекомендую."
+                            </p>
+                            <div class="client-info">
+                                <img src="https://images.unsplash.com/photo-1541534401786-3b2a1f3f0b12?q=80&w=800&auto=format&fit=crop&crop=faces"
+                                    alt="Марина Л">
+                                <span>Марина Л.</span>
+                                <span style="font-size:13px;color:var(--color-silver)">Руководитель Brand</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-controls" aria-hidden="false">
+                    <button id="prevTest" aria-label="Предыдущий отзыв"><i class="fas fa-chevron-left"></i></button>
+                    <button id="nextTest" aria-label="Следующий отзыв"><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2>Создадим вместе</h2>
+            <div class="contact-grid">
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" action="#" method="post" onsubmit="return false;">
+                        <input type="text" name="name" placeholder="Имя" required>
+                        <input type="email" name="email" placeholder="Email" required>
+                        <input type="tel" name="phone" placeholder="Телефон">
+                        <select name="service" aria-label="Выберите услугу">
+                            <option value="">Выберите услугу</option>
+                            <option value="product-photography">Фотография продуктов</option>
+                            <option value="advertising-videos">Рекламные видео</option>
+                            <option value="corporate-shoots">Корпоративные съемки</option>
+                            <option value="other">Другое</option>
+                        </select>
+                        <textarea name="message" placeholder="Сообщение" rows="5"></textarea>
+                        <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                    </form>
+                </div>
+                <div class="contact-info-wrapper"
+                    style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
+                    <div style="display:flex;gap:12px;align-items:flex-start">
+                        <i class="fas fa-map-marker-alt" style="font-size:20px;color:var(--color-gold)"></i>
+                        <div>
+                            <h4 style="margin-bottom:6px">Адрес</h4>
+                            <p style="color:var(--color-silver)">Москва, Россия</p>
+                            <a href="https://maps.app.goo.gl/YourGoogleMapsLink" target="_blank">Посмотреть на карте</a>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:12px;align-items:flex-start">
+                        <i class="fas fa-phone-alt" style="font-size:20px;color:var(--color-gold)"></i>
+                        <div>
+                            <h4 style="margin-bottom:6px">Телефон</h4>
+                            <p style="color:var(--color-silver)"><a href="tel:+79891156946">+79891156946</a></p>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:12px;align-items:flex-start">
+                        <i class="fas fa-envelope" style="font-size:20px;color:var(--color-gold)"></i>
+                        <div>
+                            <h4 style="margin-bottom:6px">Email</h4>
+                            <p style="color:var(--color-silver)"><a href="mailto:info@mgh.studio">info@mgh.studio</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">MGH</div>
+            <ul class="footer-links" style="padding:0;display:flex;gap:14px;justify-content:center">
+                <li><a href="#">Политика конфиденциальности</a></li>
+                <li><a href="#">Условия использования</a></li>
+            </ul>
+            <p style="color:var(--color-silver)">&copy; 2024 MGH Studio. Все права защищены.</p>
+            <p class="made-with-love" style="color:var(--color-silver)">Создано с любовью в Москве</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            /* Header scroll effect */
+            const header = document.getElementById('mainHeader');
+            if (header) {
+                const onScroll = () => {
+                    if (window.scrollY > 60) header.classList.add('scrolled');
+                    else header.classList.remove('scrolled');
+                };
+                window.addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+            }
+
+            /* Mobile menu toggle (basic) */
+            const mobileToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            if (mobileToggle && mainNav) {
+                mobileToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                    const icon = mobileToggle.querySelector('i');
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                });
+            }
+
+            /* Smooth scroll for anchors */
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (!href || href === '#') { e.preventDefault(); return; }
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        const topOffset = (document.querySelector('.main-header')?.offsetHeight || 0) + 8;
+                        const top = target.getBoundingClientRect().top + window.scrollY - topOffset;
+                        window.scrollTo({ top, behavior: 'smooth' });
+                        // close mobile nav if open
+                        if (mainNav && mainNav.classList.contains('active')) mainNav.classList.remove('active');
+                    }
+                });
+            });
+
+            /* Fix hover issue:
+               - Avoid changing element background to gold on generic hover for nav/section buttons.
+               - Keep underline effect and color contrast.
+               (This is handled in CSS; JS kept minimal)
+            */
+
+            /* Testimonials Carousel (auto + controls + pause on hover) */
+            const track = document.getElementById('testimonialTrack');
+            const prevBtn = document.getElementById('prevTest');
+            const nextBtn = document.getElementById('nextTest');
+            const slides = track ? Array.from(track.children) : [];
+            let current = 0;
+            let autoTimer = null;
+            const slideCount = slides.length;
+
+            function goTo(index) {
+                if (!track) return;
+                current = (index + slideCount) % slideCount;
+                track.style.transform = `translateX(-${current * 100}%)`;
+            }
+            function next() { goTo(current + 1); }
+            function prev() { goTo(current - 1); }
+
+            if (nextBtn) nextBtn.addEventListener('click', next);
+            if (prevBtn) prevBtn.addEventListener('click', prev);
+
+            function startAuto() {
+                const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                if (reduced) return;
+                stopAuto();
+                autoTimer = setInterval(next, 4000);
+            }
+            function stopAuto() {
+                if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+            }
+
+            const testimonialInner = document.getElementById('testimonialInner');
+            if (testimonialInner) {
+                testimonialInner.addEventListener('mouseenter', stopAuto);
+                testimonialInner.addEventListener('mouseleave', startAuto);
+            }
+
+            // Ensure correct starting position
+            goTo(0);
+            startAuto();
+
+            // Accessibility: keyboard arrows for carousel
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') prev();
+                if (e.key === 'ArrowRight') next();
+            });
+
+            /* Intersection observer for simple reveal animations */
+            const ioOptions = { root: null, rootMargin: '0px', threshold: 0.12 };
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(en => {
+                        if (en.isIntersecting) {
+                            en.target.classList.add('is-visible');
+                            obs.unobserve(en.target);
+                        }
+                    });
+                }, ioOptions);
+                document.querySelectorAll('.mgh-card, .portfolio-item, .service-item, .testimonial-item, .contact-form-wrapper').forEach(el => {
+                    el.classList.add('animate-on-scroll');
+                    io.observe(el);
+                });
+            } else {
+                document.querySelectorAll('.mgh-card, .portfolio-item, .service-item, .testimonial-item, .contact-form-wrapper').forEach(el => {
+                    el.classList.add('is-visible');
+                });
+            }
+
+            /* Pause hero video on mobile to save data */
+            const heroVideo = document.querySelector('.hero-video');
+            if (heroVideo) {
+                const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+                if (isMobile) heroVideo.pause();
+            }
+
+        });
+    </script>
+
+</body>
+
+</html>

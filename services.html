@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MGH Studio | Услуги</title>
+
+    <!-- Google Font – Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        /* ---------------- NAVBAR / HEADER ---------------- */
+        header {
+            width: 100%;
+            padding: 20px 60px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        header:hover {
+            background: rgba(10, 10, 10, 1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffd700;
+            cursor: pointer;
+        }
+
+        nav {
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #000;
+            background: #ffd700;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        /* Toggle menu for mobile */
+        @media (max-width: 800px) {
+            nav ul {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #111;
+                flex-direction: column;
+                width: 200px;
+                padding: 20px;
+                border-radius: 8px;
+                display: none;
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* ---------------- TITLE ---------------- */
+        .services-header {
+            text-align: center;
+            padding: 100px 20px 40px;
+        }
+
+        .services-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        .services-header p {
+            margin-top: 15px;
+            color: #aaa;
+            font-size: 17px;
+        }
+
+        /* ---------------- SERVICES GRID ---------------- */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 40px 60px 100px;
+        }
+
+        .service-card {
+            background: #111;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            border-color: #ffd700;
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-align: center;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .service-card p {
+            color: #bbb;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 15px;
+            flex-grow: 1;
+        }
+
+        .service-card .price {
+            color: #ffd700;
+            font-weight: 600;
+            font-size: 20px;
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .service-card button {
+            margin-top: auto;
+            padding: 12px 22px;
+            border: 1px solid #ffd700;
+            background: transparent;
+            color: #ffd700;
+            font-size: 14px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+        }
+
+        .service-card button:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        /* ---------------- BOOKING MODAL ---------------- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .booking-modal {
+            background: #1a1a1a;
+            width: 90%;
+            max-width: 600px;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .booking-modal {
+            transform: translateY(0);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-modal:hover {
+            color: #ffd700;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ffd700;
+            text-align: center;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .step {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #333;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 10px;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .step.active {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: #333;
+            margin: 0 5px;
+            align-self: center;
+        }
+
+        .step-line.active {
+            background: #ffd700;
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ffd700;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+        }
+
+        .btn-prev {
+            background: #333;
+            color: #fff;
+        }
+
+        .btn-next, .btn-submit {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .btn-prev:hover {
+            background: #444;
+        }
+
+        .btn-next:hover, .btn-submit:hover {
+            background: #ffed4e;
+        }
+
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #222;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid #444;
+        }
+
+        .payment-option:hover {
+            border-color: #ffd700;
+        }
+
+        .payment-option.selected {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.1);
+        }
+
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #333;
+            border-radius: 8px;
+            font-size: 20px;
+        }
+
+        .payment-details {
+            flex: 1;
+        }
+
+        .payment-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .payment-desc {
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        .confirmation-message {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .confirmation-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        .footer-links li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-links li a:hover {
+            color: #ffd700;
+        }
+
+        .footer-socials {
+            margin-top: 15px;
+        }
+
+        .footer-socials a {
+            margin: 0 10px;
+            font-size: 20px;
+            color: #aaa;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            color: #ffd700;
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+        @media (max-width: 950px) {
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .services {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            header {
+                padding: 15px 20px;
+            }
+            .booking-modal {
+                padding: 20px;
+            }
+            .form-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MGH Studio</div>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul id="nav-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- TITLE -->
+<div class="services-header">
+    <h1>Наши Услуги</h1>
+    <p>Профессиональная видеосъёмка, фотосъёмка и рекламные проекты под ключ.</p>
+</div>
+
+<!-- SERVICES GRID -->
+<div class="services">
+
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-video"></i>
+        </div>
+        <h3>Видео Съёмка</h3>
+        <p>Создание профессиональных видео под любой запрос: реклама, корпоратив, клипы, свадьбы, short films.</p>
+        <div class="price">от 5 000₽</div>
+        <button class="book-btn" data-service="Видео Съёмка" data-price="5000">Заказать</button>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-camera"></i>
+        </div>
+        <h3>Фото Сессия</h3>
+        <p>Качественные фото в студии или на локации. Портреты, lifestyle, контент для брендов.</p>
+        <div class="price">от 3 000₽</div>
+        <button class="book-btn" data-service="Фото Сессия" data-price="3000">Заказать</button>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-ad"></i>
+        </div>
+        <h3>Рекламные Видео</h3>
+        <p>Продакшн полного цикла: сценарий, съёмка, монтаж. Идеально для бизнеса и брендов.</p>
+        <div class="price">от 8 000₽</div>
+        <button class="book-btn" data-service="Рекламные Видео" data-price="8000">Заказать</button>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-film"></i>
+        </div>
+        <h3>Монтаж Видео</h3>
+        <p>Профессиональная пост-обработка, цветокоррекция, звук, спецэффекты, работа с 4K.</p>
+        <div class="price">от 2 500₽</div>
+        <button class="book-btn" data-service="Монтаж Видео" data-price="2500">Заказать</button>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-hashtag"></i>
+        </div>
+        <h3>Контент для Соцсетей</h3>
+        <p>Reels, TikTok, Shorts — стильный контент, который увеличивает вовлечённость.</p>
+        <div class="price">от 3 500₽</div>
+        <button class="book-btn" data-service="Контент для Соцсетей" data-price="3500">Заказать</button>
+    </div>
+
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-briefcase"></i>
+        </div>
+        <h3>Бренд-Съёмка</h3>
+        <p>Съёмка продуктов, услуг и компаний. Создадим визуал, который продаёт.</p>
+        <div class="price">от 6 000₽</div>
+        <button class="book-btn" data-service="Бренд-Съёмка" data-price="6000">Заказать</button>
+    </div>
+
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="bookingModal">
+    <div class="booking-modal">
+        <button class="close-modal" id="closeModal">&times;</button>
+        <h2 class="modal-title">Заказ услуги</h2>
+        
+        <!-- Step Indicator -->
+        <div class="step-indicator">
+            <div class="step active" data-step="1">1</div>
+            <div class="step-line"></div>
+            <div class="step" data-step="2">2</div>
+            <div class="step-line"></div>
+            <div class="step" data-step="3">3</div>
+        </div>
+        
+        <!-- Step 1: Service Details -->
+        <div class="form-step active" id="step1">
+            <div class="form-group">
+                <label for="service">Выберите услугу</label>
+                <select id="service" required>
+                    <option value="">-- Выберите услугу --</option>
+                    <option value="Видео Съёмка" data-price="5000">Видео Съёмка (от 5 000₽)</option>
+                    <option value="Фото Сессия" data-price="3000">Фото Сессия (от 3 000₽)</option>
+                    <option value="Рекламные Видео" data-price="8000">Рекламные Видео (от 8 000₽)</option>
+                    <option value="Монтаж Видео" data-price="2500">Монтаж Видео (от 2 500₽)</option>
+                    <option value="Контент для Соцсетей" data-price="3500">Контент для Соцсетей (от 3 500₽)</option>
+                    <option value="Бренд-Съёмка" data-price="6000">Бренд-Съёмка (от 6 000₽)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Ваше имя</label>
+                <input type="text" id="name" placeholder="Введите ваше имя" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="example@mail.ru" required>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-next" id="nextToStep2">Далее</button>
+            </div>
+        </div>
+        
+        <!-- Step 2: Additional Details -->
+        <div class="form-step" id="step2">
+            <div class="form-group">
+                <label for="date">Предпочтительная дата</label>
+                <input type="date" id="date" required>
+            </div>
+            <div class="form-group">
+                <label for="location">Место съёмки</label>
+                <select id="location" required>
+                    <option value="">Выберите место</option>
+                    <option value="studio">Студия MGH</option>
+                    <option value="outdoor">На улице</option>
+                    <option value="indoor">В помещении</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="duration">Продолжительность съёмки</label>
+                <select id="duration" required>
+                    <option value="">Выберите продолжительность</option>
+                    <option value="1">1 час</option>
+                    <option value="2">2 часа</option>
+                    <option value="3">3 часа</option>
+                    <option value="4">4 часа</option>
+                    <option value="full">Полный день (8 часов)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="details">Дополнительные детали</label>
+                <textarea id="details" rows="3" placeholder="Опишите ваши пожелания..."></textarea>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-prev" id="prevToStep1">Назад</button>
+                <button class="btn btn-next" id="nextToStep3">Далее</button>
+            </div>
+        </div>
+        
+        <!-- Step 3: Payment -->
+        <div class="form-step" id="step3">
+            <div class="form-group">
+                <label>Выберите способ оплаты</label>
+                <div class="payment-options">
+                    <div class="payment-option" data-payment="spear">
+                        <div class="payment-icon">💳</div>
+                        <div class="payment-details">
+                            <div class="payment-name">SpearPay</div>
+                            <div class="payment-desc">Быстрый и безопасный платеж</div>
+                        </div>
+                    </div>
+                    <div class="payment-option" data-payment="sbp">
+                        <div class="payment-icon">🏦</div>
+                        <div class="payment-details">
+                            <div class="payment-name">СБП (Система быстрых платежей)</div>
+                            <div class="payment-desc">Оплата через ваш банк</div>
+                        </div>
+                    </div>
+                    <div class="payment-option" data-payment="cash">
+                        <div class="payment-icon">💵</div>
+                        <div class="payment-details">
+                            <div class="payment-name">Наличные</div>
+                            <div class="payment-desc">Оплата на месте после съёмки</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="total">Итого к оплате</label>
+                <input type="text" id="total" readonly>
+            </div>
+            <div class="form-actions">
+                <button class="btn btn-prev" id="prevToStep2">Назад</button>
+                <button class="btn btn-submit" id="submitBooking">Забронировать</button>
+            </div>
+        </div>
+        
+        <!-- Confirmation Step -->
+        <div class="form-step" id="confirmation">
+            <div class="confirmation-message">
+                <div class="confirmation-icon">✓</div>
+                <h3>Заявка отправлена!</h3>
+                <p>Мы свяжемся с вами в ближайшее время для подтверждения заказа.</p>
+                <button class="btn btn-submit" id="closeAfterSubmit">Закрыть</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">MGH Studio</div>
+        <p>© 2025 MGH Studio. Все права защищены.</p>
+        <ul class="footer-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
+        <div class="footer-socials">
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="#" title="VK"><i class="fab fa-vk"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Navigation Menu Toggle
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('show');
+    }
+
+    // Booking Modal Logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('bookingModal');
+        const closeModal = document.getElementById('closeModal');
+        const bookButtons = document.querySelectorAll('.book-btn');
+        const serviceSelect = document.getElementById('service');
+        const totalInput = document.getElementById('total');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step');
+        const stepLines = document.querySelectorAll('.step-line');
+        
+        let currentStep = 1;
+        let selectedService = '';
+        let selectedPrice = 0;
+        let selectedPayment = '';
+
+        // Open modal when clicking on any book button
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                selectedService = this.getAttribute('data-service');
+                selectedPrice = this.getAttribute('data-price');
+                
+                // Set the service in the dropdown
+                serviceSelect.value = selectedService;
+                totalInput.value = formatPrice(selectedPrice) + '₽';
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Update price when service is changed in dropdown
+        serviceSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            selectedPrice = selectedOption.getAttribute('data-price') || '0';
+            totalInput.value = formatPrice(selectedPrice) + '₽';
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetForm();
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                resetForm();
+            }
+        });
+
+        // Payment option selection
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedPayment = this.getAttribute('data-payment');
+            });
+        });
+
+        // Step navigation
+        document.getElementById('nextToStep2').addEventListener('click', function() {
+            if (validateStep1()) {
+                goToStep(2);
+            }
+        });
+
+        document.getElementById('prevToStep1').addEventListener('click', function() {
+            goToStep(1);
+        });
+
+        document.getElementById('nextToStep3').addEventListener('click', function() {
+            if (validateStep2()) {
+                goToStep(3);
+            }
+        });
+
+        document.getElementById('prevToStep2').addEventListener('click', function() {
+            goToStep(2);
+        });
+
+        document.getElementById('submitBooking').addEventListener('click', function() {
+            if (validateStep3()) {
+                // Here you would normally send the data to your server
+                // For now, we'll just show the confirmation
+                goToStep(4);
+            }
+        });
+
+        document.getElementById('closeAfterSubmit').addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetForm();
+        });
+
+        function goToStep(step) {
+            // Hide all steps
+            steps.forEach(s => s.classList.remove('active'));
+            
+            // Show the target step
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            // Update step indicators
+            stepIndicators.forEach((indicator, index) => {
+                if (index < step) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+            
+            // Update step lines
+            stepLines.forEach((line, index) => {
+                if (index < step - 1) {
+                    line.classList.add('active');
+                } else {
+                    line.classList.remove('active');
+                }
+            });
+            
+            currentStep = step;
+        }
+
+        function validateStep1() {
+            const service = document.getElementById('service').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            
+            if (!service || !name || !phone || !email) {
+                alert('Пожалуйста, заполните все обязательные поля');
+                return false;
+            }
+            
+            // Simple email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Пожалуйста, введите корректный email');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateStep2() {
+            const date = document.getElementById('date').value;
+            const location = document.getElementById('location').value;
+            const duration = document.getElementById('duration').value;
+            
+            if (!date || !location || !duration) {
+                alert('Пожалуйста, заполните все обязательные поля');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateStep3() {
+            if (!selectedPayment) {
+                alert('Пожалуйста, выберите способ оплаты');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function resetForm() {
+            // Reset form fields
+            document.getElementById('service').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('details').value = '';
+            
+            // Reset payment selection
+            paymentOptions.forEach(opt => opt.classList.remove('selected'));
+            selectedPayment = '';
+            
+            // Reset to step 1
+            goToStep(1);
+        }
+
+        function formatPrice(price) {
+            // Format price with spaces for thousands
+            return parseInt(price).toLocaleString('ru-RU');
+        }
+    });
+</script>
+
+</body>
+</html>

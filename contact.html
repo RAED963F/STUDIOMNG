@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MGH Studio | Контакты</title>
+
+    <!-- Google Font – Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ---------------- NAVBAR / HEADER ---------------- */
+        header {
+            width: 100%;
+            padding: 20px 60px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .scrolled {
+            padding: 15px 60px;
+            background: rgba(10, 10, 10, 0.98);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffd700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 24px;
+        }
+
+        nav {
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #ffd700;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 80%;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffd700;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* Toggle menu for mobile */
+        @media (max-width: 800px) {
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                background: #111;
+                flex-direction: column;
+                width: 280px;
+                height: 100vh;
+                padding: 100px 30px 30px;
+                border-radius: 0;
+                transition: 0.4s;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+
+            nav ul.show {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* ---------------- CONTACT HERO ---------------- */
+        .contact-hero {
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .contact-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .contact-hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 30px;
+            color: #ddd;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ffd700;
+            color: #000;
+            border: 2px solid #ffd700;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: #ffd700;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .btn-secondary:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* ---------------- CONTACT SECTION ---------------- */
+        .contact-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+            justify-content: center;
+        }
+
+        .contact-info, .contact-form {
+            flex: 1 1 500px;
+            background: #111;
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-info:hover, .contact-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .contact-info h2, .contact-form h2 {
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            color: #ffd700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-info h2 i, .contact-form h2 i {
+            font-size: 24px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,215,0,0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffd700;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .contact-text h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .contact-text p, .contact-text a {
+            color: #ccc;
+            font-size: 16px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-text a:hover {
+            color: #ffd700;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #aaa;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #ffd700;
+            color: #000;
+            transform: translateY(-3px);
+        }
+
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #ddd;
+        }
+
+        .contact-form input, 
+        .contact-form textarea,
+        .contact-form select {
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            background: #0a0a0a;
+            color: #fff;
+            font-size: 15px;
+            resize: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .contact-form input:focus, 
+        .contact-form textarea:focus,
+        .contact-form select:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 2px rgba(255,215,0,0.2);
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #888;
+        }
+
+        .contact-form button {
+            padding: 15px 25px;
+            border: 2px solid #ffd700;
+            background: #ffd700;
+            color: #000;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .contact-form button:hover {
+            background: transparent;
+            color: #ffd700;
+        }
+
+        /* ---------------- MAP ---------------- */
+        .contact-map {
+            margin: 60px auto;
+            max-width: 1200px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .map-container {
+            width: 100%;
+            height: 450px;
+            position: relative;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(10,10,10,0.8);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            max-width: 300px;
+        }
+
+        .map-overlay h3 {
+            color: #ffd700;
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .map-overlay p {
+            color: #ddd;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        /* ---------------- FAQ SECTION ---------------- */
+        .faq-section {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+            color: #ffd700;
+        }
+
+        .faq-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .faq-item {
+            background: #111;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(255,255,255,0.05);
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            color: #ccc;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 200px;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 60px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        .footer-links li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-links li a:hover {
+            color: #ffd700;
+        }
+
+        .footer-socials {
+            margin-top: 25px;
+        }
+
+        .footer-socials a {
+            margin: 0 10px;
+            font-size: 20px;
+            color: #aaa;
+            transition: 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .footer-socials a:hover {
+            color: #ffd700;
+            background: rgba(255,215,0,0.1);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+        @media (max-width: 900px) {
+            .contact-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .contact-hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            .scrolled {
+                padding: 10px 20px;
+            }
+            
+            .contact-hero {
+                height: 40vh;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 25px;
+            }
+            
+            .map-overlay {
+                position: relative;
+                bottom: auto;
+                left: auto;
+                max-width: 100%;
+                border-radius: 0;
+                border: none;
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header id="header">
+    <div class="logo">
+        <i ></i> MGH Studio
+    </div>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul id="nav-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contact.html" class="active">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- CONTACT HERO -->
+<section class="contact-hero">
+    <h1>Свяжитесь с нами</h1>
+    <p>Готовы начать новый проект? Свяжитесь с нами, и мы обсудим, как можем помочь воплотить ваши идеи в жизнь.</p>
+    <div class="hero-buttons">
+        <a href="#contact-form" class="btn btn-primary">Написать сообщение</a>
+        <a href="tel:+79991234567" class="btn btn-secondary">Позвонить нам</a>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<div class="contact-section">
+    <!-- Contact Info -->
+    <div class="contact-info">
+        <h2><i class="fas fa-info-circle"></i> Контактная информация</h2>
+        <div class="contact-details">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Адрес</h3>
+                    <p>Москва, ул. Тверская, д. 10</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Телефон</h3>
+                    <p><a href="tel:+79991234567">+7 999 123 45 67</a></p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Email</h3>
+                    <p><a href="mailto:info@mghstudio.com">info@mghstudio.com</a></p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Часы работы</h3>
+                    <p>Пн-Пт: 9:00 - 18:00</p>
+                    <p>Сб-Вс: по предварительной записи</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <div class="contact-text">
+                    <h3>Социальные сети</h3>
+                    <div class="social-links">
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="VK"><i class="fab fa-vk"></i></a>
+                        <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form" id="contact-form">
+        <h2><i class="fas fa-paper-plane"></i> Форма обратной связи</h2>
+        <form action="#" method="post" id="contactForm">
+            <div class="form-group">
+                <label for="name">Ваше имя *</label>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" placeholder="Введите ваш телефон">
+            </div>
+            <div class="form-group">
+                <label for="service">Услуга</label>
+                <select id="service" name="service">
+                    <option value="">Выберите услугу</option>
+                    <option value="video">Видеосъемка</option>
+                    <option value="photo">Фотосъемка</option>
+                    <option value="commercial">Рекламный ролик</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Сообщение *</label>
+                <textarea id="message" name="message" placeholder="Опишите ваш проект или задайте вопрос" rows="5" required></textarea>
+            </div>
+            <button type="submit">
+                <i class="fas fa-paper-plane"></i> Отправить сообщение
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- MAP -->
+<div class="contact-map">
+    <div class="map-container">
+        <div id="map"></div>
+        <div class="map-overlay">
+            <h3>MGH Studio</h3>
+            <p>Москва, 1-й Смоленский переулок, 5с1</p>
+            <p>+7 989 115 69 46</p>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ SECTION -->
+<div class="faq-section">
+    <h2>Часто задаваемые вопросы</h2>
+    <div class="faq-container">
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Как долго выполняется заказ?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Срок выполнения зависит от сложности проекта. Обычно видеосъемка и монтаж занимают от 3 до 10 рабочих дней. Фотосессии обрабатываются быстрее - от 1 до 5 дней.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Можно ли заказать срочный проект?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Да, мы принимаем срочные заказы. Стоимость срочных проектов обсуждается индивидуально в зависимости от сроков и сложности работы.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Предоставляете ли вы оборудование для съемки?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Да, мы работаем на профессиональном оборудовании и предоставляем всю необходимую технику для съемки и освещения.</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <div class="faq-question">
+                <span>Можно ли внести изменения в проект после согласования?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Да, мы предоставляем возможность внесения правок на этапе монтажа. Количество правок зависит от пакета услуг, который вы выбрали.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">MGH Studio</div>
+        <p>Создаем визуальные истории, которые вдохновляют</p>
+        <ul class="footer-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
+        <div class="footer-socials">
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" title="VK"><i class="fab fa-vk"></i></a>
+            <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+        </div>
+        <div class="copyright">
+            © 2025 MGH Studio. Все права защищены.
+        </div>
+    </div>
+</footer>
+
+<!-- Yandex Maps API -->
+<script src="https://yandex.ru/maps/-/CLSGbU37" type="text/javascript"></script>
+
+<script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Initialize Yandex Map
+    ymaps.ready(init);
+    
+    function init() {
+        const map = new ymaps.Map('map', {
+            center: [55.76, 37.64], // Moscow coordinates
+            zoom: 14,
+            controls: ['zoomControl', 'fullscreenControl']
+        });
+        
+        // Add marker
+        const marker = new ymaps.Placemark([55.76, 37.64], {
+            balloonContent: 'MGH Studio-1-й Смоленский переулок, 5с1'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#ffd700'
+        });
+        
+        map.geoObjects.add(marker);
+        
+        // Open balloon on marker click
+        marker.balloon.open();
+    }
+
+    // FAQ Accordion
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question');
+        
+        question.addEventListener('click', () => {
+            // Close all other items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
+            });
+            
+            // Toggle current item
+            item.classList.toggle('active');
+        });
+    });
+
+    // Form submission
+    const contactForm = document.getElementById('contactForm');
+    
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Here you would normally send the form data to the server
+        // For demonstration, we'll just show an alert
+        alert('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
+        contactForm.reset();
+    });
+
+    /* HAMBURGER MENU */
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('show');
+        document.querySelector('.hamburger').classList.toggle('active');
+    }
+
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('#nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.getElementById('nav-links').classList.remove('show');
+            document.querySelector('.hamburger').classList.remove('active');
+        });
+    });
+</script>
+
+</body>
+</html>

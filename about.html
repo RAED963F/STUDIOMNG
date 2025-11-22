@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MGH Studio | О нас</title>
+
+    <!-- Google Font – Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* ---------------- NAVBAR / HEADER ---------------- */
+        header {
+            width: 100%;
+            padding: 20px 60px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: background 0.3s ease;
+        }
+
+        header:hover {
+            background: rgba(10, 10, 10, 1);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #ffd700;
+            cursor: pointer;
+        }
+
+        nav {
+            position: relative;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav ul li {
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #000;
+            background: #ffd700;
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 800px) {
+            nav ul {
+                position: absolute;
+                top: 60px;
+                right: 0;
+                background: #111;
+                flex-direction: column;
+                width: 200px;
+                padding: 20px;
+                border-radius: 8px;
+                display: none;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+        }
+
+        /* ---------------- MAIN CONTENT ---------------- */
+        .about-header {
+            text-align: center;
+            padding: 120px 20px 60px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(10,10,10,1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            opacity: 0.1;
+            z-index: -1;
+        }
+
+        .about-header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .about-header p {
+            color: #ddd;
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #111;
+            padding: 60px 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* About Section */
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .about-image {
+            flex: 1 1 400px;
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .about-text {
+            flex: 1 1 500px;
+        }
+
+        .about-text h2 {
+            font-size: 32px;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #ffd700;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #ccc;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* Values Section */
+        .values-section {
+            background: #111;
+            padding: 80px 20px;
+        }
+
+        .values-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 50px;
+            font-weight: 600;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .value-card {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .value-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.1);
+            border-color: rgba(255,215,0,0.2);
+        }
+
+        .value-icon {
+            font-size: 40px;
+            color: #ffd700;
+            margin-bottom: 20px;
+        }
+
+        .value-title {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .value-description {
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .member-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 3px solid #ffd700;
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-member:hover .member-photo img {
+            transform: scale(1.1);
+        }
+
+        .member-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .member-role {
+            color: #ffd700;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .member-bio {
+            color: #aaa;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(10,10,10,1) 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .cta-description {
+            color: #ddd;
+            font-size: 18px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: #ffd700;
+            color: #000;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            border: 2px solid #ffd700;
+            font-size: 16px;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: #ffd700;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+        footer {
+            background: #111;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+
+        .footer-links li a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        .footer-links li a:hover {
+            color: #ffd700;
+        }
+
+        .footer-socials {
+            margin-top: 15px;
+        }
+
+        .footer-socials a {
+            margin: 0 10px;
+            font-size: 20px;
+            color: #aaa;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+
+        .footer-socials a:hover {
+            color: #ffd700;
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+        @media (max-width: 900px) {
+            .about-section {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .about-header h1 {
+                font-size: 36px;
+            }
+            
+            .about-header p {
+                font-size: 16px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .cta-title {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            .about-header {
+                padding: 100px 20px 40px;
+            }
+            
+            .stats-section {
+                padding: 40px 20px;
+            }
+            
+            .stat-number {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">MGH Studio</div>
+    <nav>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <ul id="nav-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ABOUT HEADER -->
+<div class="about-header">
+    <h1>О нас</h1>
+    <p>MGH Studio — это профессиональная команда, создающая уникальный видеоконтент, фотосессии и рекламные проекты под ключ. Наша цель — передавать эмоции и создавать визуальный стиль, который запоминается.</p>
+</div>
+
+<!-- STATS SECTION -->
+<div class="stats-section">
+    <div class="stat-item">
+        <div class="stat-number">150+</div>
+        <div class="stat-label">Завершенных проектов</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">15+</div>
+        <div class="stat-label">Лет опыта</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Довольных клиентов</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Профессионализм</div>
+    </div>
+</div>
+
+<!-- ABOUT SECTION -->
+<div class="about-section">
+    <div class="about-image">
+        <img src="about-1.jpg" alt="MGH Studio Team">
+    </div>
+    <div class="about-text">
+        <h2>Наша миссия</h2>
+        <p>Мы стремимся создавать качественный контент для брендов и частных клиентов, сочетая креатив и профессионализм. Каждое наше видео и каждая фотография рассказывают историю.</p>
+        
+        <h2>Наши ценности</h2>
+        <p>Качество, креатив, индивидуальный подход к каждому проекту и постоянное совершенствование своих навыков — вот что делает MGH Studio уникальной.</p>
+        
+        <h2>Почему выбирают нас</h2>
+        <p>Мы объединяем опыт, современное оборудование и внимание к деталям, чтобы каждый проект был на высшем уровне и приносил результат нашим клиентам.</p>
+    </div>
+</div>
+
+<!-- VALUES SECTION -->
+<div class="values-section">
+    <div class="values-container">
+        <h2 class="section-title">Наши ценности</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3 class="value-title">Качество</h3>
+                <p class="value-description">Мы гарантируем высочайшее качество на всех этапах работы, от съемки до постпродакшна.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="value-title">Креативность</h3>
+                <p class="value-description">Мы постоянно ищем новые идеи и подходы, чтобы каждый проект был уникальным.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3 class="value-title">Командная работа</h3>
+                <p class="value-description">Мы верим, что лучшие результаты достигаются благодаря слаженной работе команды профессионалов.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3 class="value-title">Страсть к делу</h3>
+                <p class="value-description">Мы любим то, что делаем, и вкладываем душу в каждый проект.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TEAM SECTION -->
+<div class="team-section">
+    <h2 class="section-title">Наша команда</h2>
+    <div class="team-grid">
+        <div class="team-member">
+            <div class="member-photo">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="Максим Гордеев">
+            </div>
+            <h3 class="member-name">Максим Гордеев</h3>
+            <p class="member-role">Основатель и режиссер</p>
+            <p class="member-bio">С более чем 7-летним опытом в видеопроизводстве, Максим отвечает за креативное видение студии.</p>
+        </div>
+        <div class="team-member">
+            <div class="member-photo">
+                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786" alt="Анна Смирнова">
+            </div>
+            <h3 class="member-name">Анна Смирнова</h3>
+            <p class="member-role">Фотограф и оператор</p>
+            <p class="member-bio">Анна специализируется на портретной и коммерческой съемке, создавая визуальные истории.</p>
+        </div>
+        <div class="team-member">
+            <div class="member-photo">
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="Дмитрий Иванов">
+            </div>
+            <h3 class="member-name">Дмитрий Иванов</h3>
+            <p class="member-role">Монтажер и VFX-художник</p>
+            <p class="member-bio">Дмитрий превращает отснятый материал в готовые продукты, используя современные технологии.</p>
+        </div>
+        <div class="team-member">
+            <div class="member-photo">
+                <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9" alt="Елена Петрова">
+            </div>
+            <h3 class="member-name">Елена Петрова</h3>
+            <p class="member-role">Продюсер и менеджер проектов</p>
+            <p class="member-bio">Елена координирует все этапы работы над проектами и обеспечивает безупречный сервис для клиентов.</p>
+        </div>
+    </div>
+</div>
+
+<!-- CTA SECTION -->
+<div class="cta-section">
+    <div class="cta-container">
+        <h2 class="cta-title">Готовы создать что-то уникальное вместе?</h2>
+        <p class="cta-description">Свяжитесь с нами сегодня, чтобы обсудить ваш проект и получить бесплатную консультацию.</p>
+        <a href="contact.html" class="cta-button">Связаться с нами</a>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-container">
+        <div class="footer-logo">MGH Studio</div>
+        <p>© 2025 MGH Studio. Все права защищены.</p>
+        <ul class="footer-links">
+            <li><a href="index.html">Главная</a></li>
+            <li><a href="portfolio.html">Портфолио</a></li>
+            <li><a href="services.html">Услуги</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contact.html">Контакты</a></li>
+        </ul>
+        <div class="footer-socials">
+            <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
+            <a href="#" title="VK"><i class="fab fa-vk"></i></a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    /* HAMBURGER MENU */
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('show');
+    }
+    
+    /* ANIMATE STATS */
+    document.addEventListener('DOMContentLoaded', function() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const target = entry.target;
+                    const finalValue = target.textContent;
+                    const duration = 2000;
+                    const step = 20;
+                    const increment = parseInt(finalValue) / (duration / step);
+                    let current = 0;
+                    
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= parseInt(finalValue)) {
+                            target.textContent = finalValue;
+                            clearInterval(timer);
+                        } else {
+                            target.textContent = Math.floor(current);
+                        }
+                    }, step);
+                    
+                    observer.unobserve(target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        statNumbers.forEach(stat => {
+            observer.observe(stat);
+        });
+    });
+</script>
+
+</body>
+</html>
