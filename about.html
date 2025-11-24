@@ -666,8 +666,38 @@
         </div>
     </div>
 </footer>
-
+<form action="https://api.web3forms.com/submit" method="POST" class="contact-form-about">
+    <input type="hidden" name="access_key" value="b0c25945-a722-4d3e-a047-1bd069b7afbe">
+    <input type="text" name="name" placeholder="Имя" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <textarea name="message" placeholder="Сообщение" rows="5" required></textarea>
+    <button type="submit">Отправить сообщение</button>
+    <p id="form-success-about" style="display:none; color:#ffd700; margin-top:10px;">Мы свяжемся с вами в ближайшее время.</p>
+    <p id="form-error-about" style="display:none; color:red; margin-top:10px;">Произошла ошибка. Попробуйте снова.</p>
+</form>
 <script>
+    const formAbout = document.querySelector('.contact-form-about');
+formAbout.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const successMsg = document.getElementById('form-success-about');
+    const errorMsg = document.getElementById('form-error-about');
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    const formData = new FormData(formAbout);
+    try {
+        const response = await fetch(formAbout.action, { method: formAbout.method, body: formData });
+        const result = await response.json();
+        if(result.success) {
+            successMsg.style.display = 'block';
+            formAbout.reset();
+        } else {
+            errorMsg.style.display = 'block';
+        }
+    } catch (error) {
+        errorMsg.style.display = 'block';
+    }
+});
     /* HAMBURGER MENU */
     function toggleMenu() {
         document.getElementById('nav-links').classList.toggle('show');
