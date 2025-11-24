@@ -976,20 +976,32 @@
             <h2>Создадим вместе</h2>
             <div class="contact-grid">
                 <div class="contact-form-wrapper">
-                    <form class="contact-form" action="#" method="post" onsubmit="return false;">
-                        <input type="text" name="name" placeholder="Имя" required>
-                        <input type="email" name="email" placeholder="Email" required>
-                        <input type="tel" name="phone" placeholder="Телефон">
-                        <select name="service" aria-label="Выберите услугу">
-                            <option value="">Выберите услугу</option>
-                            <option value="product-photography">Фотография продуктов</option>
-                            <option value="advertising-videos">Рекламные видео</option>
-                            <option value="corporate-shoots">Корпоративные съемки</option>
-                            <option value="other">Другое</option>
-                        </select>
-                        <textarea name="message" placeholder="Сообщение" rows="5"></textarea>
-                        <button type="submit" class="btn btn-primary">Отправить сообщение</button>
-                    </form>
+                    <form class="contact-form" action="https://api.web3forms.com/submit" method="POST">
+    <!-- Web3Forms Access Key -->
+    <input type="hidden" name="access_key" value="b0c25945-a722-4d3e-a047-1bd069b7afbe">
+    
+    <!-- Redirect بعد الإرسال (اختياري) -->
+    <input type="hidden" name="redirect" value="">
+    
+    <!-- الحقول -->
+    <input type="text" name="name" placeholder="Имя" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="tel" name="phone" placeholder="Телефон">
+    <select name="service" aria-label="Выберите услугу">
+        <option value="">Выберите услугу</option>
+        <option value="product-photography">Фотография продуктов</option>
+        <option value="advertising-videos">Рекламные видео</option>
+        <option value="corporate-shoots">Корпоративные съемки</option>
+        <option value="other">Другое</option>
+    </select>
+    <textarea name="message" placeholder="Сообщение" rows="5"></textarea>
+    
+    <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+    
+    <!-- رسائل النجاح/الخطأ -->
+    <p id="form-success" style="display:none; color:#ffd700; margin-top:10px;">Мы свяжемся с вами в ближайшее время.</p>
+    <p id="form-error" style="display:none; color:red; margin-top:10px;">Произошла ошибка. Попробуйте снова.</p>
+</form>
                 </div>
                 <div class="contact-info-wrapper"
                     style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">
@@ -1160,6 +1172,28 @@
             }
 
         });
+        const form = document.querySelector('.contact-form');
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const successMsg = document.getElementById('form-success');
+    const errorMsg = document.getElementById('form-error');
+    successMsg.style.display = 'none';
+    errorMsg.style.display = 'none';
+
+    const formData = new FormData(form);
+    try {
+        const response = await fetch(form.action, { method: form.method, body: formData });
+        const result = await response.json();
+        if(result.success) {
+            successMsg.style.display = 'block';
+            form.reset();
+        } else {
+            errorMsg.style.display = 'block';
+        }
+    } catch (error) {
+        errorMsg.style.display = 'block';
+    }
+});
     </script>
 
 </body>
