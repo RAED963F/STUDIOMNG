@@ -770,7 +770,6 @@
         </div>
     </div>
 </footer>
-
 <script>
     // Navigation Menu Toggle
     function toggleMenu() {
@@ -788,7 +787,8 @@
         const steps = document.querySelectorAll('.form-step');
         const stepIndicators = document.querySelectorAll('.step');
         const stepLines = document.querySelectorAll('.step-line');
-        
+        const spearPayBtn = document.getElementById('spearPayBtn');
+
         let currentStep = 1;
         let selectedService = '';
         let selectedPrice = 0;
@@ -799,11 +799,10 @@
             button.addEventListener('click', function() {
                 selectedService = this.getAttribute('data-service');
                 selectedPrice = this.getAttribute('data-price');
-                
-                // Set the service in the dropdown
+
                 serviceSelect.value = selectedService;
                 totalInput.value = formatPrice(selectedPrice) + '₽';
-                
+
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
@@ -841,68 +840,34 @@
             });
         });
 
+        // SpearPay button click
+        if (spearPayBtn) {
+            spearPayBtn.addEventListener('click', function() {
+                if (!selectedPrice || !selectedService) {
+                    alert("Пожалуйста, выберите услугу перед оплатой");
+                    return;
+                }
+
+                // Ссылка для оплаты SpearPay (пример)
+                const spearUrl = `https://spearbank.com/pay?amount=${selectedPrice}&service=${encodeURIComponent(selectedService)}`;
+
+                // Перенаправление на Spear Bank
+                window.location.href = spearUrl;
+            });
+        }
+
         // Step navigation
         document.getElementById('nextToStep2').addEventListener('click', function() {
-            if (validateStep1()) {
-                goToStep(2);
-            }
+            if (validateStep1()) goToStep(2);
         });
-
-        document.getElementById('prevToStep1').addEventListener('click', function() {
-            goToStep(1);
-        });
-
+        document.getElementById('prevToStep1').addEventListener('click', function() { goToStep(1); });
         document.getElementById('nextToStep3').addEventListener('click', function() {
-            if (validateStep2()) {
-                goToStep(3);
-            }
+            if (validateStep2()) goToStep(3);
         });
-
-        document.getElementById('prevToStep2').addEventListener('click', function() {
-            goToStep(2);
-        });
-
-        // Submit booking and send to Web3Forms
+        document.getElementById('prevToStep2').addEventListener('click', function() { goToStep(2); });
         document.getElementById('submitBooking').addEventListener('click', function() {
-            if (!validateStep3()) return; // تحقق من اختيار الدفع
-
-            // جمع كل البيانات من الخطوات الثلاث
-            const data = {
-                access_key: "b0c25945-a722-4d3e-a047-1bd069b7afbe",
-                service: document.getElementById('service').value,
-                name: document.getElementById('name').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                date: document.getElementById('date').value,
-                location: document.getElementById('location').value,
-                duration: document.getElementById('duration').value,
-                details: document.getElementById('details').value,
-                payment: selectedPayment,
-                total: document.getElementById('total').value
-            };
-
-            // إرسال البيانات إلى Web3Forms
-            fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-            .then(res => res.json())
-            .then(response => {
-                if (response.success) {
-                    goToStep(4); // الانتقال لرسالة الشكر
-                } else {
-                    alert("Ошибка при отправке формы. Попробуйте еще раз.");
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                alert("Произошла ошибка. Попробуйте еще раз.");
-            });
+            if (validateStep3()) goToStep(4);
         });
-
         document.getElementById('closeAfterSubmit').addEventListener('click', function() {
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
@@ -912,43 +877,34 @@
         function goToStep(step) {
             steps.forEach(s => s.classList.remove('active'));
             document.getElementById(`step${step}`).classList.add('active');
-            
+
             stepIndicators.forEach((indicator, index) => {
-                if (index < step) {
-                    indicator.classList.add('active');
-                } else {
-                    indicator.classList.remove('active');
-                }
+                indicator.classList.toggle('active', index < step);
             });
-            
             stepLines.forEach((line, index) => {
-                if (index < step - 1) {
-                    line.classList.add('active');
-                } else {
-                    line.classList.remove('active');
-                }
+                line.classList.toggle('active', index < step - 1);
             });
-            
+
             currentStep = step;
         }
 
         function validateStep1() {
-            const service = document.getElementById('service').value;
+            const service = serviceSelect.value;
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
             const email = document.getElementById('email').value;
-            
+
             if (!service || !name || !phone || !email) {
                 alert('Пожалуйста, заполните все обязательные поля');
                 return false;
             }
-            
+
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert('Пожалуйста, введите корректный email');
                 return false;
             }
-            
+
             return true;
         }
 
@@ -956,12 +912,10 @@
             const date = document.getElementById('date').value;
             const location = document.getElementById('location').value;
             const duration = document.getElementById('duration').value;
-            
             if (!date || !location || !duration) {
                 alert('Пожалуйста, заполните все обязательные поля');
                 return false;
             }
-            
             return true;
         }
 
@@ -974,7 +928,7 @@
         }
 
         function resetForm() {
-            document.getElementById('service').value = '';
+            serviceSelect.value = '';
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
             document.getElementById('email').value = '';
@@ -982,10 +936,8 @@
             document.getElementById('location').value = '';
             document.getElementById('duration').value = '';
             document.getElementById('details').value = '';
-            
             paymentOptions.forEach(opt => opt.classList.remove('selected'));
             selectedPayment = '';
-            
             goToStep(1);
         }
 
@@ -994,6 +946,7 @@
         }
     });
 </script>
+
 
 
 </body>
