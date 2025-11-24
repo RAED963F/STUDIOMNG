@@ -862,12 +862,45 @@
             goToStep(2);
         });
 
+        // Submit booking and send to Web3Forms
         document.getElementById('submitBooking').addEventListener('click', function() {
-            if (validateStep3()) {
-                // Here you would normally send the data to your server
-                // For now, we'll just show the confirmation
-                goToStep(4);
-            }
+            if (!validateStep3()) return; // تحقق من اختيار الدفع
+
+            // جمع كل البيانات من الخطوات الثلاث
+            const data = {
+                access_key: "b0c25945-a722-4d3e-a047-1bd069b7afbe",
+                service: document.getElementById('service').value,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('date').value,
+                location: document.getElementById('location').value,
+                duration: document.getElementById('duration').value,
+                details: document.getElementById('details').value,
+                payment: selectedPayment,
+                total: document.getElementById('total').value
+            };
+
+            // إرسال البيانات إلى Web3Forms
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(response => {
+                if (response.success) {
+                    goToStep(4); // الانتقال لرسالة الشكر
+                } else {
+                    alert("Ошибка при отправке формы. Попробуйте еще раз.");
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Произошла ошибка. Попробуйте еще раз.");
+            });
         });
 
         document.getElementById('closeAfterSubmit').addEventListener('click', function() {
@@ -877,13 +910,9 @@
         });
 
         function goToStep(step) {
-            // Hide all steps
             steps.forEach(s => s.classList.remove('active'));
-            
-            // Show the target step
             document.getElementById(`step${step}`).classList.add('active');
             
-            // Update step indicators
             stepIndicators.forEach((indicator, index) => {
                 if (index < step) {
                     indicator.classList.add('active');
@@ -892,7 +921,6 @@
                 }
             });
             
-            // Update step lines
             stepLines.forEach((line, index) => {
                 if (index < step - 1) {
                     line.classList.add('active');
@@ -915,7 +943,6 @@
                 return false;
             }
             
-            // Simple email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
                 alert('Пожалуйста, введите корректный email');
@@ -943,12 +970,10 @@
                 alert('Пожалуйста, выберите способ оплаты');
                 return false;
             }
-            
             return true;
         }
 
         function resetForm() {
-            // Reset form fields
             document.getElementById('service').value = '';
             document.getElementById('name').value = '';
             document.getElementById('phone').value = '';
@@ -958,64 +983,18 @@
             document.getElementById('duration').value = '';
             document.getElementById('details').value = '';
             
-            // Reset payment selection
             paymentOptions.forEach(opt => opt.classList.remove('selected'));
             selectedPayment = '';
             
-            // Reset to step 1
             goToStep(1);
         }
 
         function formatPrice(price) {
-            // Format price with spaces for thousands
             return parseInt(price).toLocaleString('ru-RU');
         }
     });
-
-    document.getElementById('submitBooking').addEventListener('click', function() {
-    if (!validateStep3()) return;
-
-    // جمع كل البيانات
-    const data = {
-        access_key: "b0c25945-a722-4d3e-a047-1bd069b7afbe", // ضع هنا مفتاحك
-        service: document.getElementById('service').value,
-        name: document.getElementById('name').value,
-        phone: document.getElementById('phone').value,
-        email: document.getElementById('email').value,
-        date: document.getElementById('date').value,
-        location: document.getElementById('location').value,
-        duration: document.getElementById('duration').value,
-        details: document.getElementById('details').value,
-        payment: selectedPayment,
-        total: document.getElementById('total').value
-    };
-
-    // إرسال البيانات لـ Web3Forms
-    fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(response => {
-        if (response.success) {
-            goToStep(4); // الانتقال لرسالة الشكر
-        } else {
-            alert("Ошибка при отправке формы. Попробуйте еще раз.");
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("Произошла ошибка. Попробуйте еще раз.");
-    });
-});
-
-
-
-
 </script>
+
 
 </body>
 </html>
