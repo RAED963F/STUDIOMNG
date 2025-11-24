@@ -973,11 +973,16 @@
     });
 
 
-    document.getElementById('submitBooking').addEventListener('click', async function() {
-    if (!validateStep3()) return;
+document.getElementById('submitBooking').addEventListener('click', async function() {
+    // تحقق من اختيار الدفع
+    if (!selectedPayment) {
+        alert('Пожалуйста, выберите способ оплаты');
+        return;
+    }
 
+    // تجهيز FormData
     const formData = new FormData();
-    formData.append('access_key', 'b0c25945-a722-4d3e-a047-1bd069b7afbe');
+    formData.append('access_key', 'b0c25945-a722-4d3e-a047-1bd069b7afbe'); // مفتاحك
     formData.append('name', document.getElementById('name').value);
     formData.append('email', document.getElementById('email').value);
     formData.append('phone', document.getElementById('phone').value);
@@ -995,8 +1000,10 @@
             headers: { 'Accept': 'application/json' }
         });
         const result = await response.json();
-        if(result.success) {
-            goToStep('confirmation');
+        if (result.success) {
+            // عرض رسالة التأكيد
+            steps.forEach(s => s.classList.remove('active'));
+            document.getElementById('confirmation').classList.add('active');
         } else {
             console.error(result);
             alert('Произошла ошибка. Попробуйте снова.');
