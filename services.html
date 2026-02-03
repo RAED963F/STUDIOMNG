@@ -1259,7 +1259,8 @@ card.innerHTML = `
 <strong>${pkg.price}</strong>
 `;
 
-card.addEventListener("click", () => {
+card.addEventListener("click", (e) => {
+    e.stopPropagation();
 
 packagesModal.classList.remove("active");
 bookingModal.classList.add("active");
@@ -1271,9 +1272,13 @@ packagesContainer.appendChild(card);
 });
 }
 
-document.querySelector(".packages-close").onclick = () => {
+document.querySelector(".packages-close").addEventListener("click", (e) => {
+  e.stopPropagation();
   packagesModal.classList.remove("active");
-};
+});
+
+document.querySelector("#packagesModal .modal-content")
+  .addEventListener("click", e => e.stopPropagation());
 
 
 
