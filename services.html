@@ -1260,12 +1260,15 @@ card.innerHTML = `
 `;
 
 card.addEventListener("click", (e) => {
-    e.stopPropagation();
+  e.stopPropagation();
 
-packagesModal.classList.remove("active");
-bookingModal.classList.add("active");
+  packagesModal.classList.remove("active");
 
+  setTimeout(() => {
+    bookingModal.classList.add("active");
+  }, 10);
 });
+
 
 packagesContainer.appendChild(card);
 
