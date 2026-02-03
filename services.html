@@ -1010,6 +1010,21 @@ live: `
 
 };
 
+document.addEventListener("DOMContentLoaded", function() {
+
+  const modal = document.getElementById("serviceModal");
+  const modalBody = document.getElementById("modalBody");
+
+  document.querySelectorAll(".openModal").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const key = btn.dataset.service;
+      modalBody.innerHTML = services[key];
+      modal.classList.add("active");
+    });
+  });
+
+});
+
 
     // Navigation Menu Toggle
     function toggleMenu() {
