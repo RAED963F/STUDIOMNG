@@ -603,6 +603,29 @@
   }
 }
 
+.modal-content h3 {
+  color: #ffd400;
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-size: 18px;
+}
+
+.modal-content p {
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.modal-content ul {
+  margin-left: 18px;
+  margin-bottom: 10px;
+}
+
+.modal-content li {
+  margin-bottom: 4px;
+}
+
+
     </style>
 </head>
 
@@ -915,7 +938,7 @@ photo: `
 <li>работаем системно</li>
 </ul>
 
-<a href="#contacts" class="modal-cta">Оставить заявку</a>
+<a href="/contact.html" class="modal-cta">Оставить заявку</a>
 `,
 
 podcast: `
@@ -955,7 +978,7 @@ podcast: `
 <li>медиа</li>
 </ul>
 
-<a href="#contacts" class="modal-cta">Записаться на съёмку</a>
+<a href="/contact.html" class="modal-cta">Записаться на съёмку</a>
 `,
 
 expert: `
@@ -986,7 +1009,7 @@ expert: `
 <li>уверенно</li>
 </ul>
 
-<a href="#contacts" class="modal-cta">Получить консультацию</a>
+<a href="/contact.html" class="modal-cta">Получить консультацию</a>
 `,
 
 live: `
@@ -1014,7 +1037,7 @@ live: `
 <li>спокойствие клиента</li>
 </ul>
 
-<a href="#contacts" class="modal-cta">Обсудить LIVE-проект</a>
+<a href="#/contact.html" class="modal-cta">Обсудить LIVE-проект</a>
 `
 
 };
@@ -1033,6 +1056,18 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
 });
+
+document.querySelector(".modal-close").addEventListener("click", () => {
+  modal.classList.remove("active");
+});
+
+
+modal.addEventListener("click", e => {
+  if (e.target.classList.contains("modal-backdrop")) {
+    modal.classList.remove("active");
+  }
+});
+
 
 
     // Navigation Menu Toggle
