@@ -524,39 +524,83 @@
                 width: 100%;
             }
         }
-        .details-toggle {
-  margin-top: 10px;
+        .service-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 9999;
+}
+
+.service-modal.active {
+  display: block;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 650px;
+  margin: 5vh auto;
+  background: #0f0f0f;
+  border-radius: 14px;
+  padding: 40px;
+  color: #ddd;
+  overflow-y: auto;
+  max-height: 90vh;
+  box-shadow: 0 0 40px rgba(255, 212, 0, 0.15);
+  transform: translateY(40px) scale(0.95);
+  opacity: 0;
+  animation: modalEnter 0.5s ease forwards;
+}
+
+.modal-close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  font-size: 28px;
   background: none;
   border: none;
   color: #ffd400;
   cursor: pointer;
+}
+
+.modal-section {
+  margin-top: 20px;
+}
+
+.modal-section h3 {
+  color: #ffd400;
+  margin-bottom: 5px;
+}
+
+.modal-cta {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 14px 26px;
+  background: #ffd400;
+  color: #000;
+  border-radius: 30px;
+  text-decoration: none;
   font-weight: bold;
 }
 
-.service-details {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-  font-size: 14px;
-  color: #ccc;
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-.service-details ul {
-  padding-left: 18px;
-}
-
-.service-details hr {
-  border: 0;
-  height: 1px;
-  background: #333;
-  margin: 10px 0;
-}
-
-.details-cta {
-  display: inline-block;
-  margin-top: 10px;
-  color: #ffd400;
-  text-decoration: underline;
+@keyframes modalEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
     </style>
@@ -595,10 +639,14 @@
         <div class="service-icon">
             <i class="fas fa-video"></i>
         </div>
-        <h3>Видео Съёмка</h3>
-        <p>Создание профессиональных видео под любой запрос: реклама, корпоратив, клипы, свадьбы, short films.</p>
+        <h3>Экспертные интервью и студийные форматы</h3>
+        <p>Видео для сайтов, соцсетей и презентаций
+— вы выглядите уверенно, профессионально и убедительно. </p>
         <div class="price">от 5 000₽</div>
         <button class="book-btn" data-service="Видео Съёмка" data-price="5000">Заказать</button>
+        <button class="openModal" data-service="expert">Подробнее</button>
+
+
     </div>
 
     <div class="service-card">
@@ -611,54 +659,7 @@
 </p>
         <div class="price">от 3 000₽</div>
         <button class="book-btn" data-service="Фото Сессия" data-price="3000">Заказать</button>
-        <button class="details-toggle">Подробнее</button>
-
-<div class="service-details">
-  <p><strong>Не просто запись разговора</strong></p>
-
-  <p>Большинство подкастов выглядят как «включили камеру».
-  Мы делаем телевизионный формат:</p>
-
-  <ul>
-    <li>правильный свет</li>
-    <li>чистый звук</li>
-    <li>работа с кадром</li>
-    <li>уверенное присутствие в камере</li>
-  </ul>
-
-  <hr>
-
-  <p><strong>Форматы</strong></p>
-  <ul>
-    <li>Подкасты 1–2 человека</li>
-    <li>Эксперт + ведущий</li>
-    <li>YouTube-шоу</li>
-    <li>Интервью</li>
-    <li>Нарезки для Reels / Shorts</li>
-  </ul>
-
-  <p><strong>Что входит</strong></p>
-  <ul>
-    <li>подготовка студии</li>
-    <li>свет и звук</li>
-    <li>съёмка на несколько камер</li>
-    <li>монтаж</li>
-    <li>короткие версии для соцсетей</li>
-  </ul>
-
-  <p><strong>Для кого</strong></p>
-  <ul>
-    <li>эксперты и спикеры</li>
-    <li>бизнес-проекты</li>
-    <li>онлайн-школы</li>
-    <li>медиа и блогеры</li>
-  </ul>
-
-  <a href="#contacts" class="details-cta">
-    Записаться на съёмку подкаста
-  </a>
-</div>
-
+<button class="openModal" data-service="photo">Подробнее</button>
     </div>
 <!--
     <div class="service-card">
@@ -680,6 +681,8 @@
 — чистый звук, правильный свет, монтаж и нарезки.</p>
         <div class="price">от 2 500₽</div>
         <button class="book-btn" data-service="Монтаж Видео" data-price="2500">Заказать</button>
+        <button class="openModal" data-service="podcast">Подробнее</button>
+
     </div>
 
     <div class="service-card">
@@ -691,6 +694,8 @@
 — студия или выезд, стабильный сигнал, полное сопровождение.</p>
         <div class="price">от 3 500₽</div>
         <button class="book-btn" data-service="Контент для Соцсетей" data-price="3500">Заказать</button>
+        <button class="openModal" data-service="live">Подробнее</button>
+
     </div>
 <!-- 
     <div class="service-card">
@@ -705,6 +710,7 @@
     </div>
 -->
 </div>
+
 
 <!-- BOOKING MODAL -->
 <div class="modal-overlay" id="bookingModal">
@@ -860,19 +866,151 @@
 </footer>
 
 <script>
-    document.querySelectorAll(".details-toggle").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const details = btn.nextElementSibling;
 
-    if (details.style.maxHeight) {
-      details.style.maxHeight = null;
-      btn.textContent = "Подробнее";
-    } else {
-      details.style.maxHeight = details.scrollHeight + "px";
-      btn.textContent = "Скрыть";
-    }
-  });
-});
+const services = {
+
+photo: `
+<h3>Зачем вам профессиональные фото?</h3>
+<p>На маркетплейсах покупают глазами. Даже хороший товар не продаётся, если карточка выглядит дёшево.</p>
+
+<ul>
+<li>которые выделяются в ленте</li>
+<li>вызывают доверие</li>
+<li>соответствуют требованиям площадок</li>
+<li>работают на конверсию</li>
+</ul>
+
+<h3>Что мы снимаем</h3>
+<ul>
+<li>Каталожные фото (white background)</li>
+<li>Lifestyle-сюжеты</li>
+<li>Детали и macro</li>
+<li>Товар в руке / в использовании</li>
+<li>Вертикальные и квадратные форматы</li>
+</ul>
+
+<h3>Что входит</h3>
+<ul>
+<li>подготовка света и композиции</li>
+<li>профессиональная съёмка</li>
+<li>ретушь</li>
+<li>адаптация под маркетплейсы</li>
+<li>передача файлов</li>
+</ul>
+
+<h3>Почему мы</h3>
+<ul>
+<li>телевизионный свет</li>
+<li>коммерческий опыт</li>
+<li>выстроенная сцена</li>
+<li>работаем системно</li>
+</ul>
+
+<a href="#contacts" class="modal-cta">Оставить заявку</a>
+`,
+
+podcast: `
+<h3>Не просто запись разговора</h3>
+<p>Большинство подкастов выглядят как «включили камеру». Мы делаем телевизионный формат.</p>
+
+<ul>
+<li>правильный свет</li>
+<li>чистый звук</li>
+<li>работа с кадром</li>
+<li>уверенное присутствие в камере</li>
+</ul>
+
+<h3>Форматы</h3>
+<ul>
+<li>Подкасты 1–2 человека</li>
+<li>Эксперт + ведущий</li>
+<li>YouTube-шоу</li>
+<li>Интервью</li>
+<li>Reels / Shorts</li>
+</ul>
+
+<h3>Что входит</h3>
+<ul>
+<li>подготовка студии</li>
+<li>свет и звук</li>
+<li>съёмка на несколько камер</li>
+<li>монтаж</li>
+<li>версии для соцсетей</li>
+</ul>
+
+<h3>Для кого</h3>
+<ul>
+<li>эксперты</li>
+<li>бизнес</li>
+<li>онлайн-школы</li>
+<li>медиа</li>
+</ul>
+
+<a href="#contacts" class="modal-cta">Записаться на съёмку</a>
+`,
+
+expert: `
+<h3>Зачем экспертное видео</h3>
+<p>Люди покупают у людей, которым доверяют. Видео — самый быстрый способ создать доверие.</p>
+
+<h3>Мы снимаем</h3>
+<ul>
+<li>экспертные обращения</li>
+<li>видео для сайтов</li>
+<li>LinkedIn / Telegram / YouTube</li>
+<li>презентационные ролики</li>
+<li>персональный бренд</li>
+</ul>
+
+<h3>Наш подход</h3>
+<ul>
+<li>уверенность в кадре</li>
+<li>свет под лицо</li>
+<li>контроль подачи</li>
+<li>спокойная съёмка</li>
+</ul>
+
+<h3>Результат</h3>
+<ul>
+<li>профессионально</li>
+<li>убедительно</li>
+<li>уверенно</li>
+</ul>
+
+<a href="#contacts" class="modal-cta">Получить консультацию</a>
+`,
+
+live: `
+<h3>Прямые эфиры и LIVE</h3>
+<p>Студийные и выездные LIVE-форматы с профессиональным сопровождением.</p>
+
+<h3>Наша сильная сторона</h3>
+<p>Мы ежедневно работаем с прямыми эфирами для международных телеканалов.</p>
+
+<h3>Форматы</h3>
+<ul>
+<li>прямые эфиры из студии</li>
+<li>выездные включения</li>
+<li>гибридные трансляции</li>
+<li>экспертные эфиры</li>
+<li>онлайн-конференции</li>
+</ul>
+
+<h3>Что мы обеспечиваем</h3>
+<ul>
+<li>стабильный сигнал</li>
+<li>профессиональный звук</li>
+<li>контроль эфира</li>
+<li>студию или выезд</li>
+<li>спокойствие клиента</li>
+</ul>
+
+<a href="#contacts" class="modal-cta">Обсудить LIVE-проект</a>
+`
+
+};
+
+
     // Navigation Menu Toggle
     function toggleMenu() {
         document.getElementById('nav-links').classList.toggle('show');
