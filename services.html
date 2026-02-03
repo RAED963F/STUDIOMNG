@@ -626,6 +626,32 @@
 }
 
 
+
+.step { display: none; }
+.step.active { display: block; }
+
+.packages {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.package-card {
+  flex: 1;
+  padding: 20px;
+  background: #111;
+  border-radius: 12px;
+  cursor: pointer;
+  border: 1px solid #333;
+  transition: 0.3s;
+}
+
+.package-card:hover {
+  border-color: #ffd400;
+  transform: translateY(-4px);
+}
+
+
     </style>
 </head>
 
@@ -681,7 +707,7 @@
 с телевизионным светом и коммерческим подходом. 
 </p>
         <div class="price">от 3 000₽</div>
-        <button class="book-btn" data-service="Фото Сессия" data-price="3000">Заказать</button>
+        <button class="openBooking" data-service="expert" class="book-btn" data-service="Фото Сессия" data-price="3000">Заказать</button>
 <button class="openModal" data-service="photo">Подробнее</button>
     </div>
 <!--
@@ -867,13 +893,27 @@
         </div>
     </div>
 </div>
-
+<!--  details  -->
 <div id="serviceModal" class="service-modal">
   <div class="modal-backdrop"></div>
   <div class="modal-content">
     <button class="modal-close">×</button>
     <div id="modalBody"></div>
   </div>
+</div>
+
+<!-- 3 cards -->
+<div id="stepPackages" class="step active">
+  <h2>Выберите пакет</h2>
+  <div class="packages" id="packagesContainer"></div>
+</div>
+
+<div id="stepForm" class="step">
+  <h2>Ваши данные</h2>
+  <input placeholder="Имя">
+  <input placeholder="Телефон">
+  <input placeholder="Email">
+  <button class="submit-btn">Отправить</button>
 </div>
 
 
@@ -1042,6 +1082,126 @@ live: `
 
 };
 
+const packagesData = {
+
+photo: [
+{
+name: "START — Каталог",
+price: "от 15 000 ₽",
+features: [
+"до 1 товара",
+"white background",
+"до 10 фото",
+"студийный свет",
+"базовая ретушь",
+"адаптация под ТЗ маркетплейса"
+]
+},
+
+{
+name: "PRO — Продающий",
+price: "от 30 000 ₽",
+features: [
+"1 товар",
+"white + lifestyle",
+"до 20 фото",
+"детали / macro",
+"глубокая ретушь",
+"кадры под главную карточку"
+]
+},
+
+{
+name: "PREMIUM — Бренд",
+price: "от 50 000 ₽",
+features: [
+"1–2 товара",
+"сценарий съёмки",
+"lifestyle / сцены",
+"до 35 фото",
+"сложный свет",
+"ретушь + стилистика"
+]
+}
+],
+
+expert: [
+{
+name: "START — Обращение",
+price: "от 25 000 ₽",
+features: [
+"1 эксперт",
+"до 3 минут",
+"студия",
+"свет + звук",
+"монтаж"
+]
+},
+
+{
+name: "PRO — Имидж",
+price: "от 45 000 ₽",
+features: [
+"1–2 видео",
+"помощь с подачей",
+"свет под лицо",
+"монтаж",
+"адаптация под соцсети"
+]
+},
+
+{
+name: "PREMIUM — Личный бренд",
+price: "от 80 000 ₽",
+features: [
+"серия видео",
+"сценарная структура",
+"несколько образов",
+"монтаж + версии",
+"консультация по подаче"
+]
+}
+],
+
+live: [
+{
+name: "START — Студийный эфир",
+price: "от 40 000 ₽",
+features: [
+"эфир из студии",
+"до 60 минут",
+"стабильный сигнал",
+"техподдержка"
+]
+},
+
+{
+name: "PRO — LIVE + контроль",
+price: "от 70 000 ₽",
+features: [
+"студия или выезд",
+"эфир до 90 минут",
+"резервные решения",
+"полный контроль эфира"
+]
+},
+
+{
+name: "PREMIUM — TV-формат",
+price: "от 120 000 ₽",
+features: [
+"сложный LIVE",
+"несколько камер",
+"режиссура",
+"выезд / гибрид",
+"ответственность под ключ"
+]
+}
+]
+
+};
+
+
 document.addEventListener("DOMContentLoaded", function() {
 
   const modal = document.getElementById("serviceModal");
@@ -1065,6 +1225,51 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 
+});
+
+
+
+const packagesContainer = document.getElementById("packagesContainer");
+const stepPackages = document.getElementById("stepPackages");
+const stepForm = document.getElementById("stepForm");
+
+function loadPackages(serviceKey) {
+
+packagesContainer.innerHTML = "";
+
+packagesData[serviceKey].forEach(pkg => {
+
+const card = document.createElement("div");
+card.className = "package-card";
+
+card.innerHTML = `
+<h3>${pkg.name}</h3>
+<ul>${pkg.features.map(f => `<li>${f}</li>`).join("")}</ul>
+<strong>${pkg.price}</strong>
+`;
+
+card.addEventListener("click", () => {
+stepPackages.classList.remove("active");
+stepForm.classList.add("active");
+});
+
+packagesContainer.appendChild(card);
+
+});
+}
+
+document.querySelectorAll(".openBooking").forEach(btn => {
+btn.addEventListener("click", () => {
+
+const serviceKey = btn.dataset.service;
+
+modal.classList.add("active");
+stepPackages.classList.add("active");
+stepForm.classList.remove("active");
+
+loadPackages(serviceKey);
+
+});
 });
 
 
