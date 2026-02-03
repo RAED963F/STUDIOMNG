@@ -704,7 +704,7 @@
 с телевизионным светом и коммерческим подходом. 
 </p>
         <div class="price">от 3 000₽</div>
-        <button class="openBooking" data-service="photo" class="book-btn" data-service="Фото Сессия" data-price="3000">Заказать</button>
+        <button class="openBooking" data-service="photo" class="book-btn" data-price="3000">Заказать</button>
         <button  class="openModal" data-service="photo">Подробнее</button>
     </div>
 <!--
@@ -1232,7 +1232,7 @@ const bookingModal = document.getElementById("serviceModal"); // المودال 
 const packagesContainer = document.getElementById("packagesContainer");
 
 document.querySelectorAll(".openBooking").forEach(btn => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (e) => {
 
     e.stopPropagation();
 
