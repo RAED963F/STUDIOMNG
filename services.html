@@ -1055,17 +1055,16 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-});
-
-document.querySelector(".modal-close").addEventListener("click", () => {
-  modal.classList.remove("active");
-});
-
-
-modal.addEventListener("click", e => {
-  if (e.target.classList.contains("modal-backdrop")) {
+  document.querySelector(".modal-close").addEventListener("click", () => {
     modal.classList.remove("active");
-  }
+  });
+
+  modal.addEventListener("click", e => {
+    if (e.target.classList.contains("modal-backdrop")) {
+      modal.classList.remove("active");
+    }
+  });
+
 });
 
 
