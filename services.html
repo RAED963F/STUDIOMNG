@@ -524,6 +524,41 @@
                 width: 100%;
             }
         }
+        .details-toggle {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #ffd400;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.service-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.service-details ul {
+  padding-left: 18px;
+}
+
+.service-details hr {
+  border: 0;
+  height: 1px;
+  background: #333;
+  margin: 10px 0;
+}
+
+.details-cta {
+  display: inline-block;
+  margin-top: 10px;
+  color: #ffd400;
+  text-decoration: underline;
+}
+
     </style>
 </head>
 
@@ -571,14 +606,61 @@
             <i class="fas fa-camera"></i>
         </div>
         <h3>Фото для маркетплейсов</h3>
-        <p>Продающие карточки товаров для Ozon, Wildberries, Yandex Market
-— свет, композиция, ретушь, адаптация под требования площадок.  Подкасты и видео-касты
-Студийная съёмка подкастов, интервью и YouTube-шоу
-— чистый звук, правильный свет, монтаж и нарезки.</p>
+        <p>Профессиональная предметная съёмка для Ozon, Wildberries и Yandex Market
+с телевизионным светом и коммерческим подходом. 
+</p>
         <div class="price">от 3 000₽</div>
         <button class="book-btn" data-service="Фото Сессия" data-price="3000">Заказать</button>
-    </div>
+        <button class="details-toggle">Подробнее</button>
 
+<div class="service-details">
+  <p><strong>Не просто запись разговора</strong></p>
+
+  <p>Большинство подкастов выглядят как «включили камеру».
+  Мы делаем телевизионный формат:</p>
+
+  <ul>
+    <li>правильный свет</li>
+    <li>чистый звук</li>
+    <li>работа с кадром</li>
+    <li>уверенное присутствие в камере</li>
+  </ul>
+
+  <hr>
+
+  <p><strong>Форматы</strong></p>
+  <ul>
+    <li>Подкасты 1–2 человека</li>
+    <li>Эксперт + ведущий</li>
+    <li>YouTube-шоу</li>
+    <li>Интервью</li>
+    <li>Нарезки для Reels / Shorts</li>
+  </ul>
+
+  <p><strong>Что входит</strong></p>
+  <ul>
+    <li>подготовка студии</li>
+    <li>свет и звук</li>
+    <li>съёмка на несколько камер</li>
+    <li>монтаж</li>
+    <li>короткие версии для соцсетей</li>
+  </ul>
+
+  <p><strong>Для кого</strong></p>
+  <ul>
+    <li>эксперты и спикеры</li>
+    <li>бизнес-проекты</li>
+    <li>онлайн-школы</li>
+    <li>медиа и блогеры</li>
+  </ul>
+
+  <a href="#contacts" class="details-cta">
+    Записаться на съёмку подкаста
+  </a>
+</div>
+
+    </div>
+<!--
     <div class="service-card">
         <div class="service-icon">
             <i class="fas fa-ad"></i>
@@ -588,13 +670,14 @@
         <div class="price">от 8 000₽</div>
         <button class="book-btn" data-service="Рекламные Видео" data-price="8000">Заказать</button>
     </div>
-
+ -->
     <div class="service-card">
         <div class="service-icon">
             <i class="fas fa-film"></i>
         </div>
-        <h3>Монтаж Видео</h3>
-        <p>Профессиональная пост-обработка, цветокоррекция, звук, спецэффекты, работа с 4K.</p>
+        <h3>Подкасты и видео-касты</h3>
+        <p>Студийная съёмка подкастов, интервью и YouTube-шоу
+— чистый звук, правильный свет, монтаж и нарезки.</p>
         <div class="price">от 2 500₽</div>
         <button class="book-btn" data-service="Монтаж Видео" data-price="2500">Заказать</button>
     </div>
@@ -609,7 +692,7 @@
         <div class="price">от 3 500₽</div>
         <button class="book-btn" data-service="Контент для Соцсетей" data-price="3500">Заказать</button>
     </div>
-
+<!-- 
     <div class="service-card">
         <div class="service-icon">
             <i class="fas fa-briefcase"></i>
@@ -620,7 +703,7 @@
         <div class="price">от 6 000₽</div>
         <button class="book-btn" data-service="Бренд-Съёмка" data-price="6000">Заказать</button>
     </div>
-
+-->
 </div>
 
 <!-- BOOKING MODAL -->
@@ -777,6 +860,19 @@
 </footer>
 
 <script>
+    document.querySelectorAll(".details-toggle").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const details = btn.nextElementSibling;
+
+    if (details.style.maxHeight) {
+      details.style.maxHeight = null;
+      btn.textContent = "Подробнее";
+    } else {
+      details.style.maxHeight = details.scrollHeight + "px";
+      btn.textContent = "Скрыть";
+    }
+  });
+});
     // Navigation Menu Toggle
     function toggleMenu() {
         document.getElementById('nav-links').classList.toggle('show');
