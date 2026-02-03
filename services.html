@@ -626,10 +626,6 @@
 }
 
 
-
-.step { display: none; }
-.step.active { display: block; }
-
 .packages {
   display: flex;
   gap: 20px;
@@ -648,8 +644,9 @@
 
 .package-card:hover {
   border-color: #ffd400;
-  transform: translateY(-4px);
+  transform: translateY(-5px);
 }
+
 
 
     </style>
@@ -903,18 +900,20 @@
 </div>
 
 <!-- 3 cards -->
-<div id="stepPackages" class="step active">
-  <h2>Выберите пакет</h2>
-  <div class="packages" id="packagesContainer"></div>
+<div id="packagesModal" class="service-modal">
+
+  <div class="modal-backdrop"></div>
+
+  <div class="modal-content">
+    <button class="modal-close packages-close">×</button>
+
+    <h2>Выберите пакет</h2>
+
+    <div class="packages" id="packagesContainer"></div>
+
+  </div>
 </div>
 
-<div id="stepForm" class="step">
-  <h2>Ваши данные</h2>
-  <input placeholder="Имя">
-  <input placeholder="Телефон">
-  <input placeholder="Email">
-  <button class="submit-btn">Отправить</button>
-</div>
 
 
 <!-- FOOTER -->
@@ -1228,10 +1227,20 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
+const packagesModal = document.getElementById("packagesModal");
+const bookingModal = document.getElementById("serviceModal"); // المودال القديم
 const packagesContainer = document.getElementById("packagesContainer");
-const stepPackages = document.getElementById("stepPackages");
-const stepForm = document.getElementById("stepForm");
+
+document.querySelectorAll(".openBooking").forEach(btn => {
+  btn.addEventListener("click", () => {
+
+    const serviceKey = btn.dataset.service;
+
+    loadPackages(serviceKey);
+
+    packagesModal.classList.add("active");
+  });
+});
 
 function loadPackages(serviceKey) {
 
@@ -1249,8 +1258,10 @@ card.innerHTML = `
 `;
 
 card.addEventListener("click", () => {
-stepPackages.classList.remove("active");
-stepForm.classList.add("active");
+
+packagesModal.classList.remove("active");
+bookingModal.classList.add("active");
+
 });
 
 packagesContainer.appendChild(card);
@@ -1258,19 +1269,9 @@ packagesContainer.appendChild(card);
 });
 }
 
-document.querySelectorAll(".openBooking").forEach(btn => {
-btn.addEventListener("click", () => {
-
-const serviceKey = btn.dataset.service;
-
-modal.classList.add("active");
-stepPackages.classList.add("active");
-stepForm.classList.remove("active");
-
-loadPackages(serviceKey);
-
-});
-});
+document.querySelector(".packages-close").onclick = () => {
+  packagesModal.classList.remove("active");
+};
 
 
 
