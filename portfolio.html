@@ -46,7 +46,7 @@
             background: rgba(10, 10, 10, 0.98);
         }
 
-        .logo {
+        .logo a{
             font-size: 28px;
             font-weight: 700;
             letter-spacing: 1px;
@@ -55,6 +55,10 @@
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .logo a:hover {
+         opacity: 0.9; /* اختياري تأثير بسيط */
         }
 
         .logo i {
@@ -673,9 +677,12 @@
 <body>
 
 <header id="header">
-    <div class="logo">
-        <a href="index.html">MHG Studio</a>
-    </div>
+   <div class="logo">
+    <a href="index.html">
+        <i></i> MHG Studio
+    </a>
+</div>
+
     <nav>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
