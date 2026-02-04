@@ -795,6 +795,23 @@
 }
 
 
+.service-card {
+  cursor: pointer;
+  user-select: none;
+}
+
+.service-card:active {
+  transform: scale(0.98);
+}
+
+.service-card {
+  transition: transform 0.15s ease, box-shadow 0.3s;
+}
+
+.service-card:hover {
+  box-shadow: 0 0 20px rgba(255,212,0,0.15);
+}
+
 
     </style>
 </head>
@@ -835,9 +852,11 @@
         <h3>Экспертные интервью и студийные форматы</h3>
         <p>Видео для сайтов, соцсетей и презентаций
 — вы выглядите уверенно, профессионально и убедительно. </p>
-       <!-- <div class="price">от 5 000₽</div>--> 
-         <!-- <button class="openBooking book-btn" data-service="expert"  data-price="5000">Заказать</button>--> 
-        <button  class="openModal" data-service="expert">Подробнее</button>
+        <!-- <div class="price">от 5 000₽</div>--> 
+        <!-- <button class="openBooking book-btn" data-service="expert"  data-price="5000">Заказать</button>--> 
+        <!-- <button  class="openModal" data-service="expert">Подробнее</button> -->
+        <div class="service-card openModal" data-service="expert">
+
 
 
     </div>
@@ -1389,8 +1408,8 @@ document.addEventListener("DOMContentLoaded", function() {
   const packagesContainer = document.getElementById("packagesContainer");
 
   // فتح مودال الشرح + الحزم
-  document.querySelectorAll(".openModal").forEach(btn => {
-    btn.addEventListener("click", () => {
+    document.querySelectorAll(".service-card.openModal").forEach(card => {
+  card.addEventListener("click", () => {
 
       const key = btn.dataset.service;
 
