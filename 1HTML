@@ -689,7 +689,7 @@
         <p>Видео для сайтов, соцсетей и презентаций
 — вы выглядите уверенно, профессионально и убедительно. </p>
         <div class="price">от 5 000₽</div>
-         <!-- <button class="openBooking book-btn" data-service="expert"  data-price="5000">Заказать</button>--> 
+        <button class="openBooking book-btn" data-service="expert"  data-price="5000">Заказать</button>
         <button  class="openModal" data-service="expert">Подробнее</button>
 
 
@@ -704,10 +704,20 @@
 с телевизионным светом и коммерческим подходом. 
 </p>
         <div class="price">от 3 000₽</div>
-         <!--  <button class="openBooking" data-service="photo" class="book-btn" data-price="3000">Заказать</button>--> 
+        <button class="openBooking" data-service="photo" class="book-btn" data-price="3000">Заказать</button>
         <button  class="openModal" data-service="photo">Подробнее</button>
     </div>
-
+<!--
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-ad"></i>
+        </div>
+        <h3>Рекламные Видео</h3>
+        <p>Продакшн полного цикла: сценарий, съёмка, монтаж. Идеально для бизнеса и брендов.</p>
+        <div class="price">от 8 000₽</div>
+        <button class="book-btn" data-service="Рекламные Видео" data-price="8000">Заказать</button>
+    </div>
+ -->
     <div class="service-card">
         <div class="service-icon">
             <i class="fas fa-film"></i>
@@ -716,7 +726,7 @@
         <p>Студийная съёмка подкастов, интервью и YouTube-шоу
 — чистый звук, правильный свет, монтаж и нарезки.</p>
         <div class="price">от 2 500₽</div>
-        <!-- <button class="book-btn" data-service="Монтаж Видео" data-price="2500">Заказать</button> --> 
+        <button class="book-btn" data-service="Монтаж Видео" data-price="2500">Заказать</button>
         <button class="openModal" data-service="podcast">Подробнее</button>
 
     </div>
@@ -729,21 +739,32 @@
         <p>Трансляции, включения, гибридные форматы
 — студия или выезд, стабильный сигнал, полное сопровождение.</p>
         <div class="price">от 3 500₽</div>
-         <!--  <button class="openBooking" data-service="live" class="book-btn"  data-price="3500">Заказать</button>--> 
+        <button class="openBooking" data-service="live" class="book-btn"  data-price="3500">Заказать</button>
         <button  class="openModal" data-service="live">Подробнее</button>
 
     </div>
-
+<!-- 
+    <div class="service-card">
+        <div class="service-icon">
+            <i class="fas fa-briefcase"></i>
+        </div>
+        <h3>Экспертные и бизнес-видео </h3>
+        <p>Видео для сайтов, соцсетей и презентаций
+— вы выглядите уверенно, профессионально и убедительно. </p>
+        <div class="price">от 6 000₽</div>
+        <button class="book-btn" data-service="Бренд-Съёмка" data-price="6000">Заказать</button>
+    </div>
+-->
 </div>
 
 
-<!-- BOOKING MODAL 
+<!-- BOOKING MODAL -->
 <div class="modal-overlay" id="bookingModal">
     <div class="booking-modal">
         <button class="close-modal" id="closeModal">&times;</button>
         <h2 class="modal-title">Заказ услуги</h2>
-        -->
-        <!-- Step Indicator 
+        
+        <!-- Step Indicator -->
         <div class="step-indicator">
             <div class="step active" data-step="1">1</div>
             <div class="step-line"></div>
@@ -751,8 +772,8 @@
             <div class="step-line"></div>
             <div class="step" data-step="3">3</div>
         </div>
-        -->
-        <!-- Step 1: Service Details 
+        
+        <!-- Step 1: Service Details -->
         <div class="form-step active" id="step1">
             <div class="form-group">
                 <label for="service">Выберите услугу</label>
@@ -782,8 +803,8 @@
                 <button class="btn btn-next" id="nextToStep2">Далее</button>
             </div>
         </div>
-        -->
-        <!-- Step 2: Additional Details 
+        
+        <!-- Step 2: Additional Details -->
         <div class="form-step" id="step2">
             <div class="form-group">
                 <label for="date">Предпочтительная дата</label>
@@ -819,8 +840,8 @@
                 <button class="btn btn-next" id="nextToStep3">Далее</button>
             </div>
         </div>
-        -->
-        <!-- Step 3: Payment 
+        
+        <!-- Step 3: Payment -->
         <div class="form-step" id="step3">
             <div class="form-group">
                 <label>Выберите способ оплаты</label>
@@ -857,8 +878,8 @@
                 <button class="btn btn-submit" id="submitBooking">Забронировать</button>
             </div>
         </div>
-        -->
-        <!-- Confirmation Step 
+        
+        <!-- Confirmation Step -->
         <div class="form-step" id="confirmation">
             <div class="confirmation-message">
                 <div class="confirmation-icon">✓</div>
@@ -869,29 +890,16 @@
         </div>
     </div>
 </div>
--->
-
 <!--  details  -->
 <div id="serviceModal" class="service-modal">
   <div class="modal-backdrop"></div>
-
   <div class="modal-content">
     <button class="modal-close">×</button>
-
     <div id="modalBody"></div>
-
-    <hr>
-
-    <h2>Пакеты</h2>
-    <div id="packagesContainer" class="packages"></div>
-
-    <a href="contact.html" class="modal-cta">
-      Связаться с нами
-    </a>
   </div>
 </div>
 
-<!-- 3 cards
+<!-- 3 cards -->
 <div id="packagesModal" class="service-modal">
 
   <div class="modal-backdrop"></div>
@@ -906,7 +914,7 @@
   </div>
 </div>
 
- -->
+
 
 <!-- FOOTER -->
 <footer>
@@ -1240,82 +1248,309 @@ features: [
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  // ---------- SERVICE MODAL ----------
   const modal = document.getElementById("serviceModal");
   const modalBody = document.getElementById("modalBody");
-  const packagesContainer = document.getElementById("packagesContainer");
 
-  // فتح مودال الشرح + الحزم
   document.querySelectorAll(".openModal").forEach(btn => {
     btn.addEventListener("click", () => {
-
       const key = btn.dataset.service;
-
       modalBody.innerHTML = services[key];
-      loadPackages(key);
-
       modal.classList.add("active");
-      document.body.style.overflow = "hidden";
     });
   });
 
-  // زر الإغلاق
   document.querySelector(".modal-close").addEventListener("click", () => {
-    closeModal();
+    modal.classList.remove("active");
   });
 
-  // إغلاق عند الضغط خارج المودال
   modal.addEventListener("click", e => {
     if (e.target.classList.contains("modal-backdrop")) {
-      closeModal();
+      modal.classList.remove("active");
     }
   });
-
-  // منع تسريب click من داخل الصندوق
-  document.querySelector("#serviceModal .modal-content")
-    .addEventListener("click", e => e.stopPropagation());
-
-  function closeModal() {
-    modal.classList.remove("active");
-    document.body.style.overflow = "auto";
-  }
-
-  // تحميل الحزم داخل المودال
-  function loadPackages(serviceKey) {
-
-    packagesContainer.innerHTML = "";
-
-    if (!packagesData[serviceKey]) return;
-
-    packagesData[serviceKey].forEach(pkg => {
-
-      const card = document.createElement("div");
-      card.className = "package-card";
-
-      card.innerHTML = `
-        <h3>${pkg.name}</h3>
-        <ul>${pkg.features.map(f => `<li>${f}</li>`).join("")}</ul>
-        <strong>${pkg.price}</strong>
-      `;
-
-      packagesContainer.appendChild(card);
-    });
-  }
-
 
 });
 
 
+const packagesModal = document.getElementById("packagesModal");
+const bookingModal = document.getElementById("serviceModal"); // المودال القديم
+const packagesContainer = document.getElementById("packagesContainer");
+
+document.querySelectorAll(".openBooking").forEach(btn => {
+  btn.addEventListener("click", (e) => {
+
+    e.stopPropagation();
+
+    const serviceKey = btn.dataset.service;
+
+    loadPackages(serviceKey);
+
+    packagesModal.classList.add("active");
+  });
+});
+
+function loadPackages(serviceKey) {
+
+packagesContainer.innerHTML = "";
+
+packagesData[serviceKey].forEach(pkg => {
+
+const card = document.createElement("div");
+card.className = "package-card";
+
+card.innerHTML = `
+<h3>${pkg.name}</h3>
+<ul>${pkg.features.map(f => `<li>${f}</li>`).join("")}</ul>
+<strong>${pkg.price}</strong>
+`;
+
+card.addEventListener("click", (e) => {
+  e.stopPropagation();
+
+  packagesModal.classList.remove("active");
+
+  setTimeout(() => {
+    bookingModal.classList.add("active");
+  }, 10);
+});
 
 
+packagesContainer.appendChild(card);
 
-// ---------- Navigation Menu ----------
-
-function toggleMenu() {
-  document.getElementById('nav-links').classList.toggle('show');
+});
 }
 
+document.querySelector(".packages-close").addEventListener("click", (e) => {
+  e.stopPropagation();
+  packagesModal.classList.remove("active");
+});
 
+document.querySelector("#packagesModal .modal-content")
+  .addEventListener("click", e => e.stopPropagation());
+
+
+
+    // Navigation Menu Toggle
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('show');
+    }
+
+    // Booking Modal Logic
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('bookingModal');
+        const closeModal = document.getElementById('closeModal');
+        const bookButtons = document.querySelectorAll('.book-btn');
+        const serviceSelect = document.getElementById('service');
+        const totalInput = document.getElementById('total');
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step');
+        const stepLines = document.querySelectorAll('.step-line');
+        
+        let currentStep = 1;
+        let selectedService = '';
+        let selectedPrice = 0;
+        let selectedPayment = '';
+
+        // Open modal when clicking on any book button
+        bookButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                selectedService = this.getAttribute('data-service');
+                selectedPrice = this.getAttribute('data-price');
+                
+                // Set the service in the dropdown
+                serviceSelect.value = selectedService;
+                totalInput.value = formatPrice(selectedPrice) + '₽';
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Update price when service is changed in dropdown
+        serviceSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            selectedPrice = selectedOption.getAttribute('data-price') || '0';
+            totalInput.value = formatPrice(selectedPrice) + '₽';
+        });
+
+        // Close modal
+        closeModal.addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetForm();
+        });
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+                resetForm();
+            }
+        });
+
+        // Payment option selection
+        paymentOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                paymentOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedPayment = this.getAttribute('data-payment');
+            });
+        });
+
+        // Step navigation
+        document.getElementById('nextToStep2').addEventListener('click', function() {
+            if (validateStep1()) {
+                goToStep(2);
+            }
+        });
+
+        document.getElementById('prevToStep1').addEventListener('click', function() {
+            goToStep(1);
+        });
+
+        document.getElementById('nextToStep3').addEventListener('click', function() {
+            if (validateStep2()) {
+                goToStep(3);
+            }
+        });
+
+        document.getElementById('prevToStep2').addEventListener('click', function() {
+            goToStep(2);
+        });
+
+        // Submit booking and send to Web3Forms
+        document.getElementById('submitBooking').addEventListener('click', function() {
+            if (!validateStep3()) return; // تحقق من اختيار الدفع
+
+            // جمع كل البيانات من الخطوات الثلاث
+            const data = {
+                access_key: "b0c25945-a722-4d3e-a047-1bd069b7afbe",
+                service: document.getElementById('service').value,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('date').value,
+                location: document.getElementById('location').value,
+                duration: document.getElementById('duration').value,
+                details: document.getElementById('details').value,
+                payment: selectedPayment,
+                total: document.getElementById('total').value
+            };
+
+            // إرسال البيانات إلى Web3Forms
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(response => {
+                if (response.success) {
+                    goToStep(4); // الانتقال لرسالة الشكر
+                } else {
+                    alert("Ошибка при отправке формы. Попробуйте еще раз.");
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Произошла ошибка. Попробуйте еще раз.");
+            });
+        });
+
+        document.getElementById('closeAfterSubmit').addEventListener('click', function() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            resetForm();
+        });
+
+        function goToStep(step) {
+            steps.forEach(s => s.classList.remove('active'));
+            document.getElementById(`step${step}`).classList.add('active');
+            
+            stepIndicators.forEach((indicator, index) => {
+                if (index < step) {
+                    indicator.classList.add('active');
+                } else {
+                    indicator.classList.remove('active');
+                }
+            });
+            
+            stepLines.forEach((line, index) => {
+                if (index < step - 1) {
+                    line.classList.add('active');
+                } else {
+                    line.classList.remove('active');
+                }
+            });
+            
+            currentStep = step;
+        }
+
+        function validateStep1() {
+            const service = document.getElementById('service').value;
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            
+            if (!service || !name || !phone || !email) {
+                alert('Пожалуйста, заполните все обязательные поля');
+                return false;
+            }
+            
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Пожалуйста, введите корректный email');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateStep2() {
+            const date = document.getElementById('date').value;
+            const location = document.getElementById('location').value;
+            const duration = document.getElementById('duration').value;
+            
+            if (!date || !location || !duration) {
+                alert('Пожалуйста, заполните все обязательные поля');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateStep3() {
+            if (!selectedPayment) {
+                alert('Пожалуйста, выберите способ оплаты');
+                return false;
+            }
+            return true;
+        }
+
+        function resetForm() {
+            document.getElementById('service').value = '';
+            document.getElementById('name').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('location').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('details').value = '';
+            
+            paymentOptions.forEach(opt => opt.classList.remove('selected'));
+            selectedPayment = '';
+            
+            goToStep(1);
+        }
+
+        function formatPrice(price) {
+            return parseInt(price).toLocaleString('ru-RU');
+        }
+    });
 </script>
 
 
