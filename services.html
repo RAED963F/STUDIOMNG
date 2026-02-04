@@ -1408,16 +1408,18 @@ document.addEventListener("DOMContentLoaded", function() {
   const packagesContainer = document.getElementById("packagesContainer");
 
   // فتح مودال الشرح + الحزم
-document.querySelectorAll(".openModal").forEach(btn => {
-  btn.addEventListener("click", () => {
+  document.querySelectorAll(".openModal").forEach(btn => {
+    btn.addEventListener("click", () => {
 
+      const key = btn.dataset.service;
 
-    const key = card.dataset.service;
-    modalBody.innerHTML = services[key];
-    modal.classList.add("active");
+      modalBody.innerHTML = services[key];
+      loadPackages(key);
 
+      modal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
   });
-});
 
 
   // زر الإغلاق
