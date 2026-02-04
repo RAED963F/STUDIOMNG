@@ -908,13 +908,14 @@ contactForm.addEventListener('submit', async function(e) {
     
     function init() {
         const map = new ymaps.Map('map', {
-            center: [55.76, 37.64], // Moscow coordinates
+            center: [55.7479, 37.5835], // Moscow coordinates
             zoom: 14,
             controls: ['zoomControl', 'fullscreenControl']
         });
         
         // Add marker
-        const marker = new ymaps.Placemark([55.76, 37.64], {
+        const marker = new ymaps.Placemark([55.7479, 37.5835], {
+
             balloonContent: 'MHG Studio-1-й Смоленский переулок, 5с1'
         }, {
             preset: 'islands#icon',
