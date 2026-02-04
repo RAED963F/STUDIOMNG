@@ -1408,8 +1408,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const packagesContainer = document.getElementById("packagesContainer");
 
   // فتح مودال الشرح + الحزم
- document.querySelectorAll(".service-card.openModal").forEach(card => {
-  card.addEventListener("click", () => {
+document.querySelectorAll(".openModal").forEach(btn => {
+  btn.addEventListener("click", () => {
+
 
     const key = card.dataset.service;
     modalBody.innerHTML = services[key];
