@@ -721,6 +721,7 @@
                 <div class="contact-icon">
                     <i class="fas fa-share-alt"></i>
                 </div>
+
                 <div class="contact-text">
                     <h3>Социальные сети</h3>
                     <div class="social-links">
@@ -730,6 +731,7 @@
                         <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -786,7 +788,7 @@
     </div>
 </div>
 
-<!-- FAQ SECTION -->
+<!-- FAQ SECTION 
 <div class="faq-section">
     <h2>Часто задаваемые вопросы</h2>
     <div class="faq-container">
@@ -828,33 +830,30 @@
         </div>
     </div>
 </div>
-
+-->
 <!-- FOOTER -->
 <footer>
     <div class="footer-container">
         <div class="footer-logo">MHG Studio</div>
-        <p>Создаем визуальные истории, которые вдохновляют</p>
-        <ul class="footer-links">
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="portfolio.html">Портфолио</a></li>
-            <li><a href="services.html">Услуги</a></li>
-            <li><a href="about.html">О нас</a></li>
-            <li><a href="contact.html">Контакты</a></li>
-        </ul>
+        <p>Мы знаем, как работает телевидение.
+И используем этот опыт для вашего бизнеса</p>
+        
+        <!-- 
         <div class="footer-socials">
             <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
             <a href="#" title="VK"><i class="fab fa-vk"></i></a>
             <a href="#" title="Telegram"><i class="fab fa-telegram"></i></a>
         </div>
+-->
         <div class="copyright">
-            © 2025 MHG Studio. Все права защищены.
+            © 2026 MHG Studio. Все права защищены.
         </div>
     </div>
 </footer>
 
 <!-- Yandex Maps API -->
-<script src="https://yandex.ru/maps/-/CLSGbU37" type="text/javascript"></script>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 
 <script>
 
@@ -944,17 +943,7 @@ contactForm.addEventListener('submit', async function(e) {
         });
     });
 
-    // Form submission
-    const contactForm = document.getElementById('contactForm');
     
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Here you would normally send the form data to the server
-        // For demonstration, we'll just show an alert
-        alert('Сообщение отправлено! Мы свяжемся с вами в ближайшее время.');
-        contactForm.reset();
-    });
 
     /* HAMBURGER MENU */
     function toggleMenu() {
