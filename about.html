@@ -730,7 +730,7 @@ function loadMap() {
     ymaps.ready(() => {
 
         const map = new ymaps.Map('map', {
-            center: [55, 37],
+            center: [55.746683, 37.580031],
             zoom: 14,
             controls: ['zoomControl']
         }, {
@@ -741,7 +741,7 @@ function loadMap() {
         map.options.set('theme', 'dark');
 
         const customMarker = new ymaps.Placemark(
-            [55, 37],
+            [55.746683, 37.580031],
             {
                 balloonContent: 'MHG Studio'
             },
