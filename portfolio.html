@@ -262,7 +262,7 @@
             border-color: #ffd700;
         }
 
-        /* ---------------- MASONRY GRID ---------------- */
+        /* ---------------- MASONRY GRID ----------------
         .portfolio {
             column-count: 3;
             column-gap: 18px;
@@ -295,8 +295,8 @@
         .item:hover img {
             transform: scale(1.05);
         }
-
-        /* Hover overlay */
+ */
+        /* Hover overlay
         .overlay {
             position: absolute;
             inset: 0;
@@ -337,8 +337,8 @@
             font-size: 12px;
             font-weight: 500;
         }
-
-        /* ---------------- LIGHTBOX ---------------- */
+ */
+        /* ---------------- LIGHTBOX ---------------- 
         .lightbox {
             position: fixed;
             inset: 0;
@@ -422,8 +422,8 @@
             color: #aaa;
             font-size: 14px;
         }
-
-        /* ---------------- FOOTER ---------------- */
+*/
+        /* ---------------- FOOTER ---------------- 
         footer {
             background: #111;
             color: #fff;
@@ -498,8 +498,8 @@
             color: #777;
             font-size: 14px;
         }
-
-        /* ---------------- LOADING ANIMATION ---------------- */
+*/
+        /* ---------------- LOADING ANIMATION ---------------- 
         .loader {
             display: none;
             text-align: center;
@@ -520,8 +520,8 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        /* ---------------- RESPONSIVE ---------------- */
+*/
+        /* ---------------- RESPONSIVE ---------------- 
         @media (max-width: 1100px) {
             .portfolio {
                 column-count: 2;
@@ -568,7 +568,105 @@
             .hero h1 {
                 font-size: 2rem;
             }
-        }
+        }*/
+        /* ===== NEW PORTFOLIO GRID ===== */
+
+.portfolio {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+    padding: 40px 60px;
+}
+
+.item {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border-radius: 14px;
+    cursor: pointer;
+    background: #111;
+    transform: translateY(20px);
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+}
+
+.item:nth-child(odd) { animation-delay: 0.05s; }
+.item:nth-child(even) { animation-delay: 0.1s; }
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.item img,
+.item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s ease;
+}
+
+.item:hover img,
+.item:hover video {
+    transform: scale(1.08);
+    filter: brightness(0.7);
+}
+
+/* cinematic overlay */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 60%);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 18px;
+    transition: opacity 0.4s ease;
+}
+
+.item:hover .overlay {
+    opacity: 1;
+}
+
+.overlay h3 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.overlay p {
+    font-size: 13px;
+    color: #bbb;
+}
+
+.item-type {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0,0,0,0.75);
+    color: #ffd700;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .portfolio {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        padding: 30px;
+    }
+}
+
+@media (max-width: 600px) {
+    .portfolio {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+}
+
     </style>
 </head>
 
@@ -1188,6 +1286,13 @@
             document.querySelector('.hamburger').classList.remove('active');
         });
     });
+
+    // Lazy load images
+document.querySelectorAll(".item img").forEach(img => {
+    img.loading = "lazy";
+});
+
+
 </script>
 
 </body>

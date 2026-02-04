@@ -1037,7 +1037,7 @@
 </div>
 -->
 
-<!--  details 
+<!--  details  -->
 <div id="serviceModal" class="service-modal">
   <div class="modal-backdrop"></div>
 
@@ -1056,24 +1056,8 @@
     </a>
   </div>
 </div>
- -->
 
-<div id="serviceModal" class="service-modal">
-  <div class="modal-backdrop"></div>
 
-  <div class="modal-content">
-    <button class="modal-close">×</button>
-
-    <div id="modalBody"></div>
-
-    <h2>Выберите пакет</h2>
-    <div class="packages" id="packagesContainer"></div>
-
-    <a href="/contact.html" class="modal-cta">
-      Связаться с нами
-    </a>
-  </div>
-</div>
 
 
 <!-- 3 cards
@@ -1537,62 +1521,6 @@ document.addEventListener("click", e => {
   card.classList.add("selected");
 });
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const modal = document.getElementById("serviceModal");
-  const modalBody = document.getElementById("modalBody");
-  const packagesContainer = document.getElementById("packagesContainer");
-
-  document.querySelectorAll(".service-card").forEach(card => {
-
-    card.addEventListener("click", () => {
-
-      const key = card.dataset.service;
-
-      // شرح الخدمة
-      modalBody.innerHTML = services[key];
-
-      // تحميل الحزم
-      loadPackages(key);
-
-      // فتح المودال
-      modal.classList.add("active");
-    });
-
-  });
-
-  // إغلاق
-  document.querySelector(".modal-close").addEventListener("click", () => {
-    modal.classList.remove("active");
-  });
-
-  modal.addEventListener("click", e => {
-    if (e.target.classList.contains("modal-backdrop")) {
-      modal.classList.remove("active");
-    }
-  });
-
-  function loadPackages(serviceKey) {
-
-    packagesContainer.innerHTML = "";
-
-    packagesData[serviceKey].forEach(pkg => {
-
-      const card = document.createElement("div");
-      card.className = "package-card";
-
-      card.innerHTML = `
-        <h3>${pkg.name}</h3>
-        <ul>${pkg.features.map(f => `<li>${f}</li>`).join("")}</ul>
-        <strong>${pkg.price}</strong>
-      `;
-
-      packagesContainer.appendChild(card);
-
-    });
-  }
-
-});
 
 
 </script>
