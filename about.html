@@ -501,6 +501,32 @@
                 font-size: 36px;
             }
         }
+
+    /* Map cinematic reveal */
+.contact-map {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.contact-map.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Dark cinematic filter */
+#map {
+    filter: grayscale(40%) contrast(110%) brightness(80%);
+}
+
+/* Custom marker glow */
+.mhg-marker {
+    width: 60px;
+    height: 60px;
+    background: url('large.jpg') center/contain no-repeat;
+    filter: drop-shadow(0 0 12px rgba(255,215,0,0.6));
+}
+
     </style>
 </head>
 
@@ -695,38 +721,56 @@
     }
     
     /* ANIMATE STATS */
-    document.addEventListener('DOMContentLoaded', function() {
-        const statNumbers = document.querySelectorAll('.stat-number');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const target = entry.target;
-                    const finalValue = target.textContent;
-                    const duration = 2000;
-                    const step = 20;
-                    const increment = parseInt(finalValue) / (duration / step);
-                    let current = 0;
-                    
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= parseInt(finalValue)) {
-                            target.textContent = finalValue;
-                            clearInterval(timer);
-                        } else {
-                            target.textContent = Math.floor(current);
-                        }
-                    }, step);
-                    
-                    observer.unobserve(target);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        statNumbers.forEach(stat => {
-            observer.observe(stat);
+let mapLoaded = false;
+
+function loadMap() {
+    if (mapLoaded) return;
+    mapLoaded = true;
+
+    ymaps.ready(() => {
+
+        const map = new ymaps.Map('map', {
+            center: [55.76, 37.64],
+            zoom: 14,
+            controls: ['zoomControl']
+        }, {
+            suppressMapOpenBlock: true
         });
+
+        // Cinematic dark preset
+        map.options.set('theme', 'dark');
+
+        const customMarker = new ymaps.Placemark(
+            [55.76, 37.64],
+            {
+                balloonContent: 'MHG Studio'
+            },
+            {
+                iconLayout: 'default#image',
+                iconImageHref: 'logo.png',
+                iconImageSize: [60, 60],
+                iconImageOffset: [-30, -60]
+            }
+        );
+
+        map.geoObjects.add(customMarker);
+        customMarker.balloon.open();
     });
+}
+
+// Lazy load + animation trigger
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            document.querySelector('.contact-map').classList.add('visible');
+            loadMap();
+            observer.disconnect();
+        }
+    });
+}, { threshold: 0.3 });
+
+observer.observe(document.querySelector('.contact-map'));
+
 </script>
 
 </body>
