@@ -725,61 +725,53 @@
 
 
 <script>
-    /* HAMBURGER MENU */
-    function toggleMenu() {
-        document.getElementById('nav-links').classList.toggle('show');
-    }
-    
-    /* ANIMATE STATS */
-let mapLoaded = false;
+ const mapSection = document.querySelector('.contact-map');
 
-function loadMap() {
-    if (mapLoaded) return;
-    mapLoaded = true;
+if (mapSection) {
 
-    ymaps.ready(() => {
+    let mapLoaded = false;
 
-        const map = new ymaps.Map('map', {
-            center: [55.746683, 37.580031],
-            zoom: 14,
-            controls: ['zoomControl']
-        }, {
-            suppressMapOpenBlock: true
-        });
+    function loadMap() {
+        if (mapLoaded) return;
+        mapLoaded = true;
 
-        // Cinematic dark preset
-        map.options.set('theme', 'dark');
+        ymaps.ready(() => {
 
-        const customMarker = new ymaps.Placemark(
-            [55.746683, 37.580031],
-            {
+            const coords = [55.746683, 37.580031];
+
+            const map = new ymaps.Map('map', {
+                center: coords,
+                zoom: 14,
+                controls: ['zoomControl']
+            }, {
+                suppressMapOpenBlock: true
+            });
+
+            const marker = new ymaps.Placemark(coords, {
                 balloonContent: 'MHG Studio'
-            },
-            {
+            }, {
                 iconLayout: 'default#image',
                 iconImageHref: 'large.jpg',
                 iconImageSize: [60, 60],
                 iconImageOffset: [-30, -60]
+            });
+
+            map.geoObjects.add(marker);
+        });
+    }
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                mapSection.classList.add('visible');
+                loadMap();
+                observer.disconnect();
             }
-        );
+        });
+    }, { threshold: 0.3 });
 
-        map.geoObjects.add(customMarker);
-        customMarker.balloon.open();
-    });
+    observer.observe(mapSection);
 }
-
-// Lazy load + animation trigger
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            document.querySelector('.contact-map').classList.add('visible');
-            loadMap();
-            observer.disconnect();
-        }
-    });
-}, { threshold: 0.3 });
-
-observer.observe(document.querySelector('.contact-map'));
 
 </script>
 
