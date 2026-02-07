@@ -680,6 +680,29 @@
     display: block;
 }
 
+.video-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.video-wrapper video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Netflix blur edges */
+.video-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at center,
+        transparent 60%,
+        rgba(0,0,0,0.6) 100%);
+}
 
 
     </style>
@@ -755,10 +778,14 @@
 
 <!-- Videos -->
 
+<!-- Video 1 -->
 <div class="item videos">
-    <video autoplay muted loop playsinline>
-        <source src="https://drive.google.com/uc?export=download&id=1CTf_Y8iA4dYLgoeFg7CqoVIgLYpPWLmj" type="video/mp4">
-    </video>
+    <div class="video-wrapper">
+        <video class="lazy-video"  controls loop playsinline preload="none">
+            <source data-src="https://drive.google.com/uc?export=download&id=1CTf_Y8iA4dYLgoeFg7CqoVIgLYpPWLmj" type="video/mp4">
+        </video>
+    </div>
+
     <div class="item-type">Видео</div>
     <div class="overlay">
         <h3>Корпоративное видео</h3>
@@ -766,10 +793,14 @@
     </div>
 </div>
 
+<!-- Video 2 -->
 <div class="item videos">
-    <video autoplay muted loop playsinline>
-        <source src="https://drive.google.com/uc?export=download&id=1BZEf8g_KxqsLTHOaBB4A2K8uLTc9sqgE" type="video/mp4">
-    </video>
+    <div class="video-wrapper">
+        <video class="lazy-video" controls loop playsinline preload="none">
+            <source data-src="https://drive.google.com/uc?export=download&id=1BZEf8g_KxqsLTHOaBB4A2K8uLTc9sqgE" type="video/mp4">
+        </video>
+    </div>
+
     <div class="item-type">Видео</div>
     <div class="overlay">
         <h3>Корпоративное видео</h3>
@@ -777,16 +808,21 @@
     </div>
 </div>
 
+<!-- Video 3 -->
 <div class="item videos">
-    <video autoplay muted loop playsinline>
-        <source src="https://drive.google.com/uc?export=download&id=1aMwXfK1cWxJAuBjI6ghPXCBuoqjekmi1" type="video/mp4">
-    </video>
+    <div class="video-wrapper">
+        <video class="lazy-video" controls loop playsinline preload="none">
+            <source data-src="https://drive.google.com/uc?export=download&id=1aMwXfK1cWxJAuBjI6ghPXCBuoqjekmi1" type="video/mp4">
+        </video>
+    </div>
+
     <div class="item-type">Видео</div>
     <div class="overlay">
         <h3>За кулисами</h3>
         <p>Съемка процесса создания рекламного ролика</p>
     </div>
 </div>
+
 
 
     
@@ -1294,6 +1330,31 @@
 </footer>
 
 <script>
+
+
+const videos = document.querySelectorAll(".lazy-video");
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        const video = entry.target;
+
+        if (entry.isIntersecting) {
+            const source = video.querySelector("source");
+            if (source.dataset.src) {
+                source.src = source.dataset.src;
+                video.load();
+                video.play();
+                source.removeAttribute("data-src");
+            }
+        } else {
+            video.pause();
+        }
+    });
+}, { threshold: 0.5 });
+
+videos.forEach(video => observer.observe(video));
+
+
     // Header scroll effect
     window.addEventListener('scroll', function() {
         const header = document.getElementById('header');
