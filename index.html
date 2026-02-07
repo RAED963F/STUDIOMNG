@@ -762,6 +762,26 @@
     flex-shrink: 0;
 }
 
+/* ===== Portfolio Carousel Fix ===== */
+
+.portfolio-carousel {
+    overflow: hidden;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.portfolio-track {
+    display: flex;
+    gap: 18px;
+    transition: transform 0.8s ease;
+}
+
+.portfolio-item {
+    min-width: 260px;
+    flex: 0 0 260px;
+}
+
+
     </style>
 </head>
 
@@ -1141,6 +1161,25 @@
     </footer>
 
     <script>
+
+
+ const track = document.querySelector('.portfolio-track');
+const items = document.querySelectorAll('.portfolio-item');
+
+let index = 0;
+
+function autoSlide() {
+    index++;
+
+    if (index > items.length - 4) {
+        index = 0;
+    }
+
+    track.style.transform = `translateX(-${index * 278}px)`;
+}
+
+setInterval(autoSlide, 2500);
+ 
         document.addEventListener('DOMContentLoaded', () => {
 
             /* Header scroll effect */
