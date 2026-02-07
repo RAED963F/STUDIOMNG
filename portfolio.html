@@ -742,6 +742,31 @@
     opacity: 1;
 }
 
+.video-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.video-modal video {
+    width: 80%;
+    max-height: 80%;
+    border-radius: 12px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 40px;
+    color: white;
+    cursor: pointer;
+}
+
 
     </style>
 </head>
@@ -815,8 +840,9 @@
 <div class="portfolio" id="portfolio-grid">
 
 <!-- Videos -->
+
 <!-- Video Card 1 -->
-<div class="cinema-card">
+<div class="cinema-card" data-video="https://drive.google.com/uc?export=download&id=1CTf_Y8iA4dYLgoeFg7CqoVIgLYpPWLmj">
 
     <video class="cinema-video" muted loop playsinline preload="none">
         <source data-src="https://drive.google.com/uc?export=download&id=1CTf_Y8iA4dYLgoeFg7CqoVIgLYpPWLmj" type="video/mp4">
@@ -830,7 +856,7 @@
 </div>
 
 <!-- Video Card 2 -->
-<div class="cinema-card">
+<div class="cinema-card" data-video="https://drive.google.com/uc?export=download&id=1BZEf8g_KxqsLTHOaBB4A2K8uLTc9sqgE">
 
     <video class="cinema-video" muted loop playsinline preload="none">
         <source data-src="https://drive.google.com/uc?export=download&id=1BZEf8g_KxqsLTHOaBB4A2K8uLTc9sqgE" type="video/mp4">
@@ -844,7 +870,7 @@
 </div>
 
 <!-- Video Card 3 -->
-<div class="cinema-card">
+<div class="cinema-card" data-video="https://drive.google.com/uc?export=download&id=1aMwXfK1cWxJAuBjI6ghPXCBuoqjekmi1">
 
     <video class="cinema-video" muted loop playsinline preload="none">
         <source data-src="https://drive.google.com/uc?export=download&id=1aMwXfK1cWxJAuBjI6ghPXCBuoqjekmi1" type="video/mp4">
@@ -856,6 +882,7 @@
     </div>
 
 </div>
+
 
 
 
@@ -1548,6 +1575,13 @@ document.querySelectorAll(".item img").forEach(img => {
 
 
 </script>
+
+
+
+<div id="videoModal" class="video-modal">
+    <span class="close-modal">&times;</span>
+    <video id="modalVideo" controls></video>
+</div>
 
 </body>
 </html>
