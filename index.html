@@ -729,6 +729,39 @@
         footer {
             background: linear-gradient(180deg, rgb(17, 17, 17) 0%, rgb(0, 0, 0) 100%);
         }
+
+        /* ===== Portfolio Carousel ===== */
+
+.portfolio-carousel {
+    overflow: hidden;
+    position: relative;
+}
+
+.portfolio-track {
+    display: flex;
+    gap: 18px;
+    width: max-content;
+    animation: scrollPortfolio 25s linear infinite;
+}
+
+.portfolio-carousel:hover .portfolio-track {
+    animation-play-state: paused;
+}
+
+@keyframes scrollPortfolio {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.portfolio-track .portfolio-item {
+    min-width: 260px;
+    flex-shrink: 0;
+}
+
     </style>
 </head>
 
@@ -840,76 +873,84 @@
     </section>
 
     <!-- Portfolio -->
-    <section id="portfolio" class="portfolio-section">
-        <div class="container">
-            <h2>Наши последние работы</h2>
-            <div class="portfolio-grid" aria-live="polite">
-                <div class="portfolio-item">
-                    <img src="photo-person/11.jpg"
-                        alt="Роскошные часы" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>Фотосессия</h4>
-                        <span>Портретная съемка в студии</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="photo-person/4.jpg"
-                        alt="Рекламная кампания бренда" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>Фотосессия</h4>
-                        <span>Фотосессия на улице</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="photo-ads/1.webp"
-                        alt="Корпоративная съемка" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>Рекламная кампания</h4>
-                        <span>Рекламное видео</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="photo-ads/17.png"
-                        alt="Корпоративная съемка" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>оциальная реклама</h4>
-                        <span>Кампания для экологической организации</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="photo-ads/20.png"
-                        alt="Косметика" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>Линия косметики</h4>
-                        <span>Фотография продукта</span>
-                    </div>
-                </div>
-                    <!--   wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww    -->
-                <div class="portfolio-item">
-                    <img src="photo-ads/20.png"
-                        alt="Косметика" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>Линия косметики</h4>
-                        <span>Фотография продукта</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="photo-ads/20.png"
-                        alt="Косметика" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>Линия косметики</h4>
-                        <span>Фотография продукта</span>
-                    </div>
-                </div>
-                <div class="portfolio-item">
-                    <img src="photo-ads/20.png"
-                        alt="Косметика" loading="lazy">
-                    <div class="overlay-content">
-                        <h4>Линия косметики</h4>
-                        <span>Фотография продукта</span>
-                    </div>
-                </div>
-            </div>
+<section id="portfolio" class="portfolio-section">
+<div class="container"> 
+
+<h2>Наши последние работы</h2>
+
+<div class="portfolio-carousel">
+<div class="portfolio-track">
+
+<div class="portfolio-item">
+<img src="photo-person/11.jpg" alt="Роскошные часы" loading="lazy">
+<div class="overlay-content">
+<h4>Фотосессия</h4>
+<span>Портретная съемка в студии</span>
+</div>
+</div>
+
+<div class="portfolio-item">
+<img src="photo-person/4.jpg" alt="Рекламная кампания бренда" loading="lazy">
+<div class="overlay-content">
+<h4>Фотосессия</h4>
+<span>Фотосессия на улице</span>
+</div>
+</div>
+
+<div class="portfolio-item">
+<img src="photo-ads/1.webp" alt="Корпоративная съемка" loading="lazy">
+<div class="overlay-content">
+<h4>Рекламная кампания</h4>
+<span>Рекламное видео</span>
+</div>
+</div>
+
+<div class="portfolio-item">
+<img src="photo-ads/17.png" alt="Социальная реклама" loading="lazy">
+<div class="overlay-content">
+<h4>Социальная реклама</h4>
+<span>Кампания для экологической организации</span>
+</div>
+</div>
+
+<div class="portfolio-item">
+<img src="photo-ads/20.png" alt="Косметика" loading="lazy">
+<div class="overlay-content">
+<h4>Линия косметики</h4>
+<span>Фотография продукта</span>
+</div>
+</div>
+
+<div class="portfolio-item">
+<img src="photo-ads/6.webp" alt="Косметика" loading="lazy">
+<div class="overlay-content">
+<h4>Линия косметики</h4>
+<span>Фотография продукта</span>
+</div>
+</div>
+
+<div class="portfolio-item">
+<img src="photo-ads/18.png" alt="Косметика" loading="lazy">
+<div class="overlay-content">
+<h4>Линия косметики</h4>
+<span>Фотография продукта</span>
+</div>
+</div>
+
+<div class="portfolio-item">
+<img src="photo-person/27.jpg" alt="Фотосессия" loading="lazy">
+<div class="overlay-content">
+<h4>Фотосессия</h4>
+<span>Фотосессия на улице</span>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+</section>
+
 
             <!-- centered buttons -->
             <div class="section-cta">
