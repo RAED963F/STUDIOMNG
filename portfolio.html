@@ -745,7 +745,7 @@
 .video-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.95);
     display: none;
     align-items: center;
     justify-content: center;
@@ -753,15 +753,15 @@
 }
 
 .video-modal video {
-    width: 80%;
-    max-height: 80%;
-    border-radius: 12px;
+    width: 90%;
+    max-height: 90%;
+    border-radius: 16px;
 }
 
-.close-modal {
+#closeModal {
     position: absolute;
-    top: 20px;
-    right: 30px;
+    top: 25px;
+    right: 35px;
     font-size: 40px;
     color: white;
     cursor: pointer;
@@ -1392,6 +1392,33 @@
 
 <script>
 
+
+
+const cards = document.querySelectorAll(".cinema-card");
+const modal = document.getElementById("videoModal");
+const modalVideo = document.getElementById("modalVideo");
+const closeBtn = document.getElementById("closeModal");
+
+cards.forEach(card => {
+    card.addEventListener("click", () => {
+        const videoSrc = card.dataset.video;
+        modalVideo.src = videoSrc;
+        modal.style.display = "flex";
+        modalVideo.play();
+    });
+});
+
+closeBtn.onclick = () => {
+    modalVideo.pause();
+    modalVideo.src = "";
+    modal.style.display = "none";
+};
+
+modal.onclick = e => {
+    if (e.target === modal) closeBtn.onclick();
+};
+
+
 const vids = document.querySelectorAll(".cinema-video");
 
 const obs = new IntersectionObserver(entries => {
@@ -1579,9 +1606,10 @@ document.querySelectorAll(".item img").forEach(img => {
 
 
 <div id="videoModal" class="video-modal">
-    <span class="close-modal">&times;</span>
+    <span id="closeModal">&times;</span>
     <video id="modalVideo" controls></video>
 </div>
+
 
 </body>
 </html>
