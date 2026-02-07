@@ -745,7 +745,7 @@
 .video-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.95);
+    background: rgba(0,0,0,0.9);
     display: none;
     align-items: center;
     justify-content: center;
@@ -753,15 +753,15 @@
 }
 
 .video-modal video {
-    width: 90%;
-    max-height: 90%;
-    border-radius: 16px;
+    width: 80%;
+    max-height: 80%;
+    border-radius: 12px;
 }
 
-#closeModal {
+.close-modal {
     position: absolute;
-    top: 25px;
-    right: 35px;
+    top: 20px;
+    right: 30px;
     font-size: 40px;
     color: white;
     cursor: pointer;
@@ -883,10 +883,6 @@
 
 </div>
 
-
-
-
-    
 
     <!-- Photos -->
     <div class="item photos">
@@ -1392,31 +1388,9 @@
 
 <script>
 
+    
 
 
-const cards = document.querySelectorAll(".cinema-card");
-const modal = document.getElementById("videoModal");
-const modalVideo = document.getElementById("modalVideo");
-const closeBtn = document.getElementById("closeModal");
-
-cards.forEach(card => {
-    card.addEventListener("click", () => {
-        const videoSrc = card.dataset.video;
-        modalVideo.src = videoSrc;
-        modal.style.display = "flex";
-        modalVideo.play();
-    });
-});
-
-closeBtn.onclick = () => {
-    modalVideo.pause();
-    modalVideo.src = "";
-    modal.style.display = "none";
-};
-
-modal.onclick = e => {
-    if (e.target === modal) closeBtn.onclick();
-};
 
 
 const vids = document.querySelectorAll(".cinema-video");
@@ -1600,13 +1574,41 @@ document.querySelectorAll(".item img").forEach(img => {
     img.loading = "lazy";
 });
 
+const cinemaCards = document.querySelectorAll(".cinema-card");
+const videoModal = document.getElementById("videoModal");
+const modalVideo = document.getElementById("modalVideo");
+const closeModal = document.querySelector(".close-modal");
+
+cinemaCards.forEach(card => {
+    card.addEventListener("click", () => {
+        const src = card.dataset.video;
+        modalVideo.src = src;
+        videoModal.style.display = "flex";
+        modalVideo.play();
+    });
+});
+
+closeModal.addEventListener("click", () => {
+    modalVideo.pause();
+    modalVideo.src = "";
+    videoModal.style.display = "none";
+});
+
+videoModal.addEventListener("click", e => {
+    if (e.target === videoModal) {
+        modalVideo.pause();
+        modalVideo.src = "";
+        videoModal.style.display = "none";
+    }
+});
+
 
 </script>
 
 
 
 <div id="videoModal" class="video-modal">
-    <span id="closeModal">&times;</span>
+    <span class="close-modal">&times;</span>
     <video id="modalVideo" controls></video>
 </div>
 
