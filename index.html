@@ -782,6 +782,55 @@
 }
 
 
+/* ==== Netflix style carousel ==== */
+
+.portfolio-carousel {
+    position: relative;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+/* blur edges */
+.portfolio-carousel::before,
+.portfolio-carousel::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.portfolio-carousel::before {
+    left: 0;
+    background: linear-gradient(to right, #0a0a0a, transparent);
+}
+
+.portfolio-carousel::after {
+    right: 0;
+    background: linear-gradient(to left, #0a0a0a, transparent);
+}
+
+.portfolio-track {
+    display: flex;
+    gap: 18px;
+    will-change: transform;
+}
+
+.portfolio-item {
+    flex: 0 0 260px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
     </style>
 </head>
 
@@ -894,81 +943,35 @@
 
     <!-- Portfolio -->
 <section id="portfolio" class="portfolio-section">
-<div class="container"> 
+    <div class="container">
+        <h2>Наши последние работы</h2>
 
-<h2>Наши последние работы</h2>
+        <div class="portfolio-carousel">
+            <div class="portfolio-track">
 
-<div class="portfolio-carousel">
-<div class="portfolio-track">
+                <!-- 8 cards -->
+                <div class="portfolio-item"><img src="photo-person/11.jpg"></div>
+                <div class="portfolio-item"><img src="photo-person/4.jpg"></div>
+                <div class="portfolio-item"><img src="photo-ads/1.webp"></div>
+                <div class="portfolio-item"><img src="photo-ads/17.png"></div>
+                <div class="portfolio-item"><img src="photo-ads/20.png"></div>
+                <div class="portfolio-item"><img src="photo-ads/6.webp"></div>
+                <div class="portfolio-item"><img src="photo-ads/18.png"></div>
+                <div class="portfolio-item"><img src="photo-person/27.jpg"></div>
 
-<div class="portfolio-item">
-<img src="photo-person/11.jpg" alt="Роскошные часы" loading="lazy">
-<div class="overlay-content">
-<h4>Фотосессия</h4>
-<span>Портретная съемка в студии</span>
-</div>
-</div>
+                <!-- clone for infinite loop -->
+                <div class="portfolio-item"><img src="photo-person/11.jpg"></div>
+                <div class="portfolio-item"><img src="photo-person/4.jpg"></div>
+                <div class="portfolio-item"><img src="photo-ads/1.webp"></div>
+                <div class="portfolio-item"><img src="photo-ads/17.png"></div>
+                <div class="portfolio-item"><img src="photo-ads/20.png"></div>
+                <div class="portfolio-item"><img src="photo-ads/6.webp"></div>
+                <div class="portfolio-item"><img src="photo-ads/18.png"></div>
+                <div class="portfolio-item"><img src="photo-person/27.jpg"></div>
 
-<div class="portfolio-item">
-<img src="photo-person/4.jpg" alt="Рекламная кампания бренда" loading="lazy">
-<div class="overlay-content">
-<h4>Фотосессия</h4>
-<span>Фотосессия на улице</span>
-</div>
-</div>
-
-<div class="portfolio-item">
-<img src="photo-ads/1.webp" alt="Корпоративная съемка" loading="lazy">
-<div class="overlay-content">
-<h4>Рекламная кампания</h4>
-<span>Рекламное видео</span>
-</div>
-</div>
-
-<div class="portfolio-item">
-<img src="photo-ads/17.png" alt="Социальная реклама" loading="lazy">
-<div class="overlay-content">
-<h4>Социальная реклама</h4>
-<span>Кампания для экологической организации</span>
-</div>
-</div>
-
-<div class="portfolio-item">
-<img src="photo-ads/20.png" alt="Косметика" loading="lazy">
-<div class="overlay-content">
-<h4>Линия косметики</h4>
-<span>Фотография продукта</span>
-</div>
-</div>
-
-<div class="portfolio-item">
-<img src="photo-ads/6.webp" alt="Косметика" loading="lazy">
-<div class="overlay-content">
-<h4>Линия косметики</h4>
-<span>Фотография продукта</span>
-</div>
-</div>
-
-<div class="portfolio-item">
-<img src="photo-ads/18.png" alt="Косметика" loading="lazy">
-<div class="overlay-content">
-<h4>Линия косметики</h4>
-<span>Фотография продукта</span>
-</div>
-</div>
-
-<div class="portfolio-item">
-<img src="photo-person/27.jpg" alt="Фотосессия" loading="lazy">
-<div class="overlay-content">
-<h4>Фотосессия</h4>
-<span>Фотосессия на улице</span>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
+            </div>
+        </div>
+    </div>
 </section>
 
 
@@ -1163,20 +1166,46 @@
     <script>
 
 
- const track = document.querySelector('.portfolio-track');
-const items = document.querySelectorAll('.portfolio-item');
 
-let index = 0;
+const track = document.querySelector(".portfolio-track");
 
-function autoSlide() {
-    index++;
+let position = 0;
+let speed = 0.4; // slow cinematic speed
 
-    if (index > items.length - 4) {
-        index = 0;
+function animate() {
+    position -= speed;
+
+    // reset seamlessly
+    if (Math.abs(position) >= track.scrollWidth / 2) {
+        position = 0;
     }
 
-    track.style.transform = `translateX(-${index * 278}px)`;
+    track.style.transform = `translateX(${position}px)`;
+    requestAnimationFrame(animate);
 }
+
+animate();
+
+/* ==== swipe support mobile ==== */
+
+let startX = 0;
+let isDown = false;
+
+track.addEventListener("touchstart", e => {
+    isDown = true;
+    startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchmove", e => {
+    if (!isDown) return;
+    let moveX = e.touches[0].clientX;
+    position += (moveX - startX) * 0.8;
+    startX = moveX;
+});
+
+track.addEventListener("touchend", () => {
+    isDown = false;
+});
 
 setInterval(autoSlide, 2500);
  
