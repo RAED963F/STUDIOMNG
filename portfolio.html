@@ -1,660 +1,45 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MHG Studio | Портфолио</title>
-
-    <!-- Google Font – Montserrat -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        body {
-            background: #0a0a0a;
-            color: #fff;
-            overflow-x: hidden;
-        }
-
-        /* ---------------- NAVBAR / HEADER ---------------- */
-        header {
-            width: 100%;
-            padding: 0px 60px;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .scrolled {
-            padding: 15px 60px;
-            background: rgba(10, 10, 10, 0.98);
-        }
-
-        .logo a{
-            font-size: 28px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #ffd700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .logo a:hover {
-         opacity: 0.9;
-        }
-
-        .logo i {
-            font-size: 24px;
-        }
-
-        nav {
-            position: relative;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 35px;
-        }
-
-        nav ul li {
-            list-style: none;
-        }
-
-        nav ul li a {
-            color: #fff;
-            font-size: 15px;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 6px 10px;
-            border-radius: 8px;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: #ffd700;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        nav ul li a:hover::after,
-        nav ul li a.active::after {
-            width: 80%;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: #ffd700;
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
-        }
-
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            transition: 0.3s;
-        }
-
-        .hamburger.active div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active div:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active div:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
-
-        /* Toggle menu for mobile */
-        @media (max-width: 800px) {
-            nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                background: #111;
-                flex-direction: column;
-                width: 280px;
-                height: 100vh;
-                padding: 100px 30px 30px;
-                border-radius: 0;
-                transition: 0.4s;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            }
-
-            nav ul.show {
-                right: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-        }
-
-        /* ---------------- HERO SECTION ---------------- */
-        .hero {
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5');
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin-bottom: 30px;
-            color: #ddd;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: #ffd700;
-            color: #000;
-            border: 2px solid #ffd700;
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            color: #ffd700;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #fff;
-            border: 2px solid #fff;
-        }
-
-        .btn-secondary:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        /* ---------------- FILTER BAR ---------------- */
-        .filter-section {
-            padding: 40px 0 20px;
-            text-align: center;
-        }
-
-        .filter-buttons {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .filter-buttons button {
-            background: transparent;
-            border: 1px solid #444;
-            color: #fff;
-            padding: 10px 22px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .filter-buttons button.active,
-        .filter-buttons button:hover {
-            background: #ffd700;
-            color: #000;
-            border-color: #ffd700;
-        }
-
-        /* ---------------- PORTFOLIO GRID ---------------- */
-        .portfolio {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 40px 60px;
-        }
-
-        .item {
-            position: relative;
-            aspect-ratio: 4 / 5;
-            overflow: hidden;
-            border-radius: 14px;
-            cursor: pointer;
-            background: #111;
-            transform: translateY(20px);
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
-            display: block;
-        }
-
-        .item:nth-child(odd) { animation-delay: 0.05s; }
-        .item:nth-child(even) { animation-delay: 0.1s; }
-
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .item img,
-        .item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease, filter 0.4s ease;
-            display: block;
-        }
-
-        .item:hover img,
-        .item:hover video {
-            transform: scale(1.08);
-            filter: brightness(0.7);
-        }
-
-        /* Hover overlay */
-        .overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent 60%);
-            opacity: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 18px;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        .item:hover .overlay {
-            opacity: 1;
-        }
-
-        .overlay h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .overlay p {
-            font-size: 13px;
-            color: #bbb;
-        }
-
-        .item-type {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            background: rgba(0,0,0,0.75);
-            color: #ffd700;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 500;
-            z-index: 2;
-        }
-
-        /* Play button for videos */
-        .play-button {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 215, 0, 0.9);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 3;
-        }
-
-        .item:hover .play-button {
-            opacity: 1;
-        }
-
-        .play-button i {
-            color: #000;
-            font-size: 24px;
-            margin-left: 4px;
-        }
-
-        /* ---------------- UNIFIED LIGHTBOX ---------------- */
-        .lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 20px;
-        }
-
-        .lightbox.active {
-            display: flex;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .lightbox-media-container {
-            position: relative;
-            width: 100%;
-            height: 80vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox img, 
-        .lightbox video {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-        }
-
-        .lightbox video {
-            width: 100%;
-            height: auto;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 35px;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-close:hover {
-            color: #ffd700;
-            transform: scale(1.1);
-        }
-
-        .lightbox-nav {
-            display: flex;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .lightbox-nav button {
-            background: rgba(255,255,255,0.1);
-            border: none;
-            color: #fff;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 20px;
-        }
-
-        .lightbox-nav button:hover {
-            background: #ffd700;
-            color: #000;
-        }
-
-        .lightbox-info {
-            margin-top: 20px;
-            text-align: center;
-            max-width: 600px;
-        }
-
-        .lightbox-info h3 {
-            font-size: 24px;
-            margin-bottom: 8px;
-            color: #ffd700;
-        }
-
-        .lightbox-info p {
-            color: #aaa;
-            font-size: 16px;
-        }
-
-        /* ---------------- FOOTER ---------------- */
-        footer {
-            background: #111;
-            color: #fff;
-            text-align: center;
-            padding: 60px 20px 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 60px;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #ffd700;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 25px 0;
-            flex-wrap: wrap;
-            padding: 0;
-        }
-
-        .footer-links li a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .footer-links li a:hover {
-            color: #ffd700;
-        }
-
-        .footer-socials {
-            margin-top: 25px;
-        }
-
-        .footer-socials a {
-            margin: 0 10px;
-            font-size: 20px;
-            color: #aaa;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .footer-socials a:hover {
-            color: #ffd700;
-            background: rgba(255,215,0,0.1);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #777;
-            font-size: 14px;
-        }
-
-        /* ---------------- LOADING ANIMATION ---------------- */
-        .loader {
-            display: none;
-            text-align: center;
-            padding: 30px;
-        }
-
-        .loader .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255,255,255,0.1);
-            border-left: 4px solid #ffd700;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ---------------- RESPONSIVE ---------------- */
-        @media (max-width: 1100px) {
-            .portfolio {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                padding: 20px 40px;
-            }
-        }
-
-        @media (max-width: 800px) {
-            header {
-                padding: 15px 20px;
-            }
-            
-            .scrolled {
-                padding: 10px 20px;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .portfolio {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-                padding: 20px;
-            }
-
-            .lightbox-media-container {
-                height: 60vh;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .portfolio {
-                grid-template-columns: 1fr;
-            }
-            
-            .hero {
-                height: 50vh;
-            }
-            
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .lightbox-nav button {
-                width: 40px;
-                height: 40px;
-            }
-        }
-
-        header {
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MHG Studio | Портфолио</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* ---------------- NAVBAR / HEADER ---------------- */
+header {
+    width: 100%;
+    padding: 20px 60px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
     height: 80px;
+}
+
+header.scrolled {
+    padding: 15px 60px;
+    background: rgba(10, 10, 10, 0.98);
 }
 
 .logo {
@@ -663,27 +48,672 @@
     justify-content: center;
 }
 
-.logo p {
-    font-size: 12px;
-    margin-top: 2px;
-    line-height: 1;
-    opacity: 0.8;
+.logo a {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #ffd700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
 }
 
+.logo p {
+    font-size: 11px;
+    margin-top: 3px;
+    line-height: 1;
+    opacity: 0.7;
+    color: #aaa;
+}
 
-    </style>
+nav ul {
+    display: flex;
+    gap: 35px;
+    list-style: none;
+}
+
+nav ul li a {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: 0.3s;
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #ffd700;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 80%;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #ffd700;
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+    z-index: 1001;
+}
+
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: #fff;
+    transition: 0.3s;
+}
+
+.hamburger.active div:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active div:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active div:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* ---------------- HERO SECTION ---------------- */
+.hero {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+    url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffd700;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+/* ---------------- CATEGORY SECTION ---------------- */
+.categories-section {
+    padding: 60px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.categories-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.categories-title h2 {
+    font-size: 2.2rem;
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.categories-title p {
+    color: #888;
+    font-size: 1rem;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.category-card {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    background: #111;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.category-card:hover {
+    transform: translateY(-10px);
+    border-color: #ffd700;
+    box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+}
+
+.category-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.category-card:hover img {
+    transform: scale(1.1);
+}
+
+.category-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.3));
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+}
+
+.category-overlay h3 {
+    font-size: 1.3rem;
+    color: #ffd700;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.category-overlay p {
+    font-size: 0.9rem;
+    color: #aaa;
+    line-height: 1.4;
+}
+
+.category-count {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 215, 0, 0.9);
+    color: #000;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.category-icon {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffd700;
+    font-size: 18px;
+}
+
+/* ---------------- GALLERY MODAL ---------------- */
+.gallery-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.98);
+    z-index: 2000;
+    display: none;
+    flex-direction: column;
+}
+
+.gallery-modal.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.gallery-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    background: rgba(10,10,10,0.9);
+}
+
+.gallery-header h2 {
+    color: #ffd700;
+    font-size: 1.5rem;
+}
+
+.gallery-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 28px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-close:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ffd700;
+}
+
+.gallery-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    aspect-ratio: 4/5;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+    transition: all 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.gallery-item img,
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item video {
+    background: #000;
+}
+
+.item-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .item-overlay {
+    opacity: 1;
+}
+
+.item-overlay h4 {
+    color: #ffd700;
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.item-overlay p {
+    color: #aaa;
+    font-size: 0.85rem;
+}
+
+.play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 215, 0, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .play-icon {
+    opacity: 1;
+}
+
+.play-icon i {
+    color: #000;
+    font-size: 22px;
+    margin-left: 3px;
+}
+
+/* ---------------- LIGHTBOX ---------------- */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.98);
+    z-index: 3000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.lightbox.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox-container {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lightbox-media {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+}
+
+.lightbox-media img,
+.lightbox-media video {
+    max-width: 100%;
+    max-height: 85vh;
+    border-radius: 8px;
+}
+
+.lightbox-close-btn {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 32px;
+    cursor: pointer;
+    transition: 0.3s;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-close-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: #ffd700;
+}
+
+.lightbox-nav-btns {
+    display: flex;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.lightbox-nav-btns button {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    color: #fff;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-nav-btns button:hover {
+    background: #ffd700;
+    color: #000;
+}
+
+.lightbox-caption {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.lightbox-caption h3 {
+    color: #ffd700;
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+.lightbox-caption p {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+/* ---------------- FOOTER ---------------- */
+footer {
+    background: #111;
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    margin-top: 60px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.footer-text {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.footer-socials {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+.footer-socials a {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 18px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.footer-socials a:hover {
+    background: #ffd700;
+    color: #000;
+    transform: translateY(-3px);
+}
+
+.copyright {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* ---------------- LOADING ---------------- */
+.loading-spinner {
+    display: none;
+    text-align: center;
+    padding: 50px;
+}
+
+.loading-spinner.active {
+    display: block;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid rgba(255,255,255,0.1);
+    border-left-color: #ffd700;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 1200px) {
+    .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .logo a {
+        font-size: 20px;
+    }
+
+    .logo p {
+        font-size: 10px;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background: #111;
+        flex-direction: column;
+        width: 280px;
+        height: 100vh;
+        padding: 100px 30px 30px;
+        transition: 0.4s;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+    }
+
+    nav ul.show {
+        right: 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 0.95rem;
+    }
+
+    .categories-section {
+        padding: 40px 20px;
+    }
+
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .category-card {
+        aspect-ratio: 16/9;
+    }
+
+    .gallery-content {
+        padding: 20px;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+
+    .lightbox-nav-btns button {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+@media (max-width: 500px) {
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-item {
+        aspect-ratio: 1/1;
+    }
+}
+</style>
 </head>
-
 <body>
 
+<!-- HEADER -->
 <header id="header">
-   <div class="logo">
-    <a href="index.html">
-        <i></i> MHG Studio
-    </a>
-    <p> Контент для медиа и бизнеса </p>
-</div>
-
+    <div class="logo">
+        <a href="index.html"><i class="fas fa-camera"></i> MHG Studio</a>
+        <p>Контент для медиа и бизнеса</p>
+    </div>
     <nav>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
@@ -704,783 +734,414 @@
 <section class="hero">
     <h1>Наше Портфолио</h1>
     <p>Откройте для себя наши лучшие работы в области видеопроизводства, фотографии и рекламы</p>
-    <div class="hero-buttons">
-        <a href="contact.html" class="btn btn-primary">Связаться с нами</a>
-        <a href="services.html" class="btn btn-secondary">Наши услуги</a>
+</section>
+
+<!-- CATEGORIES SECTION -->
+<section class="categories-section">
+    <div class="categories-title">
+        <h2>Категории Работ</h2>
+        <p>Выберите категорию для просмотра всех работ</p>
+    </div>
+
+    <div class="categories-grid">
+        <!-- Category 1: Фотосессии -->
+        <div class="category-card" data-category="photosessions">
+            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/132b22298-03b7-451a-bd83-31b17bf47c82.png" alt="Фотосессии" loading="lazy">
+            <div class="category-icon"><i class="fas fa-camera"></i></div>
+            <div class="category-count">28 работ</div>
+            <div class="category-overlay">
+                <h3>Фотосессии</h3>
+                <p>Портретная и студийная съёмка</p>
+            </div>
+        </div>
+
+        <!-- Category 2: Видео -->
+        <div class="category-card" data-category="videos">
+            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/18854067a-91b1-4c51-bec0-04adb0cb910f.png" alt="Видео" loading="lazy">
+            <div class="category-icon"><i class="fas fa-video"></i></div>
+            <div class="category-count">15 работ</div>
+            <div class="category-overlay">
+                <h3>Видео</h3>
+                <p>Корпоративные ролики и клипы</p>
+            </div>
+        </div>
+
+        <!-- Category 3: Фото Продуктов -->
+        <div class="category-card" data-category="products">
+            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/1cf47776e-2848-4f37-a1a4-65fbed392fcb.png" alt="Фото Продуктов" loading="lazy">
+            <div class="category-icon"><i class="fas fa-box"></i></div>
+            <div class="category-count">20 работ</div>
+            <div class="category-overlay">
+                <h3>Фото Продуктов</h3>
+                <p>Предметная и коммерческая съёмка</p>
+            </div>
+        </div>
+
+        <!-- Category 4: Интерактивные Фото -->
+        <div class="category-card" data-category="interactive">
+            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/18095d13a-7aba-4da3-8fdb-95da48cab771.png" alt="Интерактивные Фото" loading="lazy">
+            <div class="category-icon"><i class="fas fa-touch"></i></div>
+            <div class="category-count">12 работ</div>
+            <div class="category-overlay">
+                <h3>Интерактивные Фото</h3>
+                <p>Рекламные и социальные кампании</p>
+            </div>
+        </div>
     </div>
 </section>
 
-<!-- FILTERS -->
-<div class="filter-section">
-    <h2>Категории работ</h2>
-    <div class="filter-buttons">
-        <button class="active" data-filter="all">
-            <i class="fas fa-th-large"></i> Все работы
-        </button>
-        <button data-filter="videos">
-            <i class="fas fa-video"></i> Видео
-        </button>
-        <button data-filter="photos">
-            <i class="fas fa-camera"></i> Фото
-        </button>
-        <button data-filter="commercials">
-            <i class="fas fa-tv"></i> Реклама
-        </button>
-    </div>
-</div>
-
-<!-- LOADER -->
-<div class="loader" id="loader">
-    <div class="spinner"></div>
-    <p>Загрузка работ...</p>
-</div>
-
-<!-- PORTFOLIO GRID -->
-<div class="portfolio" id="portfolio-grid">
-
-    <!-- Videos -->
-    <div class="item videos" data-type="video" data-src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4">
-        <video class="preview-video" muted loop playsinline preload="metadata">
-            <source src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4" type="video/mp4">
-        </video>
-        <div class="play-button">
-            <i class="fas fa-play"></i>
-        </div>
-        <div class="item-type">Видео</div>
-        <div class="overlay">
-            <h3>Корпоративное видео</h3>
-            <p>Съемка и монтаж для крупной компании</p>
-        </div>
-    </div>
-
-    <div class="item videos" data-type="video" data-src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485212/Video_2026-02-07_14-20-40_tkwz82.mp4">
-        <video class="preview-video" muted loop playsinline preload="metadata">
-            <source src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485212/Video_2026-02-07_14-20-40_tkwz82.mp4" type="video/mp4">
-        </video>
-        <div class="play-button">
-            <i class="fas fa-play"></i>
-        </div>
-        <div class="item-type">Видео</div>
-        <div class="overlay">
-            <h3>Корпоративное видео</h3>
-            <p>Съемка и монтаж для крупной компании</p>
-        </div>
-    </div>
-
-    <div class="item videos" data-type="video" data-src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770484776/video_2026-02-07_14-20-32_uxvgvg.mp4">
-        <video class="preview-video" muted loop playsinline preload="metadata">
-            <source src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770484776/video_2026-02-07_14-20-32_uxvgvg.mp4" type="video/mp4">
-        </video>
-        <div class="play-button">
-            <i class="fas fa-play"></i>
-        </div>
-        <div class="item-type">Видео</div>
-        <div class="overlay">
-            <h3>За кулисами</h3>
-            <p>Съемка процесса создания рекламного ролика</p>
-        </div>
-    </div>
-
-    <!-- Photos -->
-
-    <div class="item photos">
-        <img src="photo-person/1.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-
-     <div class="item photos">
-        <img src="photo-person/2.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/3.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/4.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/5.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/6.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/7.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/8.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/9.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/10.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/11.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/12.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/1.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-     <div class="item photos">
-        <img src="photo-person/14.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <!-- 
-     <div class="item photos">
-        <img src="photo-person/15.jpg" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    -->
-    <div class="item photos">
-        <img src="photo-person/16.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/17.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/18.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/19.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/20.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/21.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/22.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/23.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <!--
-    <div class="item photos">
-        <img src="photo-person/24.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div> 
-    -->
-    <div class="item photos">
-        <img src="photo-person/25.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/26.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/27.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-    <div class="item photos">
-        <img src="photo-person/28.JPG" alt="Photography">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Фотосессия</h3>
-            <p>Портретная съемка в студии</p>
-        </div>
-    </div>
-
-    <div class="item photos">
-        <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f" alt="Portrait">
-        <div class="item-type">Фото</div>
-        <div class="overlay">
-            <h3>Портрет</h3>
-            <p>Художественная портретная съемка</p>
-        </div>
-    </div>
-
-    <!-- Commercials -->
-    <div class="item commercials">
-        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5" alt="Commercial Ad">
-        <div class="item-type">Реклама</div>
-        <div class="overlay">
-            <h3>Рекламный ролик</h3>
-            <p>ТВ-реклама для бренда одежды</p>
-        </div>
-    </div>
-
-    <!-- ADS -->
-   
-
-    <div class="item ads">
-        <img src="photo-ads/1.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-<!--
-    <div class="item ads">
-        <img src="photo-ads/2.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-      -->
-
-    <div class="item ads">
-        <img src="photo-ads/3.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/4.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/5.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/6.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/7.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-
-    <div class="item ads">
-        <img src="photo-ads/8.jpg" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-
-     <div class="item ads">
-        <img src="photo-ads/9.jpg" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-
-     <div class="item ads">
-        <img src="photo-ads/10.jpeg" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-
-    <div class="item ads">
-        <img src="photo-ads/11.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/12.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/13.webp" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-
-    <div class="item ads">
-        <img src="photo-ads/14.jpg" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/15.jpg" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/16.jpg" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-
-    <div class="item ads">
-        <img src="photo-ads/17.png" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p> 
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/18.png" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/19.png" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-    <div class="item ads">
-        <img src="photo-ads/20.png" alt="Ads Shot">
-        <div class="item-type">Объявления</div>
-        <div class="overlay">
-            <h3>Социальная реклама</h3>
-            <p>Кампания для экологической организации</p>
-        </div>
-    </div>
-
-    
-
-    <!-- Commercials 
-    <div class="item commercials" data-type="image" data-src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5">
-        <img src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5" alt="Commercial Ad" loading="lazy">
-        <div class="item-type">Реклама</div>
-        <div class="overlay">
-            <h3>Рекламный ролик</h3>
-            <p>ТВ-реклама для бренда одежды</p>
-        </div>
-    </div>
--->
-    <!-- Additional items... 
-    <div class="item videos" data-type="video" data-src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4">
-        <video class="preview-video" muted loop playsinline preload="metadata">
-            <source src="https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4" type="video/mp4">
-        </video>
-        <div class="play-button">
-            <i class="fas fa-play"></i>
-        </div>
-        <div class="item-type">Видео</div>
-        <div class="overlay">
-            <h3>Музыкальный клип</h3>
-            <p>Съемка и продюсирование для артиста</p>
-        </div>
-    </div>
--->
-</div>
-
-<!-- UNIFIED LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-    <div class="lightbox-content">
-        <button class="lightbox-close" id="lightbox-close">
+<!-- GALLERY MODAL -->
+<div class="gallery-modal" id="gallery-modal">
+    <div class="gallery-header">
+        <h2 id="gallery-title">Название категории</h2>
+        <button class="gallery-close" onclick="closeGallery()">
             <i class="fas fa-times"></i>
         </button>
-        
-        <div class="lightbox-media-container" id="lightbox-media-container">
-            <!-- Media will be inserted here dynamically -->
+    </div>
+    <div class="gallery-content">
+        <div class="loading-spinner" id="gallery-loader">
+            <div class="spinner"></div>
+            <p>Загрузка работ...</p>
         </div>
+        <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+</div>
 
-        <div class="lightbox-info">
-            <h3 id="lightbox-title">Project Title</h3>
-            <p id="lightbox-description">Project description goes here</p>
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-container">
+        <button class="lightbox-close-btn" onclick="closeLightbox()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lightbox-media" id="lightbox-media"></div>
+        <div class="lightbox-nav-btns">
+            <button onclick="prevLightbox()"><i class="fas fa-chevron-left"></i></button>
+            <button onclick="nextLightbox()"><i class="fas fa-chevron-right"></i></button>
         </div>
-        
-        <div class="lightbox-nav">
-            <button id="lightbox-prev"><i class="fas fa-chevron-left"></i></button>
-            <button id="lightbox-next"><i class="fas fa-chevron-right"></i></button>
+        <div class="lightbox-caption">
+            <h3 id="lightbox-title">Название</h3>
+            <p id="lightbox-desc">Описание</p>
         </div>
     </div>
 </div>
 
 <!-- FOOTER -->
 <footer>
-    <div class="footer-container">
-        <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса </p>
-
-        <p>© 2026 MHG Studio. Все права защищены. </p>
-        <!-- 
+    <div class="footer-content">
         <div class="footer-logo">MHG Studio</div>
-        <p>© 2026 MGH Studio. Все права защищены. </p>
-        <div class="copyright">
-            Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса
+        <p class="footer-text">Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса.</p>
+        <div class="footer-socials">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-vk"></i></a>
         </div>
-        -->
+        <p class="copyright">© 2026 MHG Studio. Все права защищены.</p>
     </div>
 </footer>
 
 <script>
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+// ==================== DATA ====================
+const portfolioData = {
+    photosessions: [
+        { type: 'image', src: 'photo-person/1.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/2.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/3.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/4.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/5.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/6.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/7.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/8.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/9.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/10.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/11.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/12.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/14.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/16.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/17.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/18.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/19.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/20.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/21.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/22.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/23.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/25.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/26.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/27.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'photo-person/28.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f', title: 'Художественный портрет', desc: 'Авторская съёмка' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb', title: 'Fashion съёмка', desc: 'Модная фотография' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04', title: 'Женский портрет', desc: 'Студийная работа' }
+    ],
+    videos: [
+        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4', title: 'Корпоративное видео', desc: 'Съёмка и монтаж для компании' },
+        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485212/Video_2026-02-07_14-20-40_tkwz82.mp4', title: 'Рекламный ролик', desc: 'Коммерческий проект' },
+        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770484776/video_2026-02-07_14-20-32_uxvgvg.mp4', title: 'За кулисами', desc: 'Процесс съёмки' },
+        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4', title: 'Музыкальный клип', desc: 'Продюсирование' },
+        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485212/Video_2026-02-07_14-20-40_tkwz82.mp4', title: 'Интервью', desc: 'Студийная запись' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1579632652768-6cb9dcf85912', title: 'Видео продакшн', desc: 'Съёмочная площадка' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1536240478700-b869070f9279', title: 'Кинематография', desc: 'Художественное видео' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4', title: 'Документальный фильм', desc: 'Режиссёрская работа' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32', title: 'Event съёмка', desc: 'Мероприятия' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1518135714426-c18f5ffb6f4d', title: 'Аэросъёмка', desc: 'Дрон видео' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1522008629173-e12980314a70', title: 'Таймлапс', desc: 'Ускоренное видео' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26', title: 'Анимация', desc: 'Motion graphics' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1535016120720-40c6874c3b13', title: 'Стриминг', desc: 'Прямые трансляции' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1505373877841-8d43f703fb8f', title: '360° видео', desc: 'Панорамная съёмка' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655', title: 'Обучающее видео', desc: 'Корпоративное обучение' }
+    ],
+    products: [
+        { type: 'image', src: 'photo-ads/1.webp', title: 'Предметная съёмка', desc: 'Коммерческая фотография' },
+        { type: 'image', src: 'photo-ads/3.webp', title: 'Каталожная съёмка', desc: 'E-commerce' },
+        { type: 'image', src: 'photo-ads/4.webp', title: 'Ювелирные изделия', desc: 'Макро съёмка' },
+        { type: 'image', src: 'photo-ads/5.webp', title: 'Косметика', desc: 'Бьюти продукты' },
+        { type: 'image', src: 'photo-ads/6.webp', title: 'Электроника', desc: 'Техника' },
+        { type: 'image', src: 'photo-ads/7.webp', title: 'Одежда', desc: 'Fashion products' },
+        { type: 'image', src: 'photo-ads/8.jpg', title: 'Обувь', desc: 'Продуктовая съёмка' },
+        { type: 'image', src: 'photo-ads/9.jpg', title: 'Аксессуары', desc: 'Детали' },
+        { type: 'image', src: 'photo-ads/10.jpeg', title: 'Часы', desc: 'Luxury products' },
+        { type: 'image', src: 'photo-ads/11.webp', title: 'Парфюмерия', desc: 'Ароматы' },
+        { type: 'image', src: 'photo-ads/12.webp', title: 'Еда', desc: 'Food photography' },
+        { type: 'image', src: 'photo-ads/13.webp', title: 'Напитки', desc: 'Beverage' },
+        { type: 'image', src: 'photo-ads/14.jpg', title: 'Упаковка', desc: 'Packaging' },
+        { type: 'image', src: 'photo-ads/15.jpg', title: 'Книги', desc: 'Print products' },
+        { type: 'image', src: 'photo-ads/16.jpg', title: 'Гаджеты', desc: 'Tech products' },
+        { type: 'image', src: 'photo-ads/17.png', title: 'Спорттовары', desc: 'Sports equipment' },
+        { type: 'image', src: 'photo-ads/18.png', title: 'Дом и интерьер', desc: 'Home decor' },
+        { type: 'image', src: 'photo-ads/19.png', title: 'Детские товары', desc: 'Kids products' },
+        { type: 'image', src: 'photo-ads/20.png', title: 'Автотовары', desc: 'Auto accessories' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', title: 'Минимализм', desc: 'White background' }
+    ],
+    interactive: [
+        { type: 'image', src: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5', title: 'Социальная реклама', desc: 'Экологическая кампания' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1542204165-65bf26472b9b', title: 'Брендинг', desc: 'Корпоративный стиль' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1561070791-2526d30994b5', title: 'Digital кампания', desc: 'Онлайн реклама' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1557804506-669a67965ba0', title: 'Презентация', desc: 'Бизнес материалы' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1551434678-e076c223a692', title: 'Веб-дизайн', desc: 'UI/UX проект' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f', title: 'Инфографика', desc: 'Визуализация данных' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71', title: 'Дашборд', desc: 'Аналитика' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71', title: 'Мобильное приложение', desc: 'App дизайн' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4', title: 'Офисное пространство', desc: 'Корпоративная среда' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1497366216548-37526070297c', title: 'Конференция', desc: 'Бизнес событие' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952', title: 'Команда', desc: 'Корпоративная культура' },
+        { type: 'image', src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f', title: 'Воркшоп', desc: 'Обучение' }
+    ]
+};
+
+const categoryTitles = {
+    photosessions: 'Фотосессии',
+    videos: 'Видео',
+    products: 'Фото Продуктов',
+    interactive: 'Интерактивные Фото'
+};
+
+// ==================== STATE ====================
+let currentGallery = [];
+let currentLightboxIndex = 0;
+
+// ==================== HEADER SCROLL ====================
+window.addEventListener('scroll', () => {
+    const header = document.getElementById('header');
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+// ==================== MOBILE MENU ====================
+function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('show');
+    document.querySelector('.hamburger').classList.toggle('active');
+}
+
+document.querySelectorAll('#nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('nav-links').classList.remove('show');
+        document.querySelector('.hamburger').classList.remove('active');
     });
+});
 
-    /* FILTER SYSTEM */
-    const filterButtons = document.querySelectorAll(".filter-buttons button");
-    const items = document.querySelectorAll(".item");
-    const portfolioGrid = document.getElementById("portfolio-grid");
-    const loader = document.getElementById("loader");
+// ==================== OPEN GALLERY ====================
+document.querySelectorAll('.category-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const category = card.dataset.category;
+        openGallery(category);
+    });
+});
 
-    filterButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-            loader.style.display = 'block';
-            portfolioGrid.style.opacity = '0.5';
+function openGallery(category) {
+    const modal = document.getElementById('gallery-modal');
+    const grid = document.getElementById('gallery-grid');
+    const loader = document.getElementById('gallery-loader');
+    const title = document.getElementById('gallery-title');
+
+    title.textContent = categoryTitles[category] || 'Галерея';
+    grid.innerHTML = '';
+    loader.classList.add('active');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    // Simulate loading
+    setTimeout(() => {
+        currentGallery = portfolioData[category] || [];
+        
+        currentGallery.forEach((item, index) => {
+            const galleryItem = document.createElement('div');
+            galleryItem.className = 'gallery-item';
+            galleryItem.dataset.index = index;
             
-            setTimeout(() => {
-                filterButtons.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-
-                const target = btn.dataset.filter;
-
-                items.forEach(item => {
-                    if (target === "all" || item.classList.contains(target)) {
-                        item.style.display = "block";
-                        // Restart animation
-                        item.style.animation = 'none';
-                        setTimeout(() => {
-                            item.style.animation = '';
-                        }, 10);
-                    } else {
-                        item.style.display = "none";
-                    }
-                });
+            if (item.type === 'video') {
+                galleryItem.innerHTML = `
+                    <video muted loop playsinline preload="metadata">
+                        <source src="${item.src}" type="video/mp4">
+                    </video>
+                    <div class="play-icon"><i class="fas fa-play"></i></div>
+                    <div class="item-overlay">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `;
                 
-                loader.style.display = 'none';
-                portfolioGrid.style.opacity = '1';
-            }, 300);
-        });
-    });
-
-    /* UNIFIED LIGHTBOX SYSTEM */
-    const lightbox = document.getElementById("lightbox");
-    const lightboxMediaContainer = document.getElementById("lightbox-media-container");
-    const lightboxClose = document.getElementById("lightbox-close");
-    const lightboxTitle = document.getElementById("lightbox-title");
-    const lightboxDescription = document.getElementById("lightbox-description");
-    const lightboxPrev = document.getElementById("lightbox-prev");
-    const lightboxNext = document.getElementById("lightbox-next");
-
-    let currentIndex = 0;
-    let visibleItems = [];
-
-    // Get currently visible items
-    function updateVisibleItems() {
-        visibleItems = Array.from(document.querySelectorAll(".item")).filter(item => 
-            item.style.display !== "none"
-        );
-    }
-
-    // Open lightbox
-    function openLightbox(index) {
-        updateVisibleItems();
-        currentIndex = index;
-        const item = visibleItems[currentIndex];
-        
-        if (!item) return;
-
-        const type = item.dataset.type;
-        const src = item.dataset.src;
-        const title = item.querySelector('.overlay h3')?.textContent || 'Проект';
-        const description = item.querySelector('.overlay p')?.textContent || 'Описание проекта';
-        
-        // Clear previous content
-        lightboxMediaContainer.innerHTML = '';
-        
-        // Create appropriate media element
-        if (type === 'video') {
-            const video = document.createElement('video');
-            video.src = src;
-            video.controls = true;
-            video.autoplay = true;
-            video.style.maxWidth = '100%';
-            video.style.maxHeight = '80vh';
-            lightboxMediaContainer.appendChild(video);
-        } else {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = title;
-            lightboxMediaContainer.appendChild(img);
-        }
-        
-        lightboxTitle.textContent = title;
-        lightboxDescription.textContent = description;
-        lightbox.classList.add("active");
-        document.body.style.overflow = "hidden";
-    }
-
-    // Close lightbox
-    function closeLightbox() {
-        // Pause any playing video
-        const video = lightboxMediaContainer.querySelector('video');
-        if (video) {
-            video.pause();
-            video.src = '';
-        }
-        
-        lightbox.classList.remove("active");
-        document.body.style.overflow = "auto";
-    }
-
-    // Navigate
-    function prevItem() {
-        currentIndex = (currentIndex - 1 + visibleItems.length) % visibleItems.length;
-        openLightbox(currentIndex);
-    }
-
-    function nextItem() {
-        currentIndex = (currentIndex + 1) % visibleItems.length;
-        openLightbox(currentIndex);
-    }
-
-    // Event listeners for items
-    items.forEach((item, index) => {
-        item.addEventListener("click", () => {
-            updateVisibleItems();
-            const visibleIndex = visibleItems.indexOf(item);
-            openLightbox(visibleIndex);
-        });
-    });
-
-    // Lightbox controls
-    lightboxClose.addEventListener("click", closeLightbox);
-    lightboxPrev.addEventListener("click", (e) => {
-        e.stopPropagation();
-        prevItem();
-    });
-    lightboxNext.addEventListener("click", (e) => {
-        e.stopPropagation();
-        nextItem();
-    });
-
-    // Close on background click
-    lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox || e.target === lightboxMediaContainer) {
-            closeLightbox();
-        }
-    });
-
-    // Keyboard navigation
-    document.addEventListener("keydown", (e) => {
-        if (!lightbox.classList.contains("active")) return;
-        
-        if (e.key === "Escape") closeLightbox();
-        if (e.key === "ArrowLeft") prevItem();
-        if (e.key === "ArrowRight") nextItem();
-    });
-
-    /* HAMBURGER MENU */
-    function toggleMenu() {
-        document.getElementById('nav-links').classList.toggle('show');
-        document.querySelector('.hamburger').classList.toggle('active');
-    }
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('#nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('nav-links').classList.remove('show');
-            document.querySelector('.hamburger').classList.remove('active');
-        });
-    });
-
-    /* VIDEO PREVIEW AUTO-PLAY ON HOVER */
-    const previewVideos = document.querySelectorAll('.preview-video');
-    
-    previewVideos.forEach(video => {
-        const item = video.closest('.item');
-        
-        item.addEventListener('mouseenter', () => {
-            video.play().catch(e => console.log('Autoplay prevented:', e));
-        });
-        
-        item.addEventListener('mouseleave', () => {
-            video.pause();
-            video.currentTime = 0;
-        });
-    });
-
-    // Intersection Observer for video previews (play when visible)
-    const videoObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            const video = entry.target;
-            if (entry.isIntersecting) {
-                video.play().catch(e => console.log('Autoplay prevented:', e));
+                const video = galleryItem.querySelector('video');
+                galleryItem.addEventListener('mouseenter', () => {
+                    video.play().catch(() => {});
+                });
+                galleryItem.addEventListener('mouseleave', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                });
             } else {
-                video.pause();
+                galleryItem.innerHTML = `
+                    <img src="${item.src}" alt="${item.title}" loading="lazy">
+                    <div class="item-overlay">
+                        <h4>${item.title}</h4>
+                        <p>${item.desc}</p>
+                    </div>
+                `;
+            }
+            
+            galleryItem.addEventListener('click', () => {
+                openLightbox(index);
+            });
+            
+            grid.appendChild(galleryItem);
+        });
+        
+        loader.classList.remove('active');
+    }, 500);
+}
+
+function closeGallery() {
+    const modal = document.getElementById('gallery-modal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    
+    // Pause all videos
+    modal.querySelectorAll('video').forEach(video => {
+        video.pause();
+        video.currentTime = 0;
+    });
+}
+
+// ==================== LIGHTBOX ====================
+function openLightbox(index) {
+    const lightbox = document.getElementById('lightbox');
+    const mediaContainer = document.getElementById('lightbox-media');
+    const titleEl = document.getElementById('lightbox-title');
+    const descEl = document.getElementById('lightbox-desc');
+    
+    currentLightboxIndex = index;
+    const item = currentGallery[index];
+    
+    if (!item) return;
+    
+    mediaContainer.innerHTML = '';
+    
+    if (item.type === 'video') {
+        const video = document.createElement('video');
+        video.src = item.src;
+        video.controls = true;
+        video.autoplay = true;
+        video.className = 'lightbox-media';
+        mediaContainer.appendChild(video);
+    } else {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = item.title;
+        img.className = 'lightbox-media';
+        mediaContainer.appendChild(img);
+    }
+    
+    titleEl.textContent = item.title;
+    descEl.textContent = item.desc;
+    
+    lightbox.classList.add('active');
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const mediaContainer = document.getElementById('lightbox-media');
+    
+    const video = mediaContainer.querySelector('video');
+    if (video) {
+        video.pause();
+        video.src = '';
+    }
+    
+    lightbox.classList.remove('active');
+}
+
+function prevLightbox() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + currentGallery.length) % currentGallery.length;
+    openLightbox(currentLightboxIndex);
+}
+
+function nextLightbox() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % currentGallery.length;
+    openLightbox(currentLightboxIndex);
+}
+
+// Close lightbox on background click
+document.getElementById('lightbox').addEventListener('click', (e) => {
+    if (e.target.id === 'lightbox') {
+        closeLightbox();
+    }
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    const lightbox = document.getElementById('lightbox');
+    const modal = document.getElementById('gallery-modal');
+    
+    if (lightbox.classList.contains('active')) {
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') prevLightbox();
+        if (e.key === 'ArrowRight') nextLightbox();
+    }
+    
+    if (modal.classList.contains('active') && e.key === 'Escape') {
+        closeGallery();
+    }
+});
+
+// ==================== LAZY LOADING ====================
+document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src || img.src;
+                imageObserver.unobserve(img);
             }
         });
-    }, { threshold: 0.5 });
-
-    previewVideos.forEach(video => videoObserver.observe(video));
+    });
+    
+    images.forEach(img => imageObserver.observe(img));
+});
 </script>
-
 </body>
 </html>
+
