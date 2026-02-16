@@ -14,6 +14,20 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+
+    <meta name="description" content="MHG Studio — профессиональная видеостудия в Москве. Телевизионный уровень продакшена для брендов и бизнеса.">
+
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://mhg.studio/">
+
+<meta property="og:title" content="MHG Studio">
+<meta property="og:description" content="Кинематографическая видеостудия в Москве">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mhg.studio/">
+
+
+
     <style>
         
         :root {
@@ -737,66 +751,47 @@
     position: relative;
 }
 
-.portfolio-track {
-    display: flex;
-    gap: 18px;
-    width: max-content;
-    animation: scrollPortfolio 25s linear infinite;
-}
-
-.portfolio-carousel:hover .portfolio-track {
-    animation-play-state: paused;
-}
-
-@keyframes scrollPortfolio {
-    from {
-        transform: translateX(0);
-    }
-    to {
-        transform: translateX(-50%);
-    }
-}
-
-.portfolio-track .portfolio-item {
-    min-width: 260px;
-    flex-shrink: 0;
-}
-
-/* ===== Portfolio Carousel Fix ===== */
-
-.portfolio-carousel {
-    overflow: hidden;
-    width: 100%;
-    margin-top: 20px;
-}
-
-.portfolio-track {
-    display: flex;
-    gap: 18px;
-    transition: transform 0.8s ease;
-}
-
-.portfolio-item {
-    min-width: 260px;
-    flex: 0 0 260px;
-}
 
 
-/* ==== Netflix style carousel ==== */
+
+/* ===== Responsive Netflix Carousel ===== */
 
 .portfolio-carousel {
     position: relative;
     overflow: hidden;
+    width: 100%;
     margin-top: 30px;
 }
 
-/* blur edges */
+.portfolio-track {
+    display: flex;
+    gap: 18px;
+    will-change: transform;
+    touch-action: pan-y;
+}
+
+.portfolio-item {
+    flex: 0 0 auto;
+    width: clamp(220px, 26vw, 320px);
+    aspect-ratio: 4 / 5;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* fade edges */
+
 .portfolio-carousel::before,
 .portfolio-carousel::after {
     content: "";
     position: absolute;
     top: 0;
-    width: 120px;
+    width: 100px;
     height: 100%;
     z-index: 2;
     pointer-events: none;
@@ -812,23 +807,44 @@
     background: linear-gradient(to left, #0a0a0a, transparent);
 }
 
-.portfolio-track {
-    display: flex;
-    gap: 18px;
-    will-change: transform;
+/* global responsive fixes */
+
+img, video {
+    max-width: 100%;
+    height: auto;
 }
 
-.portfolio-item {
-    flex: 0 0 260px;
-    border-radius: 12px;
+.services-grid {
+    flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+    .service-item {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .mgh-card {
+        max-width: 100%;
+    }
+}
+
+
+body.menu-open {
     overflow: hidden;
 }
 
-.portfolio-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 3px;
 }
+
 
 
     </style>
@@ -850,13 +866,14 @@
     </div>
 
     <!-- Header -->
-    <header class="main-header" id="mainHeader">
+    <header class="main-header" id="mainHeader" role="banner">
         <div class="container header-inner">
             <div class="logo"><a href="index.html">MHG Studio <small
                         style="display:block;font-weight:400;font-size:12px;color:var(--color-silver)">Кинематографическая
                         визуализация</small></a></div>
 
-            <nav class="main-nav" aria-label="Главное меню">
+            <nav class="main-nav" role="navigation" aria-label="Главная навигация">
+
                 <ul>
                     <li><a href="#home" class="nav-link active">Главная</a></li>
                     <li class="dropdown">
@@ -950,24 +967,24 @@
             <div class="portfolio-track">
 
                 <!-- 8 cards -->
-                <div class="portfolio-item"><img src="photo-person/11.jpg"></div>
-                <div class="portfolio-item"><img src="photo-person/4.jpg"></div>
-                <div class="portfolio-item"><img src="photo-ads/1.webp"></div>
-                <div class="portfolio-item"><img src="photo-ads/17.png"></div>
-                <div class="portfolio-item"><img src="photo-ads/20.png"></div>
-                <div class="portfolio-item"><img src="photo-ads/6.webp"></div>
-                <div class="portfolio-item"><img src="photo-ads/18.png"></div>
-                <div class="portfolio-item"><img src="photo-person/24.jpg"></div>
+                <div class="portfolio-item"><img src="photo-person/11.jpg" loading="lazy" alt="описание изображения" ></div>
+                <div class="portfolio-item"><img src="photo-person/4.jpg" loading="lazy" alt="описание изображения" ></div>
+                <div class="portfolio-item"><img src="photo-ads/1.webp" loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-ads/17.png" loading="lazy" alt="описание изображения" ></div>
+                <div class="portfolio-item"><img src="photo-ads/20.png" loading="lazy" alt="описание изображения" ></div>
+                <div class="portfolio-item"><img src="photo-ads/6.webp"loading="lazy" alt="описание изображения" ></div>
+                <div class="portfolio-item"><img src="photo-ads/18.png"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-person/24.jpg"loading="lazy" alt="описание изображения"></div>
 
                 <!-- clone for infinite loop -->
-                <div class="portfolio-item"><img src="photo-person/11.jpg"></div>
-                <div class="portfolio-item"><img src="photo-person/4.jpg"></div>
-                <div class="portfolio-item"><img src="photo-ads/1.webp"></div>
-                <div class="portfolio-item"><img src="photo-ads/17.png"></div>
-                <div class="portfolio-item"><img src="photo-ads/20.png"></div>
-                <div class="portfolio-item"><img src="photo-ads/6.webp"></div>
-                <div class="portfolio-item"><img src="photo-ads/18.png"></div>
-                <div class="portfolio-item"><img src="photo-person/24.jpg"></div>
+                <div class="portfolio-item"><img src="photo-person/11.jpg"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-person/4.jpg"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-ads/1.webp"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-ads/17.png"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-ads/20.png"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-ads/6.webp"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-ads/18.png"loading="lazy" alt="описание изображения"></div>
+                <div class="portfolio-item"><img src="photo-person/24.jpg"loading="lazy" alt="описание изображения"></div>
 
             </div>
         </div>
@@ -1148,11 +1165,11 @@
     </section>
 -->
     <!-- Footer -->
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
-      
-        <p>© 2026 MHG Studio. Все права защищены. </p>
         <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса </p>
+
+        <p>© 2026 MHG Studio. Все права защищены. </p>
         
         <!-- 
             <p style="color:var(--color-silver)">&copy;  2026 MHG Studio. Все права защищены.</p>
@@ -1165,47 +1182,55 @@
 
 
 
-const track = document.querySelector(".portfolio-track");
+/* ===== Netflix Physics Carousel ===== */
+const portfolioTrack = document.querySelector(".portfolio-track");
 
-let position = 0;
-let speed = 0.2; // slow cinematic speed
+if (portfolioTrack) {
 
-function animate() {
-    position -= speed;
+let pos = 0;
+let autoSpeed = -0.4;   // سرعة تلقائية
+let velocity = 0;
+let isDown = false;
+let lastX = 0;
 
-    // reset seamlessly
-    if (Math.abs(position) >= track.scrollWidth / 2) {
-        position = 0;
-    }
+function loop() {
 
-    track.style.transform = `translateX(${position}px)`;
-    requestAnimationFrame(animate);
+    // autoplay + swipe velocity
+    pos += autoSpeed + velocity;
+
+    // friction للسحب فقط
+    velocity *= 0.92;
+
+    const half = portfolioTrack.scrollWidth / 2;
+    if (Math.abs(pos) >= half) pos = 0;
+
+    portfolioTrack.style.transform = `translateX(${pos}px)`;
+
+    requestAnimationFrame(loop);
 }
 
-animate();
+loop();
 
-/* ==== swipe support mobile ==== */
+/* drag */
 
-let startX = 0;
-let isDown = false;
-
-track.addEventListener("touchstart", e => {
+portfolioTrack.addEventListener("pointerdown", e => {
     isDown = true;
-    startX = e.touches[0].clientX;
+    lastX = e.clientX;
 });
 
-track.addEventListener("touchmove", e => {
+window.addEventListener("pointermove", e => {
     if (!isDown) return;
-    let moveX = e.touches[0].clientX;
-    position += (moveX - startX) * 0.8;
-    startX = moveX;
+    const dx = e.clientX - lastX;
+    velocity = dx;
+    lastX = e.clientX;
 });
 
-track.addEventListener("touchend", () => {
+window.addEventListener("pointerup", () => {
     isDown = false;
 });
 
-setInterval(autoSlide, 2500);
+}
+
  
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -1220,19 +1245,39 @@ setInterval(autoSlide, 2500);
                 onScroll();
             }
 
-            /* Mobile menu toggle (basic) */
-            const mobileToggle = document.querySelector('.mobile-menu-toggle');
-            const mainNav = document.querySelector('.main-nav');
-            if (mobileToggle && mainNav) {
-                mobileToggle.addEventListener('click', () => {
-                    mainNav.classList.toggle('active');
-                    const icon = mobileToggle.querySelector('i');
-                    if (icon) {
-                        icon.classList.toggle('fa-bars');
-                        icon.classList.toggle('fa-times');
-                    }
-                });
+            /* ===== PRO Mobile Menu ===== */
+
+            const toggle = document.querySelector(".mobile-menu-toggle");
+            const nav = document.querySelector(".main-nav");
+
+            function openMenu() {
+                nav.classList.add("active");
+                document.body.style.overflow = "hidden";
             }
+
+            function closeMenu() {
+                nav.classList.remove("active");
+                document.body.style.overflow = "";
+            }
+
+            toggle.addEventListener("click", () => {
+                nav.classList.contains("active") ? closeMenu() : openMenu();
+            });
+
+            /* close on link click */
+
+            nav.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", closeMenu);
+            });
+
+            /* close if user taps outside */
+
+            document.addEventListener("click", e => {
+                if (!nav.contains(e.target) && !toggle.contains(e.target)) {
+                    closeMenu();
+                }
+            });
+
 
             /* Smooth scroll for anchors */
             document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1246,7 +1291,7 @@ setInterval(autoSlide, 2500);
                         const top = target.getBoundingClientRect().top + window.scrollY - topOffset;
                         window.scrollTo({ top, behavior: 'smooth' });
                         // close mobile nav if open
-                        if (mainNav && mainNav.classList.contains('active')) mainNav.classList.remove('active');
+                        if (nav && nav.classList.contains('active')) mainNav.classList.remove('active');
                     }
                 });
             });
@@ -1257,51 +1302,9 @@ setInterval(autoSlide, 2500);
                (This is handled in CSS; JS kept minimal)
             */
 
-            /* Testimonials Carousel (auto + controls + pause on hover) */
-            const track = document.getElementById('testimonialTrack');
-            const prevBtn = document.getElementById('prevTest');
-            const nextBtn = document.getElementById('nextTest');
-            const slides = track ? Array.from(track.children) : [];
-            let current = 0;
-            let autoTimer = null;
-            const slideCount = slides.length;
 
-            function goTo(index) {
-                if (!track) return;
-                current = (index + slideCount) % slideCount;
-                track.style.transform = `translateX(-${current * 100}%)`;
-            }
-            function next() { goTo(current + 1); }
-            function prev() { goTo(current - 1); }
 
-            if (nextBtn) nextBtn.addEventListener('click', next);
-            if (prevBtn) prevBtn.addEventListener('click', prev);
 
-            function startAuto() {
-                const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                if (reduced) return;
-                stopAuto();
-                autoTimer = setInterval(next, 4000);
-            }
-            function stopAuto() {
-                if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
-            }
-
-            const testimonialInner = document.getElementById('testimonialInner');
-            if (testimonialInner) {
-                testimonialInner.addEventListener('mouseenter', stopAuto);
-                testimonialInner.addEventListener('mouseleave', startAuto);
-            }
-
-            // Ensure correct starting position
-            goTo(0);
-            startAuto();
-
-            // Accessibility: keyboard arrows for carousel
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowLeft') prev();
-                if (e.key === 'ArrowRight') next();
-            });
 
             /* Intersection observer for simple reveal animations */
             const ioOptions = { root: null, rootMargin: '0px', threshold: 0.12 };
@@ -1332,8 +1335,13 @@ setInterval(autoSlide, 2500);
             }
 
         });
-        const form = document.querySelector('.contact-form');
+
+
+const form = document.querySelector('.contact-form');
+
+if (form) {
 form.addEventListener('submit', async (e) => {
+
     e.preventDefault();
     const successMsg = document.getElementById('form-success');
     const errorMsg = document.getElementById('form-error');
@@ -1354,6 +1362,9 @@ form.addEventListener('submit', async (e) => {
         errorMsg.style.display = 'block';
     }
 });
+}
+
+
     </script>
 
 </body>

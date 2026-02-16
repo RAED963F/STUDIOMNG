@@ -54,7 +54,6 @@
             align-items: center;
             gap: 10px;
             text-decoration: none;
-
         }
 
         nav {
@@ -247,14 +246,14 @@
             line-height: 1.8;
         }
 
-        /* Values Section */
+        /* Values Section - 2x2 Grid */
         .values-section {
-            background: #111;
+            background: #0a0a0a;
             padding: 80px 20px;
         }
 
         .values-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -267,41 +266,76 @@
 
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .value-card {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 15px;
+            background: linear-gradient(145deg, #111 0%, #1a1a1a 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
             border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         .value-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 10px 25px rgba(255,215,0,0.1);
-            border-color: rgba(255,215,0,0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            border-color: rgba(255,215,0,0.1);
+        }
+
+        .value-card:hover::before {
+            opacity: 1;
         }
 
         .value-icon {
-            font-size: 40px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255,215,0,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 32px;
             color: #ffd700;
-            margin-bottom: 20px;
+            border: 2px solid rgba(255,215,0,0.2);
+            transition: all 0.3s;
+        }
+
+        .value-card:hover .value-icon {
+            background: #ffd700;
+            color: #000;
+            transform: scale(1.1);
         }
 
         .value-title {
-            font-size: 22px;
+            font-size: 24px;
             margin-bottom: 15px;
             font-weight: 600;
         }
 
         .value-description {
-            color: #aaa;
+            color: #888;
             font-size: 15px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* Team Section */
@@ -360,47 +394,505 @@
             line-height: 1.6;
         }
 
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(10,10,10,1) 100%);
+        /* ================= COMPACT STUDIO GALLERY ================= */
+        .studio-gallery-section {
             padding: 80px 20px;
-            text-align: center;
+            background: #111;
+            position: relative;
         }
 
-        .cta-container {
-            max-width: 800px;
+        .studio-gallery-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            opacity: 0.3;
+        }
+
+        .gallery-main-container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .cta-title {
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .gallery-header h2 {
             font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 600;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
-        .cta-description {
-            color: #ddd;
-            font-size: 18px;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 35px;
-            background: #ffd700;
-            color: #000;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            border: 2px solid #ffd700;
+        .gallery-header p {
+            color: #888;
             font-size: 16px;
         }
 
-        .cta-button:hover {
-            background: transparent;
+        /* Compact Gallery Layout */
+        .gallery-showcase {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 20px;
+            max-height: 500px;
+        }
+
+        .main-image-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #1a1a1a;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        .main-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+
+        .main-image-container:hover .main-image {
+            transform: scale(1.05);
+        }
+
+        .cinematic-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, 
+                rgba(0,0,0,0.9) 0%, 
+                rgba(0,0,0,0.3) 50%, 
+                transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .main-image-container:hover .cinematic-overlay {
+            opacity: 1;
+        }
+
+        .image-category {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255,215,0,0.2);
             color: #ffd700;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,215,0,0.3);
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .image-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.15s;
+        }
+
+        .image-description {
+            font-size: 14px;
+            color: #aaa;
+            line-height: 1.5;
+            transform: translateY(20px);
+            transition: transform 0.4s ease 0.2s;
+        }
+
+        .main-image-container:hover .image-category,
+        .main-image-container:hover .image-title,
+        .main-image-container:hover .image-description {
+            transform: translateY(0);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #ffed4e);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+
+        /* Thumbnails Grid */
+        .thumbnails-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 12px;
+            height: 100%;
+        }
+
+        .thumbnail-item {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            background: #1a1a1a;
+        }
+
+        .thumbnail-item.active {
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255,215,0,0.2);
+        }
+
+        .thumbnail-item:hover {
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .thumbnail-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.6;
+            transition: all 0.3s;
+        }
+
+        .thumbnail-item.active img,
+        .thumbnail-item:hover img {
+            opacity: 1;
+        }
+
+        .thumb-number {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 24px;
+            height: 24px;
+            background: rgba(0,0,0,0.7);
+            color: #ffd700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        /* Counter */
+        .gallery-counter {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .gallery-counter span {
+            color: #ffd700;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* ================= NEW: EQUIPMENT GRID SECTION ================= */
+        .equipment-section {
+            padding: 80px 20px;
+            background: #0a0a0a;
+            position: relative;
+        }
+
+        .equipment-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #444, transparent);
+        }
+
+        .equipment-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .equipment-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .equipment-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .equipment-header p {
+            color: #888;
+            font-size: 16px;
+        }
+
+        /* Symmetric Equipment Grid */
+        .equipment-symmetric-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .equipment-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #111;
+            aspect-ratio: 4/3;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .equipment-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            border-color: rgba(255,215,0,0.2);
+            z-index: 10;
+        }
+
+        .equipment-card.featured {
+            grid-column: span 2;
+            aspect-ratio: 16/9;
+        }
+
+        .equipment-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .equipment-card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Overlay */
+        .equipment-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, 
+                rgba(0,0,0,0.95) 0%, 
+                rgba(0,0,0,0.6) 40%, 
+                transparent 70%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .equipment-card:hover .equipment-overlay {
+            opacity: 1;
+        }
+
+        .equipment-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(255,215,0,0.15);
+            color: #ffd700;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,215,0,0.3);
+            width: fit-content;
+            transform: translateY(15px);
+            transition: transform 0.4s ease 0.1s;
+        }
+
+        .equipment-name {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            transform: translateY(15px);
+            transition: transform 0.4s ease 0.15s;
+        }
+
+        .equipment-card.featured .equipment-name {
+            font-size: 28px;
+        }
+
+        .equipment-desc {
+            font-size: 14px;
+            color: #aaa;
+            transform: translateY(15px);
+            transition: transform 0.4s ease 0.2s;
+        }
+
+        .equipment-card:hover .equipment-tag,
+        .equipment-card:hover .equipment-name,
+        .equipment-card:hover .equipment-desc {
+            transform: translateY(0);
+        }
+
+        /* View Button */
+        .view-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,215,0,0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 20px;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+        }
+
+        .equipment-card:hover .view-btn {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* Lightbox */
+        .gallery-lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(20px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            padding: 40px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-image-container {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+        }
+
+        .lightbox-content img {
+            max-width: 80vw;
+            max-height: 75vh;
+            display: block;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 35px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .lightbox-close:hover {
+            color: #ffd700;
+            background: rgba(255,215,0,0.1);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+        }
+
+        .lightbox-nav button {
+            background: rgba(255,215,0,0.1);
+            border: 2px solid rgba(255,215,0,0.3);
+            color: #ffd700;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+            pointer-events: all;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav button:hover {
+            background: #ffd700;
+            color: #000;
+            border-color: #ffd700;
+        }
+
+        .lightbox-info {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .lightbox-info h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 8px;
+        }
+
+        .lightbox-info p {
+            color: #888;
+            font-size: 16px;
         }
 
         /* ---------------- FOOTER ---------------- */
@@ -423,44 +915,28 @@
             margin-bottom: 10px;
         }
 
-        .footer-links {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 15px 0;
-            flex-wrap: wrap;
-            padding: 0;
-        }
-
-        .footer-links li a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .footer-links li a:hover {
-            color: #ffd700;
-        }
-
-        .footer-socials {
-            margin-top: 15px;
-        }
-
-        .footer-socials a {
-            margin: 0 10px;
-            font-size: 20px;
-            color: #aaa;
-            transition: 0.3s;
-            text-decoration: none;
-        }
-
-        .footer-socials a:hover {
-            color: #ffd700;
-        }
-
         /* ---------------- RESPONSIVE ---------------- */
+        @media (max-width: 1024px) {
+            .gallery-showcase {
+                grid-template-columns: 1fr;
+                max-height: none;
+            }
+
+            .thumbnails-grid {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 120px);
+                margin-top: 20px;
+            }
+
+            .equipment-symmetric-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .equipment-card.featured {
+                grid-column: span 2;
+            }
+        }
+
         @media (max-width: 900px) {
             .about-section {
                 flex-direction: column;
@@ -470,17 +946,23 @@
             .about-header h1 {
                 font-size: 36px;
             }
-            
-            .about-header p {
-                font-size: 16px;
+
+            .values-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
             }
-            
+
             .section-title {
                 font-size: 28px;
             }
-            
-            .cta-title {
-                font-size: 28px;
+
+            .equipment-symmetric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .equipment-card.featured {
+                grid-column: span 1;
+                aspect-ratio: 4/3;
             }
         }
         
@@ -492,41 +974,53 @@
             .about-header {
                 padding: 100px 20px 40px;
             }
-            
-            .stats-section {
-                padding: 40px 20px;
+
+            .thumbnails-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 100px);
             }
-            
-            .stat-number {
-                font-size: 36px;
+
+            .image-title {
+                font-size: 18px;
+            }
+
+            .cinematic-overlay {
+                opacity: 1;
+                padding: 20px;
+            }
+
+            .image-category,
+            .image-title,
+            .image-description {
+                transform: translateY(0);
+            }
+
+            .gallery-header h2,
+            .equipment-header h2 {
+                font-size: 28px;
+            }
+
+            .equipment-card.featured .equipment-name {
+                font-size: 20px;
             }
         }
 
-    /* Map cinematic reveal */
-.contact-map {
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    transition: opacity 1s ease, transform 1s ease;
-}
+        /* Map */
+        .contact-map {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: opacity 1s ease, transform 1s ease;
+        }
 
-.contact-map.visible {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
+        .contact-map.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
 
-/* Dark cinematic filter */
-#map {
-    filter: grayscale(40%) contrast(110%) brightness(80%);
-}
-
-/* Custom marker glow */
-.mhg-marker {
-    width: 60px;
-    height: 60px;
-    background: url('large.jpg') center/contain no-repeat;
-    filter: drop-shadow(0 0 12px rgba(255,215,0,0.6));
-}
-
+        #map {
+            filter: grayscale(40%) contrast(110%) brightness(80%);
+            height: 400px;
+        }
     </style>
 </head>
 
@@ -534,10 +1028,10 @@
 
 <header>
     <div class="logo">
-    <a href="index.html">
-        <i></i> MHG Studio
-    </a>
-</div>
+        <a href="index.html">
+            <i></i> MHG Studio
+        </a>
+    </div>
     <nav>
         <div class="hamburger" onclick="toggleMenu()">
             <div></div>
@@ -557,7 +1051,7 @@
 <!-- ABOUT HEADER -->
 <div class="about-header">
     <h1>О нас</h1>
-    <p>MHG Studio — это профессиональная команда, создающая уникальный видеоконтент, фотосессии и рекламные проекты под ключ. Наша цель — передавать эмоции и создавать визуальный стиль, который запоминается.</p>
+    <p>MHG Studio — это профессиональная команда, создающая уникальный видеоконтент, фотосессии и рекламные проекты под ключ.</p>
 </div>
 
 <!-- STATS SECTION -->
@@ -587,30 +1081,17 @@
     </div>
     <div class="about-text">
         <h2>Для кого мы работаем ?</h2>
-        <p>эксперты и спикеры </p>
-        <p>предприниматели и стартапы </p>
-        <p>онлайн-школы и образовательные проекты </p>
-        <p>бренды и e-commerce</p>
-        <p>агентства и PR-команды</p>
-        <p>корпоративные клиенты</p>
+        <p>эксперты и спикеры • предприниматели и стартапы • онлайн-школы • бренды и e-commerce • агентства • корпоративные клиенты</p>
         
         <h2>Как проходит работа ... </h2>
-        <p> 1. Вы описываете задачу</p>
-        <p> 2. Мы предлагаем формат и решение</p>
-        <p> 3. Подготавливаем студию / выезд</p>
-        <p> 4. Проводим съёмку или эфир</p>
-        <p> 5. Передаём готовый материал</p>
+        <p>1. Описание задачи → 2. Предложение решения → 3. Подготовка → 4. Съёмка → 5. Готовый материал</p>
 
         <h2>Техника и база !</h2>
-        <p>профессиональные видеокамеры (camcorder + DSLR)</p>
-        <p>студийный и импульсный свет</p>
-        <p>профессиональные микрофоны</p>
-        <p>монтаж на MacBook (Final Cut / Premiere)</p>
-        <p>системы live-передачи сигнала (TVU)</p>
+        <p>Профессиональные камеры Panasonic, освещение Aputure, звук Sennheiser, монтаж на Mac Pro</p>
     </div>
 </div>
 
-<!-- VALUES SECTION -->
+<!-- VALUES SECTION - 2x2 Grid 
 <div class="values-section">
     <div class="values-container">
         <h2 class="section-title">Наши ценности</h2>
@@ -620,32 +1101,34 @@
                     <i class="fas fa-medal"></i>
                 </div>
                 <h3 class="value-title">Качество</h3>
-                <p class="value-description">Мы гарантируем высочайшее качество на всех этапах работы, от съемки до постпродакшна.</p>
+                <p class="value-description">Высочайшие стандарты на всех этапах производства контента</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">
                     <i class="fas fa-lightbulb"></i>
                 </div>
                 <h3 class="value-title">Креативность</h3>
-                <p class="value-description">Мы постоянно ищем новые идеи и подходы, чтобы каждый проект был уникальным.</p>
+                <p class="value-description">Уникальные идеи и свежий взгляд на каждый проект</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">
                     <i class="fas fa-users"></i>
                 </div>
                 <h3 class="value-title">Командная работа</h3>
-                <p class="value-description">Мы верим, что лучшие результаты достигаются благодаря слаженной работе команды профессионалов.</p>
+                <p class="value-description">Слаженная работа профессионалов для идеального результата</p>
             </div>
             <div class="value-card">
                 <div class="value-icon">
                     <i class="fas fa-heart"></i>
                 </div>
                 <h3 class="value-title">Страсть к делу</h3>
-                <p class="value-description">Мы любим то, что делаем, и вкладываем душу в каждый проект.</p>
+                <p class="value-description">Любовь к своей работе в каждом кадре</p>
             </div>
         </div>
     </div>
 </div>
+-->
+
 
 <!-- TEAM SECTION -->
 <div class="team-section">
@@ -655,9 +1138,9 @@
             <div class="member-photo">
                 <img src="firas.jpg" alt="Фирас">
             </div>
-            <h3 class="member-name">Фирас </h3>
+            <h3 class="member-name">Фирас</h3>
             <p class="member-role">Основатель и режиссер</p>
-            <p class="member-bio">С более чем 7-летним опытом в видеопроизводстве, Фирас отвечает за креативное видение студии.</p>
+            <p class="member-bio">7+ лет в видеопроизводстве, креативное видение студии</p>
         </div>
         <div class="team-member">
             <div class="member-photo">
@@ -665,107 +1148,471 @@
             </div>
             <h3 class="member-name">Раед</h3>
             <p class="member-role">Фотограф и оператор</p>
-            <p class="member-bio">Раед специализируется на портретной и коммерческой съемке, создавая визуальные истории.</p>
+            <p class="member-bio">Специалист по портретной и коммерческой съемке</p>
         </div>
         <div class="team-member">
             <div class="member-photo">
                 <img src="moxamad.jpg" alt="Мухамад">
             </div>
             <h3 class="member-name">Мухамад</h3>
-            <p class="member-role">Монтажер и VFX-художник</p>
-            <p class="member-bio">Мухамад превращает отснятый материал в готовые продукты, используя современные технологии.</p>
+            <p class="member-role">Монтажер и VFX</p>
+            <p class="member-bio">Постпродакшн и визуальные эффекты</p>
         </div>
         <div class="team-member">
             <div class="member-photo">
                 <img src="yaraslaf.jpg" alt="Ярослав">
             </div>
             <h3 class="member-name">Ярослав</h3>
-            <p class="member-role">Продюсер и менеджер проектов</p>
-            <p class="member-bio">Ярослав координирует все этапы работы над проектами и обеспечивает безупречный сервис для клиентов.</p>
+            <p class="member-role">Продюсер</p>
+            <p class="member-bio">Управление проектами и клиентский сервис</p>
         </div>
     </div>
 </div>
 
-<!-- CTA SECTION 
-<div class="cta-section">
-    <div class="cta-container">
-        <h2 class="cta-title">Готовы обсудить ваш проект?</h2>
-        <p class="cta-description">Оставьте заявку — мы предложим оптимальный формат под вашу задачу и бюджет.</p>
-        <a href="contact.html" class="cta-button">Связаться с нами</a>
+<!-- COMPACT STUDIO GALLERY -->
+<section class="studio-gallery-section">
+    <div class="gallery-main-container">
+        <div class="gallery-header">
+            <h2>Наши студии</h2>
+            <p>Профессиональные пространства для создания контента мирового уровня</p>
+        </div>
+        
+        <div class="gallery-showcase" id="studioGallery">
+            <div class="main-image-container" onclick="openLightbox(currentIndex)">
+                <div class="main-image-wrapper">
+                    <img src="" alt="" class="main-image" id="mainImage">
+                    <div class="cinematic-overlay">
+                        <span class="image-category" id="mainCategory">Категория</span>
+                        <h3 class="image-title" id="mainTitle">Название</h3>
+                        <p class="image-description" id="mainDesc">Описание</p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="thumbnails-grid" id="thumbnailsContainer">
+                <!-- Generated by JS -->
+            </div>
+        </div>
+
+        <div class="gallery-counter">
+            <span id="currentNum">1</span> / <span id="totalNum">6</span>
+        </div>
     </div>
+</section>
+
+<!-- NEW EQUIPMENT GRID -->
+<section class="equipment-section">
+    <div class="equipment-container">
+        <div class="equipment-header">
+            <h2>Профессиональное оборудование</h2>
+            <p>Только проверенная техника ведущих мировых брендов</p>
+        </div>
+        
+        <div class="equipment-symmetric-grid" id="equipmentGrid">
+            <!-- Generated by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="gallery-lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <div class="lightbox-content">
+        <button class="lightbox-close" onclick="closeLightbox(event)">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <div class="lightbox-image-container">
+            <img src="" alt="" id="lightboxImg">
+            <div class="lightbox-nav">
+                <button onclick="navigateLightbox(-1); event.stopPropagation();">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button onclick="navigateLightbox(1); event.stopPropagation();">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="lightbox-info">
+            <h3 id="lightboxTitle"></h3>
+            <p id="lightboxDesc"></p>
+        </div>
+    </div>
+</div>
+
+<!-- MAP 
+<div class="contact-map">
+    <div id="map"></div>
 </div>
 -->
-
-<!-- MAP SECTION -->
-<div class="contact-map">
-    <div class="map-container">
-        <div id="map"></div>
-    </div>
-</div>
 
 <!-- FOOTER -->
 <footer>
     <div class="footer-container">
-        <!-- <div class="footer-logo">MHG Studio</div> -->
-        <p>© 2026 MHG Studio. Все права защищены. </p>
         <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса </p>
-        
-    
+
+        <p>© 2026 MHG Studio. Все права защищены. </p>
     </div>
 </footer>
 
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 
-
 <script>
- const mapSection = document.querySelector('.contact-map');
+    // ================= DATA =================
+    const galleryData = [
+        {
+            src: '/equepment/1.jpg',
+            category: 'Съемочная зона',
+            title: 'Основная студия',
+            desc: 'Профессиональная площадка с освещением и звукоизоляцией'
+        },
+        {
+            src: '/equepment/2.jpg',
+            category: 'Звукозапись',
+            title: 'Аудио студия',
+            desc: 'Звукоизолированная кабина для записи голоса и подкастов'
+        },
+        {
+            src: '/equepment/3.jpg',
+            category: 'Хромакей',
+            title: 'Green Screen',
+            desc: 'Зеленый фон для VFX и виртуальных сцен'
+        },
+        {
+            src: '/equepment/4.jpg',
+            category: 'Фотозона',
+            title: 'Photo Studio',
+            desc: 'Предметная и портретная съемка'
+        },
+        {
+            src: '/equepment/5.jpg',
+            category: 'Монтаж',
+            title: 'Post-Production',
+            desc: 'Цветокоррекция и монтаж 4K'
+        },
+        /* 
+        {
+            src: '/equepment/6.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/7.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/8.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/9.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/10.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/11.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/12.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/13.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        },
+        {
+            src: '/equepment/14.jpg',
+            category: 'Отдых',
+            title: 'Lounge Area',
+            desc: 'Комфортная зона для клиентов'
+        }
+            */
+    ];
 
-if (mapSection) {
+    const equipmentData = [
+        {
+            src: '/equepment/6.jpg',
+            tag: 'Камеры',
+            name: 'Panasonic 4K',
+            desc: 'Профессиональные видеокамеры для broadcast',
+            featured: true
+        },
+        {
+            src: '/equepment/9.jpg',
+            tag: 'Камеры',
+            name: 'Lumix GH5',
+            desc: 'Mirrorless для фото и видео'
+        },
+        {
+            src: '/equepment/10.jpg',
+            tag: 'Риги',
+            name: 'Camera Rigs',
+            desc: 'Профессиональные риги SmallRig'
+        },
+        {
+            src: '/equepment/12.jpg',
+            tag: 'Аудио',
+            name: 'Sennheiser Kit',
+            desc: 'Микрофоны и радиосистемы'
+        },
+        {
+            src: '/equepment/13.jpg',
+            tag: 'Свет',
+            name: 'LED Panels',
+            desc: 'Освещение Aputure'
+        },
+        {
+            src: '/equepment/14.jpg',
+            tag: 'Стабилизация',
+            name: 'DJI Gimbals',
+            desc: 'Электронные стедикамы'
+        }
+    ];
 
-    let mapLoaded = false;
+    // ================= STUDIO GALLERY LOGIC =================
+    let currentIndex = 0;
+    let isPaused = false;
+    let autoPlayTimer;
+    let progressTimer;
+    const slideDuration = 5000;
 
-    function loadMap() {
-        if (mapLoaded) return;
-        mapLoaded = true;
+    function initGallery() {
+        const container = document.getElementById('thumbnailsContainer');
+        container.innerHTML = '';
+        
+        galleryData.forEach((item, index) => {
+            const thumb = document.createElement('div');
+            thumb.className = `thumbnail-item ${index === 0 ? 'active' : ''}`;
+            thumb.innerHTML = `
+                <img src="${item.src}" alt="${item.title}" loading="lazy">
+                <span class="thumb-number">${index + 1}</span>
+            `;
+            thumb.onclick = () => goToSlide(index);
+            container.appendChild(thumb);
+        });
 
-        ymaps.ready(() => {
+        document.getElementById('totalNum').textContent = galleryData.length;
+        updateDisplay();
+        startAutoPlay();
 
-            const coords = [55.746683, 37.580031];
-
-            const map = new ymaps.Map('map', {
-                center: coords,
-                zoom: 14,
-                controls: ['zoomControl']
-            }, {
-                suppressMapOpenBlock: true
-            });
-
-            const marker = new ymaps.Placemark(coords, {
-                balloonContent: 'MHG Studio'
-            }, {
-                iconLayout: 'default#image',
-                iconImageHref: 'large.jpg',
-                iconImageSize: [60, 60],
-                iconImageOffset: [-30, -60]
-            });
-
-            map.geoObjects.add(marker);
+        // Pause on hover
+        const gallery = document.getElementById('studioGallery');
+        gallery.addEventListener('mouseenter', () => {
+            isPaused = true;
+            stopAutoPlay();
+        });
+        gallery.addEventListener('mouseleave', () => {
+            isPaused = false;
+            startAutoPlay();
         });
     }
 
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                mapSection.classList.add('visible');
-                loadMap();
-                observer.disconnect();
-            }
+    function updateDisplay() {
+        const item = galleryData[currentIndex];
+        const mainImg = document.getElementById('mainImage');
+        
+        mainImg.style.opacity = '0.8';
+        setTimeout(() => {
+            mainImg.src = item.src;
+            document.getElementById('mainCategory').textContent = item.category;
+            document.getElementById('mainTitle').textContent = item.title;
+            document.getElementById('mainDesc').textContent = item.desc;
+            document.getElementById('currentNum').textContent = currentIndex + 1;
+            
+            mainImg.onload = () => {
+                mainImg.style.opacity = '1';
+            };
+        }, 150);
+
+        document.querySelectorAll('.thumbnail-item').forEach((thumb, idx) => {
+            thumb.classList.toggle('active', idx === currentIndex);
         });
-    }, { threshold: 0.3 });
+    }
 
-    observer.observe(mapSection);
-}
+    function goToSlide(index) {
+        currentIndex = index;
+        updateDisplay();
+        if (!isPaused) {
+            stopAutoPlay();
+            startAutoPlay();
+        }
+    }
 
+    function nextSlide() {
+        currentIndex = (currentIndex + 1) % galleryData.length;
+        updateDisplay();
+    }
+
+    function startAutoPlay() {
+        if (isPaused) return;
+        
+        let progress = 0;
+        const bar = document.getElementById('progressBar');
+        bar.style.width = '0%';
+        
+        progressTimer = setInterval(() => {
+            progress += 100 / (slideDuration / 50);
+            bar.style.width = `${Math.min(progress, 100)}%`;
+        }, 50);
+        
+        autoPlayTimer = setTimeout(() => {
+            nextSlide();
+            startAutoPlay();
+        }, slideDuration);
+    }
+
+    function stopAutoPlay() {
+        clearTimeout(autoPlayTimer);
+        clearInterval(progressTimer);
+        document.getElementById('progressBar').style.width = '0%';
+    }
+
+    // ================= EQUIPMENT GRID =================
+    function initEquipment() {
+        const grid = document.getElementById('equipmentGrid');
+        grid.innerHTML = '';
+        
+        equipmentData.forEach((item, index) => {
+            const card = document.createElement('div');
+            card.className = `equipment-card ${item.featured ? 'featured' : ''}`;
+            card.onclick = () => openEquipmentLightbox(index);
+            card.innerHTML = `
+                <img src="${item.src}" alt="${item.name}" loading="lazy">
+                <div class="equipment-overlay">
+                    <span class="equipment-tag">${item.tag}</span>
+                    <h3 class="equipment-name">${item.name}</h3>
+                    <p class="equipment-desc">${item.desc}</p>
+                </div>
+                <div class="view-btn">
+                    <i class="fas fa-expand"></i>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    }
+
+    // ================= LIGHTBOX =================
+    let currentLightboxSet = [];
+    let currentLightboxIndex = 0;
+    const lightbox = document.getElementById('lightbox');
+
+    function openLightbox(index) {
+        currentLightboxSet = galleryData;
+        currentLightboxIndex = index;
+        updateLightbox();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        stopAutoPlay();
+    }
+
+    function openEquipmentLightbox(index) {
+        currentLightboxSet = equipmentData;
+        currentLightboxIndex = index;
+        updateLightbox();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function updateLightbox() {
+        const item = currentLightboxSet[currentLightboxIndex];
+        document.getElementById('lightboxImg').src = item.src;
+        document.getElementById('lightboxTitle').textContent = item.title || item.name;
+        document.getElementById('lightboxDesc').textContent = item.desc || item.description;
+    }
+
+    function closeLightbox(e) {
+        if (e.target === lightbox || e.target.closest('.lightbox-close')) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            if (!isPaused) startAutoPlay();
+        }
+    }
+
+    function navigateLightbox(dir) {
+        currentLightboxIndex = (currentLightboxIndex + dir + currentLightboxSet.length) % currentLightboxSet.length;
+        updateLightbox();
+    }
+
+    // ================= MAP =================
+    const mapSection = document.querySelector('.contact-map');
+    if (mapSection) {
+        let mapLoaded = false;
+        function loadMap() {
+            if (mapLoaded) return;
+            mapLoaded = true;
+            ymaps.ready(() => {
+                const map = new ymaps.Map('map', {
+                    center: [55.746683, 37.580031],
+                    zoom: 14,
+                    controls: ['zoomControl']
+                }, { suppressMapOpenBlock: true });
+                
+                map.geoObjects.add(new ymaps.Placemark([55.746683, 37.580031], {
+                    balloonContent: 'MHG Studio'
+                }, {
+                    iconLayout: 'default#image',
+                    iconImageHref: 'large.jpg',
+                    iconImageSize: [50, 50],
+                    iconImageOffset: [-25, -50]
+                }));
+            });
+        }
+        
+        new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    mapSection.classList.add('visible');
+                    loadMap();
+                }
+            });
+        }, { threshold: 0.3 }).observe(mapSection);
+    }
+
+    // ================= UTILS =================
+    function toggleMenu() {
+        document.getElementById('nav-links').classList.toggle('show');
+        document.querySelector('.hamburger').classList.toggle('active');
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox({ target: lightbox });
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        header.style.background = window.scrollY > 50 ? 'rgba(10, 10, 10, 0.98)' : 'rgba(10, 10, 10, 0.95)';
+    });
+
+    // Init
+    window.addEventListener('DOMContentLoaded', () => {
+        initGallery();
+        initEquipment();
+    });
 </script>
 
 </body>
