@@ -704,6 +704,46 @@ footer {
         aspect-ratio: 1/1;
     }
 }
+
+.hero {
+    position: relative;
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px 40px;
+    overflow: hidden; /* مهم جداً */
+    /* احذف الـ background القديم */
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; /* عشان الفيديو يروح ورا النص */
+}
+
+/* أضف طبقة سوداء شفافة فوق الفيديو */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* طبقة سوداء شفافة */
+    z-index: 0;
+}
+
+.hero h1, .hero p {
+    position: relative;
+    z-index: 1; /* عشان النص يبان فوق الفيديو */
+}
 </style>
 </head>
 <body>
@@ -712,7 +752,7 @@ footer {
 <header id="header">
     <div class="logo">
         <a href="index.html"> MHG Studio</a>
-        <p>Контент для медиа и бизнеса</p>
+        <p>Контент для бизнеса</p>
     </div>
     <nav>
         <div class="hamburger" onclick="toggleMenu()">
@@ -732,6 +772,9 @@ footer {
 
 <!-- HERO SECTION -->
 <section class="hero">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="корпоративная-съемка.mp4" type="video/mp4">
+    </video>
     <h1>Наше Портфолио</h1>
     <p>Откройте для себя наши лучшие работы в области видеопроизводства, фотографии и рекламы</p>
 </section>
