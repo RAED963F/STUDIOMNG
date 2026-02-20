@@ -1038,6 +1038,547 @@
     color: #aaa;
 }
 
+
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+
+/* Modern Team Section */
+.team-section-modern {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.team-section-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.section-subtitle {
+    display: inline-block;
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.title-divider {
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, #ffd700, #ffed4e);
+    margin: 0 auto 20px;
+    border-radius: 2px;
+}
+
+.section-description {
+    color: #888;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Modern Team Grid */
+.team-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+.team-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.team-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    border-color: rgba(255, 215, 0, 0.3);
+}
+
+.card-image-wrapper {
+    position: relative;
+    height: 350px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.team-card:hover .card-image {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.team-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    transform: translateY(20px);
+    transition: transform 0.4s ease;
+}
+
+.team-card:hover .social-links {
+    transform: translateY(0);
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 215, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #0a0a0a;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.social-link:hover {
+    background: #ffffff;
+    transform: translateY(-5px);
+}
+
+.card-content {
+    padding: 30px;
+    text-align: center;
+}
+
+.card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.card-role {
+    color: #ffd700;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.card-bio {
+    color: #888;
+    font-size: 14px;
+    line-height: 1.7;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Portfolio Section */
+.portfolio-section {
+    padding: 120px 0;
+    background: #0a0a0a;
+    position: relative;
+}
+
+/* Filter Buttons */
+.portfolio-filter {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 60px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 12px 30px;
+    background: transparent;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: #ffd700;
+    border-color: #ffd700;
+    color: #0a0a0a;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+/* Portfolio Grid */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.portfolio-item {
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+.portfolio-item.hidden {
+    display: none;
+}
+
+.portfolio-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.portfolio-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.portfolio-item:hover .portfolio-image {
+    transform: scale(1.1);
+}
+
+.video-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 215, 0, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.video-icon i {
+    color: #0a0a0a;
+    font-size: 28px;
+    margin-left: 5px;
+}
+
+.portfolio-item:hover .video-icon {
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.9) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-category {
+    display: inline-block;
+    color: #ffd700;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.portfolio-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.portfolio-date {
+    color: #888;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+}
+
+.portfolio-actions {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    gap: 10px;
+}
+
+.action-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    color: #0a0a0a;
+}
+
+.action-btn.view-btn {
+    width: auto;
+    padding: 0 20px;
+    border-radius: 25px;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.action-btn:hover {
+    background: #ffd700;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Load More Button */
+.portfolio-load-more {
+    text-align: center;
+}
+
+.load-more-btn {
+    padding: 15px 50px;
+    background: transparent;
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.load-more-btn:hover {
+    background: #ffd700;
+    color: #0a0a0a;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.4);
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s ease;
+}
+
+.lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 10px;
+    animation: zoomIn 0.3s ease;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    color: #ffffff;
+    font-size: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    z-index: 10001;
+}
+
+.lightbox-close:hover {
+    color: #ffd700;
+}
+
+/* Video Modal */
+.video-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s ease;
+}
+
+.video-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    animation: zoomIn 0.3s ease;
+}
+
+.video-modal-content video {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    color: #ffffff;
+    font-size: 40px;
+    font-weight: 300;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.video-modal-close:hover {
+    color: #ffd700;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+    from { 
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 36px;
+    }
+    
+    .team-grid-modern {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .portfolio-filter {
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 10px 20px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .team-section-modern,
+    .portfolio-section {
+        padding: 80px 0;
+    }
+    
+    .section-title {
+        font-size: 32px;
+    }
+    
+    .card-image-wrapper {
+        height: 300px;
+    }
+}
+
     </style>
 </head>
 
@@ -1148,46 +1689,225 @@
 -->
 
 
+
 <!-- TEAM SECTION -->
-<div class="team-section">
-    <h2 class="section-title">Наша команда</h2>
-    <div class="team-grid">
-        <div class="team-member">
-            <div class="member-photo">
-                <img src="firas.jpg" alt="Фирас">
-            </div>
-            <h3 class="member-name">Фирас</h3>
-            <p class="member-role">Основатель и режиссер</p>
-            <p class="member-bio">7+ лет в видеопроизводстве, креативное видение студии</p>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="section-header">
+            <span class="section-subtitle">Профессионалы своего дела</span>
+            <h2 class="section-title">Наша команда</h2>
+            <div class="title-line"></div>
         </div>
-        <div class="team-member">
-            <div class="member-photo">
-                <img src="raed.jpg" alt="Раед">
+
+        <div class="team-grid">
+            <!-- Card 1 -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <img src="firas.jpg" alt="Фирас" class="card-image">
+                    <div class="card-overlay">
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Фирас</h3>
+                    <p class="card-role">Основатель и режиссёр</p>
+                    <p class="card-bio">7+ лет в видеопроизводстве, креативное видение студии</p>
+                </div>
             </div>
-            <h3 class="member-name">Раед</h3>
-            <p class="member-role">Фотограф и оператор</p>
-            <p class="member-bio">Специалист по портретной и коммерческой съемке</p>
+
+            <!-- Card 2 -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <img src="raed.jpg" alt="Раед" class="card-image">
+                    <div class="card-overlay">
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Раед</h3>
+                    <p class="card-role">Фотограф и оператор</p>
+                    <p class="card-bio">Специалист по портретной и коммерческой съёмке</p>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <img src="moxamad.jpg" alt="Мухамад" class="card-image">
+                    <div class="card-overlay">
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Мухамад</h3>
+                    <p class="card-role">Монтажёр и VFX</p>
+                    <p class="card-bio">Постпродакшн и визуальные эффекты</p>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="team-card">
+                <div class="card-image-wrapper">
+                    <img src="yaroslaf.jpg" alt="Ярослав" class="card-image">
+                    <div class="card-overlay">
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-name">Ярослав</h3>
+                    <p class="card-role">Продюсер</p>
+                    <p class="card-bio">Управление проектами и клиентский сервис</p>
+                </div>
+            </div>
         </div>
-        <div class="team-member">
-            <div class="member-photo">
-                <img src="moxamad.jpg" alt="Мухамад">
-            </div>
-            <h3 class="member-name">Мухамад</h3>
-            <p class="member-role">Монтажер и VFX</p>
-            <p class="member-bio">Постпродакшн и визуальные эффекты</p>
+
+        <div class="bts-container">
+            <button class="bts-button" onclick="openModal()">
+                <i class="fas fa-camera-retro"></i>
+                За кулисами
+            </button>
         </div>
-        <div class="team-member">
-            <div class="member-photo">
-                <img src="yaraslaf.jpg" alt="Ярослав">
+    </section>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="btsModal">
+        <div class="modal-header">
+            <div>
+                <h2 class="modal-title">За кулисами</h2>
+                <p class="modal-subtitle">Как мы создаём магию</p>
             </div>
-            <h3 class="member-name">Ярослав</h3>
-            <p class="member-role">Продюсер</p>
-            <p class="member-bio">Управление проектами и клиентский сервис</p>
+            <button class="close-modal" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="modal-content">
+            <!-- Filter Tabs -->
+            <div class="filter-tabs">
+                <button class="filter-tab active" onclick="filterItems('all')">Все</button>
+                <button class="filter-tab" onclick="filterItems('photo')">Фотографии</button>
+                <button class="filter-tab" onclick="filterItems('video')">Видео</button>
+                <button class="filter-tab" onclick="filterItems('process')">Процесс</button>
+            </div>
+
+            <!-- Portfolio Grid -->
+            <div class="portfolio-grid">
+                <!-- Item 1 -->
+                <div class="portfolio-item" data-category="photo">
+                    <img src="bts-1.jpg" alt="Настройка студии" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Фото</span>
+                        <h3 class="portfolio-title">Настройка студии</h3>
+                        <p class="portfolio-date">Февраль 2026</p>
+                    </div>
+                    <div class="portfolio-actions">
+                        <button class="action-btn" onclick="openLightbox('bts-1.jpg')">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 2 - Video -->
+                <div class="portfolio-item" data-category="video">
+                    <img src="bts-2.jpg" alt="Съёмочный день" class="portfolio-image">
+                    <div class="video-badge">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Видео</span>
+                        <h3 class="portfolio-title">Съёмочный день</h3>
+                        <p class="portfolio-date">Январь 2026</p>
+                    </div>
+                    <div class="portfolio-actions">
+                        <button class="action-btn" onclick="alert('Открыть видео')">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+              <!-- Item 3 -->
+                <div class="portfolio-item" data-category="process">
+                    <img src="bts-3.jpg" alt="Подготовка оборудования" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Процесс</span>
+                        <h3 class="portfolio-title">Подготовка оборудования</h3>
+                        <p class="portfolio-date">Декабрь 2025</p>
+                    </div>
+                    <div class="portfolio-actions">
+                        <button class="action-btn" onclick="openLightbox('bts-3.jpg')">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="portfolio-item" data-category="photo">
+                    <img src="bts-4.jpg" alt="Командная работа" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Фото</span>
+                        <h3 class="portfolio-title">Командная работа</h3>
+                        <p class="portfolio-date">Ноябрь 2025</p>
+                    </div>
+                    <div class="portfolio-actions">
+                        <button class="action-btn" onclick="openLightbox('bts-4.jpg')">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="portfolio-item" data-category="process">
+                    <img src="bts-5.jpg" alt="Работа со светом" class="portfolio-image">
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Процесс</span>
+                        <h3 class="portfolio-title">Работа со светом</h3>
+                        <p class="portfolio-date">Октябрь 2025</p>
+                    </div>
+                    <div class="portfolio-actions">
+                        <button class="action-btn" onclick="openLightbox('bts-5.jpg')">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Item 6 - Video -->
+                <div class="portfolio-item" data-category="video">
+                    <img src="bts-6.jpg" alt="Финальный монтаж" class="portfolio-image">
+                    <div class="video-badge">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="portfolio-overlay">
+                        <span class="portfolio-category">Видео</span>
+                        <h3 class="portfolio-title">Финальный монтаж</h3>
+                        <p class="portfolio-date">Сентябрь 2025</p>
+                    </div>
+                    <div class="portfolio-actions">
+                        <button class="action-btn" onclick="alert('Открыть видео')">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<!-- COMPACT STUDIO GALLERY -->
+<!-- COMPACT STUDIO GALLERY 
 <section class="studio-gallery-section">
     <div class="gallery-main-container">
         <div class="gallery-header">
@@ -1211,7 +1931,7 @@
             </div>
 
             <div class="thumbnails-grid" id="thumbnailsContainer">
-                <!-- Generated by JS -->
+
             </div>
         </div>
 
@@ -1219,9 +1939,10 @@
             <span id="currentNum">1</span> / <span id="totalNum">6</span>
         </div>
     </div>
+-->
 </section>
 
-<!-- NEW EQUIPMENT GRID -->
+<!-- NEW EQUIPMENT GRID 
 <section class="equipment-section">
     <div class="equipment-container">
         <div class="equipment-header">
@@ -1230,9 +1951,11 @@
         </div>
         
         <div class="equipment-symmetric-grid" id="equipmentGrid">
-            <!-- Generated by JS -->
+
         </div>
     </div>
+-->
+
 </section>
 
 <!-- Lightbox -->
@@ -1631,6 +2354,123 @@
         initGallery();
         initEquipment();
     });
+
+// Font Awesome Icons (add in <head>)
+// <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+// Portfolio Filter
+const filterBtns = document.querySelectorAll('.filter-btn');
+const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        // Add active class to clicked button
+        btn.classList.add('active');
+        
+        const filterValue = btn.getAttribute('data-filter');
+        
+        portfolioItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                item.classList.remove('hidden');
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                }, 10);
+            } else {
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    item.classList.add('hidden');
+                }, 300);
+            }
+        });
+    });
+});
+
+// Lightbox Functions
+function openLightbox(imageSrc) {
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    lightboxImage.src = imageSrc;
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Video Modal Functions
+function openVideo(videoSrc) {
+    const videoModal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.querySelector('source').src = videoSrc;
+    videoPlayer.load();
+    videoModal.classList.add('active');
+    videoPlayer.play();
+    document.body.style.overflow = 'hidden';
+}
+
+function closeVideo() {
+    const videoModal = document.getElementById('videoModal');
+    const videoPlayer = document.getElementById('videoPlayer');
+    videoPlayer.pause();
+    videoModal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modals on outside click
+window.onclick = function(event) {
+    const lightbox = document.getElementById('lightbox');
+    const videoModal = document.getElementById('videoModal');
+    
+    if (event.target === lightbox) {
+        closeLightbox();
+    }
+    if (event.target === videoModal) {
+        closeVideo();
+    }
+}
+
+// Smooth scroll animation for team cards
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Observe team cards
+document.querySelectorAll('.team-card').forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(50px)';
+    card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+    observer.observe(card);
+});
+
+// Observe portfolio items
+document.querySelectorAll('.portfolio-item').forEach((item, index) => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(30px)';
+    item.style.transition = `all 0.6s ease ${index * 0.1}s`;
+    setTimeout(() => {
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+    }, 200 + (index * 100));
+});
+ 
+
 </script>
 
 </body>
