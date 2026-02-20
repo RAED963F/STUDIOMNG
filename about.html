@@ -1563,6 +1563,159 @@
             }
         }
 
+
+
+        /* Lightbox Modal Styles */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s;
+}
+
+.lightbox-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 18px;
+    text-align: center;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.lightbox-close:hover {
+    color: #ffd700;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 215, 0, 0.8);
+    color: #000;
+    border: none;
+    padding: 20px 15px;
+    font-size: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: #ffd700;
+}
+
+.lightbox-prev {
+    left: 20px;
+}
+
+.lightbox-next {
+    right: 20px;
+}
+
+/* Video Modal Styles */
+.video-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s;
+}
+
+.video-modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 900px;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.video-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+.video-close:hover {
+    color: #ffd700;
+}
+
+#videoContainer video,
+#videoContainer iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 768px) {
+    .lightbox-content {
+        max-width: 95%;
+    }
+    
+    #videoContainer video,
+    #videoContainer iframe {
+        height: 300px;
+    }
+    
+    .lightbox-prev,
+    .lightbox-next {
+        padding: 10px 10px;
+        font-size: 20px;
+    }
+}
+
     </style>
 </head>
 
@@ -1801,26 +1954,12 @@
 
             <!-- Portfolio Grid -->
             <div class="portfolio-grid">
-                <!-- photo 1 -->
-                <div class="portfolio-item" data-category="photo">
-                    <img src="bakctage/ph_1.jpg" alt="Настройка студии" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Фото</span>
-                        <h3 class="portfolio-title">Настройка студии</h3>
-                        <p class="portfolio-date">Февраль 2026</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="openLightbox(0)">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                </div>
-
                 <!-- Video 1 -->
-                <div class="portfolio-item" data-category="video">
+                <!-- للفيديو -->
+                <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(1)">
                     <video class="portfolio-image" muted>
-                      <source src="bakctage/vid_1.mp4" type="video/mp4">
-                   </video>
+                        <source src="bakctage/vid_1.mp4" type="video/mp4">
+                    </video>
                     <div class="video-badge">
                         <i class="fas fa-play"></i>
                     </div>
@@ -1830,55 +1969,71 @@
                         <p class="portfolio-date">Январь 2026</p>
                     </div>
                     <div class="portfolio-actions">
-                        <button class="action-btn" onclick="alert('Открыть видео')">
+                        <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(1)">
                             <i class="fas fa-play"></i>
                         </button>
                     </div>
                 </div>
-              <!-- photo 2 -->
-                <div class="portfolio-item" data-category="process">
-                    <img src="bakctage/ph_2.jpg" alt="Подготовка оборудования" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Процесс</span>
-                        <h3 class="portfolio-title">Подготовка оборудования</h3>
-                        <p class="portfolio-date">Декабрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="openLightbox(0)">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                </div>
+             <!-- photo 1 -->
+<div class="portfolio-item" data-category="photo">
+    <img src="bakctage/ph_1.jpg" alt="Настройка студии" class="portfolio-image">
+    <div class="portfolio-overlay">
+        <span class="portfolio-category">Фото</span>
+        <h3 class="portfolio-title">Настройка студии</h3>
+        <p class="portfolio-date">Февраль 2026</p>
+    </div>
+    <div class="portfolio-actions">
+        <button class="action-btn" onclick="openPortfolioImageLightbox(0)">
 
-                <!-- photo 3 -->
-                <div class="portfolio-item" data-category="photo">
-                    <img src="bakctage/ph_3.jpg" alt="Командная работа" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Фото</span>
-                        <h3 class="portfolio-title">Командная работа</h3>
-                        <p class="portfolio-date">Ноябрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="openLightbox(0)">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                </div>
+    <i class="fas fa-expand"></i>
+</button>
+    </div>
+</div>
 
-                <!-- photo 4 -->
-                <div class="portfolio-item" data-category="process">
-                    <img src="bakctage/ph_4.jpg" alt="Работа со светом" class="portfolio-image">
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Процесс</span>
-                        <h3 class="portfolio-title">Работа со светом</h3>
-                        <p class="portfolio-date">Октябрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="openLightbox(0)">
-                            <i class="fas fa-expand"></i>
-                        </button>
-                    </div>
-                </div>
+<!-- photo 2 -->
+<div class="portfolio-item" data-category="process">
+    <img src="bakctage/ph_2.jpg" alt="Подготовка оборудования" class="portfolio-image">
+    <div class="portfolio-overlay">
+        <span class="portfolio-category">Процесс</span>
+        <h3 class="portfolio-title">Подготовка оборудования</h3>
+        <p class="portfolio-date">Декабрь 2025</p>
+    </div>
+    <div class="portfolio-actions">
+        <button class="action-btn" onclick="openPortfolioImageLightbox(1)">
+            <i class="fas fa-expand"></i>
+        </button>
+    </div>
+</div>
+
+<!-- photo 3 -->
+<div class="portfolio-item" data-category="photo">
+    <img src="bakctage/ph_3.jpg" alt="Командная работа" class="portfolio-image">
+    <div class="portfolio-overlay">
+        <span class="portfolio-category">Фото</span>
+        <h3 class="portfolio-title">Командная работа</h3>
+        <p class="portfolio-date">Ноябрь 2025</p>
+    </div>
+    <div class="portfolio-actions">
+        <button class="action-btn" onclick="openPortfolioImageLightbox(2)">
+            <i class="fas fa-expand"></i>
+        </button>
+    </div>
+</div>
+
+<!-- photo 4 -->
+<div class="portfolio-item" data-category="process">
+    <img src="bakctage/ph_4.jpg" alt="Работа со светом" class="portfolio-image">
+    <div class="portfolio-overlay">
+        <span class="portfolio-category">Процесс</span>
+        <h3 class="portfolio-title">Работа со светом</h3>
+        <p class="portfolio-date">Октябрь 2025</p>
+    </div>
+    <div class="portfolio-actions">
+        <button class="action-btn" onclick="openPortfolioImageLightbox(3)">
+            <i class="fas fa-expand"></i>
+        </button>
+    </div>
+</div>
 
                 <!-- Video 2 -->
                 <div class="portfolio-item" data-category="video">
@@ -1921,8 +2076,8 @@
                 <!--  - Video 4 -->
                 <div class="portfolio-item" data-category="video">
                     <video class="portfolio-image" muted>
-   <source src="bakctage/vid_4.mp4" type="video/mp4">
-</video>
+                         <source src="bakctage/vid_4.mp4" type="video/mp4">
+                    </video>
                     <div class="video-badge">
                         <i class="fas fa-play"></i>
                     </div>
@@ -1940,8 +2095,8 @@
                 <!--  Video 5 -->
                 <div class="portfolio-item" data-category="video">
                     <video class="portfolio-image" muted>
-   <source src="bakctage/vid_5.mp4" type="video/mp4">
-</video>
+                         <source src="bakctage/vid_5.mp4" type="video/mp4">
+                    </video>
                     <div class="video-badge">
                         <i class="fas fa-play"></i>
                     </div>
@@ -1959,8 +2114,8 @@
                 <!--  Video 6  -->
                 <div class="portfolio-item" data-category="video">
                     <video class="portfolio-image" muted>
-   <source src="bakctage/vid_6.mp4" type="video/mp4">
-</video>
+                         <source src="bakctage/vid_6.mp4" type="video/mp4">
+                    </video>
                     <div class="video-badge">
                         <i class="fas fa-play"></i>
                     </div>
@@ -2070,6 +2225,29 @@
         <p>© 2026 MHG Studio. Все права защищены. </p>
     </div>
 </footer>
+
+
+
+
+<!-- Lightbox Modal for Images -->
+<div id="imageLightbox" class="lightbox-modal">
+    <span class="lightbox-close" onclick="closeImageLightbox()">&times;</span>
+    <img class="lightbox-content" id="portfolioLightboxImage">
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+    <button class="lightbox-prev" onclick="changePortfolioImage(-1)">&#10094;</button>
+    <button class="lightbox-next" onclick="changePortfolioImage(1)">&#10095;</button>
+</div>
+
+<!-- Video Modal -->
+<div id="videoModal" class="video-modal">
+    <div class="video-modal-content">
+        <span class="video-close" onclick="closeVideoModal()">&times;</span>
+        <div id="videoContainer"></div>
+    </div>
+</div>
+
+
+
 
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 
@@ -2211,37 +2389,7 @@
     let progressTimer;
     const slideDuration = 5000;
 
-    function initGallery() {
-        const container = document.getElementById('thumbnailsContainer');
-        container.innerHTML = '';
-        
-        galleryData.forEach((item, index) => {
-            const thumb = document.createElement('div');
-            thumb.className = `thumbnail-item ${index === 0 ? 'active' : ''}`;
-            thumb.innerHTML = `
-                <img src="${item.src}" alt="${item.title}" loading="lazy">
-                <span class="thumb-number">${index + 1}</span>
-            `;
-            thumb.onclick = () => goToSlide(index);
-            container.appendChild(thumb);
-        });
-
-        document.getElementById('totalNum').textContent = galleryData.length;
-        updateDisplay();
-        startAutoPlay();
-
-        // Pause on hover
-        const gallery = document.getElementById('studioGallery');
-        gallery.addEventListener('mouseenter', () => {
-            isPaused = true;
-            stopAutoPlay();
-        });
-        gallery.addEventListener('mouseleave', () => {
-            isPaused = false;
-            startAutoPlay();
-        });
-    }
-
+ 
     function updateDisplay() {
         const item = galleryData[currentIndex];
         const mainImg = document.getElementById('mainImage');
@@ -2523,6 +2671,271 @@
             observer.observe(card);
         });
  
+
+
+let currentImageIndex = 0;
+let galleryImages = [];
+
+
+
+// Extract YouTube ID
+function extractYouTubeId(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeImageLightbox();
+        closeVideoModal();
+    } else if (e.key === 'ArrowLeft') {
+        changeImage(-1);
+    } else if (e.key === 'ArrowRight') {
+        changeImage(1);
+    }
+});
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const lightbox = document.getElementById('imageLightbox');
+    const videoModal = document.getElementById('videoModal');
+    
+    if (event.target === lightbox) {
+        closeImageLightbox();
+    }
+    if (event.target === videoModal) {
+        closeVideoModal();
+    }
+}
+
+
+// Modal Functions
+function openModal() {
+    const modal = document.getElementById('btsModal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('btsModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+// Portfolio Lightbox Functions
+let currentPortfolioIndex = 0;
+let portfolioItems = [];
+
+function initPortfolioGallery() {
+    portfolioItems = document.querySelectorAll('.portfolio-item');
+    portfolioItems.forEach((item, index) => {
+        item.addEventListener('click', function(e) {
+            if (!e.target.closest('.action-btn')) {
+                const img = this.querySelector('img');
+                const video = this.querySelector('video');
+                const category = this.getAttribute('data-category');
+                
+                if (video || category === 'video') {
+                    openVideoLightbox(index);
+                } else if (img) {
+                    openPortfolioLightbox(index);
+                }
+            }
+        });
+    });
+}
+
+function openPortfolioLightbox(index) {
+    const item = portfolioItems[index];
+    const img = item.querySelector('img');
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const caption = document.getElementById('lightboxCaption');
+    
+    if (lightbox && lightboxImg && img) {
+        currentPortfolioIndex = index;
+        lightboxImg.src = img.src;
+        caption.textContent = item.querySelector('.portfolio-title')?.textContent || '';
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function openVideoLightbox(index) {
+    const item = portfolioItems[index];
+    const video = item.querySelector('video');
+    const modal = document.getElementById('videoModal');
+    const container = document.getElementById('videoContainer');
+    
+    if (modal && container && video) {
+        currentPortfolioIndex = index;
+        const videoSrc = video.querySelector('source')?.src || video.src;
+        
+        container.innerHTML = `
+            <video controls autoplay style="width: 100%; height: 500px; border-radius: 10px;">
+                <source src="${videoSrc}" type="video/mp4">
+            </video>
+        `;
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeImageLightbox() {
+    const lightbox = document.getElementById('imageLightbox');
+    if (lightbox) {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const container = document.getElementById('videoContainer');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+    if (container) {
+        container.innerHTML = '';
+    }
+}
+
+function changeImage(direction) {
+    currentPortfolioIndex += direction;
+    
+    if (currentPortfolioIndex >= portfolioItems.length) {
+        currentPortfolioIndex = 0;
+    } else if (currentPortfolioIndex < 0) {
+        currentPortfolioIndex = portfolioItems.length - 1;
+    }
+    
+    const item = portfolioItems[currentPortfolioIndex];
+    const img = item.querySelector('img');
+    const lightboxImg = document.getElementById('lightboxImage');
+    const caption = document.getElementById('lightboxCaption');
+    
+    if (img && lightboxImg) {
+        lightboxImg.src = img.src;
+        caption.textContent = item.querySelector('.portfolio-title')?.textContent || '';
+    }
+}
+
+// Filter Function
+function filterItems(category) {
+    const items = document.querySelectorAll('.portfolio-item');
+    const tabs = document.querySelectorAll('.filter-tab');
+    
+    tabs.forEach(tab => {
+        tab.classList.remove('active');
+        if ((category === 'all' && tab.textContent === 'Все') ||
+            (category === 'photo' && tab.textContent === 'Фотографии') ||
+            (category === 'video' && tab.textContent === 'Видео') ||
+            (category === 'process' && tab.textContent === 'Процесс')) {
+            tab.classList.add('active');
+        }
+    });
+    
+    items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+            item.classList.remove('hidden');
+            item.style.opacity = '1';
+            item.style.transform = 'scale(1)';
+        } else {
+            item.classList.add('hidden');
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.8)';
+        }
+    });
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeModal();
+        closeImageLightbox();
+        closeVideoModal();
+    } else if (e.key === 'ArrowLeft') {
+        changeImage(-1);
+    } else if (e.key === 'ArrowRight') {
+        changeImage(1);
+    }
+});
+
+// Close on outside click
+window.onclick = function(event) {
+    const lightbox = document.getElementById('imageLightbox');
+    const videoModal = document.getElementById('videoModal');
+    const modal = document.getElementById('btsModal');
+    
+    if (event.target === lightbox) {
+        closeImageLightbox();
+    }
+    if (event.target === videoModal) {
+        closeVideoModal();
+    }
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    initPortfolioGallery();
+});
+
+// Portfolio Images Data
+const portfolioImages = [
+    { src: 'bakctage/ph_1.jpg', caption: 'Настройка студии' },
+    { src: 'bakctage/ph_2.jpg', caption: 'Подготовка оборудования' },
+    { src: 'bakctage/ph_3.jpg', caption: 'Командная работа' },
+    { src: 'bakctage/ph_4.jpg', caption: 'Работа со светом' }
+];
+
+let currentPortfolioImageIndex = 0;
+
+function openPortfolioImageLightbox(index) {
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('portfolioLightboxImage');
+    const caption = document.getElementById('lightboxCaption');
+    
+    if (lightbox && lightboxImg) {
+        currentPortfolioImageIndex = index;
+        lightboxImg.src = portfolioImages[index].src;
+        caption.textContent = portfolioImages[index].caption;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// تحديث دالة changeImage لتعمل مع portfolio
+function changePortfolioImage(direction) {
+    currentPortfolioImageIndex += direction;
+    
+    if (currentPortfolioImageIndex >= portfolioImages.length) {
+        currentPortfolioImageIndex = 0;
+    } else if (currentPortfolioImageIndex < 0) {
+        currentPortfolioImageIndex = portfolioImages.length - 1;
+    }
+    
+    const lightboxImg = document.getElementById('portfolioLightboxImage');
+    const caption = document.getElementById('lightboxCaption');
+    
+    if (lightboxImg) {
+        lightboxImg.src = portfolioImages[currentPortfolioImageIndex].src;
+    }
+    if (caption) {
+        caption.textContent = portfolioImages[currentPortfolioImageIndex].caption;
+    }
+}
 
 </script>
 
