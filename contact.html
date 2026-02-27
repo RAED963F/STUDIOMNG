@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MHG Studio | О нас</title>
+    <title>MHG Studio | Контакты</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
-        body { background: #0a0a0a; color: #fff; line-height: 1.6; }
+        body { background: #0a0a0a; color: #fff; line-height: 1.6; overflow-x: hidden; }
 
         /* ================== HEADER ================== */
         header {
@@ -24,10 +24,10 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
             height: 80px;
-            transition: background 0.3s ease;
+            transition: all 0.3s ease;
         }
 
-        header.scrolled { background: rgba(10,10,10,0.98); }
+        header.scrolled { background: rgba(10,10,10,0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
 
         /* ================== LOGO ================== */
         .logo a {
@@ -44,532 +44,227 @@
             gap: 2px;
         }
 
-        .logo-name {
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffd700;
-            line-height: 1;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-
-        .logo-sub {
-            font-size: 11px;
-            color: #aaa;
-            font-weight: 400;
-            line-height: 1;
-            opacity: 0.8;
-            white-space: nowrap;
-        }
+        .logo-name { font-size: 22px; font-weight: 700; color: #ffd700; line-height: 1; letter-spacing: 0.5px; white-space: nowrap; }
+        .logo-sub  { font-size: 11px; color: #aaa; font-weight: 400; line-height: 1; opacity: 0.8; white-space: nowrap; }
 
         /* ================== ANIMATED SPHERE ================== */
-        .logo-icon-wrap {
-            position: relative;
-            width: 38px;
-            height: 38px;
-            flex-shrink: 0;
-        }
+        .logo-icon-wrap { position: relative; width: 38px; height: 38px; flex-shrink: 0; }
 
-        .logo-ring {
-            position: absolute;
-            inset: 0;
-            border-radius: 50%;
-            border: 2px solid #D4AF37;
-            animation: ringPulse 2.8s ease-in-out infinite;
-        }
+        .logo-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #D4AF37; animation: ringPulse 2.8s ease-in-out infinite; }
         .logo-ring:nth-child(2) { inset: -5px; border-color: rgba(212,175,55,0.35); animation: ringPulse 2.8s ease-in-out infinite 0.4s; }
         .logo-ring:nth-child(3) { inset: -10px; border-color: rgba(212,175,55,0.15); animation: ringPulse 2.8s ease-in-out infinite 0.8s; }
 
-        @keyframes ringPulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.12); opacity: 0.6; }
-        }
+        @keyframes ringPulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.12);opacity:0.6} }
 
         .logo-sphere {
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
+            position: absolute; inset: 3px; border-radius: 50%;
             background: radial-gradient(circle at 38% 35%, #F0CC55, #D4AF37 50%, #8a6f00 100%);
             box-shadow: 0 0 12px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.25), inset 0 2px 4px rgba(255,255,255,0.3);
             animation: spherePopIn 0.7s cubic-bezier(.36,.07,.19,.97) both, sphereGlow 3s ease-in-out 0.7s infinite, sphereBounce 3.5s ease-in-out 1.2s infinite;
         }
-
         .logo-sphere::after {
-            content: '';
-            position: absolute;
-            top: 15%; left: 20%;
-            width: 35%; height: 30%;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.35);
-            filter: blur(3px);
+            content: ''; position: absolute; top:15%; left:20%; width:35%; height:30%;
+            border-radius:50%; background:rgba(255,255,255,0.35); filter:blur(3px);
             animation: shineMove 3s ease-in-out infinite;
         }
-
-        .logo-orbit {
-            position: absolute;
-            inset: -4px;
-            border-radius: 50%;
-            animation: orbitSpin 4s linear infinite;
-        }
+        .logo-orbit { position:absolute; inset:-4px; border-radius:50%; animation:orbitSpin 4s linear infinite; }
         .logo-orbit::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 50%;
-            transform: translateX(-50%);
-            width: 6px; height: 6px;
-            background: #F0CC55;
-            border-radius: 50%;
-            box-shadow: 0 0 8px #D4AF37;
+            content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+            width:6px; height:6px; background:#F0CC55; border-radius:50%; box-shadow:0 0 8px #D4AF37;
         }
 
-        @keyframes orbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes spherePopIn {
-            0% { transform: scale(0) rotate(-30deg); opacity: 0; }
-            60% { transform: scale(1.15) rotate(5deg); opacity: 1; }
-            80% { transform: scale(0.92) rotate(-2deg); }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
-        @keyframes sphereGlow {
-            0%, 100% { box-shadow: 0 0 12px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.25), inset 0 2px 4px rgba(255,255,255,0.3); }
-            50% { box-shadow: 0 0 20px rgba(212,175,55,0.9), 0 0 50px rgba(212,175,55,0.4), inset 0 2px 4px rgba(255,255,255,0.35); }
-        }
-        @keyframes sphereBounce {
-            0% { transform: translateY(0) scale(1); }
-            30% { transform: translateY(-8px) scale(1.06); }
-            50% { transform: translateY(0) scale(0.96); }
-            65% { transform: translateY(-4px) scale(1.02); }
-            80% { transform: translateY(0) scale(0.99); }
-            100% { transform: translateY(0) scale(1); }
-        }
-        @keyframes shineMove {
-            0%, 100% { transform: translate(0,0); opacity: 0.35; }
-            50% { transform: translate(2px,2px); opacity: 0.55; }
-        }
+        @keyframes orbitSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        @keyframes spherePopIn { 0%{transform:scale(0) rotate(-30deg);opacity:0} 60%{transform:scale(1.15) rotate(5deg);opacity:1} 80%{transform:scale(0.92) rotate(-2deg)} 100%{transform:scale(1) rotate(0deg);opacity:1} }
+        @keyframes sphereGlow { 0%,100%{box-shadow:0 0 12px rgba(212,175,55,0.6),0 0 30px rgba(212,175,55,0.25),inset 0 2px 4px rgba(255,255,255,0.3)} 50%{box-shadow:0 0 20px rgba(212,175,55,0.9),0 0 50px rgba(212,175,55,0.4),inset 0 2px 4px rgba(255,255,255,0.35)} }
+        @keyframes sphereBounce { 0%{transform:translateY(0) scale(1)} 30%{transform:translateY(-8px) scale(1.06)} 50%{transform:translateY(0) scale(0.96)} 65%{transform:translateY(-4px) scale(1.02)} 80%{transform:translateY(0) scale(0.99)} 100%{transform:translateY(0) scale(1)} }
+        @keyframes shineMove { 0%,100%{transform:translate(0,0);opacity:0.35} 50%{transform:translate(2px,2px);opacity:0.55} }
 
         /* ================== NAV ================== */
-        nav ul { display: flex; gap: 35px; list-style: none; }
-
+        nav ul { display:flex; gap:35px; list-style:none; }
         nav ul li a {
-            color: #fff;
-            font-size: 15px;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 6px 10px;
-            border-radius: 8px;
-            transition: 0.3s;
+            color:#fff; font-size:15px; font-weight:500; text-decoration:none;
+            padding:6px 10px; border-radius:8px; transition:0.3s; position:relative;
+        }
+        nav ul li a::after {
+            content:''; position:absolute; width:0; height:2px; bottom:0; left:50%;
+            background:#ffd700; transition:all 0.3s ease; transform:translateX(-50%);
+        }
+        nav ul li a:hover::after, nav ul li a.active::after { width:80%; }
+        nav ul li a:hover, nav ul li a.active { color:#ffd700; }
+
+        .hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; z-index:1001; }
+        .hamburger div { width:25px; height:3px; background:#fff; transition:0.3s; }
+        .hamburger.active div:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+        .hamburger.active div:nth-child(2) { opacity:0; }
+        .hamburger.active div:nth-child(3) { transform:rotate(-45deg) translate(7px,-6px); }
+
+        /* ================== HERO ================== */
+        .contact-hero {
+            height: 50vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px;
+            
+            background-size: cover; background-position: center;
         }
 
-        nav ul li a:hover { color: #000; background: #ffd700; }
-        nav ul li a.active { color: #ffd700; }
+        .contact-hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 700; letter-spacing: 1px; }
+        .contact-hero p  { font-size: 1.2rem; max-width: 700px; margin-bottom: 30px; color: #ddd; }
 
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
-        .hamburger div { width: 25px; height: 3px; background: #fff; transition: 0.3s; }
-        .hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-        .hamburger.active div:nth-child(2) { opacity: 0; }
-        .hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
+        .hero-buttons { display: flex; gap: 15px; }
+        .btn { padding: 12px 30px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn-primary { background: #ffd700; color: #000; border: 2px solid #ffd700; }
+        .btn-primary:hover { background: transparent; color: #ffd700; }
+        .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+        .btn-secondary:hover { background: #fff; color: #000; }
 
-        /* ================== ABOUT HEADER ================== */
-        .about-header {
-            text-align: center;
-            padding: 120px 20px 60px;
-            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(10,10,10,1) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
-            opacity: 0.1;
-            z-index: -1;
-        }
-
-        .about-header h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; }
-        .about-header p { color: #ddd; font-size: 18px; max-width: 700px; margin: 0 auto; line-height: 1.8; }
-
-        /* ================== STATS ================== */
-        .stats-section {
-            background: #111;
-            padding: 60px 20px;
-            display: flex;
+        /* ================== CONTACT SECTION ================== */
+        .contact-section {
+            display: flex; flex-wrap: wrap; gap: 40px;
+            max-width: 1200px; margin: 60px auto; padding: 0 20px;
             justify-content: center;
-            flex-wrap: wrap;
-            gap: 40px;
         }
 
-        .stat-item { text-align: center; flex: 1; min-width: 200px; }
-        .stat-number { font-size: 48px; font-weight: 700; color: #ffd700; margin-bottom: 10px; }
-        .stat-label { font-size: 16px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* ================== ABOUT SECTION ================== */
-        .about-section {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 80px 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 60px;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .about-image { flex: 1 1 400px; }
-        .about-image img {
-            width: 100%;
-            border-radius: 15px;
+        .contact-info, .contact-form {
+            flex: 1 1 500px;
+            background: #111; padding: 40px; border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.5s ease;
-        }
-        .about-image:hover img { transform: scale(1.02); }
-
-        .about-text { flex: 1 1 500px; }
-        .about-text h2 {
-            font-size: 32px;
-            margin-bottom: 25px;
-            font-weight: 600;
-            position: relative;
-            padding-bottom: 15px;
-        }
-        
-        .about-text h2::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 60px; height: 3px;
-            background: #ffd700;
-        }
-        .about-text p { margin-bottom: 20px; color: #ccc; font-size: 16px; line-height: 1.8; }
-
-        /* ================== TEAM SECTION ================== */
-        .team-section { padding: 100px 20px; max-width: 1400px; margin: 0 auto; }
-
-        .section-header { text-align: center; margin-bottom: 70px; }
-        .section-subtitle { color: #ffd700; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 15px; display: block; }
-        .section-title { color: #fff; font-size: 48px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
-        .title-line { width: 100px; height: 4px; background: linear-gradient(90deg, #ffd700, #ffed4e); margin: 0 auto; border-radius: 2px; }
-
-        .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 30px; margin-bottom: 60px; }
-
-        .team-card {
-            background: rgba(255,255,255,0.03);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255,215,0,0.1);
-            transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
-            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .team-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
-            transition: left 0.7s;
+        .contact-info:hover, .contact-form:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+
+        .contact-info h2, .contact-form h2 {
+            font-size: 28px; margin-bottom: 25px; font-weight: 600;
+            color: #ffd700; display: flex; align-items: center; gap: 10px;
         }
 
-        .team-card:hover::before { left: 100%; }
-        .team-card:hover { transform: translateY(-15px); border-color: rgba(255,215,0,0.5); box-shadow: 0 20px 60px rgba(255,215,0,0.2); }
+        .contact-details { display: flex; flex-direction: column; gap: 20px; }
 
-        .card-image-wrapper { position: relative; height: 380px; overflow: hidden; }
-        .card-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .team-card:hover .card-image { transform: scale(1.1); }
+        .contact-item { display: flex; align-items: flex-start; gap: 15px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .contact-item:last-child { border-bottom: none; }
 
-        .card-overlay {
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
-            padding: 30px;
-            transform: translateY(100%);
-            transition: transform 0.4s ease;
-        }
-        .team-card:hover .card-overlay { transform: translateY(0); }
-
-        .social-links { display: flex; gap: 12px; }
-        .social-link {
-            width: 40px; height: 40px;
-            border-radius: 50%;
-            background: rgba(255,215,0,0.9);
-            display: flex; align-items: center; justify-content: center;
-            color: #000;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
-        .social-link:hover { background: #fff; transform: translateY(-3px); }
-
-        .card-content { padding: 25px; text-align: center; }
-        .card-role { color: #ffd700; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-        .card-bio { color: #888; font-size: 13px; line-height: 1.6; }
-
-        .bts-container { text-align: center; margin-top: 50px; }
-        .bts-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 18px 50px;
-            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-            color: #000;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            box-shadow: 0 10px 40px rgba(255,215,0,0.3);
-        }
-        .bts-button:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(255,215,0,0.5); }
-        .bts-button i { font-size: 20px; }
-
-        /* ================== BTS MODAL ================== */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 10000;
-            overflow-y: auto;
-            animation: fadeIn 0.4s ease;
-        }
-        .modal-overlay.active { display: flex; flex-direction: column; }
-
-        .modal-header {
-            position: sticky;
-            top: 0;
-            background: rgba(12,12,12,0.98);
-            padding: 30px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,215,0,0.2);
-            z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-        .modal-title { color: #fff; font-size: 32px; font-weight: 700; text-transform: uppercase; }
-        .modal-subtitle { color: #ffd700; font-size: 14px; margin-top: 5px; }
-
-        .close-modal {
+        .contact-icon {
             width: 50px; height: 50px;
-            border-radius: 50%;
-            background: rgba(255,215,0,0.1);
-            border: 2px solid #ffd700;
-            color: #ffd700;
-            font-size: 24px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
+            background: rgba(255,215,0,0.1); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #ffd700; font-size: 20px; flex-shrink: 0;
         }
-        .close-modal:hover { background: #ffd700; color: #000; transform: rotate(90deg); }
 
-        .modal-content { flex: 1; padding: 50px; max-width: 1400px; margin: 0 auto; width: 100%; }
+        .contact-text h3 { font-size: 18px; margin-bottom: 5px; font-weight: 600; }
+        .contact-text p, .contact-text a { color: #ccc; font-size: 16px; text-decoration: none; transition: color 0.3s; }
+        .contact-text a:hover { color: #ffd700; }
 
-        .filter-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
-        .filter-tab {
-            padding: 12px 30px;
-            background: transparent;
-            border: 2px solid rgba(255,215,0,0.3);
-            color: #fff;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+        .contact-form form { display: flex; flex-direction: column; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 14px; font-weight: 500; color: #ddd; }
+
+        .contact-form input,
+        .contact-form textarea,
+        .contact-form select {
+            padding: 15px; border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px; background: #0a0a0a; color: #fff;
+            font-size: 15px; resize: none; transition: border-color 0.3s, box-shadow 0.3s;
         }
-        .filter-tab:hover, .filter-tab.active { background: #ffd700; border-color: #ffd700; color: #000; transform: translateY(-3px); }
-
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px,1fr)); gap: 30px; }
-
-        .portfolio-item {
-            position: relative;
-            border-radius: 15px;
-            overflow: hidden;
-            aspect-ratio: 16/10;
-            cursor: pointer;
-            background: rgba(255,255,255,0.05);
-            transition: all 0.4s ease;
+        .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
+            outline: none; border-color: #ffd700; box-shadow: 0 0 0 2px rgba(255,215,0,0.2);
         }
-        .portfolio-item.hidden { display: none; }
-        .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(255,215,0,0.2); }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: #888; }
 
-        .portfolio-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
-        .portfolio-item:hover .portfolio-image { transform: scale(1.1); }
-
-        .portfolio-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
-            display: flex; flex-direction: column; justify-content: flex-end;
-            padding: 25px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
+        .contact-form button {
+            padding: 15px 25px; border: 2px solid #ffd700; background: #ffd700;
+            color: #000; font-size: 16px; font-weight: 600; border-radius: 8px;
+            cursor: pointer; transition: all 0.3s;
+            display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;
         }
-        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+        .contact-form button:hover { background: transparent; color: #ffd700; }
 
-        .portfolio-category { display: inline-block; background: #ffd700; color: #000; padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; width: fit-content; }
-        .portfolio-title { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 5px; }
-        .portfolio-date { color: #888; font-size: 13px; }
-
-        .portfolio-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; }
-        .action-btn {
-            width: 45px; height: 45px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.95);
-            border: none; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 16px; color: #000;
+        /* ================== MAP ================== */
+        .contact-map {
+            margin: 60px auto; max-width: 1200px;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-        .action-btn:hover { background: #ffd700; transform: scale(1.1); }
-
-        .video-badge {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%,-50%);
-            width: 80px; height: 80px;
-            background: rgba(255,215,0,0.9);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 28px; color: #000;
-            transition: all 0.3s ease;
+        .map-container { width: 100%; height: 450px; position: relative; }
+        #map { width: 100%; height: 100%; }
+        .map-overlay {
+            position: absolute; bottom: 20px; left: 20px;
+            background: rgba(10,10,10,0.8); backdrop-filter: blur(10px);
+            padding: 15px 20px; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1); max-width: 300px;
         }
-        .portfolio-item:hover .video-badge { transform: translate(-50%,-50%) scale(1.1); box-shadow: 0 0 40px rgba(255,215,0,0.6); }
-
-        /* ================== IMAGE LIGHTBOX ================== */
-        .lightbox-modal {
-            display: none;
-            position: fixed;
-            z-index: 10001;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            animation: fadeIn 0.3s;
-        }
-        .lightbox-modal.active { display: flex; align-items: center; justify-content: center; }
-
-        .lightbox-content { max-width: 90%; max-height: 80vh; object-fit: contain; border-radius: 8px; }
-
-        .lightbox-caption { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 18px; text-align: center; }
-
-        .lightbox-close {
-            position: absolute;
-            top: 20px; right: 40px;
-            color: #fff; font-size: 50px;
-            font-weight: bold; cursor: pointer;
-            z-index: 10002;
-            transition: color 0.3s;
-        }
-        .lightbox-close:hover { color: #ffd700; }
-
-        .lightbox-prev, .lightbox-next {
-            position: absolute;
-            top: 50%; transform: translateY(-50%);
-            background: rgba(255,215,0,0.8);
-            color: #000; border: none;
-            padding: 20px 15px;
-            font-size: 30px; cursor: pointer;
-            border-radius: 5px; transition: all 0.3s;
-        }
-        .lightbox-prev:hover, .lightbox-next:hover { background: #ffd700; }
-        .lightbox-prev { left: 20px; }
-        .lightbox-next { right: 20px; }
-
-        /* ================== VIDEO MODAL ================== */
-        .video-modal {
-            display: none;
-            position: fixed;
-            z-index: 10001;
-            inset: 0;
-            background: rgba(0,0,0,0.95);
-            animation: fadeIn 0.3s;
-        }
-        .video-modal.active { display: flex; align-items: center; justify-content: center; }
-
-        .video-modal-content {
-            position: relative;
-            width: 90%; max-width: 900px;
-            background: #000; border-radius: 10px; overflow: hidden;
-        }
-        .video-close {
-            position: absolute;
-            top: 10px; right: 20px;
-            color: #fff; font-size: 40px;
-            font-weight: bold; cursor: pointer;
-            z-index: 10002; transition: color 0.3s;
-        }
-        .video-close:hover { color: #ffd700; }
-        #videoContainer video { width: 100%; height: 500px; border: none; }
+        .map-overlay h3 { color: #ffd700; margin-bottom: 5px; font-size: 18px; }
+        .map-overlay p { color: #ddd; font-size: 14px; margin-bottom: 5px; }
 
         /* ================== FOOTER ================== */
         footer {
             background: linear-gradient(180deg, #111 0%, #000 100%);
-            color: #fff;
-            text-align: center;
+            color: #fff; text-align: center;
             padding: 40px 20px;
             border-top: 1px solid rgba(255,255,255,0.05);
             margin-top: 60px;
         }
 
         .footer-logo-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 14px;
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; margin-bottom: 14px;
         }
-
         .footer-logo-wrap .logo-icon-wrap { width: 30px; height: 30px; }
         .footer-logo-text { font-size: 1.3rem; font-weight: 700; color: #D4AF37; }
         footer p { color: #C0C0C0; font-size: 0.85rem; margin-top: 6px; }
 
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
         /* ================== RESPONSIVE ================== */
-        @media (max-width: 1200px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
         @media (max-width: 800px) {
             header { padding: 0 20px; }
             nav ul {
-                position: fixed;
-                top: 0; right: -100%;
-                background: #111;
-                flex-direction: column;
+                position: fixed; top: 0; right: -100%;
+                background: #111; flex-direction: column;
                 width: 280px; height: 100vh;
                 padding: 100px 30px 30px;
-                transition: 0.4s;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+                transition: 0.4s; box-shadow: -5px 0 15px rgba(0,0,0,0.3);
             }
             nav ul.show { right: 0; }
             .hamburger { display: flex; }
-            .about-header h1 { font-size: 36px; }
-            .section-title { font-size: 36px; }
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .modal-header { padding: 20px 30px; }
-            .modal-content { padding: 30px 20px; }
-        }
-        @media (max-width: 600px) {
-            header { padding: 0 15px; }
-            .team-grid { grid-template-columns: 1fr; }
+            .contact-hero h1 { font-size: 2.5rem; }
+            .contact-hero p   { font-size: 1rem; }
+            .hero-buttons { flex-direction: column; gap: 10px; }
         }
 
-        .hero-video {
-            position: absolute;
-            inset: -10% -10% auto -10%;
-            min-width: 120%;
-            min-height: 120%;
-            object-fit: cover;
-            z-index: -2;
-            filter: brightness(0.6);
-            transition: transform var(--transition-medium)
-        }   
+        @media (max-width: 600px) {
+            .contact-hero { height: 40vh; }
+            .contact-hero h1 { font-size: 2rem; }
+            .contact-info, .contact-form { padding: 25px; }
+        }
+
+    .contact-hero {
+    position: relative;
+    overflow: hidden;
+        background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(10, 10, 10, 1) 100%);
+
+}
+
+.contact-hero video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.6);
+    
+} 
+
+.contact-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.199);
+    z-index: -1;
+}
     </style>
 </head>
-
 <body>
 
 <!-- ================== HEADER ================== -->
@@ -597,317 +292,112 @@
             <li><a href="index.html">Главная</a></li>
             <li><a href="portfolio.html">Портфолио</a></li>
             <li><a href="services.html">Услуги</a></li>
-            <li><a href="about.html" class="active">О нас</a></li>
-            <li><a href="contact.html">Контакты</a></li>
+            <li><a href="about.html">О нас</a></li>
+            <li><a href="contact.html" class="active">Контакты</a></li>
         </ul>
     </nav>
 </header>
 
-<!-- ================== ABOUT HEADER ================== -->
-<div class="about-header">
+<!-- ================== HERO ================== -->
+<section class="contact-hero">
+
     <video autoplay muted loop playsinline class="hero-video" aria-hidden="true">
             <!-- fallback: if you have a file replace src with your video -->
-            <source src="background_server.mp4" type="video/mp4">
+            <source src="background_contact.mp4" type="video/mp4">
         </video>
-    <h1>О нас</h1>
-    <p>MHG Studio — это профессиональная команда, создающая уникальный видеоконтент, фотосессии и рекламные проекты под ключ.</p>
-</div>
 
-<!-- ================== STATS ================== -->
-<div class="stats-section">
-    <div class="stat-item">
-        <div class="stat-number">150+</div>
-        <div class="stat-label">Завершенных проектов</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-number">15+</div>
-        <div class="stat-label">Лет опыта</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Довольных клиентов</div>
-    </div>
-    <div class="stat-item">
-        <div class="stat-number">100%</div>
-        <div class="stat-label">Профессионализм</div>
-    </div>
-</div>
-
-<!-- ================== ABOUT SECTION ================== -->
-<div class="about-section">
-    <div class="about-image">
-        <img src="large.jpg" alt="MHG Studio Team">
-    </div>
-    <div class="about-text">
-        <h2>Для кого мы работаем?</h2>
-        <p>эксперты и спикеры • предприниматели и стартапы • онлайн-школы • бренды и e-commerce • агентства • корпоративные клиенты</p>
-        <h2>Как проходит работа...</h2>
-        <p>1. Описание задачи → 2. Предложение решения → 3. Подготовка → 4. Съёмка → 5. Готовый материал</p>
-        <h2>Техника и база!</h2>
-        <p>Профессиональные камеры Panasonic, освещение Aputure, звук Sennheiser, монтаж на Mac Pro</p>
-    </div>
-</div>
-
-<!-- ================== TEAM SECTION ================== -->
-<section class="team-section">
-    <div class="section-header">
-        <span class="section-subtitle">Профессионалы своего дела</span>
-        <h2 class="section-title">Наша команда</h2>
-        <div class="title-line"></div>
-    </div>
-
-    <div class="team-grid">
-        <div class="team-card">
-            <div class="card-image-wrapper">
-                <img src="firas.jpg" alt="Фирас" class="card-image">
-              <!-- 
-                <div class="card-overlay">
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
--->
-            </div>
-     <!--            
-            <div class="card-content">
-                <p class="card-role">Основатель и режиссёр</p>
-                <p class="card-bio">7+ лет в видеопроизводстве, креативное видение студии</p>
-            </div>
- -->
-        </div>
-        <div class="team-card">
-            <div class="card-image-wrapper">
-                <img src="raed.jpg" alt="Раед" class="card-image">
- <!-- 
-                <div class="card-overlay">
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
--->
-            </div>
-<!-- 
-            <div class="card-content">
-                <p class="card-role">Фотограф и оператор</p>
-                <p class="card-bio">Специалист по портретной и коммерческой съёмке</p>
-            </div>
--->
-        </div>
-        <div class="team-card">
-            <div class="card-image-wrapper">
-                <img src="moxamad.jpg" alt="Мухамад" class="card-image">
-              <!-- 
-                <div class="card-overlay">
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
--->
-            </div>
- <!--  
-            <div class="card-content">
-                <p class="card-role">Монтажёр и VFX</p>
-                <p class="card-bio">Постпродакшн и визуальные эффекты</p>
-            </div>
--->
-        </div>
-        <div class="team-card">
-            <div class="card-image-wrapper">
-                <img src="yaraslaf.jpg" alt="Ярослав" class="card-image">
-             <!-- 
-                <div class="card-overlay">
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                </div>
--->
-            </div>
-  <!--  
-            <div class="card-content">
-                <p class="card-role">Продюсер</p>
-                <p class="card-bio">Управление проектами и клиентский сервис</p>
-            </div>
--->
-        </div>
-    </div>
-
-    <div class="bts-container">
-        <button class="bts-button" onclick="openModal()">
-            <i class="fas fa-camera-retro"></i>
-            За кулисами
-        </button>
+    <h1>Свяжитесь с нами</h1>
+    <p>Готовы начать новый проект? Свяжитесь с нами, и мы обсудим, как можем помочь воплотить ваши идеи в жизнь.</p>
+    <div class="hero-buttons">
+        <a href="#contact-form" class="btn btn-primary">Написать сообщение</a>
+        <a href="tel:+79891156946" class="btn btn-secondary">Позвонить нам</a>
     </div>
 </section>
 
-<!-- ================== BTS MODAL ================== -->
-<div class="modal-overlay" id="btsModal">
-    <div class="modal-header">
-        <div>
-            <h2 class="modal-title">За кулисами</h2>
-            <p class="modal-subtitle">Как мы создаём магию</p>
-        </div>
-        <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
-    </div>
-    <div class="modal-content">
-        <div class="filter-tabs">
-            <button class="filter-tab active" onclick="filterItems('all')">Все</button>
-            <button class="filter-tab" onclick="filterItems('photo')">Фотографии</button>
-            <button class="filter-tab" onclick="filterItems('video')">Видео</button>
-            <button class="filter-tab" onclick="filterItems('process')">Процесс</button>
-        </div>
-        <div class="portfolio-grid">
-            <!-- Video 1 -->
-            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(0)">
-                <video class="portfolio-image" muted><source src="bakctage/vid_1.mp4" type="video/mp4"></video>
-                <div class="video-badge"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Видео</span>
-                    <h3 class="portfolio-title">Съёмочный день</h3>
-                    <p class="portfolio-date">Январь 2026</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(0)"><i class="fas fa-play"></i></button>
+<!-- ================== CONTACT SECTION ================== -->
+<div class="contact-section">
+
+    <div class="contact-info">
+        <h2><i class="fas fa-info-circle"></i> Контактная информация</h2>
+        <div class="contact-details">
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="contact-text">
+                    <h3>Адрес</h3>
+                    <p>Москва, 1-й Смоленский переулок, 5с1</p>
                 </div>
             </div>
-            <!-- Photo 1 -->
-            <div class="portfolio-item" data-category="photo" onclick="openPortfolioImageLightbox(0)">
-                <img src="bakctage/ph_1.jpg" alt="Настройка студии" class="portfolio-image">
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Фото</span>
-                    <h3 class="portfolio-title">Настройка студии</h3>
-                    <p class="portfolio-date">Февраль 2026</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(0)"><i class="fas fa-expand"></i></button>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                <div class="contact-text">
+                    <h3>Телефон</h3>
+                    <p><a href="tel:+79891156946">+7 989 115 69 46</a></p>
                 </div>
             </div>
-            <!-- Photo 2 -->
-            <div class="portfolio-item" data-category="process" onclick="openPortfolioImageLightbox(1)">
-                <img src="bakctage/ph_2.jpg" alt="Подготовка оборудования" class="portfolio-image">
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Процесс</span>
-                    <h3 class="portfolio-title">Подготовка оборудования</h3>
-                    <p class="portfolio-date">Декабрь 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(1)"><i class="fas fa-expand"></i></button>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                <div class="contact-text">
+                    <h3>Email</h3>
+                    <p><a href="mailto:producer@mhgroup.tv">producer@mhgroup.tv</a></p>
                 </div>
             </div>
-            <!-- Photo 3 -->
-            <div class="portfolio-item" data-category="photo" onclick="openPortfolioImageLightbox(2)">
-                <img src="bakctage/ph_3.jpg" alt="Командная работа" class="portfolio-image">
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Фото</span>
-                    <h3 class="portfolio-title">Командная работа</h3>
-                    <p class="portfolio-date">Ноябрь 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(2)"><i class="fas fa-expand"></i></button>
-                </div>
-            </div>
-            <!-- Photo 4 -->
-            <div class="portfolio-item" data-category="process" onclick="openPortfolioImageLightbox(3)">
-                <img src="bakctage/ph_4.jpg" alt="Работа со светом" class="portfolio-image">
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Процесс</span>
-                    <h3 class="portfolio-title">Работа со светом</h3>
-                    <p class="portfolio-date">Октябрь 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(3)"><i class="fas fa-expand"></i></button>
-                </div>
-            </div>
-            <!-- Video 2 -->
-            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(1)">
-                <video class="portfolio-image" muted><source src="bakctage/vid_2.mp4" type="video/mp4"></video>
-                <div class="video-badge"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Видео</span>
-                    <h3 class="portfolio-title">Финальный монтаж</h3>
-                    <p class="portfolio-date">Сентябрь 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(1)"><i class="fas fa-play"></i></button>
-                </div>
-            </div>
-            <!-- Video 3 -->
-            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(2)">
-                <video class="portfolio-image" muted><source src="bakctage/vid_3.mp4" type="video/mp4"></video>
-                <div class="video-badge"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Видео</span>
-                    <h3 class="portfolio-title">Рабочий процесс</h3>
-                    <p class="portfolio-date">Август 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(2)"><i class="fas fa-play"></i></button>
-                </div>
-            </div>
-            <!-- Video 4 -->
-            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(3)">
-                <video class="portfolio-image" muted><source src="bakctage/vid_4.mp4" type="video/mp4"></video>
-                <div class="video-badge"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Видео</span>
-                    <h3 class="portfolio-title">За кадром</h3>
-                    <p class="portfolio-date">Июль 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(3)"><i class="fas fa-play"></i></button>
-                </div>
-            </div>
-            <!-- Video 5 -->
-            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(4)">
-                <video class="portfolio-image" muted><source src="bakctage/vid_5.mp4" type="video/mp4"></video>
-                <div class="video-badge"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Видео</span>
-                    <h3 class="portfolio-title">Съёмка интервью</h3>
-                    <p class="portfolio-date">Июнь 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(4)"><i class="fas fa-play"></i></button>
-                </div>
-            </div>
-            <!-- Video 6 -->
-            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(5)">
-                <video class="portfolio-image" muted><source src="bakctage/vid_6.mp4" type="video/mp4"></video>
-                <div class="video-badge"><i class="fas fa-play"></i></div>
-                <div class="portfolio-overlay">
-                    <span class="portfolio-category">Видео</span>
-                    <h3 class="portfolio-title">Постпродакшн</h3>
-                    <p class="portfolio-date">Май 2025</p>
-                </div>
-                <div class="portfolio-actions">
-                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(5)"><i class="fas fa-play"></i></button>
+            <div class="contact-item">
+                <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                <div class="contact-text">
+                    <h3>Часы работы</h3>
+                    <p>Каждый день — 10:00 - 22:00</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="contact-form" id="contact-form">
+        <h2><i class="fas fa-paper-plane"></i> Форма обратной связи</h2>
+        <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
+            <input type="hidden" name="access_key" value="b0c25945-a722-4d3e-a047-1bd069b7afbe">
+            <div class="form-group">
+                <label for="name">Ваше имя *</label>
+                <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" placeholder="Введите ваш email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" placeholder="Введите ваш телефон">
+            </div>
+            <div class="form-group">
+                <label for="service">Услуга</label>
+                <select id="service" name="service">
+                    <option value="">Выберите услугу</option>
+                    <option value="video">Видеосъемка</option>
+                    <option value="photo">Фотосъемка</option>
+                    <option value="commercial">Рекламный ролик</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="message">Сообщение *</label>
+                <textarea id="message" name="message" placeholder="Опишите ваш проект или задайте вопрос" rows="5" required></textarea>
+            </div>
+            <button type="submit">
+                <i class="fas fa-paper-plane"></i> Отправить сообщение
+            </button>
+        </form>
+    </div>
+
 </div>
 
-<!-- ================== IMAGE LIGHTBOX ================== -->
-<div id="imageLightbox" class="lightbox-modal">
-    <span class="lightbox-close" onclick="closeImageLightbox()">&times;</span>
-    <img class="lightbox-content" id="portfolioLightboxImage" alt="">
-    <div class="lightbox-caption" id="lightboxCaption"></div>
-    <button class="lightbox-prev" onclick="changePortfolioImage(-1)">&#10094;</button>
-    <button class="lightbox-next" onclick="changePortfolioImage(1)">&#10095;</button>
-</div>
-
-<!-- ================== VIDEO MODAL ================== -->
-<div id="videoModal" class="video-modal">
-    <div class="video-modal-content">
-        <span class="video-close" onclick="closeVideoModal()">&times;</span>
-        <div id="videoContainer"></div>
+<!-- ================== MAP ================== -->
+<div class="contact-map">
+    <div class="map-container">
+        <div id="map"></div>
+        <div class="map-overlay">
+            <h3>MHG Studio</h3>
+            <p>Москва, 1-й Смоленский переулок, 5с1</p>
+            <p>+7 989 115 69 46</p>
+        </div>
     </div>
 </div>
 
@@ -927,6 +417,7 @@
     <p style="margin-top:10px">© 2026 MHG Studio. Все права защищены.</p>
 </footer>
 
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script>
 /* ---- Header scroll ---- */
 window.addEventListener('scroll', () => {
@@ -946,129 +437,46 @@ document.querySelectorAll('#nav-links a').forEach(link => {
     });
 });
 
-/* ---- Team card animations ---- */
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, { threshold: 0.1 });
+/* ---- Contact form ---- */
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button');
+    btn.disabled = true;
+    btn.innerText = 'Отправка...';
 
-document.querySelectorAll('.team-card').forEach((card, i) => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(50px)';
-    card.style.transition = `all 0.6s ease ${i * 0.1}s`;
-    observer.observe(card);
+    try {
+        const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body: new FormData(this) });
+        const data = await res.json();
+        if (data.success) {
+            alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        } else {
+            alert('Ошибка отправки. Пожалуйста, попробуйте позже.');
+        }
+    } catch {
+        alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить сообщение';
+    }
 });
 
-/* ---- Modal ---- */
-function openModal() {
-    document.getElementById('btsModal').classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeModal() {
-    document.getElementById('btsModal').classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-/* ---- Filter ---- */
-function filterItems(category) {
-    document.querySelectorAll('.filter-tab').forEach(tab => {
-        tab.classList.remove('active');
-        const map = { all:'Все', photo:'Фотографии', video:'Видео', process:'Процесс' };
-        if (tab.textContent === map[category]) tab.classList.add('active');
+/* ---- Yandex Map ---- */
+ymaps.ready(function() {
+    const map = new ymaps.Map('map', {
+        center: [55.7479, 37.5835],
+        zoom: 14,
+        controls: ['zoomControl', 'fullscreenControl']
     });
-
-    document.querySelectorAll('.portfolio-item').forEach(item => {
-        const cat = item.getAttribute('data-category');
-        if (category === 'all' || cat === category) {
-            item.classList.remove('hidden');
-            item.style.opacity = '1';
-            item.style.transform = 'scale(1)';
-        } else {
-            item.classList.add('hidden');
-            item.style.opacity = '0';
-            item.style.transform = 'scale(0.8)';
-        }
+    const marker = new ymaps.Placemark([55.7479, 37.5835], {
+        balloonContent: 'MHG Studio - 1-й Смоленский переулок, 5с1'
+    }, {
+        preset: 'islands#icon',
+        iconColor: '#ffd700'
     });
-}
-
-/* ---- Image Lightbox ---- */
-const portfolioImages = [
-    { src: 'bakctage/ph_1.jpg', caption: 'Настройка студии' },
-    { src: 'bakctage/ph_2.jpg', caption: 'Подготовка оборудования' },
-    { src: 'bakctage/ph_3.jpg', caption: 'Командная работа' },
-    { src: 'bakctage/ph_4.jpg', caption: 'Работа со светом' }
-];
-
-const videoSources = [
-    'bakctage/vid_1.mp4',
-    'bakctage/vid_2.mp4',
-    'bakctage/vid_3.mp4',
-    'bakctage/vid_4.mp4',
-    'bakctage/vid_5.mp4',
-    'bakctage/vid_6.mp4'
-];
-
-let currentPortfolioImageIndex = 0;
-
-function openPortfolioImageLightbox(index) {
-    const lb = document.getElementById('imageLightbox');
-    const img = document.getElementById('portfolioLightboxImage');
-    const cap = document.getElementById('lightboxCaption');
-    currentPortfolioImageIndex = index;
-    img.src = portfolioImages[index].src;
-    cap.textContent = portfolioImages[index].caption;
-    lb.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeImageLightbox() {
-    document.getElementById('imageLightbox').classList.remove('active');
-    document.body.style.overflow = 'auto';
-}
-
-function changePortfolioImage(dir) {
-    currentPortfolioImageIndex = (currentPortfolioImageIndex + dir + portfolioImages.length) % portfolioImages.length;
-    document.getElementById('portfolioLightboxImage').src = portfolioImages[currentPortfolioImageIndex].src;
-    document.getElementById('lightboxCaption').textContent = portfolioImages[currentPortfolioImageIndex].caption;
-}
-
-/* ---- Video Modal ---- */
-function openVideoLightbox(index) {
-    const modal = document.getElementById('videoModal');
-    const container = document.getElementById('videoContainer');
-    container.innerHTML = `
-        <video controls autoplay style="width:100%; height:500px; border-radius:10px;">
-            <source src="${videoSources[index]}" type="video/mp4">
-        </video>
-    `;
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-}
-
-function closeVideoModal() {
-    document.getElementById('videoModal').classList.remove('active');
-    document.getElementById('videoContainer').innerHTML = '';
-    document.body.style.overflow = 'auto';
-}
-
-/* ---- Close on outside click ---- */
-window.onclick = function(e) {
-    if (e.target.id === 'imageLightbox') closeImageLightbox();
-    if (e.target.id === 'videoModal') closeVideoModal();
-    if (e.target.id === 'btsModal') closeModal();
-};
-
-/* ---- Keyboard ---- */
-document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') { closeModal(); closeImageLightbox(); closeVideoModal(); }
-    if (e.key === 'ArrowLeft') changePortfolioImage(-1);
-    if (e.key === 'ArrowRight') changePortfolioImage(1);
+    map.geoObjects.add(marker);
+    marker.balloon.open();
 });
 </script>
 </body>
-</html>
+</html> 
