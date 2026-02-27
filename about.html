@@ -4,31 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MHG Studio | О нас</title>
-
-    <!-- Google Font – Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: #0a0a0a; color: #fff; line-height: 1.6; }
 
-        body {
-            background: #0a0a0a;
-            color: #fff;
-            line-height: 1.6;
-        }
-
-        /* ---------------- NAVBAR / HEADER ---------------- */
+        /* ================== HEADER ================== */
         header {
             width: 100%;
-            padding: 0px 60px;
-            background: rgba(10, 10, 10, 0.95);
+            padding: 0 60px;
+            background: rgba(10,10,10,0.95);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
@@ -37,36 +23,131 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
+            height: 80px;
             transition: background 0.3s ease;
         }
 
-        header:hover {
-            background: rgba(10, 10, 10, 1);
-        }
+        header.scrolled { background: rgba(10,10,10,0.98); }
 
-        .logo a{
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #ffd700;
-            cursor: pointer;
+        /* ================== LOGO ================== */
+        .logo a {
             display: flex;
             align-items: center;
+            gap: 12px;
             text-decoration: none;
         }
 
-        nav {
-            position: relative;
-        }
-
-        nav ul {
+        .logo-text-wrap {
             display: flex;
-            gap: 35px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
         }
 
-        nav ul li {
-            list-style: none;
+        .logo-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffd700;
+            line-height: 1;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
         }
+
+        .logo-sub {
+            font-size: 11px;
+            color: #aaa;
+            font-weight: 400;
+            line-height: 1;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+
+        /* ================== ANIMATED SPHERE ================== */
+        .logo-icon-wrap {
+            position: relative;
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+        }
+
+        .logo-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid #D4AF37;
+            animation: ringPulse 2.8s ease-in-out infinite;
+        }
+        .logo-ring:nth-child(2) { inset: -5px; border-color: rgba(212,175,55,0.35); animation: ringPulse 2.8s ease-in-out infinite 0.4s; }
+        .logo-ring:nth-child(3) { inset: -10px; border-color: rgba(212,175,55,0.15); animation: ringPulse 2.8s ease-in-out infinite 0.8s; }
+
+        @keyframes ringPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.12); opacity: 0.6; }
+        }
+
+        .logo-sphere {
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 38% 35%, #F0CC55, #D4AF37 50%, #8a6f00 100%);
+            box-shadow: 0 0 12px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.25), inset 0 2px 4px rgba(255,255,255,0.3);
+            animation: spherePopIn 0.7s cubic-bezier(.36,.07,.19,.97) both, sphereGlow 3s ease-in-out 0.7s infinite, sphereBounce 3.5s ease-in-out 1.2s infinite;
+        }
+
+        .logo-sphere::after {
+            content: '';
+            position: absolute;
+            top: 15%; left: 20%;
+            width: 35%; height: 30%;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.35);
+            filter: blur(3px);
+            animation: shineMove 3s ease-in-out infinite;
+        }
+
+        .logo-orbit {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            animation: orbitSpin 4s linear infinite;
+        }
+        .logo-orbit::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 6px; height: 6px;
+            background: #F0CC55;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #D4AF37;
+        }
+
+        @keyframes orbitSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes spherePopIn {
+            0% { transform: scale(0) rotate(-30deg); opacity: 0; }
+            60% { transform: scale(1.15) rotate(5deg); opacity: 1; }
+            80% { transform: scale(0.92) rotate(-2deg); }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        @keyframes sphereGlow {
+            0%, 100% { box-shadow: 0 0 12px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.25), inset 0 2px 4px rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 0 20px rgba(212,175,55,0.9), 0 0 50px rgba(212,175,55,0.4), inset 0 2px 4px rgba(255,255,255,0.35); }
+        }
+        @keyframes sphereBounce {
+            0% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-8px) scale(1.06); }
+            50% { transform: translateY(0) scale(0.96); }
+            65% { transform: translateY(-4px) scale(1.02); }
+            80% { transform: translateY(0) scale(0.99); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        @keyframes shineMove {
+            0%, 100% { transform: translate(0,0); opacity: 0.35; }
+            50% { transform: translate(2px,2px); opacity: 0.55; }
+        }
+
+        /* ================== NAV ================== */
+        nav ul { display: flex; gap: 35px; list-style: none; }
 
         nav ul li a {
             color: #fff;
@@ -78,50 +159,16 @@
             transition: 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #000;
-            background: #ffd700;
-        }
+        nav ul li a:hover { color: #000; background: #ffd700; }
+        nav ul li a.active { color: #ffd700; }
 
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; z-index: 1001; }
+        .hamburger div { width: 25px; height: 3px; background: #fff; transition: 0.3s; }
+        .hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.active div:nth-child(2) { opacity: 0; }
+        .hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
 
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            transition: 0.3s;
-        }
-
-        @media (max-width: 800px) {
-            nav ul {
-                position: absolute;
-                top: 60px;
-                right: 0;
-                background: #111;
-                flex-direction: column;
-                width: 200px;
-                padding: 20px;
-                border-radius: 8px;
-                display: none;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            }
-
-            nav ul.show {
-                display: flex;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-        }
-
-        /* ---------------- MAIN CONTENT ---------------- */
+        /* ================== ABOUT HEADER ================== */
         .about-header {
             text-align: center;
             padding: 120px 20px 60px;
@@ -133,31 +180,16 @@
         .about-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+            inset: 0;
+            background: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
             opacity: 0.1;
             z-index: -1;
         }
 
-        .about-header h1 {
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
+        .about-header h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; }
+        .about-header p { color: #ddd; font-size: 18px; max-width: 700px; margin: 0 auto; line-height: 1.8; }
 
-        .about-header p {
-            color: #ddd;
-            font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
-
-        /* Stats Section */
+        /* ================== STATS ================== */
         .stats-section {
             background: #111;
             padding: 60px 20px;
@@ -167,27 +199,11 @@
             gap: 40px;
         }
 
-        .stat-item {
-            text-align: center;
-            flex: 1;
-            min-width: 200px;
-        }
+        .stat-item { text-align: center; flex: 1; min-width: 200px; }
+        .stat-number { font-size: 48px; font-weight: 700; color: #ffd700; margin-bottom: 10px; }
+        .stat-label { font-size: 16px; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
 
-        .stat-number {
-            font-size: 48px;
-            font-weight: 700;
-            color: #ffd700;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 16px;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* About Section */
+        /* ================== ABOUT SECTION ================== */
         .about-section {
             max-width: 1200px;
             margin: 0 auto;
@@ -199,11 +215,7 @@
             align-items: center;
         }
 
-        .about-image {
-            flex: 1 1 400px;
-            position: relative;
-        }
-
+        .about-image { flex: 1 1 400px; }
         .about-image img {
             width: 100%;
             border-radius: 15px;
@@ -211,15 +223,9 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: transform 0.5s ease;
         }
+        .about-image:hover img { transform: scale(1.02); }
 
-        .about-image:hover img {
-            transform: scale(1.02);
-        }
-
-        .about-text {
-            flex: 1 1 500px;
-        }
-
+        .about-text { flex: 1 1 500px; }
         .about-text h2 {
             font-size: 32px;
             margin-bottom: 25px;
@@ -227,1001 +233,79 @@
             position: relative;
             padding-bottom: 15px;
         }
-
+        
         .about-text h2::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
+            bottom: 0; left: 0;
+            width: 60px; height: 3px;
             background: #ffd700;
         }
+        .about-text p { margin-bottom: 20px; color: #ccc; font-size: 16px; line-height: 1.8; }
 
-        .about-text p {
-            margin-bottom: 20px;
-            color: #ccc;
-            font-size: 16px;
-            line-height: 1.8;
-        }
+        /* ================== TEAM SECTION ================== */
+        .team-section { padding: 100px 20px; max-width: 1400px; margin: 0 auto; }
 
-        /* Values Section - 2x2 Grid */
-        .values-section {
-            background: #0a0a0a;
-            padding: 80px 20px;
-        }
+        .section-header { text-align: center; margin-bottom: 70px; }
+        .section-subtitle { color: #ffd700; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 15px; display: block; }
+        .section-title { color: #fff; font-size: 48px; font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
+        .title-line { width: 100px; height: 4px; background: linear-gradient(90deg, #ffd700, #ffed4e); margin: 0 auto; border-radius: 2px; }
 
-        .values-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 50px;
-            font-weight: 600;
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .value-card {
-            background: linear-gradient(145deg, #111 0%, #1a1a1a 100%);
-            padding: 40px 30px;
-            border-radius: 20px;
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .value-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .value-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            border-color: rgba(255,215,0,0.1);
-        }
-
-        .value-card:hover::before {
-            opacity: 1;
-        }
-
-        .value-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,215,0,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            font-size: 32px;
-            color: #ffd700;
-            border: 2px solid rgba(255,215,0,0.2);
-            transition: all 0.3s;
-        }
-
-        .value-card:hover .value-icon {
-            background: #ffd700;
-            color: #000;
-            transform: scale(1.1);
-        }
-
-        .value-title {
-            font-size: 24px;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
-
-        .value-description {
-            color: #888;
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        /* Team Section */
-        .team-section {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-
-        .team-member {
-            text-align: center;
-        }
-
-        .member-photo {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            overflow: hidden;
-            border: 3px solid #ffd700;
-        }
-
-        .member-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .team-member:hover .member-photo img {
-            transform: scale(1.1);
-        }
-
-        .member-name {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .member-role {
-            color: #ffd700;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-
-        .member-bio {
-            color: #aaa;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* ================= COMPACT STUDIO GALLERY ================= */
-        .studio-gallery-section {
-            padding: 80px 20px;
-            background: #111;
-            position: relative;
-        }
-
-        .studio-gallery-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #ffd700, transparent);
-            opacity: 0.3;
-        }
-
-        .gallery-main-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery-header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .gallery-header h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .gallery-header p {
-            color: #888;
-            font-size: 16px;
-        }
-
-        /* Compact Gallery Layout */
-        .gallery-showcase {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 20px;
-            max-height: 500px;
-        }
-
-        .main-image-container {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            cursor: pointer;
-            background: #1a1a1a;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-        }
-
-        .main-image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .main-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-            display: block;
-        }
-
-        .main-image-container:hover .main-image {
-            transform: scale(1.05);
-        }
-
-        .cinematic-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, 
-                rgba(0,0,0,0.9) 0%, 
-                rgba(0,0,0,0.3) 50%, 
-                transparent 100%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 25px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .main-image-container:hover .cinematic-overlay {
-            opacity: 1;
-        }
-
-        .image-category {
-            display: inline-block;
-            padding: 5px 15px;
-            background: rgba(255,215,0,0.2);
-            color: #ffd700;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255,215,0,0.3);
-            transform: translateY(20px);
-            transition: transform 0.4s ease 0.1s;
-        }
-
-        .image-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            transform: translateY(20px);
-            transition: transform 0.4s ease 0.15s;
-        }
-
-        .image-description {
-            font-size: 14px;
-            color: #aaa;
-            line-height: 1.5;
-            transform: translateY(20px);
-            transition: transform 0.4s ease 0.2s;
-        }
-
-        .main-image-container:hover .image-category,
-        .main-image-container:hover .image-title,
-        .main-image-container:hover .image-description {
-            transform: translateY(0);
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: rgba(255,255,255,0.1);
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-            width: 0%;
-            transition: width 0.1s linear;
-        }
-
-        /* Thumbnails Grid */
-        .thumbnails-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-rows: repeat(3, 1fr);
-            gap: 12px;
-            height: 100%;
-        }
-
-        .thumbnail-item {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            background: #1a1a1a;
-        }
-
-        .thumbnail-item.active {
-            border-color: #ffd700;
-            box-shadow: 0 0 20px rgba(255,215,0,0.2);
-        }
-
-        .thumbnail-item:hover {
-            transform: scale(1.05);
-            z-index: 10;
-        }
-
-        .thumbnail-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.6;
-            transition: all 0.3s;
-        }
-
-        .thumbnail-item.active img,
-        .thumbnail-item:hover img {
-            opacity: 1;
-        }
-
-        .thumb-number {
-            position: absolute;
-            top: 8px;
-            left: 8px;
-            width: 24px;
-            height: 24px;
-            background: rgba(0,0,0,0.7);
-            color: #ffd700;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            font-weight: 700;
-            border: 1px solid rgba(255,215,0,0.3);
-        }
-
-        /* Counter */
-        .gallery-counter {
-            text-align: center;
-            margin-top: 25px;
-            font-size: 14px;
-            color: #666;
-        }
-
-        .gallery-counter span {
-            color: #ffd700;
-            font-size: 20px;
-            font-weight: 700;
-        }
-
-        /* ================= NEW: EQUIPMENT GRID SECTION ================= */
-        .equipment-section {
-            padding: 80px 20px;
-            background: #0a0a0a;
-            position: relative;
-        }
-
-        .equipment-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #444, transparent);
-        }
-
-        .equipment-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .equipment-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .equipment-header h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .equipment-header p {
-            color: #888;
-            font-size: 16px;
-        }
-
-        /* Symmetric Equipment Grid */
-        .equipment-symmetric-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .equipment-card {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: #111;
-            aspect-ratio: 4/3;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .equipment-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-            border-color: rgba(255,215,0,0.2);
-            z-index: 10;
-        }
-
-        .equipment-card.featured {
-            grid-column: span 2;
-            aspect-ratio: 16/9;
-        }
-
-        .equipment-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .equipment-card:hover img {
-            transform: scale(1.1);
-        }
-
-        /* Overlay */
-        .equipment-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, 
-                rgba(0,0,0,0.95) 0%, 
-                rgba(0,0,0,0.6) 40%, 
-                transparent 70%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 25px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .equipment-card:hover .equipment-overlay {
-            opacity: 1;
-        }
-
-        .equipment-tag {
-            display: inline-block;
-            padding: 6px 14px;
-            background: rgba(255,215,0,0.15);
-            color: #ffd700;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-            border: 1px solid rgba(255,215,0,0.3);
-            width: fit-content;
-            transform: translateY(15px);
-            transition: transform 0.4s ease 0.1s;
-        }
-
-        .equipment-name {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            transform: translateY(15px);
-            transition: transform 0.4s ease 0.15s;
-        }
-
-        .equipment-card.featured .equipment-name {
-            font-size: 28px;
-        }
-
-        .equipment-desc {
-            font-size: 14px;
-            color: #aaa;
-            transform: translateY(15px);
-            transition: transform 0.4s ease 0.2s;
-        }
-
-        .equipment-card:hover .equipment-tag,
-        .equipment-card:hover .equipment-name,
-        .equipment-card:hover .equipment-desc {
-            transform: translateY(0);
-        }
-
-        /* View Button */
-        .view-btn {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            width: 60px;
-            height: 60px;
-            background: rgba(255,215,0,0.95);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            font-size: 20px;
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
-        }
-
-        .equipment-card:hover .view-btn {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        /* Lightbox */
-        .gallery-lightbox {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.98);
-            backdrop-filter: blur(20px);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 3000;
-            padding: 40px;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .gallery-lightbox.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .lightbox-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .lightbox-image-container {
-            position: relative;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
-        }
-
-        .lightbox-content img {
-            max-width: 80vw;
-            max-height: 75vh;
-            display: block;
-        }
-
-        .lightbox-close {
-            position: absolute;
-            top: -50px;
-            right: 0;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 35px;
-            cursor: pointer;
-            transition: all 0.3s;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-
-        .lightbox-close:hover {
-            color: #ffd700;
-            background: rgba(255,215,0,0.1);
-            transform: rotate(90deg);
-        }
-
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            pointer-events: none;
-        }
-
-        .lightbox-nav button {
-            background: rgba(255,215,0,0.1);
-            border: 2px solid rgba(255,215,0,0.3);
-            color: #ffd700;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 20px;
-            transition: all 0.3s;
-            pointer-events: all;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .lightbox-nav button:hover {
-            background: #ffd700;
-            color: #000;
-            border-color: #ffd700;
-        }
-
-        .lightbox-info {
-            margin-top: 25px;
-            text-align: center;
-        }
-
-        .lightbox-info h3 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #ffd700;
-            margin-bottom: 8px;
-        }
-
-        .lightbox-info p {
-            color: #888;
-            font-size: 16px;
-        }
-
-        /* ---------------- FOOTER ---------------- */
-        footer {
-            background: #111;
-            color: #fff;
-            text-align: center;
-            padding: 60px 20px 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        /* ---------------- RESPONSIVE ---------------- */
-        @media (max-width: 1024px) {
-            .gallery-showcase {
-                grid-template-columns: 1fr;
-                max-height: none;
-            }
-
-            .thumbnails-grid {
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(2, 120px);
-                margin-top: 20px;
-            }
-
-            .equipment-symmetric-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .equipment-card.featured {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .about-section {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .about-header h1 {
-                font-size: 36px;
-            }
-
-            .values-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-            }
-
-            .section-title {
-                font-size: 28px;
-            }
-
-            .equipment-symmetric-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .equipment-card.featured {
-                grid-column: span 1;
-                aspect-ratio: 4/3;
-            }
-        }
-        
-        @media (max-width: 600px) {
-            header {
-                padding: 15px 20px;
-            }
-            
-            .about-header {
-                padding: 100px 20px 40px;
-            }
-
-            .thumbnails-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: repeat(3, 100px);
-            }
-
-            .image-title {
-                font-size: 18px;
-            }
-
-            .cinematic-overlay {
-                opacity: 1;
-                padding: 20px;
-            }
-
-            .image-category,
-            .image-title,
-            .image-description {
-                transform: translateY(0);
-            }
-
-            .gallery-header h2,
-            .equipment-header h2 {
-                font-size: 28px;
-            }
-
-            .equipment-card.featured .equipment-name {
-                font-size: 20px;
-            }
-        }
-
-        /* Map */
-        .contact-map {
-            opacity: 0;
-            transform: translateY(40px) scale(0.98);
-            transition: opacity 1s ease, transform 1s ease;
-        }
-
-        .contact-map.visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        #map {
-            filter: grayscale(40%) contrast(110%) brightness(80%);
-            height: 400px;
-        }
-
-        header {
-    height: 80px;
-}
-
-.logo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.logo p {
-    font-size: 11px;
-    line-height: 1;
-    opacity: 0.7;
-    color: #aaa;
-}
-
-
-/* Import Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
-
-
-        /* Team Section */
-        .team-section {
-            padding: 100px 20px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 70px;
-        }
-
-        .section-subtitle {
-            color: #ffd700;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .section-title {
-            color: #ffffff;
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .title-line {
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #ffd700, #ffed4e);
-            margin: 0 auto;
-            border-radius: 2px;
-        }
-
-        /* Team Grid - 4 Cards */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            margin-bottom: 60px;
-        }
+        .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 30px; margin-bottom: 60px; }
 
         .team-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255,255,255,0.03);
             border-radius: 20px;
             overflow: hidden;
-            border: 1px solid rgba(255, 215, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,215,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);
             position: relative;
         }
 
         .team-card::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
             transition: left 0.7s;
         }
 
-        .team-card:hover::before {
-            left: 100%;
-        }
+        .team-card:hover::before { left: 100%; }
+        .team-card:hover { transform: translateY(-15px); border-color: rgba(255,215,0,0.5); box-shadow: 0 20px 60px rgba(255,215,0,0.2); }
 
-        .team-card:hover {
-            transform: translateY(-15px);
-            border-color: rgba(255, 215, 0, 0.5);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
-        }
-
-        .card-image-wrapper {
-            position: relative;
-            height: 380px;
-            overflow: hidden;
-        }
-
-        .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .team-card:hover .card-image {
-            transform: scale(1.1);
-        }
-
-        .card-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: #ffd700;
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            z-index: 2;
-        }
+        .card-image-wrapper { position: relative; height: 380px; overflow: hidden; }
+        .card-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .team-card:hover .card-image { transform: scale(1.1); }
 
         .card-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
             padding: 30px;
             transform: translateY(100%);
             transition: transform 0.4s ease;
         }
+        .team-card:hover .card-overlay { transform: translateY(0); }
 
-        .team-card:hover .card-overlay {
-            transform: translateY(0);
-        }
-
-        .social-links {
-            display: flex;
-            gap: 12px;
-        }
-
+        .social-links { display: flex; gap: 12px; }
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 40px; height: 40px;
             border-radius: 50%;
-            background: rgba(255, 215, 0, 0.9);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: rgba(255,215,0,0.9);
+            display: flex; align-items: center; justify-content: center;
             color: #000;
             text-decoration: none;
             transition: all 0.3s ease;
             font-size: 16px;
         }
+        .social-link:hover { background: #fff; transform: translateY(-3px); }
 
-        .social-link:hover {
-            background: #fff;
-            transform: translateY(-3px);
-        }
+        .card-content { padding: 25px; text-align: center; }
+        .card-role { color: #ffd700; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .card-bio { color: #888; font-size: 13px; line-height: 1.6; }
 
-        .card-content {
-            padding: 25px;
-            text-align: center;
-        }
-
-        .card-name {
-            color: #ffffff;
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .card-role {
-            color: #ffd700;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-
-        .card-bio {
-            color: #888;
-            font-size: 13px;
-            line-height: 1.6;
-        }
-
-        /* BTS Button */
-        .bts-container {
-            text-align: center;
-            margin-top: 50px;
-        }
-
+        .bts-container { text-align: center; margin-top: 50px; }
         .bts-button {
             display: inline-flex;
             align-items: center;
@@ -1237,105 +321,58 @@
             letter-spacing: 2px;
             cursor: pointer;
             transition: all 0.4s ease;
-            box-shadow: 0 10px 40px rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(255,215,0,0.3);
         }
+        .bts-button:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(255,215,0,0.5); }
+        .bts-button i { font-size: 20px; }
 
-        .bts-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.5);
-        }
-
-        .bts-button i {
-            font-size: 20px;
-        }
-
-        /* Modal Styles */
+        /* ================== BTS MODAL ================== */
         .modal-overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.95);
+            inset: 0;
+            background: rgba(0,0,0,0.95);
             z-index: 10000;
             overflow-y: auto;
             animation: fadeIn 0.4s ease;
         }
-
-        .modal-overlay.active {
-            display: flex;
-            flex-direction: column;
-        }
+        .modal-overlay.active { display: flex; flex-direction: column; }
 
         .modal-header {
             position: sticky;
             top: 0;
-            background: rgba(12, 12, 12, 0.98);
+            background: rgba(12,12,12,0.98);
             padding: 30px 50px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            border-bottom: 1px solid rgba(255,215,0,0.2);
             z-index: 100;
             backdrop-filter: blur(10px);
         }
-
-        .modal-title {
-            color: #ffffff;
-            font-size: 32px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .modal-subtitle {
-            color: #ffd700;
-            font-size: 14px;
-            margin-top: 5px;
-        }
+        .modal-title { color: #fff; font-size: 32px; font-weight: 700; text-transform: uppercase; }
+        .modal-subtitle { color: #ffd700; font-size: 14px; margin-top: 5px; }
 
         .close-modal {
-            width: 50px;
-            height: 50px;
+            width: 50px; height: 50px;
             border-radius: 50%;
-            background: rgba(255, 215, 0, 0.1);
+            background: rgba(255,215,0,0.1);
             border: 2px solid #ffd700;
             color: #ffd700;
             font-size: 24px;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
         }
+        .close-modal:hover { background: #ffd700; color: #000; transform: rotate(90deg); }
 
-        .close-modal:hover {
-            background: #ffd700;
-            color: #000;
-            transform: rotate(90deg);
-        }
+        .modal-content { flex: 1; padding: 50px; max-width: 1400px; margin: 0 auto; width: 100%; }
 
-        .modal-content {
-            flex: 1;
-            padding: 50px;
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        /* Filter Tabs */
-        .filter-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 50px;
-            flex-wrap: wrap;
-        }
-
+        .filter-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 50px; flex-wrap: wrap; }
         .filter-tab {
             padding: 12px 30px;
             background: transparent;
-            border: 2px solid rgba(255, 215, 0, 0.3);
+            border: 2px solid rgba(255,215,0,0.3);
             color: #fff;
             border-radius: 30px;
             cursor: pointer;
@@ -1346,21 +383,9 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
         }
+        .filter-tab:hover, .filter-tab.active { background: #ffd700; border-color: #ffd700; color: #000; transform: translateY(-3px); }
 
-        .filter-tab:hover,
-        .filter-tab.active {
-            background: #ffd700;
-            border-color: #ffd700;
-            color: #000;
-            transform: translateY(-3px);
-        }
-
-        /* Portfolio Grid in Modal */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-        }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px,1fr)); gap: 30px; }
 
         .portfolio-item {
             position: relative;
@@ -1368,389 +393,212 @@
             overflow: hidden;
             aspect-ratio: 16/10;
             cursor: pointer;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255,255,255,0.05);
             transition: all 0.4s ease;
         }
+        .portfolio-item.hidden { display: none; }
+        .portfolio-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(255,215,0,0.2); }
 
-        .portfolio-item.hidden {
-            display: none;
-        }
-
-        .portfolio-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.2);
-        }
-
-        .portfolio-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .portfolio-item:hover .portfolio-image {
-            transform: scale(1.1);
-        }
+        .portfolio-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+        .portfolio-item:hover .portfolio-image { transform: scale(1.1); }
 
         .portfolio-overlay {
             position: absolute;
             inset: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
+            display: flex; flex-direction: column; justify-content: flex-end;
             padding: 25px;
             opacity: 0;
             transition: opacity 0.4s ease;
         }
+        .portfolio-item:hover .portfolio-overlay { opacity: 1; }
 
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
+        .portfolio-category { display: inline-block; background: #ffd700; color: #000; padding: 5px 15px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; width: fit-content; }
+        .portfolio-title { color: #fff; font-size: 20px; font-weight: 700; margin-bottom: 5px; }
+        .portfolio-date { color: #888; font-size: 13px; }
 
-        .portfolio-category {
-            display: inline-block;
-            background: #ffd700;
-            color: #000;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            width: fit-content;
-        }
-
-        .portfolio-title {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .portfolio-date {
-            color: #888;
-            font-size: 13px;
-        }
-
-        .portfolio-actions {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-        }
-
+        .portfolio-actions { position: absolute; top: 20px; right: 20px; display: flex; gap: 10px; }
         .action-btn {
-            width: 45px;
-            height: 45px;
+            width: 45px; height: 45px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.95);
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: rgba(255,255,255,0.95);
+            border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
             transition: all 0.3s ease;
-            font-size: 16px;
-            color: #000;
+            font-size: 16px; color: #000;
         }
-
-        .action-btn:hover {
-            background: #ffd700;
-            transform: scale(1.1);
-        }
+        .action-btn:hover { background: #ffd700; transform: scale(1.1); }
 
         .video-badge {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px;
-            height: 80px;
-            background: rgba(255, 215, 0, 0.9);
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            width: 80px; height: 80px;
+            background: rgba(255,215,0,0.9);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; color: #000;
             transition: all 0.3s ease;
         }
+        .portfolio-item:hover .video-badge { transform: translate(-50%,-50%) scale(1.1); box-shadow: 0 0 40px rgba(255,215,0,0.6); }
 
-        .portfolio-item:hover .video-badge {
-            transform: translate(-50%, -50%) scale(1.1);
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.6);
-        }
-
-        /* Lightbox */
-        .lightbox {
+        /* ================== IMAGE LIGHTBOX ================== */
+        .lightbox-modal {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.98);
             z-index: 10001;
-            align-items: center;
-            justify-content: center;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            animation: fadeIn 0.3s;
         }
+        .lightbox-modal.active { display: flex; align-items: center; justify-content: center; }
 
-        .lightbox.active {
-            display: flex;
-        }
+        .lightbox-content { max-width: 90%; max-height: 80vh; object-fit: contain; border-radius: 8px; }
 
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
-            border-radius: 10px;
-            animation: zoomIn 0.3s ease;
-        }
+        .lightbox-caption { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); color: #fff; font-size: 18px; text-align: center; }
 
         .lightbox-close {
             position: absolute;
-            top: 30px;
-            right: 40px;
+            top: 20px; right: 40px;
+            color: #fff; font-size: 50px;
+            font-weight: bold; cursor: pointer;
+            z-index: 10002;
+            transition: color 0.3s;
+        }
+        .lightbox-close:hover { color: #ffd700; }
+
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%; transform: translateY(-50%);
+            background: rgba(255,215,0,0.8);
+            color: #000; border: none;
+            padding: 20px 15px;
+            font-size: 30px; cursor: pointer;
+            border-radius: 5px; transition: all 0.3s;
+        }
+        .lightbox-prev:hover, .lightbox-next:hover { background: #ffd700; }
+        .lightbox-prev { left: 20px; }
+        .lightbox-next { right: 20px; }
+
+        /* ================== VIDEO MODAL ================== */
+        .video-modal {
+            display: none;
+            position: fixed;
+            z-index: 10001;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            animation: fadeIn 0.3s;
+        }
+        .video-modal.active { display: flex; align-items: center; justify-content: center; }
+
+        .video-modal-content {
+            position: relative;
+            width: 90%; max-width: 900px;
+            background: #000; border-radius: 10px; overflow: hidden;
+        }
+        .video-close {
+            position: absolute;
+            top: 10px; right: 20px;
+            color: #fff; font-size: 40px;
+            font-weight: bold; cursor: pointer;
+            z-index: 10002; transition: color 0.3s;
+        }
+        .video-close:hover { color: #ffd700; }
+        #videoContainer video { width: 100%; height: 500px; border: none; }
+
+        /* ================== FOOTER ================== */
+        footer {
+            background: linear-gradient(180deg, #111 0%, #000 100%);
             color: #fff;
-            font-size: 50px;
-            cursor: pointer;
-            transition: color 0.3s ease;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            margin-top: 60px;
         }
 
-        .lightbox-close:hover {
-            color: #ffd700;
+        .footer-logo-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 14px;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .footer-logo-wrap .logo-icon-wrap { width: 30px; height: 30px; }
+        .footer-logo-text { font-size: 1.3rem; font-weight: 700; color: #D4AF37; }
+        footer p { color: #C0C0C0; font-size: 0.85rem; margin-top: 6px; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* ================== RESPONSIVE ================== */
+        @media (max-width: 1200px) { .team-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 800px) {
+            header { padding: 0 20px; }
+            nav ul {
+                position: fixed;
+                top: 0; right: -100%;
+                background: #111;
+                flex-direction: column;
+                width: 280px; height: 100vh;
+                padding: 100px 30px 30px;
+                transition: 0.4s;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+            }
+            nav ul.show { right: 0; }
+            .hamburger { display: flex; }
+            .about-header h1 { font-size: 36px; }
+            .section-title { font-size: 36px; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .modal-header { padding: 20px 30px; }
+            .modal-content { padding: 30px 20px; }
         }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        @media (max-width: 600px) {
+            header { padding: 0 15px; }
+            .team-grid { grid-template-columns: 1fr; }
         }
-
-        /* Responsive */
-        @media (max-width: 1200px) {
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .section-title {
-                font-size: 36px;
-            }
-            
-            .modal-header {
-                padding: 20px 30px;
-            }
-            
-            .modal-content {
-                padding: 30px 20px;
-            }
-            
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-
-
-        /* Lightbox Modal Styles */
-.lightbox-modal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    animation: fadeIn 0.3s;
-}
-
-.lightbox-modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox-content {
-    max-width: 90%;
-    max-height: 80vh;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
-.lightbox-caption {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-size: 18px;
-    text-align: center;
-}
-
-.lightbox-close {
-    position: absolute;
-    top: 20px;
-    right: 40px;
-    color: #fff;
-    font-size: 50px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10001;
-}
-
-.lightbox-close:hover {
-    color: #ffd700;
-}
-
-.lightbox-prev,
-.lightbox-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 215, 0, 0.8);
-    color: #000;
-    border: none;
-    padding: 20px 15px;
-    font-size: 30px;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: all 0.3s;
-}
-
-.lightbox-prev:hover,
-.lightbox-next:hover {
-    background: #ffd700;
-}
-
-.lightbox-prev {
-    left: 20px;
-}
-
-.lightbox-next {
-    right: 20px;
-}
-
-/* Video Modal Styles */
-.video-modal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.95);
-    animation: fadeIn 0.3s;
-}
-
-.video-modal.active {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.video-modal-content {
-    position: relative;
-    width: 90%;
-    max-width: 900px;
-    background: #000;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.video-close {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10001;
-}
-
-.video-close:hover {
-    color: #ffd700;
-}
-
-#videoContainer video,
-#videoContainer iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@media (max-width: 768px) {
-    .lightbox-content {
-        max-width: 95%;
-    }
-    
-    #videoContainer video,
-    #videoContainer iframe {
-        height: 300px;
-    }
-    
-    .lightbox-prev,
-    .lightbox-next {
-        padding: 10px 10px;
-        font-size: 20px;
-    }
-}
-
     </style>
 </head>
 
 <body>
 
-<header>
+<!-- ================== HEADER ================== -->
+<header id="header">
     <div class="logo">
         <a href="index.html">
-            <i></i> MHG Studio
+            <div class="logo-icon-wrap">
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <div class="logo-sphere"></div>
+                <div class="logo-orbit"></div>
+            </div>
+            <div class="logo-text-wrap">
+                <span class="logo-name">MHG Studio</span>
+                <span class="logo-sub">Контент для бизнеса</span>
+            </div>
         </a>
-        <p>Контент для бизнеса</p>
     </div>
     <nav>
-        <div class="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
         </div>
         <ul id="nav-links">
             <li><a href="index.html">Главная</a></li>
             <li><a href="portfolio.html">Портфолио</a></li>
             <li><a href="services.html">Услуги</a></li>
-            <li><a href="about.html">О нас</a></li>
+            <li><a href="about.html" class="active">О нас</a></li>
             <li><a href="contact.html">Контакты</a></li>
         </ul>
     </nav>
 </header>
 
-<!-- ABOUT HEADER -->
+<!-- ================== ABOUT HEADER ================== -->
 <div class="about-header">
     <h1>О нас</h1>
     <p>MHG Studio — это профессиональная команда, создающая уникальный видеоконтент, фотосессии и рекламные проекты под ключ.</p>
 </div>
 
-<!-- STATS SECTION -->
+<!-- ================== STATS ================== -->
 <div class="stats-section">
     <div class="stat-item">
         <div class="stat-number">150+</div>
@@ -1770,484 +618,274 @@
     </div>
 </div>
 
-<!-- ABOUT SECTION -->
+<!-- ================== ABOUT SECTION ================== -->
 <div class="about-section">
     <div class="about-image">
         <img src="large.jpg" alt="MHG Studio Team">
     </div>
     <div class="about-text">
-        <h2>Для кого мы работаем ?</h2>
+        <h2>Для кого мы работаем?</h2>
         <p>эксперты и спикеры • предприниматели и стартапы • онлайн-школы • бренды и e-commerce • агентства • корпоративные клиенты</p>
-        
-        <h2>Как проходит работа ... </h2>
+        <h2>Как проходит работа...</h2>
         <p>1. Описание задачи → 2. Предложение решения → 3. Подготовка → 4. Съёмка → 5. Готовый материал</p>
-
-        <h2>Техника и база !</h2>
+        <h2>Техника и база!</h2>
         <p>Профессиональные камеры Panasonic, освещение Aputure, звук Sennheiser, монтаж на Mac Pro</p>
     </div>
 </div>
 
-<!-- VALUES SECTION - 2x2 Grid 
-<div class="values-section">
-    <div class="values-container">
-        <h2 class="section-title">Наши ценности</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <div class="value-icon">
-                    <i class="fas fa-medal"></i>
-                </div>
-                <h3 class="value-title">Качество</h3>
-                <p class="value-description">Высочайшие стандарты на всех этапах производства контента</p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3 class="value-title">Креативность</h3>
-                <p class="value-description">Уникальные идеи и свежий взгляд на каждый проект</p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3 class="value-title">Командная работа</h3>
-                <p class="value-description">Слаженная работа профессионалов для идеального результата</p>
-            </div>
-            <div class="value-card">
-                <div class="value-icon">
-                    <i class="fas fa-heart"></i>
-                </div>
-                <h3 class="value-title">Страсть к делу</h3>
-                <p class="value-description">Любовь к своей работе в каждом кадре</p>
-            </div>
-        </div>
+<!-- ================== TEAM SECTION ================== -->
+<section class="team-section">
+    <div class="section-header">
+        <span class="section-subtitle">Профессионалы своего дела</span>
+        <h2 class="section-title">Наша команда</h2>
+        <div class="title-line"></div>
     </div>
-</div>
+
+    <div class="team-grid">
+        <div class="team-card">
+            <div class="card-image-wrapper">
+                <img src="firas.jpg" alt="Фирас" class="card-image">
+    <!--
+              
+                <div class="card-overlay">
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-content">
+              
+                <p class="card-role">Основатель и режиссёр</p>
+                <p class="card-bio">7+ лет в видеопроизводстве, креативное видение студии</p>
+            </div>
+ -->
+        </div>
+        <div class="team-card">
+            <div class="card-image-wrapper">
+                <img src="raed.jpg" alt="Раед" class="card-image">
+<!--  
+                <div class="card-overlay">
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <p class="card-role">Фотограф и оператор</p>
+                <p class="card-bio">Специалист по портретной и коммерческой съёмке</p>
+            </div>
 -->
-
-
-
-<!-- TEAM SECTION -->
-
-
-    <section class="team-section">
-        <div class="section-header">
-            <span class="section-subtitle">Профессионалы своего дела</span>
-            <h2 class="section-title">Наша команда</h2>
-            <div class="title-line"></div>
         </div>
-
-        <div class="team-grid">
-            <!-- Card 1 -->
-            <div class="team-card">
-                <div class="card-image-wrapper">
-                    <img src="firas.jpg" alt="Фирас" class="card-image">
-                    <div class="card-overlay">
-                        <!-- 
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                        -->
-                    </div>
-                </div>
-                <div class="card-content">
-                    <!-- 
-                    <h3 class="card-name">Фирас</h3>
-                    -->
-                    <p class="card-role">Основатель и режиссёр</p>
-                    <p class="card-bio">7+ лет в видеопроизводстве, креативное видение студии</p>
-                </div>
-            </div>
-
-            <!-- Card 2 -->
-            <div class="team-card">
-                <div class="card-image-wrapper">
-                    <img src="raed.jpg" alt="Раед" class="card-image">
-                    <div class="card-overlay">
-                        <!-- 
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                        -->
-                    </div>
-                </div>
-                <div class="card-content">
-                    <!-- 
-                    <h3 class="card-name">Раед</h3>
-                    -->
-                    <p class="card-role">Фотограф и оператор</p>
-                    <p class="card-bio">Специалист по портретной и коммерческой съёмке</p>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="team-card">
-                <div class="card-image-wrapper">
-                    <img src="moxamad.jpg" alt="Мухамад" class="card-image">
-                    <div class="card-overlay">
-                        <!-- 
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                        -->
-                    </div>
-                </div>
-                <div class="card-content">
-                    <!--
-                    <h3 class="card-name">Мухамад</h3>
-                     -->
-                    <p class="card-role">Монтажёр и VFX</p>
-                    <p class="card-bio">Постпродакшн и визуальные эффекты</p>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="team-card">
-                <div class="card-image-wrapper">
-                    <img src="yaraslaf.jpg" alt="Ярослав" class="card-image">
-                    <div class="card-overlay">
-                        <!-- 
-                        <div class="social-links">
-                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
-                            <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
-                        </div>
-                        -->
-                    </div>
-                </div>
-                <div class="card-content">
-                    <!-- 
-                    <h3 class="card-name">Ярослав</h3>
-                    -->
-                    <p class="card-role">Продюсер</p>
-                    <p class="card-bio">Управление проектами и клиентский сервис</p>
-                </div>
-            </div>
-        </div>
-<!-- 
-        <div class="bts-container">
-            <button class="bts-button" onclick="openModal()">
-                <i class="fas fa-camera-retro"></i>
-                За кулисами
-            </button>
-        </div>
-        -->
-    </section>
-
-    <!-- Modal -->
-    <div class="modal-overlay" id="btsModal">
-        <div class="modal-header">
-            <div>
-                <h2 class="modal-title">За кулисами</h2>
-                <p class="modal-subtitle">Как мы создаём магию</p>
-            </div>
-            <button class="close-modal" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <div class="modal-content">
-            <!-- Filter Tabs -->
-            <div class="filter-tabs">
-                <button class="filter-tab active" onclick="filterItems('all')">Все</button>
-                <button class="filter-tab" onclick="filterItems('photo')">Фотографии</button>
-                <button class="filter-tab" onclick="filterItems('video')">Видео</button>
-                <button class="filter-tab" onclick="filterItems('process')">Процесс</button>
-            </div>
-
-            <!-- Portfolio Grid -->
-            <div class="portfolio-grid">
-                <!-- Video 1 -->
-                <!-- للفيديو -->
-                <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(1)">
-                    <video class="portfolio-image" muted>
-                        <source src="bakctage/vid_1.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-badge">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Видео</span>
-                        <h3 class="portfolio-title">Съёмочный день</h3>
-                        <p class="portfolio-date">Январь 2026</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(1)">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-             <!-- photo 1 -->
-<div class="portfolio-item" data-category="photo">
-    <img src="bakctage/ph_1.jpg" alt="Настройка студии" class="portfolio-image">
-    <div class="portfolio-overlay">
-        <span class="portfolio-category">Фото</span>
-        <h3 class="portfolio-title">Настройка студии</h3>
-        <p class="portfolio-date">Февраль 2026</p>
-    </div>
-    <div class="portfolio-actions">
-        <button class="action-btn" onclick="openPortfolioImageLightbox(0)">
-
-    <i class="fas fa-expand"></i>
-</button>
-    </div>
-</div>
-
-<!-- photo 2 -->
-<div class="portfolio-item" data-category="process">
-    <img src="bakctage/ph_2.jpg" alt="Подготовка оборудования" class="portfolio-image">
-    <div class="portfolio-overlay">
-        <span class="portfolio-category">Процесс</span>
-        <h3 class="portfolio-title">Подготовка оборудования</h3>
-        <p class="portfolio-date">Декабрь 2025</p>
-    </div>
-    <div class="portfolio-actions">
-        <button class="action-btn" onclick="openPortfolioImageLightbox(1)">
-            <i class="fas fa-expand"></i>
-        </button>
-    </div>
-</div>
-
-<!-- photo 3 -->
-<div class="portfolio-item" data-category="photo">
-    <img src="bakctage/ph_3.jpg" alt="Командная работа" class="portfolio-image">
-    <div class="portfolio-overlay">
-        <span class="portfolio-category">Фото</span>
-        <h3 class="portfolio-title">Командная работа</h3>
-        <p class="portfolio-date">Ноябрь 2025</p>
-    </div>
-    <div class="portfolio-actions">
-        <button class="action-btn" onclick="openPortfolioImageLightbox(2)">
-            <i class="fas fa-expand"></i>
-        </button>
-    </div>
-</div>
-
-<!-- photo 4 -->
-<div class="portfolio-item" data-category="process">
-    <img src="bakctage/ph_4.jpg" alt="Работа со светом" class="portfolio-image">
-    <div class="portfolio-overlay">
-        <span class="portfolio-category">Процесс</span>
-        <h3 class="portfolio-title">Работа со светом</h3>
-        <p class="portfolio-date">Октябрь 2025</p>
-    </div>
-    <div class="portfolio-actions">
-        <button class="action-btn" onclick="openPortfolioImageLightbox(3)">
-            <i class="fas fa-expand"></i>
-        </button>
-    </div>
-</div>
-
-                <!-- Video 2 -->
-                <div class="portfolio-item" data-category="video">
-                    <video class="portfolio-image" muted>
-                        <source src="bakctage/vid_2.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-badge">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Видео</span>
-                        <h3 class="portfolio-title">Финальный монтаж</h3>
-                        <p class="portfolio-date">Сентябрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="alert('Открыть видео')">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-                <!--  Video  3 -->
-                <div class="portfolio-item" data-category="video">
-                    <video class="portfolio-image" muted>
-                         <source src="bakctage/vid_3.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-badge">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Видео</span>
-                        <h3 class="portfolio-title">Финальный монтаж</h3>
-                        <p class="portfolio-date">Сентябрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="alert('Открыть видео')">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-                <!--  - Video 4 -->
-                <div class="portfolio-item" data-category="video">
-                    <video class="portfolio-image" muted>
-                         <source src="bakctage/vid_4.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-badge">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Видео</span>
-                        <h3 class="portfolio-title">Финальный монтаж</h3>
-                        <p class="portfolio-date">Сентябрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="alert('Открыть видео')">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-                <!--  Video 5 -->
-                <div class="portfolio-item" data-category="video">
-                    <video class="portfolio-image" muted>
-                         <source src="bakctage/vid_5.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-badge">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Видео</span>
-                        <h3 class="portfolio-title">Финальный монтаж</h3>
-                        <p class="portfolio-date">Сентябрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="alert('Открыть видео')">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-                <!--  Video 6  -->
-                <div class="portfolio-item" data-category="video">
-                    <video class="portfolio-image" muted>
-                         <source src="bakctage/vid_6.mp4" type="video/mp4">
-                    </video>
-                    <div class="video-badge">
-                        <i class="fas fa-play"></i>
-                    </div>
-                    <div class="portfolio-overlay">
-                        <span class="portfolio-category">Видео</span>
-                        <h3 class="portfolio-title">Финальный монтаж</h3>
-                        <p class="portfolio-date">Сентябрь 2025</p>
-                    </div>
-                    <div class="portfolio-actions">
-                        <button class="action-btn" onclick="alert('Открыть видео')">
-                            <i class="fas fa-play"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-<!-- COMPACT STUDIO GALLERY 
-<section class="studio-gallery-section">
-    <div class="gallery-main-container">
-        <div class="gallery-header">
-            <h2>Наши студии</h2>
-            <p>Профессиональные пространства для создания контента мирового уровня</p>
-        </div>
-        
-        <div class="gallery-showcase" id="studioGallery">
-            <div class="main-image-container" onclick="openLightbox(currentIndex)">
-                <div class="main-image-wrapper">
-                    <img src="" alt="" class="main-image" id="mainImage">
-                    <div class="cinematic-overlay">
-                        <span class="image-category" id="mainCategory">Категория</span>
-                        <h3 class="image-title" id="mainTitle">Название</h3>
-                        <p class="image-description" id="mainDesc">Описание</p>
-                    </div>
-                    <div class="progress-container">
-                        <div class="progress-bar" id="progressBar"></div>
+        <div class="team-card">
+            <div class="card-image-wrapper">
+                <img src="moxamad.jpg" alt="Мухамад" class="card-image">
+ <!--                
+                <div class="card-overlay">
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
             </div>
 
-            <div class="thumbnails-grid" id="thumbnailsContainer">
-
+            <div class="card-content">
+                <p class="card-role">Монтажёр и VFX</p>
+                <p class="card-bio">Постпродакшн и визуальные эффекты</p>
             </div>
-        </div>
-
-        <div class="gallery-counter">
-            <span id="currentNum">1</span> / <span id="totalNum">6</span>
-        </div>
-    </div>
 -->
+        </div>
+        <div class="team-card">
+            <div class="card-image-wrapper">
+                <img src="yaraslaf.jpg" alt="Ярослав" class="card-image">
+  <!--               
+                <div class="card-overlay">
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-content">
+                <p class="card-role">Продюсер</p>
+                <p class="card-bio">Управление проектами и клиентский сервис</p>
+            </div>
+-->
+        </div>
+    </div>
+
+    <div class="bts-container">
+        <button class="bts-button" onclick="openModal()">
+            <i class="fas fa-camera-retro"></i>
+            За кулисами
+        </button>
+    </div>
 </section>
 
-<!-- NEW EQUIPMENT GRID 
-<section class="equipment-section">
-    <div class="equipment-container">
-        <div class="equipment-header">
-            <h2>Профессиональное оборудование</h2>
-            <p>Только проверенная техника ведущих мировых брендов</p>
+<!-- ================== BTS MODAL ================== -->
+<div class="modal-overlay" id="btsModal">
+    <div class="modal-header">
+        <div>
+            <h2 class="modal-title">За кулисами</h2>
+            <p class="modal-subtitle">Как мы создаём магию</p>
         </div>
-        
-        <div class="equipment-symmetric-grid" id="equipmentGrid">
-
-        </div>
+        <button class="close-modal" onclick="closeModal()"><i class="fas fa-times"></i></button>
     </div>
--->
-
-</section>
-
-<!-- Lightbox -->
-<div class="gallery-lightbox" id="lightbox" onclick="closeLightbox(event)">
-    <div class="lightbox-content">
-        <button class="lightbox-close" onclick="closeLightbox(event)">
-            <i class="fas fa-times"></i>
-        </button>
-        
-        <div class="lightbox-image-container">
-            <img src="" alt="" id="lightboxImage">
-            <div class="lightbox-nav">
-                <button onclick="navigateLightbox(-1); event.stopPropagation();">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                <button onclick="navigateLightbox(1); event.stopPropagation();">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+    <div class="modal-content">
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterItems('all')">Все</button>
+            <button class="filter-tab" onclick="filterItems('photo')">Фотографии</button>
+            <button class="filter-tab" onclick="filterItems('video')">Видео</button>
+            <button class="filter-tab" onclick="filterItems('process')">Процесс</button>
+        </div>
+        <div class="portfolio-grid">
+            <!-- Video 1 -->
+            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(0)">
+                <video class="portfolio-image" muted><source src="bakctage/vid_1.mp4" type="video/mp4"></video>
+                <div class="video-badge"><i class="fas fa-play"></i></div>
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Видео</span>
+                    <h3 class="portfolio-title">Съёмочный день</h3>
+                    <p class="portfolio-date">Январь 2026</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(0)"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+            <!-- Photo 1 -->
+            <div class="portfolio-item" data-category="photo" onclick="openPortfolioImageLightbox(0)">
+                <img src="bakctage/ph_1.jpg" alt="Настройка студии" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Фото</span>
+                    <h3 class="portfolio-title">Настройка студии</h3>
+                    <p class="portfolio-date">Февраль 2026</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(0)"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+            <!-- Photo 2 -->
+            <div class="portfolio-item" data-category="process" onclick="openPortfolioImageLightbox(1)">
+                <img src="bakctage/ph_2.jpg" alt="Подготовка оборудования" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Процесс</span>
+                    <h3 class="portfolio-title">Подготовка оборудования</h3>
+                    <p class="portfolio-date">Декабрь 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(1)"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+            <!-- Photo 3 -->
+            <div class="portfolio-item" data-category="photo" onclick="openPortfolioImageLightbox(2)">
+                <img src="bakctage/ph_3.jpg" alt="Командная работа" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Фото</span>
+                    <h3 class="portfolio-title">Командная работа</h3>
+                    <p class="portfolio-date">Ноябрь 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(2)"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+            <!-- Photo 4 -->
+            <div class="portfolio-item" data-category="process" onclick="openPortfolioImageLightbox(3)">
+                <img src="bakctage/ph_4.jpg" alt="Работа со светом" class="portfolio-image">
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Процесс</span>
+                    <h3 class="portfolio-title">Работа со светом</h3>
+                    <p class="portfolio-date">Октябрь 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openPortfolioImageLightbox(3)"><i class="fas fa-expand"></i></button>
+                </div>
+            </div>
+            <!-- Video 2 -->
+            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(1)">
+                <video class="portfolio-image" muted><source src="bakctage/vid_2.mp4" type="video/mp4"></video>
+                <div class="video-badge"><i class="fas fa-play"></i></div>
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Видео</span>
+                    <h3 class="portfolio-title">Финальный монтаж</h3>
+                    <p class="portfolio-date">Сентябрь 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(1)"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+            <!-- Video 3 -->
+            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(2)">
+                <video class="portfolio-image" muted><source src="bakctage/vid_3.mp4" type="video/mp4"></video>
+                <div class="video-badge"><i class="fas fa-play"></i></div>
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Видео</span>
+                    <h3 class="portfolio-title">Рабочий процесс</h3>
+                    <p class="portfolio-date">Август 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(2)"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+            <!-- Video 4 -->
+            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(3)">
+                <video class="portfolio-image" muted><source src="bakctage/vid_4.mp4" type="video/mp4"></video>
+                <div class="video-badge"><i class="fas fa-play"></i></div>
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Видео</span>
+                    <h3 class="portfolio-title">За кадром</h3>
+                    <p class="portfolio-date">Июль 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(3)"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+            <!-- Video 5 -->
+            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(4)">
+                <video class="portfolio-image" muted><source src="bakctage/vid_5.mp4" type="video/mp4"></video>
+                <div class="video-badge"><i class="fas fa-play"></i></div>
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Видео</span>
+                    <h3 class="portfolio-title">Съёмка интервью</h3>
+                    <p class="portfolio-date">Июнь 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(4)"><i class="fas fa-play"></i></button>
+                </div>
+            </div>
+            <!-- Video 6 -->
+            <div class="portfolio-item" data-category="video" onclick="openVideoLightbox(5)">
+                <video class="portfolio-image" muted><source src="bakctage/vid_6.mp4" type="video/mp4"></video>
+                <div class="video-badge"><i class="fas fa-play"></i></div>
+                <div class="portfolio-overlay">
+                    <span class="portfolio-category">Видео</span>
+                    <h3 class="portfolio-title">Постпродакшн</h3>
+                    <p class="portfolio-date">Май 2025</p>
+                </div>
+                <div class="portfolio-actions">
+                    <button class="action-btn" onclick="event.stopPropagation(); openVideoLightbox(5)"><i class="fas fa-play"></i></button>
+                </div>
             </div>
         </div>
-        
-        <div class="lightbox-info">
-            <h3 id="lightboxTitle"></h3>
-            <p id="lightboxDesc"></p>
-        </div>
     </div>
 </div>
 
-<!-- MAP 
-<div class="contact-map">
-    <div id="map"></div>
-</div>
--->
-
-<!-- FOOTER -->
-<footer>
-    <div class="footer-container">
-        <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса </p>
-
-        <p>© 2026 MHG Studio. Все права защищены. </p>
-    </div>
-</footer>
-
-
-
-
-<!-- Lightbox Modal for Images -->
+<!-- ================== IMAGE LIGHTBOX ================== -->
 <div id="imageLightbox" class="lightbox-modal">
     <span class="lightbox-close" onclick="closeImageLightbox()">&times;</span>
-    <img class="lightbox-content" id="portfolioLightboxImage">
+    <img class="lightbox-content" id="portfolioLightboxImage" alt="">
     <div class="lightbox-caption" id="lightboxCaption"></div>
     <button class="lightbox-prev" onclick="changePortfolioImage(-1)">&#10094;</button>
     <button class="lightbox-next" onclick="changePortfolioImage(1)">&#10095;</button>
 </div>
 
-<!-- Video Modal -->
+<!-- ================== VIDEO MODAL ================== -->
 <div id="videoModal" class="video-modal">
     <div class="video-modal-content">
         <span class="video-close" onclick="closeVideoModal()">&times;</span>
@@ -2255,606 +893,80 @@
     </div>
 </div>
 
-
-
-
-<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<!-- ================== FOOTER ================== -->
+<footer>
+    <div class="footer-logo-wrap">
+        <div class="logo-icon-wrap">
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-sphere"></div>
+            <div class="logo-orbit"></div>
+        </div>
+        <span class="footer-logo-text">MHG Studio</span>
+    </div>
+    <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса.</p>
+    <p style="margin-top:10px">© 2026 MHG Studio. Все права защищены.</p>
+</footer>
 
 <script>
-    // ================= DATA =================
-    const galleryData = [
-        {
-            src: '/equepment/1.jpg',
-            category: 'Съемочная зона',
-            title: 'Основная студия',
-            desc: 'Профессиональная площадка с освещением и звукоизоляцией'
-        },
-        {
-            src: '/equepment/2.jpg',
-            category: 'Звукозапись',
-            title: 'Аудио студия',
-            desc: 'Звукоизолированная кабина для записи голоса и подкастов'
-        },
-        {
-            src: '/equepment/3.jpg',
-            category: 'Хромакей',
-            title: 'Green Screen',
-            desc: 'Зеленый фон для VFX и виртуальных сцен'
-        },
-        {
-            src: '/equepment/4.jpg',
-            category: 'Фотозона',
-            title: 'Photo Studio',
-            desc: 'Предметная и портретная съемка'
-        },
-        {
-            src: '/equepment/5.jpg',
-            category: 'Монтаж',
-            title: 'Post-Production',
-            desc: 'Цветокоррекция и монтаж 4K'
-        },
-        /* 
-        {
-            src: '/equepment/6.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/7.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/8.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/9.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/10.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/11.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/12.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/13.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        },
-        {
-            src: '/equepment/14.jpg',
-            category: 'Отдых',
-            title: 'Lounge Area',
-            desc: 'Комфортная зона для клиентов'
-        }
-            */
-    ];
-
-    const equipmentData = [
-        {
-            src: '/equepment/6.jpg',
-            tag: 'Камеры',
-            name: 'Panasonic 4K',
-            desc: 'Профессиональные видеокамеры для broadcast',
-            featured: true
-        },
-        {
-            src: '/equepment/9.jpg',
-            tag: 'Камеры',
-            name: 'Lumix GH5',
-            desc: 'Mirrorless для фото и видео'
-        },
-        {
-            src: '/equepment/10.jpg',
-            tag: 'Риги',
-            name: 'Camera Rigs',
-            desc: 'Профессиональные риги SmallRig'
-        },
-        {
-            src: '/equepment/12.jpg',
-            tag: 'Аудио',
-            name: 'Sennheiser Kit',
-            desc: 'Микрофоны и радиосистемы'
-        },
-        {
-            src: '/equepment/13.jpg',
-            tag: 'Свет',
-            name: 'LED Panels',
-            desc: 'Освещение Aputure'
-        },
-        {
-            src: '/equepment/14.jpg',
-            tag: 'Стабилизация',
-            name: 'DJI Gimbals',
-            desc: 'Электронные стедикамы'
-        }
-    ];
-
-    // ================= STUDIO GALLERY LOGIC =================
-    let currentIndex = 0;
-    let isPaused = false;
-    let autoPlayTimer;
-    let progressTimer;
-    const slideDuration = 5000;
-
- 
-    function updateDisplay() {
-        const item = galleryData[currentIndex];
-        const mainImg = document.getElementById('mainImage');
-        
-        mainImg.style.opacity = '0.8';
-        setTimeout(() => {
-            mainImg.src = item.src;
-            document.getElementById('mainCategory').textContent = item.category;
-            document.getElementById('mainTitle').textContent = item.title;
-            document.getElementById('mainDesc').textContent = item.desc;
-            document.getElementById('currentNum').textContent = currentIndex + 1;
-            
-            mainImg.onload = () => {
-                mainImg.style.opacity = '1';
-            };
-        }, 150);
-
-        document.querySelectorAll('.thumbnail-item').forEach((thumb, idx) => {
-            thumb.classList.toggle('active', idx === currentIndex);
-        });
-    }
-
-    function goToSlide(index) {
-        currentIndex = index;
-        updateDisplay();
-        if (!isPaused) {
-            stopAutoPlay();
-            startAutoPlay();
-        }
-    }
-
-    function nextSlide() {
-        currentIndex = (currentIndex + 1) % galleryData.length;
-        updateDisplay();
-    }
-
-    function startAutoPlay() {
-        if (isPaused) return;
-        
-        let progress = 0;
-        const bar = document.getElementById('progressBar');
-        bar.style.width = '0%';
-        
-        progressTimer = setInterval(() => {
-            progress += 100 / (slideDuration / 50);
-            bar.style.width = `${Math.min(progress, 100)}%`;
-        }, 50);
-        
-        autoPlayTimer = setTimeout(() => {
-            nextSlide();
-            startAutoPlay();
-        }, slideDuration);
-    }
-
-    function stopAutoPlay() {
-        clearTimeout(autoPlayTimer);
-        clearInterval(progressTimer);
-        document.getElementById('progressBar').style.width = '0%';
-    }
-
-    // ================= EQUIPMENT GRID =================
-    function initEquipment() {
-        const grid = document.getElementById('equipmentGrid');
-        grid.innerHTML = '';
-        
-        equipmentData.forEach((item, index) => {
-            const card = document.createElement('div');
-            card.className = `equipment-card ${item.featured ? 'featured' : ''}`;
-            card.onclick = () => openEquipmentLightbox(index);
-            card.innerHTML = `
-                <img src="${item.src}" alt="${item.name}" loading="lazy">
-                <div class="equipment-overlay">
-                    <span class="equipment-tag">${item.tag}</span>
-                    <h3 class="equipment-name">${item.name}</h3>
-                    <p class="equipment-desc">${item.desc}</p>
-                </div>
-                <div class="view-btn">
-                    <i class="fas fa-expand"></i>
-                </div>
-            `;
-            grid.appendChild(card);
-        });
-    }
-
-    // ================= LIGHTBOX =================
-    let currentLightboxSet = [];
-    let currentLightboxIndex = 0;
-    const lightbox = document.getElementById('lightbox');
-
-    function openLightbox(index) {
-        currentLightboxSet = galleryData;
-        currentLightboxIndex = index;
-        updateLightbox();
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        stopAutoPlay();
-    }
-
-    function openEquipmentLightbox(index) {
-        currentLightboxSet = equipmentData;
-        currentLightboxIndex = index;
-        updateLightbox();
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function updateLightbox() {
-        const item = currentLightboxSet[currentLightboxIndex];
-        document.getElementById('lightboxImage').src = item.src;
-        document.getElementById('lightboxTitle').textContent = item.title || item.name;
-        document.getElementById('lightboxDesc').textContent = item.desc || item.description;
-    }
-
-    function closeLightbox(e) {
-        if (e.target === lightbox || e.target.closest('.lightbox-close')) {
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-            if (!isPaused) startAutoPlay();
-        }
-    }
-
-    function navigateLightbox(dir) {
-        currentLightboxIndex = (currentLightboxIndex + dir + currentLightboxSet.length) % currentLightboxSet.length;
-        updateLightbox();
-    }
-
-    // ================= MAP =================
-    const mapSection = document.querySelector('.contact-map');
-    if (mapSection) {
-        let mapLoaded = false;
-        function loadMap() {
-            if (mapLoaded) return;
-            mapLoaded = true;
-            ymaps.ready(() => {
-                const map = new ymaps.Map('map', {
-                    center: [55.746683, 37.580031],
-                    zoom: 14,
-                    controls: ['zoomControl']
-                }, { suppressMapOpenBlock: true });
-                
-                map.geoObjects.add(new ymaps.Placemark([55.746683, 37.580031], {
-                    balloonContent: 'MHG Studio'
-                }, {
-                    iconLayout: 'default#image',
-                    iconImageHref: 'large.jpg',
-                    iconImageSize: [50, 50],
-                    iconImageOffset: [-25, -50]
-                }));
-            });
-        }
-        
-        new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    mapSection.classList.add('visible');
-                    loadMap();
-                }
-            });
-        }, { threshold: 0.3 }).observe(mapSection);
-    }
-
-    // ================= UTILS =================
-    function toggleMenu() {
-        document.getElementById('nav-links').classList.toggle('show');
-        document.querySelector('.hamburger').classList.toggle('active');
-    }
-
-    document.addEventListener('keydown', (e) => {
-        if (!lightbox.classList.contains('active')) return;
-        if (e.key === 'Escape') closeLightbox({ target: lightbox });
-        if (e.key === 'ArrowLeft') navigateLightbox(-1);
-        if (e.key === 'ArrowRight') navigateLightbox(1);
-    });
-
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        header.style.background = window.scrollY > 50 ? 'rgba(10, 10, 10, 0.98)' : 'rgba(10, 10, 10, 0.95)';
-    });
-
-    // Init
-    window.addEventListener('DOMContentLoaded', () => {
-        initGallery();
-        initEquipment();
-    });
-
-
-
-// Portfolio Filter
-// Modal Functions
-        function openModal() {
-            document.getElementById('btsModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('btsModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
-        // Close modal on outside click
-        document.getElementById('btsModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeModal();
-            }
-        });
-
-        // Filter Function
-        function filterItems(category) {
-            const items = document.querySelectorAll('.portfolio-item');
-            const tabs = document.querySelectorAll('.filter-tab');
-            
-            // Update active tab
-            tabs.forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.textContent === getCategoryName(category)) {
-                    tab.classList.add('active');
-                }
-            });
-            
-            // Filter items with animation
-            items.forEach((item, index) => {
-                const itemCategory = item.getAttribute('data-category');
-                
-                if (category === 'all' || itemCategory === category) {
-                    item.classList.remove('hidden');
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, index * 50);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        item.classList.add('hidden');
-                    }, 300);
-                }
-            });
-        }
-
-        function getCategoryName(category) {
-            const names = {
-                'all': 'Все',
-                'photo': 'Фотографии',
-                'video': 'Видео',
-                'process': 'Процесс'
-            };
-            return names[category];
-        }
-
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-                document.getElementById('lightbox').classList.remove('active');
-            }
-        });
-
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe team cards
-        document.querySelectorAll('.team-card').forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(50px)';
-            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
-            observer.observe(card);
-        });
- 
-
-
-let currentImageIndex = 0;
-let galleryImages = [];
-
-
-
-// Extract YouTube ID
-function extractYouTubeId(url) {
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-}
-
-// Keyboard navigation
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeImageLightbox();
-        closeVideoModal();
-    } else if (e.key === 'ArrowLeft') {
-        changeImage(-1);
-    } else if (e.key === 'ArrowRight') {
-        changeImage(1);
-    }
+/* ---- Header scroll ---- */
+window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Close modal when clicking outside
-window.onclick = function(event) {
-    const lightbox = document.getElementById('imageLightbox');
-    const videoModal = document.getElementById('videoModal');
-    
-    if (event.target === lightbox) {
-        closeImageLightbox();
-    }
-    if (event.target === videoModal) {
-        closeVideoModal();
-    }
+/* ---- Mobile menu ---- */
+function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('show');
+    document.getElementById('hamburger').classList.toggle('active');
 }
 
+document.querySelectorAll('#nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('nav-links').classList.remove('show');
+        document.getElementById('hamburger').classList.remove('active');
+    });
+});
 
-// Modal Functions
+/* ---- Team card animations ---- */
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.team-card').forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(50px)';
+    card.style.transition = `all 0.6s ease ${i * 0.1}s`;
+    observer.observe(card);
+});
+
+/* ---- Modal ---- */
 function openModal() {
-    const modal = document.getElementById('btsModal');
-    if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+    document.getElementById('btsModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
-    const modal = document.getElementById('btsModal');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
+    document.getElementById('btsModal').classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
-// Portfolio Lightbox Functions
-let currentPortfolioIndex = 0;
-let portfolioItems = [];
-
-function initPortfolioGallery() {
-    portfolioItems = document.querySelectorAll('.portfolio-item');
-    portfolioItems.forEach((item, index) => {
-        item.addEventListener('click', function(e) {
-            if (!e.target.closest('.action-btn')) {
-                const img = this.querySelector('img');
-                const video = this.querySelector('video');
-                const category = this.getAttribute('data-category');
-                
-                if (video || category === 'video') {
-                    openVideoLightbox(index);
-                } else if (img) {
-                    openPortfolioLightbox(index);
-                }
-            }
-        });
-    });
-}
-
-function openPortfolioLightbox(index) {
-    const item = portfolioItems[index];
-    const img = item.querySelector('img');
-    const lightbox = document.getElementById('imageLightbox');
-    const lightboxImg = document.getElementById('lightboxImage');
-    const caption = document.getElementById('lightboxCaption');
-    
-    if (lightbox && lightboxImg && img) {
-        currentPortfolioIndex = index;
-        lightboxImg.src = img.src;
-        caption.textContent = item.querySelector('.portfolio-title')?.textContent || '';
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function openVideoLightbox(index) {
-    const item = portfolioItems[index];
-    const video = item.querySelector('video');
-    const modal = document.getElementById('videoModal');
-    const container = document.getElementById('videoContainer');
-    
-    if (modal && container && video) {
-        currentPortfolioIndex = index;
-        const videoSrc = video.querySelector('source')?.src || video.src;
-        
-        container.innerHTML = `
-            <video controls autoplay style="width: 100%; height: 500px; border-radius: 10px;">
-                <source src="${videoSrc}" type="video/mp4">
-            </video>
-        `;
-        
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeImageLightbox() {
-    const lightbox = document.getElementById('imageLightbox');
-    if (lightbox) {
-        lightbox.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-}
-
-function closeVideoModal() {
-    const modal = document.getElementById('videoModal');
-    const container = document.getElementById('videoContainer');
-    if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    }
-    if (container) {
-        container.innerHTML = '';
-    }
-}
-
-function changeImage(direction) {
-    currentPortfolioIndex += direction;
-    
-    if (currentPortfolioIndex >= portfolioItems.length) {
-        currentPortfolioIndex = 0;
-    } else if (currentPortfolioIndex < 0) {
-        currentPortfolioIndex = portfolioItems.length - 1;
-    }
-    
-    const item = portfolioItems[currentPortfolioIndex];
-    const img = item.querySelector('img');
-    const lightboxImg = document.getElementById('lightboxImage');
-    const caption = document.getElementById('lightboxCaption');
-    
-    if (img && lightboxImg) {
-        lightboxImg.src = img.src;
-        caption.textContent = item.querySelector('.portfolio-title')?.textContent || '';
-    }
-}
-
-// Filter Function
+/* ---- Filter ---- */
 function filterItems(category) {
-    const items = document.querySelectorAll('.portfolio-item');
-    const tabs = document.querySelectorAll('.filter-tab');
-    
-    tabs.forEach(tab => {
+    document.querySelectorAll('.filter-tab').forEach(tab => {
         tab.classList.remove('active');
-        if ((category === 'all' && tab.textContent === 'Все') ||
-            (category === 'photo' && tab.textContent === 'Фотографии') ||
-            (category === 'video' && tab.textContent === 'Видео') ||
-            (category === 'process' && tab.textContent === 'Процесс')) {
-            tab.classList.add('active');
-        }
+        const map = { all:'Все', photo:'Фотографии', video:'Видео', process:'Процесс' };
+        if (tab.textContent === map[category]) tab.classList.add('active');
     });
-    
-    items.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        if (category === 'all' || itemCategory === category) {
+
+    document.querySelectorAll('.portfolio-item').forEach(item => {
+        const cat = item.getAttribute('data-category');
+        if (category === 'all' || cat === category) {
             item.classList.remove('hidden');
             item.style.opacity = '1';
             item.style.transform = 'scale(1)';
@@ -2866,42 +978,7 @@ function filterItems(category) {
     });
 }
 
-// Keyboard navigation
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeModal();
-        closeImageLightbox();
-        closeVideoModal();
-    } else if (e.key === 'ArrowLeft') {
-        changeImage(-1);
-    } else if (e.key === 'ArrowRight') {
-        changeImage(1);
-    }
-});
-
-// Close on outside click
-window.onclick = function(event) {
-    const lightbox = document.getElementById('imageLightbox');
-    const videoModal = document.getElementById('videoModal');
-    const modal = document.getElementById('btsModal');
-    
-    if (event.target === lightbox) {
-        closeImageLightbox();
-    }
-    if (event.target === videoModal) {
-        closeVideoModal();
-    }
-    if (event.target === modal) {
-        closeModal();
-    }
-}
-
-// Initialize
-document.addEventListener('DOMContentLoaded', function() {
-    initPortfolioGallery();
-});
-
-// Portfolio Images Data
+/* ---- Image Lightbox ---- */
 const portfolioImages = [
     { src: 'bakctage/ph_1.jpg', caption: 'Настройка студии' },
     { src: 'bakctage/ph_2.jpg', caption: 'Подготовка оборудования' },
@@ -2909,44 +986,71 @@ const portfolioImages = [
     { src: 'bakctage/ph_4.jpg', caption: 'Работа со светом' }
 ];
 
+const videoSources = [
+    'bakctage/vid_1.mp4',
+    'bakctage/vid_2.mp4',
+    'bakctage/vid_3.mp4',
+    'bakctage/vid_4.mp4',
+    'bakctage/vid_5.mp4',
+    'bakctage/vid_6.mp4'
+];
+
 let currentPortfolioImageIndex = 0;
 
 function openPortfolioImageLightbox(index) {
-    const lightbox = document.getElementById('imageLightbox');
-    const lightboxImg = document.getElementById('portfolioLightboxImage');
-    const caption = document.getElementById('lightboxCaption');
-    
-    if (lightbox && lightboxImg) {
-        currentPortfolioImageIndex = index;
-        lightboxImg.src = portfolioImages[index].src;
-        caption.textContent = portfolioImages[index].caption;
-        lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+    const lb = document.getElementById('imageLightbox');
+    const img = document.getElementById('portfolioLightboxImage');
+    const cap = document.getElementById('lightboxCaption');
+    currentPortfolioImageIndex = index;
+    img.src = portfolioImages[index].src;
+    cap.textContent = portfolioImages[index].caption;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
 }
 
-// تحديث دالة changeImage لتعمل مع portfolio
-function changePortfolioImage(direction) {
-    currentPortfolioImageIndex += direction;
-    
-    if (currentPortfolioImageIndex >= portfolioImages.length) {
-        currentPortfolioImageIndex = 0;
-    } else if (currentPortfolioImageIndex < 0) {
-        currentPortfolioImageIndex = portfolioImages.length - 1;
-    }
-    
-    const lightboxImg = document.getElementById('portfolioLightboxImage');
-    const caption = document.getElementById('lightboxCaption');
-    
-    if (lightboxImg) {
-        lightboxImg.src = portfolioImages[currentPortfolioImageIndex].src;
-    }
-    if (caption) {
-        caption.textContent = portfolioImages[currentPortfolioImageIndex].caption;
-    }
+function closeImageLightbox() {
+    document.getElementById('imageLightbox').classList.remove('active');
+    document.body.style.overflow = 'auto';
 }
 
+function changePortfolioImage(dir) {
+    currentPortfolioImageIndex = (currentPortfolioImageIndex + dir + portfolioImages.length) % portfolioImages.length;
+    document.getElementById('portfolioLightboxImage').src = portfolioImages[currentPortfolioImageIndex].src;
+    document.getElementById('lightboxCaption').textContent = portfolioImages[currentPortfolioImageIndex].caption;
+}
+
+/* ---- Video Modal ---- */
+function openVideoLightbox(index) {
+    const modal = document.getElementById('videoModal');
+    const container = document.getElementById('videoContainer');
+    container.innerHTML = `
+        <video controls autoplay style="width:100%; height:500px; border-radius:10px;">
+            <source src="${videoSources[index]}" type="video/mp4">
+        </video>
+    `;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeVideoModal() {
+    document.getElementById('videoModal').classList.remove('active');
+    document.getElementById('videoContainer').innerHTML = '';
+    document.body.style.overflow = 'auto';
+}
+
+/* ---- Close on outside click ---- */
+window.onclick = function(e) {
+    if (e.target.id === 'imageLightbox') closeImageLightbox();
+    if (e.target.id === 'videoModal') closeVideoModal();
+    if (e.target.id === 'btsModal') closeModal();
+};
+
+/* ---- Keyboard ---- */
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { closeModal(); closeImageLightbox(); closeVideoModal(); }
+    if (e.key === 'ArrowLeft') changePortfolioImage(-1);
+    if (e.key === 'ArrowRight') changePortfolioImage(1);
+});
 </script>
-
 </body>
 </html>

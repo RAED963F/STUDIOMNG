@@ -854,6 +854,7 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    
 }
 
 .logo p {
@@ -862,6 +863,314 @@ header {
     line-height: 1;
     opacity: 0.8;
 }
+
+
+/* ===== LOGO WRAPPER ===== */
+.logo-icon-wrap {
+    position: relative;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+}
+
+/* ===== الحلقات الثلاث النابضة ===== */
+.logo-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #D4AF37;
+    animation: ringPulse 2.8s ease-in-out infinite;
+}
+.logo-ring:nth-child(2) {
+    inset: -5px;
+    border-color: rgba(212,175,55,0.35);
+    animation: ringPulse 2.8s ease-in-out infinite 0.4s;
+}
+.logo-ring:nth-child(3) {
+    inset: -10px;
+    border-color: rgba(212,175,55,0.15);
+    animation: ringPulse 2.8s ease-in-out infinite 0.8s;
+}
+
+@keyframes ringPulse {
+    0%, 100% { transform: scale(1);    opacity: 1;   }
+    50%       { transform: scale(1.12); opacity: 0.6; }
+}
+
+/* ===== الكرة الذهبية الرئيسية ===== */
+.logo-sphere {
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle at 38% 35%,
+        #F0CC55,
+        #D4AF37 50%,
+        #8a6f00 100%
+    );
+    box-shadow:
+        0 0 12px rgba(212,175,55,0.6),
+        0 0 30px rgba(212,175,55,0.25),
+        inset 0 2px 4px rgba(255,255,255,0.3);
+    animation:
+        spherePopIn   0.7s cubic-bezier(.36,.07,.19,.97) both,
+        sphereGlow    3s  ease-in-out 0.7s infinite,
+        sphereBounce  3.5s ease-in-out 1.2s infinite;
+}
+
+/* بريق أبيض فوق الكرة */
+.logo-sphere::after {
+    content: '';
+    position: absolute;
+    top: 15%; left: 20%;
+    width: 35%; height: 30%;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    filter: blur(3px);
+    animation: shineMove 3s ease-in-out infinite;
+}
+
+/* ===== النقطة الدائرة (القمر) ===== */
+.logo-orbit {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    animation: orbitSpin 4s linear infinite;
+}
+.logo-orbit::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background: #F0CC55;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #D4AF37;
+}
+
+/* ===== KEYFRAMES ===== */
+@keyframes orbitSpin {
+    from { transform: rotate(0deg);   }
+    to   { transform: rotate(360deg); }
+}
+
+@keyframes spherePopIn {
+    0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+    60%  { transform: scale(1.15) rotate(5deg); opacity: 1; }
+    80%  { transform: scale(0.92) rotate(-2deg);            }
+    100% { transform: scale(1) rotate(0deg);    opacity: 1; }
+}
+
+@keyframes sphereGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 12px rgba(212,175,55,0.6),
+            0 0 30px rgba(212,175,55,0.25),
+            inset 0 2px 4px rgba(255,255,255,0.3);
+    }
+    50% {
+        box-shadow:
+            0 0 20px rgba(212,175,55,0.9),
+            0 0 50px rgba(212,175,55,0.4),
+            inset 0 2px 4px rgba(255,255,255,0.35);
+    }
+}
+
+@keyframes sphereBounce {
+    0%   { transform: translateY(0)   scale(1);    }
+    30%  { transform: translateY(-8px) scale(1.06); }
+    50%  { transform: translateY(0)   scale(0.96); }
+    65%  { transform: translateY(-4px) scale(1.02); }
+    80%  { transform: translateY(0)   scale(0.99); }
+    100% { transform: translateY(0)   scale(1);    }
+}
+
+@keyframes shineMove {
+    0%, 100% { transform: translate(0, 0);   opacity: 0.35; }
+    50%       { transform: translate(2px,2px); opacity: 0.55; }
+}
+
+
+/* ===== SECTION ===== */
+.services-section {
+    background: linear-gradient(190deg, #080808 0%, #0c0c0c 100%);
+    padding: 80px 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== TITLE ===== */
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    color: #D4AF37;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.section-sub {
+    text-align: center;
+    color: #C0C0C0;
+    margin-bottom: 40px;
+    font-size: 0.92rem;
+}
+
+/* ===== GRID ===== */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+/* ===== CARD ===== */
+.service-item {
+    background: linear-gradient(145deg, #1a1a1a, #131313);
+    padding: 32px 24px;
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.04);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+
+    /* حالة البداية للأنيميشن */
+    opacity: 0;
+    transform: translateY(30px);
+    transition:
+        opacity    0.5s ease,
+        transform  0.5s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+}
+
+/* خط ذهبي سفلي يظهر عند hover */
+.service-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    transform: scaleX(0);
+    transition: transform 0.35s ease;
+}
+
+/* توهج خفيف خلفي عند hover */
+.service-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(212,175,55,0.07), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+}
+
+.service-item:hover::after  { transform: scaleX(1); }
+.service-item:hover::before { opacity: 1; }
+
+.service-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.65);
+    border-color: rgba(212,175,55,0.25);
+}
+
+/* ===== الكارد يصير مرئي عند الـ scroll ===== */
+.service-item.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== الأيقونة / الإيموجي ===== */
+.s-icon {
+    font-size: 38px;
+    display: block;
+    margin-bottom: 16px;
+
+    /* أنيميشن صغير على الأيقونة عند hover الكارد */
+    transition: transform 0.3s cubic-bezier(.36,.07,.19,.97);
+}
+.service-item:hover .s-icon {
+    transform: scale(1.2) rotate(-5deg);
+}
+
+.service-item h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.service-item p {
+    color: #C0C0C0;
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+/* ===== زر الأسفل ===== */
+.section-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #D4AF37;
+    color: #0a0a0a;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    text-decoration: none;
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 22px rgba(212,175,55,0.7), 0 4px 14px rgba(0,0,0,0.4);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+        .footer-logo-wrap {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 10px;
+                    margin-bottom: 12px;
+                }
+        .footer-logo-sphere {
+                    width: 28px;
+                    height: 28px;
+                    border-radius: 50%;
+                    background: radial-gradient(circle at 38% 35%, var(--color-gold-light), var(--color-gold) 50%, #8a6f00 100%);
+                    box-shadow: 0 0 10px rgba(212,175,55,0.5);
+                    animation: sphereGlow 3s ease-in-out infinite;
+                }
+
+        .footer-logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--color-gold);
+        }
+        footer p { color: var(--color-silver); font-size: 0.85rem; margin-top: 6px; }
+
 
     </style>
 </head>
@@ -884,6 +1193,14 @@ header {
     <!-- Header -->
     <header class="main-header" id="mainHeader" role="banner">
         <div class="container header-inner">
+            <div class="logo-icon-wrap">
+    <div class="logo-ring"></div>      <!-- الحلقة الأولى (داخلية) -->
+    <div class="logo-ring"></div>      <!-- الحلقة الثانية (وسطى) -->
+    <div class="logo-ring"></div>      <!-- الحلقة الثالثة (خارجية) -->
+    <div class="logo-sphere"></div>    <!-- الدائرة الذهبية الرئيسية -->
+    <div class="logo-orbit"></div>     <!-- النقطة الدائرة حول الكرة -->
+</div>
+
             <div class="logo"><a href="index.html">MHG Studio <small
                         style="display:block;font-weight:400;font-size:12px;color:var(--color-silver)">Контент для бизнеса</small></a></div>
 
@@ -1016,36 +1333,46 @@ header {
     </section>
 
     <!-- Services -->
-    <section id="services" class="services-section">
-        <div class="container">
-            <h2>Наши основные направления:</h2>
-            <div class="services-grid" role="list">
-                <div class="service-item" role="listitem">
-                    <i class="fas fa-box-open" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
-                    <h3> Видео- и подкаст-съёмка 🎥</h3>
-                    <p>Профессиональная съёмка видео и подкастов с качественным звуком и светом.</p>
-                </div>
-                <div class="service-item" role="listitem">
-                    <i class="fas fa-ad" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
-                    <h3> Фото для маркетплейсов и брендов 📸</h3>
-                    <p>Студийная съёмка товаров и брендов для сайтов, рекламы и онлайн-магазинов.</p>
-                </div>
-                <div class="service-item" role="listitem">
-                    <i class="fas fa-building" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
-                    <h3>Экспертные интервью и студийные форматы 🎙</h3>
-                    <p>Запись интервью, разговорных шоу и экспертных программ в студии.</p>
-                </div>
-                <div class="service-item" role="listitem">
-                    <i class="fas fa-building" style="font-size:28px;color:var(--color-gold);margin-bottom:12px"></i>
-                    <h3>Прямые эфиры и live-трансляции 🔴</h3>
-                    <p>Организация прямых трансляций для YouTube, Instagram и других платформ.</p>
-                </div>
+<section class="services-section">
+    <div class="container">
+
+        <h2>Наши основные направления</h2>
+        <p class="section-sub">Полный спектр медиапроизводства для вашего бренда</p>
+
+        <div class="services-grid">
+
+            <div class="service-item">
+                <span class="s-icon">🎥</span>
+                <h3>Видео- и подкаст-съёмка</h3>
+                <p>Профессиональная съёмка видео и подкастов с качественным звуком и светом.</p>
             </div>
-            <div class="section-cta" style="margin-top:22px">
-                <a href="services.html" class="btn btn-primary">Все услуги</a>
+
+            <div class="service-item">
+                <span class="s-icon">📸</span>
+                <h3>Фото для маркетплейсов и брендов</h3>
+                <p>Студийная съёмка товаров и брендов для сайтов, рекламы и онлайн-магазинов.</p>
             </div>
+
+            <div class="service-item">
+                <span class="s-icon">🎙</span>
+                <h3>Экспертные интервью и студийные форматы</h3>
+                <p>Запись интервью, разговорных шоу и экспертных программ в студии.</p>
+            </div>
+
+            <div class="service-item">
+                <span class="s-icon">🔴</span>
+                <h3>Прямые эфиры и live-трансляции</h3>
+                <p>Организация прямых трансляций для YouTube, Instagram и других платформ.</p>
+            </div>
+
         </div>
-    </section>
+
+        <div class="section-cta">
+            <a href="services.html" class="btn-primary">Все услуги</a>
+        </div>
+
+    </div>
+</section>
  
 
     <!-- Testimonials (Carousel) 
@@ -1181,6 +1508,17 @@ header {
 -->
     <!-- Footer -->
     <footer role="contentinfo">
+        <div class="footer-logo-wrap">
+
+            <!-- الدائرة المتحركة -->
+            <div class="logo-icon-wrap">
+
+                <div class="logo-sphere"></div>
+                <div class="logo-orbit"></div>
+            </div>
+
+            <span class="footer-logo-text">MHG Studio</span>
+        </div>
         <div class="container">
         <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса </p>
 

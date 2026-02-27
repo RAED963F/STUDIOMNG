@@ -4,32 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MHG Studio | Контакты</title>
-
-    <!-- Google Font – Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
+        body { background: #0a0a0a; color: #fff; line-height: 1.6; overflow-x: hidden; }
 
-        body {
-            background: #0a0a0a;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* ---------------- NAVBAR / HEADER ---------------- */
+        /* ================== HEADER ================== */
         header {
             width: 100%;
-            padding: 20px 60px;
-            background: rgba(10, 10, 10, 0.95);
+            padding: 0 60px;
+            background: rgba(10,10,10,0.95);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: space-between;
@@ -38,651 +23,244 @@
             top: 0;
             z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
             height: 80px;
+            transition: all 0.3s ease;
         }
 
-        header.scrolled {
-            padding: 15px 60px;
-            background: rgba(10, 10, 10, 0.98);
-        }
+        header.scrolled { background: rgba(10,10,10,0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
 
-        .logo {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
+        /* ================== LOGO ================== */
         .logo a {
-            font-size: 24px;
-            font-weight: 700;
-            letter-spacing: 1px;
-            color: #ffd700;
-            cursor: pointer;
             display: flex;
             align-items: center;
+            gap: 12px;
             text-decoration: none;
         }
 
-        .logo a:hover {
-            opacity: 0.9;
-        }
-
-        .logo i {
-            font-size: 24px;
-        }
-
-        .logo p {
-            font-size: 11px;
-            line-height: 1;
-            opacity: 0.7;
-            color: #aaa;
-        }
-
-        nav {
-            position: relative;
-        }
-
-        nav ul {
+        .logo-text-wrap {
             display: flex;
-            gap: 35px;
-            list-style: none;
-        }
-
-        nav ul li {
-            list-style: none;
-        }
-
-        nav ul li a {
-            color: #fff;
-            font-size: 15px;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 6px 10px;
-            border-radius: 8px;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: #ffd700;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        nav ul li a:hover::after,
-        nav ul li a.active::after {
-            width: 80%;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
-            color: #ffd700;
-        }
-
-        /* Hamburger Menu */
-        .hamburger {
-            display: none;
             flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-            z-index: 1001;
+            align-items: flex-start;
+            gap: 2px;
         }
 
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background: #fff;
-            transition: 0.3s;
+        .logo-name { font-size: 22px; font-weight: 700; color: #ffd700; line-height: 1; letter-spacing: 0.5px; white-space: nowrap; }
+        .logo-sub  { font-size: 11px; color: #aaa; font-weight: 400; line-height: 1; opacity: 0.8; white-space: nowrap; }
+
+        /* ================== ANIMATED SPHERE ================== */
+        .logo-icon-wrap { position: relative; width: 38px; height: 38px; flex-shrink: 0; }
+
+        .logo-ring { position: absolute; inset: 0; border-radius: 50%; border: 2px solid #D4AF37; animation: ringPulse 2.8s ease-in-out infinite; }
+        .logo-ring:nth-child(2) { inset: -5px; border-color: rgba(212,175,55,0.35); animation: ringPulse 2.8s ease-in-out infinite 0.4s; }
+        .logo-ring:nth-child(3) { inset: -10px; border-color: rgba(212,175,55,0.15); animation: ringPulse 2.8s ease-in-out infinite 0.8s; }
+
+        @keyframes ringPulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.12);opacity:0.6} }
+
+        .logo-sphere {
+            position: absolute; inset: 3px; border-radius: 50%;
+            background: radial-gradient(circle at 38% 35%, #F0CC55, #D4AF37 50%, #8a6f00 100%);
+            box-shadow: 0 0 12px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.25), inset 0 2px 4px rgba(255,255,255,0.3);
+            animation: spherePopIn 0.7s cubic-bezier(.36,.07,.19,.97) both, sphereGlow 3s ease-in-out 0.7s infinite, sphereBounce 3.5s ease-in-out 1.2s infinite;
+        }
+        .logo-sphere::after {
+            content: ''; position: absolute; top:15%; left:20%; width:35%; height:30%;
+            border-radius:50%; background:rgba(255,255,255,0.35); filter:blur(3px);
+            animation: shineMove 3s ease-in-out infinite;
+        }
+        .logo-orbit { position:absolute; inset:-4px; border-radius:50%; animation:orbitSpin 4s linear infinite; }
+        .logo-orbit::before {
+            content:''; position:absolute; top:0; left:50%; transform:translateX(-50%);
+            width:6px; height:6px; background:#F0CC55; border-radius:50%; box-shadow:0 0 8px #D4AF37;
         }
 
-        .hamburger.active div:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
+        @keyframes orbitSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+        @keyframes spherePopIn { 0%{transform:scale(0) rotate(-30deg);opacity:0} 60%{transform:scale(1.15) rotate(5deg);opacity:1} 80%{transform:scale(0.92) rotate(-2deg)} 100%{transform:scale(1) rotate(0deg);opacity:1} }
+        @keyframes sphereGlow { 0%,100%{box-shadow:0 0 12px rgba(212,175,55,0.6),0 0 30px rgba(212,175,55,0.25),inset 0 2px 4px rgba(255,255,255,0.3)} 50%{box-shadow:0 0 20px rgba(212,175,55,0.9),0 0 50px rgba(212,175,55,0.4),inset 0 2px 4px rgba(255,255,255,0.35)} }
+        @keyframes sphereBounce { 0%{transform:translateY(0) scale(1)} 30%{transform:translateY(-8px) scale(1.06)} 50%{transform:translateY(0) scale(0.96)} 65%{transform:translateY(-4px) scale(1.02)} 80%{transform:translateY(0) scale(0.99)} 100%{transform:translateY(0) scale(1)} }
+        @keyframes shineMove { 0%,100%{transform:translate(0,0);opacity:0.35} 50%{transform:translate(2px,2px);opacity:0.55} }
+
+        /* ================== NAV ================== */
+        nav ul { display:flex; gap:35px; list-style:none; }
+        nav ul li a {
+            color:#fff; font-size:15px; font-weight:500; text-decoration:none;
+            padding:6px 10px; border-radius:8px; transition:0.3s; position:relative;
         }
-
-        .hamburger.active div:nth-child(2) {
-            opacity: 0;
+        nav ul li a::after {
+            content:''; position:absolute; width:0; height:2px; bottom:0; left:50%;
+            background:#ffd700; transition:all 0.3s ease; transform:translateX(-50%);
         }
+        nav ul li a:hover::after, nav ul li a.active::after { width:80%; }
+        nav ul li a:hover, nav ul li a.active { color:#ffd700; }
 
-        .hamburger.active div:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -6px);
-        }
+        .hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; z-index:1001; }
+        .hamburger div { width:25px; height:3px; background:#fff; transition:0.3s; }
+        .hamburger.active div:nth-child(1) { transform:rotate(45deg) translate(5px,5px); }
+        .hamburger.active div:nth-child(2) { opacity:0; }
+        .hamburger.active div:nth-child(3) { transform:rotate(-45deg) translate(7px,-6px); }
 
-        /* Toggle menu for mobile */
-        @media (max-width: 800px) {
-            header {
-                padding: 15px 20px;
-            }
-
-            header.scrolled {
-                padding: 10px 20px;
-            }
-
-            nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                background: #111;
-                flex-direction: column;
-                width: 280px;
-                height: 100vh;
-                padding: 100px 30px 30px;
-                border-radius: 0;
-                transition: 0.4s;
-                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            }
-
-            nav ul.show {
-                right: 0;
-            }
-
-            .hamburger {
-                display: flex;
-            }
-
-            .logo a {
-                font-size: 20px;
-            }
-
-            .logo p {
-                font-size: 10px;
-            }
-        }
-
-        /* ---------------- CONTACT HERO ---------------- */
+        /* ================== HERO ================== */
         .contact-hero {
             height: 50vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 0 20px;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 0 20px;
+            background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),
                         url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5');
-            background-size: cover;
-            background-position: center;
-            position: relative;
+            background-size: cover; background-position: center;
         }
 
-        .contact-hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
+        .contact-hero h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 700; letter-spacing: 1px; }
+        .contact-hero p  { font-size: 1.2rem; max-width: 700px; margin-bottom: 30px; color: #ddd; }
 
-        .contact-hero p {
-            font-size: 1.2rem;
-            max-width: 700px;
-            margin-bottom: 30px;
-            color: #ddd;
-        }
+        .hero-buttons { display: flex; gap: 15px; }
+        .btn { padding: 12px 30px; border-radius: 30px; font-weight: 600; cursor: pointer; transition: 0.3s; text-decoration: none; display: inline-block; }
+        .btn-primary { background: #ffd700; color: #000; border: 2px solid #ffd700; }
+        .btn-primary:hover { background: transparent; color: #ffd700; }
+        .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+        .btn-secondary:hover { background: #fff; color: #000; }
 
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-
-        .btn {
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .btn-primary {
-            background: #ffd700;
-            color: #000;
-            border: 2px solid #ffd700;
-        }
-
-        .btn-primary:hover {
-            background: transparent;
-            color: #ffd700;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #fff;
-            border: 2px solid #fff;
-        }
-
-        .btn-secondary:hover {
-            background: #fff;
-            color: #000;
-        }
-
-        /* ---------------- CONTACT SECTION ---------------- */
+        /* ================== CONTACT SECTION ================== */
         .contact-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
+            display: flex; flex-wrap: wrap; gap: 40px;
+            max-width: 1200px; margin: 60px auto; padding: 0 20px;
             justify-content: center;
         }
 
         .contact-info, .contact-form {
             flex: 1 1 500px;
-            background: #111;
-            padding: 40px;
-            border-radius: 16px;
+            background: #111; padding: 40px; border-radius: 16px;
             border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .contact-info:hover, .contact-form:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-        }
+        .contact-info:hover, .contact-form:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
 
         .contact-info h2, .contact-form h2 {
-            font-size: 28px;
-            margin-bottom: 25px;
-            font-weight: 600;
-            color: #ffd700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 28px; margin-bottom: 25px; font-weight: 600;
+            color: #ffd700; display: flex; align-items: center; gap: 10px;
         }
 
-        .contact-info h2 i, .contact-form h2 i {
-            font-size: 24px;
-        }
+        .contact-details { display: flex; flex-direction: column; gap: 20px; }
 
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .contact-item:last-child {
-            border-bottom: none;
-        }
+        .contact-item { display: flex; align-items: flex-start; gap: 15px; padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .contact-item:last-child { border-bottom: none; }
 
         .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: rgba(255,215,0,0.1);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffd700;
-            font-size: 20px;
-            flex-shrink: 0;
+            width: 50px; height: 50px;
+            background: rgba(255,215,0,0.1); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: #ffd700; font-size: 20px; flex-shrink: 0;
         }
 
-        .contact-text h3 {
-            font-size: 18px;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
+        .contact-text h3 { font-size: 18px; margin-bottom: 5px; font-weight: 600; }
+        .contact-text p, .contact-text a { color: #ccc; font-size: 16px; text-decoration: none; transition: color 0.3s; }
+        .contact-text a:hover { color: #ffd700; }
 
-        .contact-text p, .contact-text a {
-            color: #ccc;
-            font-size: 16px;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
+        .contact-form form { display: flex; flex-direction: column; gap: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 8px; }
+        .form-group label { font-size: 14px; font-weight: 500; color: #ddd; }
 
-        .contact-text a:hover {
-            color: #ffd700;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 10px;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #aaa;
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            background: #ffd700;
-            color: #000;
-            transform: translateY(-3px);
-        }
-
-        .contact-form form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .form-group label {
-            font-size: 14px;
-            font-weight: 500;
-            color: #ddd;
-        }
-
-        .contact-form input, 
+        .contact-form input,
         .contact-form textarea,
         .contact-form select {
-            padding: 15px;
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 8px;
-            background: #0a0a0a;
-            color: #fff;
-            font-size: 15px;
-            resize: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            padding: 15px; border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px; background: #0a0a0a; color: #fff;
+            font-size: 15px; resize: none; transition: border-color 0.3s, box-shadow 0.3s;
         }
-
-        .contact-form input:focus, 
-        .contact-form textarea:focus,
-        .contact-form select:focus {
-            outline: none;
-            border-color: #ffd700;
-            box-shadow: 0 0 0 2px rgba(255,215,0,0.2);
+        .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
+            outline: none; border-color: #ffd700; box-shadow: 0 0 0 2px rgba(255,215,0,0.2);
         }
-
-        .contact-form input::placeholder,
-        .contact-form textarea::placeholder {
-            color: #888;
-        }
+        .contact-form input::placeholder, .contact-form textarea::placeholder { color: #888; }
 
         .contact-form button {
-            padding: 15px 25px;
-            border: 2px solid #ffd700;
-            background: #ffd700;
-            color: #000;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
+            padding: 15px 25px; border: 2px solid #ffd700; background: #ffd700;
+            color: #000; font-size: 16px; font-weight: 600; border-radius: 8px;
+            cursor: pointer; transition: all 0.3s;
+            display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px;
         }
+        .contact-form button:hover { background: transparent; color: #ffd700; }
 
-        .contact-form button:hover {
-            background: transparent;
-            color: #ffd700;
-        }
-
-        /* ---------------- MAP ---------------- */
+        /* ================== MAP ================== */
         .contact-map {
-            margin: 60px auto;
-            max-width: 1200px;
-            border-radius: 16px;
-            overflow: hidden;
+            margin: 60px auto; max-width: 1200px;
+            border-radius: 16px; overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
-
-        .map-container {
-            width: 100%;
-            height: 450px;
-            position: relative;
-        }
-
-        #map {
-            width: 100%;
-            height: 100%;
-        }
-
+        .map-container { width: 100%; height: 450px; position: relative; }
+        #map { width: 100%; height: 100%; }
         .map-overlay {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(10,10,10,0.8);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-            max-width: 300px;
+            position: absolute; bottom: 20px; left: 20px;
+            background: rgba(10,10,10,0.8); backdrop-filter: blur(10px);
+            padding: 15px 20px; border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1); max-width: 300px;
         }
+        .map-overlay h3 { color: #ffd700; margin-bottom: 5px; font-size: 18px; }
+        .map-overlay p { color: #ddd; font-size: 14px; margin-bottom: 5px; }
 
-        .map-overlay h3 {
-            color: #ffd700;
-            margin-bottom: 5px;
-            font-size: 18px;
-        }
-
-        .map-overlay p {
-            color: #ddd;
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        /* ---------------- FAQ SECTION ---------------- */
-        .faq-section {
-            max-width: 1000px;
-            margin: 80px auto;
-            padding: 0 20px;
-        }
-
-        .faq-section h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 40px;
-            color: #ffd700;
-        }
-
-        .faq-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .faq-item {
-            background: #111;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .faq-question {
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-
-        .faq-question:hover {
-            background: rgba(255,255,255,0.05);
-        }
-
-        .faq-question i {
-            transition: transform 0.3s;
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s, padding 0.3s;
-            color: #ccc;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 0 20px 20px;
-            max-height: 200px;
-        }
-
-        /* ---------------- FOOTER ---------------- */
+        /* ================== FOOTER ================== */
         footer {
-            background: #111;
-            color: #fff;
-            text-align: center;
-            padding: 60px 20px 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            background: linear-gradient(180deg, #111 0%, #000 100%);
+            color: #fff; text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(255,255,255,0.05);
             margin-top: 60px;
         }
 
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .footer-logo-wrap {
+            display: flex; align-items: center; justify-content: center;
+            gap: 12px; margin-bottom: 14px;
         }
+        .footer-logo-wrap .logo-icon-wrap { width: 30px; height: 30px; }
+        .footer-logo-text { font-size: 1.3rem; font-weight: 700; color: #D4AF37; }
+        footer p { color: #C0C0C0; font-size: 0.85rem; margin-top: 6px; }
 
-        .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: #ffd700;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin: 25px 0;
-            flex-wrap: wrap;
-            padding: 0;
-        }
-
-        .footer-links li a {
-            color: #aaa;
-            text-decoration: none;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        .footer-links li a:hover {
-            color: #ffd700;
-        }
-
-        .footer-socials {
-            margin-top: 25px;
-        }
-
-        .footer-socials a {
-            margin: 0 10px;
-            font-size: 20px;
-            color: #aaa;
-            transition: 0.3s;
-            text-decoration: none;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.05);
-        }
-
-        .footer-socials a:hover {
-            color: #ffd700;
-            background: rgba(255,215,0,0.1);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: #777;
-            font-size: 14px;
-        }
-
-        /* ---------------- RESPONSIVE ---------------- */
-        @media (max-width: 900px) {
-            .contact-section {
-                flex-direction: column;
-                align-items: center;
+        /* ================== RESPONSIVE ================== */
+        @media (max-width: 800px) {
+            header { padding: 0 20px; }
+            nav ul {
+                position: fixed; top: 0; right: -100%;
+                background: #111; flex-direction: column;
+                width: 280px; height: 100vh;
+                padding: 100px 30px 30px;
+                transition: 0.4s; box-shadow: -5px 0 15px rgba(0,0,0,0.3);
             }
-            
-            .contact-hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .contact-hero p {
-                font-size: 1rem;
-            }
-            
-            .hero-buttons {
-                flex-direction: column;
-                gap: 10px;
-            }
+            nav ul.show { right: 0; }
+            .hamburger { display: flex; }
+            .contact-hero h1 { font-size: 2.5rem; }
+            .contact-hero p   { font-size: 1rem; }
+            .hero-buttons { flex-direction: column; gap: 10px; }
         }
 
         @media (max-width: 600px) {
-            .contact-hero {
-                height: 40vh;
-            }
-            
-            .contact-hero h1 {
-                font-size: 2rem;
-            }
-            
-            .contact-info, .contact-form {
-                padding: 25px;
-            }
-            
-            .map-overlay {
-                position: relative;
-                bottom: auto;
-                left: auto;
-                max-width: 100%;
-                border-radius: 0;
-                border: none;
-                border-top: 1px solid rgba(255,255,255,0.1);
-            }
+            .contact-hero { height: 40vh; }
+            .contact-hero h1 { font-size: 2rem; }
+            .contact-info, .contact-form { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
+<!-- ================== HEADER ================== -->
 <header id="header">
     <div class="logo">
         <a href="index.html">
-            MHG Studio
+            <div class="logo-icon-wrap">
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <div class="logo-sphere"></div>
+                <div class="logo-orbit"></div>
+            </div>
+            <div class="logo-text-wrap">
+                <span class="logo-name">MHG Studio</span>
+                <span class="logo-sub">Контент для бизнеса</span>
+            </div>
         </a>
-        <p>Контент для бизнеса</p>
     </div>
     <nav>
-        <div class="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <div></div><div></div><div></div>
         </div>
         <ul id="nav-links">
             <li><a href="index.html">Главная</a></li>
@@ -694,74 +272,57 @@
     </nav>
 </header>
 
-<!-- CONTACT HERO -->
+<!-- ================== HERO ================== -->
 <section class="contact-hero">
     <h1>Свяжитесь с нами</h1>
     <p>Готовы начать новый проект? Свяжитесь с нами, и мы обсудим, как можем помочь воплотить ваши идеи в жизнь.</p>
     <div class="hero-buttons">
         <a href="#contact-form" class="btn btn-primary">Написать сообщение</a>
-        <a href="tel:+79991234567" class="btn btn-secondary">Позвонить нам</a>
+        <a href="tel:+79891156946" class="btn btn-secondary">Позвонить нам</a>
     </div>
 </section>
 
-<!-- CONTACT SECTION -->
+<!-- ================== CONTACT SECTION ================== -->
 <div class="contact-section">
-    <!-- Contact Info -->
+
     <div class="contact-info">
         <h2><i class="fas fa-info-circle"></i> Контактная информация</h2>
         <div class="contact-details">
             <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
+                <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="contact-text">
                     <h3>Адрес</h3>
                     <p>Москва, 1-й Смоленский переулок, 5с1</p>
                 </div>
             </div>
             <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-phone"></i>
-                </div>
+                <div class="contact-icon"><i class="fas fa-phone"></i></div>
                 <div class="contact-text">
                     <h3>Телефон</h3>
-                    <p><a href="tel:+79991234567">+7 989 115 69 46</a></p>
+                    <p><a href="tel:+79891156946">+7 989 115 69 46</a></p>
                 </div>
             </div>
             <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
+                <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                 <div class="contact-text">
                     <h3>Email</h3>
-                    <p><a href="mailto:info@mhgstudio.com">producer@mhgroup.tv</a></p>
+                    <p><a href="mailto:producer@mhgroup.tv">producer@mhgroup.tv</a></p>
                 </div>
             </div>
             <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-clock"></i>
-                </div>
+                <div class="contact-icon"><i class="fas fa-clock"></i></div>
                 <div class="contact-text">
                     <h3>Часы работы</h3>
-                    <p>Каждый день - 10:00 - 22:00</p>
+                    <p>Каждый день — 10:00 - 22:00</p>
                 </div>
             </div>
-<!--- 
-            <div class="contact-item">
-                <div class="contact-icon">
-                    <i class="fas fa-share-alt"></i>
-                </div>
-            </div>
--->
         </div>
     </div>
 
-    <!-- Contact Form -->
     <div class="contact-form" id="contact-form">
         <h2><i class="fas fa-paper-plane"></i> Форма обратной связи</h2>
         <form action="https://api.web3forms.com/submit" method="POST" id="contactForm">
             <input type="hidden" name="access_key" value="b0c25945-a722-4d3e-a047-1bd069b7afbe">
-
             <div class="form-group">
                 <label for="name">Ваше имя *</label>
                 <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
@@ -793,9 +354,10 @@
             </button>
         </form>
     </div>
+
 </div>
 
-<!-- MAP -->
+<!-- ================== MAP ================== -->
 <div class="contact-map">
     <div class="map-container">
         <div id="map"></div>
@@ -807,99 +369,82 @@
     </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ================== FOOTER ================== -->
 <footer>
-    <div class="footer-container">
-        <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса</p>
-        <p>© 2026 MHG Studio. Все права защищены.</p>
+    <div class="footer-logo-wrap">
+        <div class="logo-icon-wrap">
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-sphere"></div>
+            <div class="logo-orbit"></div>
+        </div>
+        <span class="footer-logo-text">MHG Studio</span>
     </div>
+    <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса.</p>
+    <p style="margin-top:10px">© 2026 MHG Studio. Все права защищены.</p>
 </footer>
 
-<!-- Yandex Maps API -->
 <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
-
 <script>
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
+/* ---- Header scroll ---- */
+window.addEventListener('scroll', () => {
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+/* ---- Mobile menu ---- */
+function toggleMenu() {
+    document.getElementById('nav-links').classList.toggle('show');
+    document.getElementById('hamburger').classList.toggle('active');
+}
+
+document.querySelectorAll('#nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('nav-links').classList.remove('show');
+        document.getElementById('hamburger').classList.remove('active');
+    });
+});
+
+/* ---- Contact form ---- */
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('button');
+    btn.disabled = true;
+    btn.innerText = 'Отправка...';
+
+    try {
+        const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body: new FormData(this) });
+        const data = await res.json();
+        if (data.success) {
+            alert('Спасибо! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
         } else {
-            header.classList.remove('scrolled');
+            alert('Ошибка отправки. Пожалуйста, попробуйте позже.');
         }
-    });
-
-    // Contact Form Handler
-    const contactForm = document.getElementById('contactForm');
-
-    contactForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-
-        const submitButton = contactForm.querySelector('button');
-        submitButton.disabled = true;
-        submitButton.innerText = "Отправка...";
-
-        const formData = new FormData(contactForm);
-
-        try {
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                body: formData
-            });
-
-            const result = await response.json();
-
-            if(result.success){
-                alert("Спасибо! Мы свяжемся с вами в ближайшее время.");
-                contactForm.reset();
-            } else {
-                alert("Ошибка отправки. Пожалуйста, попробуйте позже.");
-            }
-
-        } catch (err) {
-            alert("Произошла ошибка. Пожалуйста, попробуйте позже.");
-        } finally {
-            submitButton.disabled = false;
-            submitButton.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить сообщение';
-        }
-    });
-
-    // Initialize Yandex Map
-    ymaps.ready(init);
-    
-    function init() {
-        const map = new ymaps.Map('map', {
-            center: [55.7479, 37.5835],
-            zoom: 14,
-            controls: ['zoomControl', 'fullscreenControl']
-        });
-        
-        const marker = new ymaps.Placemark([55.7479, 37.5835], {
-            balloonContent: 'MHG Studio - 1-й Смоленский переулок, 5с1'
-        }, {
-            preset: 'islands#icon',
-            iconColor: '#ffd700'
-        });
-        
-        map.geoObjects.add(marker);
-        marker.balloon.open();
+    } catch {
+        alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+    } finally {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Отправить сообщение';
     }
+});
 
-    // Hamburger Menu
-    function toggleMenu() {
-        document.getElementById('nav-links').classList.toggle('show');
-        document.querySelector('.hamburger').classList.toggle('active');
-    }
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('#nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            document.getElementById('nav-links').classList.remove('show');
-            document.querySelector('.hamburger').classList.remove('active');
-        });
+/* ---- Yandex Map ---- */
+ymaps.ready(function() {
+    const map = new ymaps.Map('map', {
+        center: [55.7479, 37.5835],
+        zoom: 14,
+        controls: ['zoomControl', 'fullscreenControl']
     });
+    const marker = new ymaps.Placemark([55.7479, 37.5835], {
+        balloonContent: 'MHG Studio - 1-й Смоленский переулок, 5с1'
+    }, {
+        preset: 'islands#icon',
+        iconColor: '#ffd700'
+    });
+    map.geoObjects.add(marker);
+    marker.balloon.open();
+});
 </script>
-
 </body>
-</html>
-
+</html> 

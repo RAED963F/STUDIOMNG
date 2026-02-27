@@ -20,11 +20,11 @@ body {
     overflow-x: hidden;
 }
 
-/* ---------------- NAVBAR / HEADER ---------------- */
+/* ================== HEADER ================== */
 header {
     width: 100%;
-    padding: 20px 60px;
-    background: rgba(10, 10, 10, 0.95);
+    padding: 0 60px;
+    background: rgba(10,10,10,0.95);
     backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
@@ -38,36 +38,145 @@ header {
 }
 
 header.scrolled {
-    padding: 15px 60px;
-    background: rgba(10, 10, 10, 0.98);
+    background: rgba(10,10,10,0.98);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
 }
 
-.logo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
+/* ================== LOGO ================== */
 .logo a {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: #ffd700;
-    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     text-decoration: none;
 }
 
-.logo p {
-    font-size: 11px;
-    margin-top: 3px;
-    line-height: 1;
-    opacity: 0.7;
-    color: #aaa;
+.logo-text-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
 }
 
+.logo-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffd700;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.logo-sub {
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 400;
+    line-height: 1;
+    opacity: 0.8;
+    white-space: nowrap;
+}
+
+/* ================== ANIMATED SPHERE ================== */
+.logo-icon-wrap {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+}
+
+.logo-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid #D4AF37;
+    animation: ringPulse 2.8s ease-in-out infinite;
+}
+.logo-ring:nth-child(2) {
+    inset: -5px;
+    border-color: rgba(212,175,55,0.35);
+    animation: ringPulse 2.8s ease-in-out infinite 0.4s;
+}
+.logo-ring:nth-child(3) {
+    inset: -10px;
+    border-color: rgba(212,175,55,0.15);
+    animation: ringPulse 2.8s ease-in-out infinite 0.8s;
+}
+
+@keyframes ringPulse {
+    0%, 100% { transform: scale(1);    opacity: 1;   }
+    50%       { transform: scale(1.12); opacity: 0.6; }
+}
+
+.logo-sphere {
+    position: absolute;
+    inset: 3px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 38% 35%, #F0CC55, #D4AF37 50%, #8a6f00 100%);
+    box-shadow:
+        0 0 12px rgba(212,175,55,0.6),
+        0 0 30px rgba(212,175,55,0.25),
+        inset 0 2px 4px rgba(255,255,255,0.3);
+    animation:
+        spherePopIn  0.7s cubic-bezier(.36,.07,.19,.97) both,
+        sphereGlow   3s ease-in-out 0.7s infinite,
+        sphereBounce 3.5s ease-in-out 1.2s infinite;
+}
+
+.logo-sphere::after {
+    content: '';
+    position: absolute;
+    top: 15%; left: 20%;
+    width: 35%; height: 30%;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    filter: blur(3px);
+    animation: shineMove 3s ease-in-out infinite;
+}
+
+.logo-orbit {
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    animation: orbitSpin 4s linear infinite;
+}
+.logo-orbit::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 6px; height: 6px;
+    background: #F0CC55;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #D4AF37;
+}
+
+@keyframes orbitSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+@keyframes spherePopIn {
+    0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
+    60%  { transform: scale(1.15) rotate(5deg); opacity: 1; }
+    80%  { transform: scale(0.92) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+@keyframes sphereGlow {
+    0%, 100% { box-shadow: 0 0 12px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.25), inset 0 2px 4px rgba(255,255,255,0.3); }
+    50%       { box-shadow: 0 0 20px rgba(212,175,55,0.9), 0 0 50px rgba(212,175,55,0.4), inset 0 2px 4px rgba(255,255,255,0.35); }
+}
+@keyframes sphereBounce {
+    0%   { transform: translateY(0)    scale(1);    }
+    30%  { transform: translateY(-8px) scale(1.06); }
+    50%  { transform: translateY(0)    scale(0.96); }
+    65%  { transform: translateY(-4px) scale(1.02); }
+    80%  { transform: translateY(0)    scale(0.99); }
+    100% { transform: translateY(0)    scale(1);    }
+}
+@keyframes shineMove {
+    0%, 100% { transform: translate(0,0);    opacity: 0.35; }
+    50%       { transform: translate(2px,2px); opacity: 0.55; }
+}
+
+/* ================== NAV ================== */
 nav ul {
     display: flex;
     gap: 35px;
@@ -98,16 +207,12 @@ nav ul li a::after {
 }
 
 nav ul li a:hover::after,
-nav ul li a.active::after {
-    width: 80%;
-}
+nav ul li a.active::after { width: 80%; }
 
 nav ul li a:hover,
-nav ul li a.active {
-    color: #ffd700;
-}
+nav ul li a.active { color: #ffd700; }
 
-/* Hamburger Menu */
+/* Hamburger */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -123,20 +228,13 @@ nav ul li a.active {
     transition: 0.3s;
 }
 
-.hamburger.active div:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
+.hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+.hamburger.active div:nth-child(2) { opacity: 0; }
+.hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
 
-.hamburger.active div:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active div:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* ---------------- HERO SECTION ---------------- */
+/* ================== HERO ================== */
 .hero {
+    position: relative;
     min-height: 40vh;
     display: flex;
     flex-direction: column;
@@ -144,12 +242,27 @@ nav ul li a.active {
     align-items: center;
     text-align: center;
     padding: 60px 20px 40px;
-    background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
-    url('https://images.unsplash.com/photo-1499951360447-b19be8fe80f5');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    overflow: hidden;
 }
+
+.hero-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 0;
+}
+
+.hero h1,
+.hero p { position: relative; z-index: 1; }
 
 .hero h1 {
     font-size: 3rem;
@@ -166,7 +279,7 @@ nav ul li a.active {
     line-height: 1.6;
 }
 
-/* ---------------- CATEGORY SECTION ---------------- */
+/* ================== CATEGORIES ================== */
 .categories-section {
     padding: 60px 40px;
     max-width: 1400px;
@@ -176,12 +289,6 @@ nav ul li a.active {
 .categories-title {
     text-align: center;
     margin-bottom: 50px;
-}
-
-.categories-title h2 {
-    font-size: 2.2rem;
-    color: #ffd700;
-    margin-bottom: 10px;
 }
 
 .categories-title p {
@@ -209,19 +316,16 @@ nav ul li a.active {
 .category-card:hover {
     transform: translateY(-10px);
     border-color: #ffd700;
-    box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(255,215,0,0.15);
 }
 
 .category-card img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
 }
 
-.category-card:hover img {
-    transform: scale(1.1);
-}
+.category-card:hover img { transform: scale(1.1); }
 
 .category-overlay {
     position: absolute;
@@ -248,9 +352,8 @@ nav ul li a.active {
 
 .category-count {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: rgba(255, 215, 0, 0.9);
+    top: 15px; right: 15px;
+    background: rgba(255,215,0,0.9);
     color: #000;
     padding: 6px 14px;
     border-radius: 20px;
@@ -260,10 +363,8 @@ nav ul li a.active {
 
 .category-icon {
     position: absolute;
-    top: 15px;
-    left: 15px;
-    width: 45px;
-    height: 45px;
+    top: 15px; left: 15px;
+    width: 45px; height: 45px;
     background: rgba(0,0,0,0.6);
     border-radius: 50%;
     display: flex;
@@ -273,7 +374,7 @@ nav ul li a.active {
     font-size: 18px;
 }
 
-/* ---------------- GALLERY MODAL ---------------- */
+/* ================== GALLERY MODAL ================== */
 .gallery-modal {
     position: fixed;
     inset: 0;
@@ -290,7 +391,7 @@ nav ul li a.active {
 
 @keyframes fadeIn {
     from { opacity: 0; }
-    to { opacity: 1; }
+    to   { opacity: 1; }
 }
 
 .gallery-header {
@@ -314,8 +415,7 @@ nav ul li a.active {
     font-size: 28px;
     cursor: pointer;
     transition: 0.3s;
-    width: 45px;
-    height: 45px;
+    width: 45px; height: 45px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -335,7 +435,7 @@ nav ul li a.active {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
     gap: 20px;
     max-width: 1600px;
     margin: 0 auto;
@@ -358,14 +458,9 @@ nav ul li a.active {
 
 .gallery-item img,
 .gallery-item video {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
     display: block;
-}
-
-.gallery-item video {
-    background: #000;
 }
 
 .item-overlay {
@@ -380,29 +475,17 @@ nav ul li a.active {
     transition: opacity 0.3s ease;
 }
 
-.gallery-item:hover .item-overlay {
-    opacity: 1;
-}
+.gallery-item:hover .item-overlay { opacity: 1; }
 
-.item-overlay h4 {
-    color: #ffd700;
-    font-size: 1rem;
-    margin-bottom: 5px;
-}
-
-.item-overlay p {
-    color: #aaa;
-    font-size: 0.85rem;
-}
+.item-overlay h4 { color: #ffd700; font-size: 1rem; margin-bottom: 5px; }
+.item-overlay p  { color: #aaa; font-size: 0.85rem; }
 
 .play-icon {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 215, 0, 0.9);
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    width: 60px; height: 60px;
+    background: rgba(255,215,0,0.9);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -411,17 +494,10 @@ nav ul li a.active {
     transition: opacity 0.3s ease;
 }
 
-.gallery-item:hover .play-icon {
-    opacity: 1;
-}
+.gallery-item:hover .play-icon { opacity: 1; }
+.play-icon i { color: #000; font-size: 22px; margin-left: 3px; }
 
-.play-icon i {
-    color: #000;
-    font-size: 22px;
-    margin-left: 3px;
-}
-
-/* ---------------- LIGHTBOX ---------------- */
+/* ================== LIGHTBOX ================== */
 .lightbox {
     position: fixed;
     inset: 0;
@@ -463,16 +539,14 @@ nav ul li a.active {
 
 .lightbox-close-btn {
     position: absolute;
-    top: -50px;
-    right: 0;
+    top: -50px; right: 0;
     background: none;
     border: none;
     color: #fff;
     font-size: 32px;
     cursor: pointer;
     transition: 0.3s;
-    width: 45px;
-    height: 45px;
+    width: 45px; height: 45px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -494,8 +568,7 @@ nav ul li a.active {
     background: rgba(255,255,255,0.1);
     border: none;
     color: #fff;
-    width: 55px;
-    height: 55px;
+    width: 55px; height: 55px;
     border-radius: 50%;
     cursor: pointer;
     transition: 0.3s;
@@ -510,99 +583,16 @@ nav ul li a.active {
     color: #000;
 }
 
-.lightbox-caption {
-    margin-top: 20px;
-    text-align: center;
-}
+.lightbox-caption { margin-top: 20px; text-align: center; }
+.lightbox-caption h3 { color: #ffd700; font-size: 1.3rem; margin-bottom: 8px; }
+.lightbox-caption p  { color: #aaa; font-size: 0.95rem; }
 
-.lightbox-caption h3 {
-    color: #ffd700;
-    font-size: 1.3rem;
-    margin-bottom: 8px;
-}
-
-.lightbox-caption p {
-    color: #aaa;
-    font-size: 0.95rem;
-}
-
-/* ---------------- FOOTER ---------------- */
-footer {
-    background: #111;
-    color: #fff;
-    text-align: center;
-    padding: 50px 20px 30px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    margin-top: 60px;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer-logo {
-    font-size: 22px;
-    font-weight: 700;
-    color: #ffd700;
-    margin-bottom: 15px;
-}
-
-.footer-text {
-    color: #888;
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-}
-
-.footer-socials {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 25px 0;
-}
-
-.footer-socials a {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #aaa;
-    font-size: 18px;
-    transition: 0.3s;
-    text-decoration: none;
-}
-
-.footer-socials a:hover {
-    background: #ffd700;
-    color: #000;
-    transform: translateY(-3px);
-}
-
-.copyright {
-    margin-top: 30px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    color: #666;
-    font-size: 0.85rem;
-}
-
-/* ---------------- LOADING ---------------- */
-.loading-spinner {
-    display: none;
-    text-align: center;
-    padding: 50px;
-}
-
-.loading-spinner.active {
-    display: block;
-}
+/* ================== LOADING ================== */
+.loading-spinner { display: none; text-align: center; padding: 50px; }
+.loading-spinner.active { display: block; }
 
 .spinner {
-    width: 50px;
-    height: 50px;
+    width: 50px; height: 50px;
     border: 4px solid rgba(255,255,255,0.1);
     border-left-color: #ffd700;
     border-radius: 50%;
@@ -610,34 +600,54 @@ footer {
     margin: 0 auto 20px;
 }
 
-@keyframes spin {
-    to { transform: rotate(360deg); }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ================== FOOTER ================== */
+footer {
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    background: linear-gradient(180deg, #111 0%, #000 100%);
+    margin-top: 60px;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
+.footer-logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+/* الدائرة في الفوتر بنفس الكلاسات — فقط أصغر */
+.footer-logo-wrap .logo-icon-wrap {
+    width: 30px;
+    height: 30px;
+}
+
+.footer-logo-text {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #D4AF37;
+}
+
+footer p {
+    color: #C0C0C0;
+    font-size: 0.85rem;
+    margin-top: 6px;
+}
+
+/* ================== RESPONSIVE ================== */
 @media (max-width: 1200px) {
-    .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .categories-grid { grid-template-columns: repeat(2,1fr); }
 }
 
 @media (max-width: 800px) {
-    header {
-        padding: 15px 20px;
-    }
-
-    .logo a {
-        font-size: 20px;
-    }
-
-    .logo p {
-        font-size: 10px;
-    }
+    header { padding: 0 20px; }
 
     nav ul {
         position: fixed;
-        top: 0;
-        right: -100%;
+        top: 0; right: -100%;
         background: #111;
         flex-direction: column;
         width: 280px;
@@ -647,115 +657,53 @@ footer {
         box-shadow: -5px 0 15px rgba(0,0,0,0.3);
     }
 
-    nav ul.show {
-        right: 0;
-    }
+    nav ul.show { right: 0; }
+    .hamburger { display: flex; }
 
-    .hamburger {
-        display: flex;
-    }
+    .hero h1 { font-size: 2rem; }
+    .hero p  { font-size: 0.95rem; }
 
-    .hero h1 {
-        font-size: 2rem;
-    }
+    .categories-section { padding: 40px 20px; }
+    .categories-grid { grid-template-columns: 1fr; gap: 20px; }
+    .category-card { aspect-ratio: 16/9; }
 
-    .hero p {
-        font-size: 0.95rem;
-    }
-
-    .categories-section {
-        padding: 40px 20px;
-    }
-
-    .categories-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .category-card {
-        aspect-ratio: 16/9;
-    }
-
-    .gallery-content {
-        padding: 20px;
-    }
-
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 15px;
-    }
-
-    .lightbox-nav-btns button {
-        width: 45px;
-        height: 45px;
-    }
+    .gallery-content { padding: 20px; }
+    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 15px; }
+    .lightbox-nav-btns button { width: 45px; height: 45px; }
 }
 
 @media (max-width: 500px) {
-    .hero h1 {
-        font-size: 1.6rem;
-    }
-
-    .gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .gallery-item {
-        aspect-ratio: 1/1;
-    }
-}
-
-.hero {
-    position: relative;
-    min-height: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 60px 20px 40px;
-    overflow: hidden; /* مهم جداً */
-    /* احذف الـ background القديم */
-}
-
-.hero-video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    z-index: -1; /* عشان الفيديو يروح ورا النص */
-}
-
-/* أضف طبقة سوداء شفافة فوق الفيديو */
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.7); /* طبقة سوداء شفافة */
-    z-index: 0;
-}
-
-.hero h1, .hero p {
-    position: relative;
-    z-index: 1; /* عشان النص يبان فوق الفيديو */
+    .hero h1 { font-size: 1.6rem; }
+    .gallery-grid { grid-template-columns: repeat(2,1fr); }
+    .gallery-item { aspect-ratio: 1/1; }
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- ================== HEADER ================== -->
 <header id="header">
+
     <div class="logo">
-        <a href="index.html"> MHG Studio</a>
-        <p>Контент для бизнеса</p>
+        <a href="index.html">
+            <!-- الدائرة المتحركة -->
+            <div class="logo-icon-wrap">
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <div class="logo-ring"></div>
+                <div class="logo-sphere"></div>
+                <div class="logo-orbit"></div>
+            </div>
+            <!-- الاسم والنص تحته -->
+            <div class="logo-text-wrap">
+                <span class="logo-name">MHG Studio</span>
+                <span class="logo-sub">Контент для бизнеса</span>
+            </div>
+        </a>
     </div>
+
     <nav>
-        <div class="hamburger" onclick="toggleMenu()">
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
             <div></div>
             <div></div>
             <div></div>
@@ -768,9 +716,10 @@ footer {
             <li><a href="contact.html">Контакты</a></li>
         </ul>
     </nav>
+
 </header>
 
-<!-- HERO SECTION -->
+<!-- ================== HERO ================== -->
 <section class="hero">
     <video class="hero-video" autoplay muted loop playsinline>
         <source src="corporate-video.mp4" type="video/mp4">
@@ -779,14 +728,14 @@ footer {
     <p>Откройте для себя наши лучшие работы в области видеопроизводства, фотографии и рекламы</p>
 </section>
 
-<!-- CATEGORIES SECTION -->
+<!-- ================== CATEGORIES ================== -->
 <section class="categories-section">
     <div class="categories-title">
         <p>Выберите категорию для просмотра всех работ</p>
     </div>
 
     <div class="categories-grid">
-        <!-- Category 1: Фотосессии -->
+
         <div class="category-card" data-category="photosessions">
             <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/132b22298-03b7-451a-bd83-31b17bf47c82.png" alt="Фотосессии" loading="lazy">
             <div class="category-icon"><i class="fas fa-camera"></i></div>
@@ -797,7 +746,6 @@ footer {
             </div>
         </div>
 
-        <!-- Category 2: Видео -->
         <div class="category-card" data-category="videos">
             <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/18854067a-91b1-4c51-bec0-04adb0cb910f.png" alt="Видео" loading="lazy">
             <div class="category-icon"><i class="fas fa-video"></i></div>
@@ -808,7 +756,6 @@ footer {
             </div>
         </div>
 
-        <!-- Category 3: Фото Продуктов -->
         <div class="category-card" data-category="products">
             <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/1cf47776e-2848-4f37-a1a4-65fbed392fcb.png" alt="Фото Продуктов" loading="lazy">
             <div class="category-icon"><i class="fas fa-box"></i></div>
@@ -819,24 +766,13 @@ footer {
             </div>
         </div>
 
-        <!-- Category 4: Интерактивные Фото 
-        <div class="category-card" data-category="interactive">
-            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/18095d13a-7aba-4da3-8fdb-95da48cab771.png" alt="Интерактивные Фото" loading="lazy">
-            <div class="category-icon"><i class="fas fa-touch"></i></div>
-            <div class="category-count">12 работ</div>
-            <div class="category-overlay">
-                <h3>Интерактивные Фото</h3>
-                <p>Рекламные и социальные кампании</p>
-            </div>
-        </div>
-        -->
     </div>
 </section>
 
-<!-- GALLERY MODAL -->
+<!-- ================== GALLERY MODAL ================== -->
 <div class="gallery-modal" id="gallery-modal">
     <div class="gallery-header">
-        <h2 id="gallery-title">Название категории</h2>
+        <h2 id="gallery-title">Галерея</h2>
         <button class="gallery-close" onclick="closeGallery()">
             <i class="fas fa-times"></i>
         </button>
@@ -850,7 +786,7 @@ footer {
     </div>
 </div>
 
-<!-- LIGHTBOX -->
+<!-- ================== LIGHTBOX ================== -->
 <div class="lightbox" id="lightbox">
     <div class="lightbox-container">
         <button class="lightbox-close-btn" onclick="closeLightbox()">
@@ -862,157 +798,137 @@ footer {
             <button onclick="nextLightbox()"><i class="fas fa-chevron-right"></i></button>
         </div>
         <div class="lightbox-caption">
-            <h3 id="lightbox-title">Название</h3>
-            <p id="lightbox-desc">Описание</p>
+            <h3 id="lightbox-title"></h3>
+            <p id="lightbox-desc"></p>
         </div>
     </div>
 </div>
 
-<!-- FOOTER -->
+<!-- ================== FOOTER ================== -->
 <footer>
-    <div class="footer-content">
-
-        <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса </p>
-
-        <p>© 2026 MHG Studio. Все права защищены. </p>
+    <div class="footer-logo-wrap">
+        <div class="logo-icon-wrap">
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-ring"></div>
+            <div class="logo-sphere"></div>
+            <div class="logo-orbit"></div>
+        </div>
+        <span class="footer-logo-text">MHG Studio</span>
     </div>
+    <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса.</p>
+    <p style="margin-top:10px">© 2026 MHG Studio. Все права защищены.</p>
 </footer>
 
 <script>
-// ==================== DATA ====================
+/* ================== DATA ================== */
 const portfolioData = {
     photosessions: [
-        { type: 'image', src: 'photo-person/1.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/2.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/3.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/4.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/5.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/6.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/7.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/8.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/9.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/10.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/11.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/12.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/14.jpg', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/16.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/17.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/18.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/19.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/20.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/21.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/22.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/23.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/25.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/26.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/27.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'photo-person/28.JPG', title: 'Портретная съёмка', desc: 'Студийная фотосессия' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f', title: 'Художественный портрет', desc: 'Авторская съёмка' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb', title: 'Fashion съёмка', desc: 'Модная фотография' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04', title: 'Женский портрет', desc: 'Студийная работа' }
+        { type:'image', src:'photo-person/1.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/2.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/3.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/4.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/5.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/6.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/7.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/8.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/9.jpg',  title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/10.jpg', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/11.jpg', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/12.jpg', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/14.jpg', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/16.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/17.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/18.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/19.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/20.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/21.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/22.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/23.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/25.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/26.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/27.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'photo-person/28.JPG', title:'Портретная съёмка', desc:'Студийная фотосессия' },
+        { type:'image', src:'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f', title:'Художественный портрет', desc:'Авторская съёмка' },
+        { type:'image', src:'https://images.unsplash.com/photo-1534528741775-53994a69daeb', title:'Fashion съёмка', desc:'Модная фотография' },
+        { type:'image', src:'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04', title:'Женский портрет', desc:'Студийная работа' }
     ],
     videos: [
-        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4', title: 'Корпоративное видео', desc: 'Съёмка и монтаж для компании' },
-        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485212/Video_2026-02-07_14-20-40_tkwz82.mp4', title: 'Рекламный ролик', desc: 'Коммерческий проект' },
-        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770484776/video_2026-02-07_14-20-32_uxvgvg.mp4', title: 'За кулисами', desc: 'Процесс съёмки' },
-        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4', title: 'Музыкальный клип', desc: 'Продюсирование' },
-        { type: 'video', src: 'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485212/Video_2026-02-07_14-20-40_tkwz82.mp4', title: 'Интервью', desc: 'Студийная запись' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1579632652768-6cb9dcf85912', title: 'Видео продакшн', desc: 'Съёмочная площадка' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1536240478700-b869070f9279', title: 'Кинематография', desc: 'Художественное видео' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4', title: 'Документальный фильм', desc: 'Режиссёрская работа' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32', title: 'Event съёмка', desc: 'Мероприятия' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1518135714426-c18f5ffb6f4d', title: 'Аэросъёмка', desc: 'Дрон видео' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1522008629173-e12980314a70', title: 'Таймлапс', desc: 'Ускоренное видео' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1478720568477-152d9b164e26', title: 'Анимация', desc: 'Motion graphics' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1535016120720-40c6874c3b13', title: 'Стриминг', desc: 'Прямые трансляции' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1505373877841-8d43f703fb8f', title: '360° видео', desc: 'Панорамная съёмка' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655', title: 'Обучающее видео', desc: 'Корпоративное обучение' }
+        { type:'video', src:'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485542/Video_2026-02-07_14-20-37_hpadop.mp4', title:'Корпоративное видео', desc:'Съёмка и монтаж' },
+        { type:'video', src:'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770485212/Video_2026-02-07_14-20-40_tkwz82.mp4', title:'Рекламный ролик', desc:'Коммерческий проект' },
+        { type:'video', src:'https://res.cloudinary.com/ddfw5wx6f/video/upload/v1770484776/video_2026-02-07_14-20-32_uxvgvg.mp4', title:'За кулисами', desc:'Процесс съёмки' },
+        { type:'image', src:'https://images.unsplash.com/photo-1579632652768-6cb9dcf85912', title:'Видео продакшн', desc:'Съёмочная площадка' },
+        { type:'image', src:'https://images.unsplash.com/photo-1536240478700-b869070f9279', title:'Кинематография', desc:'Художественное видео' },
+        { type:'image', src:'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4', title:'Документальный фильм', desc:'Режиссёрская работа' },
+        { type:'image', src:'https://images.unsplash.com/photo-1516035069371-29a1b244cc32', title:'Event съёмка', desc:'Мероприятия' },
+        { type:'image', src:'https://images.unsplash.com/photo-1518135714426-c18f5ffb6f4d', title:'Аэросъёмка', desc:'Дрон видео' },
+        { type:'image', src:'https://images.unsplash.com/photo-1522008629173-e12980314a70', title:'Таймлапс', desc:'Ускоренное видео' },
+        { type:'image', src:'https://images.unsplash.com/photo-1478720568477-152d9b164e26', title:'Анимация', desc:'Motion graphics' },
+        { type:'image', src:'https://images.unsplash.com/photo-1535016120720-40c6874c3b13', title:'Стриминг', desc:'Прямые трансляции' },
+        { type:'image', src:'https://images.unsplash.com/photo-1505373877841-8d43f703fb8f', title:'360° видео', desc:'Панорамная съёмка' },
+        { type:'image', src:'https://images.unsplash.com/photo-1524178232363-1fb2b075b655', title:'Обучающее видео', desc:'Корпоративное обучение' }
     ],
     products: [
-        { type: 'image', src: 'photo-ads/1.webp', title: 'Предметная съёмка', desc: 'Коммерческая фотография' },
-        { type: 'image', src: 'photo-ads/3.webp', title: 'Каталожная съёмка', desc: 'E-commerce' },
-        { type: 'image', src: 'photo-ads/4.webp', title: 'Ювелирные изделия', desc: 'Макро съёмка' },
-        { type: 'image', src: 'photo-ads/5.webp', title: 'Косметика', desc: 'Бьюти продукты' },
-        { type: 'image', src: 'photo-ads/6.webp', title: 'Электроника', desc: 'Техника' },
-        { type: 'image', src: 'photo-ads/7.webp', title: 'Одежда', desc: 'Fashion products' },
-        { type: 'image', src: 'photo-ads/8.jpg', title: 'Обувь', desc: 'Продуктовая съёмка' },
-        { type: 'image', src: 'photo-ads/9.jpg', title: 'Аксессуары', desc: 'Детали' },
-        { type: 'image', src: 'photo-ads/10.jpeg', title: 'Часы', desc: 'Luxury products' },
-        { type: 'image', src: 'photo-ads/11.webp', title: 'Парфюмерия', desc: 'Ароматы' },
-        { type: 'image', src: 'photo-ads/12.webp', title: 'Еда', desc: 'Food photography' },
-        { type: 'image', src: 'photo-ads/13.webp', title: 'Напитки', desc: 'Beverage' },
-        { type: 'image', src: 'photo-ads/14.jpg', title: 'Упаковка', desc: 'Packaging' },
-        { type: 'image', src: 'photo-ads/15.jpg', title: 'Книги', desc: 'Print products' },
-        { type: 'image', src: 'photo-ads/16.jpg', title: 'Гаджеты', desc: 'Tech products' },
-        { type: 'image', src: 'photo-ads/17.png', title: 'Спорттовары', desc: 'Sports equipment' },
-        { type: 'image', src: 'photo-ads/18.png', title: 'Дом и интерьер', desc: 'Home decor' },
-        { type: 'image', src: 'photo-ads/19.png', title: 'Детские товары', desc: 'Kids products' },
-        { type: 'image', src: 'photo-ads/20.png', title: 'Автотовары', desc: 'Auto accessories' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30', title: 'Минимализм', desc: 'White background' }
-    ],
-    interactive: [
-        { type: 'image', src: 'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5', title: 'Социальная реклама', desc: 'Экологическая кампания' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1542204165-65bf26472b9b', title: 'Брендинг', desc: 'Корпоративный стиль' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1561070791-2526d30994b5', title: 'Digital кампания', desc: 'Онлайн реклама' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1557804506-669a67965ba0', title: 'Презентация', desc: 'Бизнес материалы' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1551434678-e076c223a692', title: 'Веб-дизайн', desc: 'UI/UX проект' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f', title: 'Инфографика', desc: 'Визуализация данных' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71', title: 'Дашборд', desc: 'Аналитика' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71', title: 'Мобильное приложение', desc: 'App дизайн' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4', title: 'Офисное пространство', desc: 'Корпоративная среда' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1497366216548-37526070297c', title: 'Конференция', desc: 'Бизнес событие' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952', title: 'Команда', desc: 'Корпоративная культура' },
-        { type: 'image', src: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f', title: 'Воркшоп', desc: 'Обучение' }
+        { type:'image', src:'photo-ads/1.webp',  title:'Предметная съёмка', desc:'Коммерческая фотография' },
+        { type:'image', src:'photo-ads/3.webp',  title:'Каталожная съёмка', desc:'E-commerce' },
+        { type:'image', src:'photo-ads/4.webp',  title:'Ювелирные изделия', desc:'Макро съёмка' },
+        { type:'image', src:'photo-ads/5.webp',  title:'Косметика', desc:'Бьюти продукты' },
+        { type:'image', src:'photo-ads/6.webp',  title:'Электроника', desc:'Техника' },
+        { type:'image', src:'photo-ads/7.webp',  title:'Одежда', desc:'Fashion products' },
+        { type:'image', src:'photo-ads/8.jpg',   title:'Обувь', desc:'Продуктовая съёмка' },
+        { type:'image', src:'photo-ads/9.jpg',   title:'Аксессуары', desc:'Детали' },
+        { type:'image', src:'photo-ads/10.jpeg', title:'Часы', desc:'Luxury products' },
+        { type:'image', src:'photo-ads/11.webp', title:'Парфюмерия', desc:'Ароматы' },
+        { type:'image', src:'photo-ads/12.webp', title:'Еда', desc:'Food photography' },
+        { type:'image', src:'photo-ads/13.webp', title:'Напитки', desc:'Beverage' },
+        { type:'image', src:'photo-ads/14.jpg',  title:'Упаковка', desc:'Packaging' },
+        { type:'image', src:'photo-ads/15.jpg',  title:'Книги', desc:'Print products' },
+        { type:'image', src:'photo-ads/16.jpg',  title:'Гаджеты', desc:'Tech products' },
+        { type:'image', src:'photo-ads/17.png',  title:'Спорттовары', desc:'Sports equipment' },
+        { type:'image', src:'photo-ads/18.png',  title:'Дом и интерьер', desc:'Home decor' },
+        { type:'image', src:'photo-ads/19.png',  title:'Детские товары', desc:'Kids products' },
+        { type:'image', src:'photo-ads/20.png',  title:'Автотовары', desc:'Auto accessories' },
+        { type:'image', src:'https://images.unsplash.com/photo-1523275335684-37898b6baf30', title:'Минимализм', desc:'White background' }
     ]
 };
 
 const categoryTitles = {
     photosessions: 'Фотосессии',
     videos: 'Видео',
-    products: 'Фото Продуктов',
-    interactive: 'Интерактивные Фото'
+    products: 'Фото Продуктов'
 };
 
-// ==================== STATE ====================
 let currentGallery = [];
 let currentLightboxIndex = 0;
 
-// ==================== HEADER SCROLL ====================
+/* ---- Header scroll ---- */
 window.addEventListener('scroll', () => {
-    const header = document.getElementById('header');
-    if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-    } else {
-        header.classList.remove('scrolled');
-    }
+    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// ==================== MOBILE MENU ====================
+/* ---- Mobile menu ---- */
 function toggleMenu() {
     document.getElementById('nav-links').classList.toggle('show');
-    document.querySelector('.hamburger').classList.toggle('active');
+    document.getElementById('hamburger').classList.toggle('active');
 }
 
 document.querySelectorAll('#nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         document.getElementById('nav-links').classList.remove('show');
-        document.querySelector('.hamburger').classList.remove('active');
+        document.getElementById('hamburger').classList.remove('active');
     });
 });
 
-// ==================== OPEN GALLERY ====================
+/* ---- Open Gallery ---- */
 document.querySelectorAll('.category-card').forEach(card => {
-    card.addEventListener('click', () => {
-        const category = card.dataset.category;
-        openGallery(category);
-    });
+    card.addEventListener('click', () => openGallery(card.dataset.category));
 });
 
 function openGallery(category) {
-    const modal = document.getElementById('gallery-modal');
-    const grid = document.getElementById('gallery-grid');
+    const modal  = document.getElementById('gallery-modal');
+    const grid   = document.getElementById('gallery-grid');
     const loader = document.getElementById('gallery-loader');
-    const title = document.getElementById('gallery-title');
+    const title  = document.getElementById('gallery-title');
 
     title.textContent = categoryTitles[category] || 'Галерея';
     grid.innerHTML = '';
@@ -1020,114 +936,85 @@ function openGallery(category) {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Simulate loading
     setTimeout(() => {
         currentGallery = portfolioData[category] || [];
-        
+
         currentGallery.forEach((item, index) => {
-            const galleryItem = document.createElement('div');
-            galleryItem.className = 'gallery-item';
-            galleryItem.dataset.index = index;
-            
+            const el = document.createElement('div');
+            el.className = 'gallery-item';
+
             if (item.type === 'video') {
-                galleryItem.innerHTML = `
+                el.innerHTML = `
                     <video muted loop playsinline preload="metadata">
                         <source src="${item.src}" type="video/mp4">
                     </video>
                     <div class="play-icon"><i class="fas fa-play"></i></div>
-                    <div class="item-overlay">
-                        <h4>${item.title}</h4>
-                        <p>${item.desc}</p>
-                    </div>
+                    <div class="item-overlay"><h4>${item.title}</h4><p>${item.desc}</p></div>
                 `;
-                
-                const video = galleryItem.querySelector('video');
-                galleryItem.addEventListener('mouseenter', () => {
-                    video.play().catch(() => {});
-                });
-                galleryItem.addEventListener('mouseleave', () => {
-                    video.pause();
-                    video.currentTime = 0;
-                });
+                const v = el.querySelector('video');
+                el.addEventListener('mouseenter', () => v.play().catch(()=>{}));
+                el.addEventListener('mouseleave', () => { v.pause(); v.currentTime=0; });
             } else {
-                galleryItem.innerHTML = `
+                el.innerHTML = `
                     <img src="${item.src}" alt="${item.title}" loading="lazy">
-                    <div class="item-overlay">
-                        <h4>${item.title}</h4>
-                        <p>${item.desc}</p>
-                    </div>
+                    <div class="item-overlay"><h4>${item.title}</h4><p>${item.desc}</p></div>
                 `;
             }
-            
-            galleryItem.addEventListener('click', () => {
-                openLightbox(index);
-            });
-            
-            grid.appendChild(galleryItem);
+
+            el.addEventListener('click', () => openLightbox(index));
+            grid.appendChild(el);
         });
-        
+
         loader.classList.remove('active');
-    }, 500);
+    }, 400);
 }
 
 function closeGallery() {
     const modal = document.getElementById('gallery-modal');
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
-    
-    // Pause all videos
-    modal.querySelectorAll('video').forEach(video => {
-        video.pause();
-        video.currentTime = 0;
-    });
+    modal.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime=0; });
 }
 
-// ==================== LIGHTBOX ====================
+/* ---- Lightbox ---- */
 function openLightbox(index) {
-    const lightbox = document.getElementById('lightbox');
-    const mediaContainer = document.getElementById('lightbox-media');
+    const lb      = document.getElementById('lightbox');
+    const media   = document.getElementById('lightbox-media');
     const titleEl = document.getElementById('lightbox-title');
-    const descEl = document.getElementById('lightbox-desc');
-    
+    const descEl  = document.getElementById('lightbox-desc');
+
     currentLightboxIndex = index;
     const item = currentGallery[index];
-    
     if (!item) return;
-    
-    mediaContainer.innerHTML = '';
-    
+
+    media.innerHTML = '';
+
     if (item.type === 'video') {
-        const video = document.createElement('video');
-        video.src = item.src;
-        video.controls = true;
-        video.autoplay = true;
-        video.className = 'lightbox-media';
-        mediaContainer.appendChild(video);
+        const v = document.createElement('video');
+        v.src = item.src;
+        v.controls = true;
+        v.autoplay = true;
+        v.className = 'lightbox-media';
+        media.appendChild(v);
     } else {
         const img = document.createElement('img');
         img.src = item.src;
         img.alt = item.title;
         img.className = 'lightbox-media';
-        mediaContainer.appendChild(img);
+        media.appendChild(img);
     }
-    
+
     titleEl.textContent = item.title;
-    descEl.textContent = item.desc;
-    
-    lightbox.classList.add('active');
+    descEl.textContent  = item.desc;
+    lb.classList.add('active');
 }
 
 function closeLightbox() {
-    const lightbox = document.getElementById('lightbox');
-    const mediaContainer = document.getElementById('lightbox-media');
-    
-    const video = mediaContainer.querySelector('video');
-    if (video) {
-        video.pause();
-        video.src = '';
-    }
-    
-    lightbox.classList.remove('active');
+    const lb    = document.getElementById('lightbox');
+    const media = document.getElementById('lightbox-media');
+    const v = media.querySelector('video');
+    if (v) { v.pause(); v.src=''; }
+    lb.classList.remove('active');
 }
 
 function prevLightbox() {
@@ -1140,46 +1027,20 @@ function nextLightbox() {
     openLightbox(currentLightboxIndex);
 }
 
-// Close lightbox on background click
-document.getElementById('lightbox').addEventListener('click', (e) => {
-    if (e.target.id === 'lightbox') {
-        closeLightbox();
-    }
+document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target.id === 'lightbox') closeLightbox();
 });
 
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    const lightbox = document.getElementById('lightbox');
+document.addEventListener('keydown', e => {
+    const lb    = document.getElementById('lightbox');
     const modal = document.getElementById('gallery-modal');
-    
-    if (lightbox.classList.contains('active')) {
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') prevLightbox();
-        if (e.key === 'ArrowRight') nextLightbox();
+    if (lb.classList.contains('active')) {
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')   prevLightbox();
+        if (e.key === 'ArrowRight')  nextLightbox();
     }
-    
-    if (modal.classList.contains('active') && e.key === 'Escape') {
-        closeGallery();
-    }
-});
-
-// ==================== LAZY LOADING ====================
-document.addEventListener('DOMContentLoaded', () => {
-    const images = document.querySelectorAll('img[loading="lazy"]');
-    
-    const imageObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.dataset.src || img.src;
-                imageObserver.unobserve(img);
-            }
-        });
-    });
-    
-    images.forEach(img => imageObserver.observe(img));
+    if (modal.classList.contains('active') && e.key === 'Escape') closeGallery();
 });
 </script>
 </body>
 </html>
-
