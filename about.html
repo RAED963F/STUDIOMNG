@@ -556,6 +556,17 @@
             header { padding: 0 15px; }
             .team-grid { grid-template-columns: 1fr; }
         }
+
+        .hero-video {
+            position: absolute;
+            inset: -10% -10% auto -10%;
+            min-width: 120%;
+            min-height: 120%;
+            object-fit: cover;
+            z-index: -2;
+            filter: brightness(0.6);
+            transition: transform var(--transition-medium)
+        }   
     </style>
 </head>
 
@@ -594,6 +605,10 @@
 
 <!-- ================== ABOUT HEADER ================== -->
 <div class="about-header">
+    <video autoplay muted loop playsinline class="hero-video" aria-hidden="true">
+            <!-- fallback: if you have a file replace src with your video -->
+            <source src="background_server.mp4" type="video/mp4">
+        </video>
     <h1>О нас</h1>
     <p>MHG Studio — это профессиональная команда, создающая уникальный видеоконтент, фотосессии и рекламные проекты под ключ.</p>
 </div>
@@ -645,8 +660,7 @@
         <div class="team-card">
             <div class="card-image-wrapper">
                 <img src="firas.jpg" alt="Фирас" class="card-image">
-    <!--
-              
+              <!-- 
                 <div class="card-overlay">
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -654,9 +668,10 @@
                         <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
+-->
             </div>
+     <!--            
             <div class="card-content">
-              
                 <p class="card-role">Основатель и режиссёр</p>
                 <p class="card-bio">7+ лет в видеопроизводстве, креативное видение студии</p>
             </div>
@@ -665,7 +680,7 @@
         <div class="team-card">
             <div class="card-image-wrapper">
                 <img src="raed.jpg" alt="Раед" class="card-image">
-<!--  
+ <!-- 
                 <div class="card-overlay">
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -673,8 +688,9 @@
                         <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
+-->
             </div>
-
+<!-- 
             <div class="card-content">
                 <p class="card-role">Фотограф и оператор</p>
                 <p class="card-bio">Специалист по портретной и коммерческой съёмке</p>
@@ -684,7 +700,7 @@
         <div class="team-card">
             <div class="card-image-wrapper">
                 <img src="moxamad.jpg" alt="Мухамад" class="card-image">
- <!--                
+              <!-- 
                 <div class="card-overlay">
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -692,8 +708,9 @@
                         <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
+-->
             </div>
-
+ <!--  
             <div class="card-content">
                 <p class="card-role">Монтажёр и VFX</p>
                 <p class="card-bio">Постпродакшн и визуальные эффекты</p>
@@ -703,7 +720,7 @@
         <div class="team-card">
             <div class="card-image-wrapper">
                 <img src="yaraslaf.jpg" alt="Ярослав" class="card-image">
-  <!--               
+             <!-- 
                 <div class="card-overlay">
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
@@ -711,8 +728,9 @@
                         <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
+-->
             </div>
-
+  <!--  
             <div class="card-content">
                 <p class="card-role">Продюсер</p>
                 <p class="card-bio">Управление проектами и клиентский сервис</p>
