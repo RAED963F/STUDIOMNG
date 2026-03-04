@@ -1123,7 +1123,11 @@
             const heroVideo = document.querySelector('.hero-video');
             if (heroVideo) {
                 const isMobile = /Mobi|Android/i.test(navigator.userAgent);
-                if (isMobile) heroVideo.pause();
+                if (isMobile) {
+                    // تغيير مصدر الفيديو إلى نسخة أخف للموبايل
+                    heroVideo.querySelector('source').src = 'Back-G1-mobile.mp4';
+                    heroVideo.load();
+                }
             }
         });
     </script>
