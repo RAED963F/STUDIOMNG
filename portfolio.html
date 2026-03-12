@@ -1,692 +1,1235 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Медиа Сфера | Портфолио</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-}
-
-body {
-    background: #0a0a0a;
-    color: #fff;
-    overflow-x: hidden;
-}
-
-/* ================== HEADER ================== */
-header {
-    width: 100%;
-    padding: 0 60px;
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(10px);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    transition: all 0.3s ease;
-    height: 80px;
-}
-
-header.scrolled {
-    background: rgba(10,10,10,0.98);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-
-/* ================== LOGO ================== */
-.logo a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-}
-
-.logo-text-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-}
-
-.logo-name {
-    font-size: 22px;
-    font-weight: 700;
-    color: #ffd700;
-    line-height: 1;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-}
-
-.logo-sub {
-    font-size: 11px;
-    color: #aaa;
-    font-weight: 400;
-    line-height: 1;
-    opacity: 0.8;
-    white-space: nowrap;
-}
-
-/* ================== ANIMATED SPHERE ================== */
-.logo-icon-wrap {
-    position: relative;
-    width: 38px;
-    height: 38px;
-    flex-shrink: 0;
-}
-
-.logo-ring {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 2px solid #D4AF37;
-    animation: ringPulse 2.8s ease-in-out infinite;
-}
-.logo-ring:nth-child(2) {
-    inset: -5px;
-    border-color: rgba(212,175,55,0.35);
-    animation: ringPulse 2.8s ease-in-out infinite 0.4s;
-}
-.logo-ring:nth-child(3) {
-    inset: -10px;
-    border-color: rgba(212,175,55,0.15);
-    animation: ringPulse 2.8s ease-in-out infinite 0.8s;
-}
-
-@keyframes ringPulse {
-    0%, 100% { transform: scale(1);    opacity: 1;   }
-    50%       { transform: scale(1.12); opacity: 0.6; }
-}
-
-.logo-sphere {
-    position: absolute;
-    inset: 3px;
-    border-radius: 50%;
-    background: radial-gradient(circle at 38% 35%, #F0CC55, #D4AF37 50%, #8a6f00 100%);
-    box-shadow:
-        0 0 12px rgba(212,175,55,0.6),
-        0 0 30px rgba(212,175,55,0.25),
-        inset 0 2px 4px rgba(255,255,255,0.3);
-    animation:
-        spherePopIn  0.7s cubic-bezier(.36,.07,.19,.97) both,
-        sphereGlow   3s ease-in-out 0.7s infinite,
-        sphereBounce 3.5s ease-in-out 1.2s infinite;
-}
-
-.logo-sphere::after {
-    content: '';
-    position: absolute;
-    top: 15%; left: 20%;
-    width: 35%; height: 30%;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.35);
-    filter: blur(3px);
-    animation: shineMove 3s ease-in-out infinite;
-}
-
-.logo-orbit {
-    position: absolute;
-    inset: -4px;
-    border-radius: 50%;
-    animation: orbitSpin 4s linear infinite;
-}
-.logo-orbit::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 6px; height: 6px;
-    background: #F0CC55;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #D4AF37;
-}
-
-@keyframes orbitSpin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-}
-@keyframes spherePopIn {
-    0%   { transform: scale(0) rotate(-30deg); opacity: 0; }
-    60%  { transform: scale(1.15) rotate(5deg); opacity: 1; }
-    80%  { transform: scale(0.92) rotate(-2deg); }
-    100% { transform: scale(1) rotate(0deg); opacity: 1; }
-}
-@keyframes sphereGlow {
-    0%, 100% { box-shadow: 0 0 12px rgba(212,175,55,0.6), 0 0 30px rgba(212,175,55,0.25), inset 0 2px 4px rgba(255,255,255,0.3); }
-    50%       { box-shadow: 0 0 20px rgba(212,175,55,0.9), 0 0 50px rgba(212,175,55,0.4), inset 0 2px 4px rgba(255,255,255,0.35); }
-}
-@keyframes sphereBounce {
-    0%   { transform: translateY(0)    scale(1);    }
-    30%  { transform: translateY(-8px) scale(1.06); }
-    50%  { transform: translateY(0)    scale(0.96); }
-    65%  { transform: translateY(-4px) scale(1.02); }
-    80%  { transform: translateY(0)    scale(0.99); }
-    100% { transform: translateY(0)    scale(1);    }
-}
-@keyframes shineMove {
-    0%, 100% { transform: translate(0,0);    opacity: 0.35; }
-    50%       { transform: translate(2px,2px); opacity: 0.55; }
-}
-
-/* ================== NAV ================== */
-nav ul {
-    display: flex;
-    gap: 35px;
-    list-style: none;
-}
-
-nav ul li a {
-    color: #fff;
-    font-size: 15px;
-    font-weight: 500;
-    text-decoration: none;
-    padding: 6px 10px;
-    border-radius: 8px;
-    transition: 0.3s;
-    position: relative;
-}
-
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 50%;
-    background-color: #ffd700;
-    transition: all 0.3s ease;
-    transform: translateX(-50%);
-}
-
-nav ul li a:hover::after,
-nav ul li a.active::after { width: 80%; }
-
-nav ul li a:hover,
-nav ul li a.active { color: #ffd700; }
-
-/* Hamburger */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 5px;
-    z-index: 1001;
-}
-
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background: #fff;
-    transition: 0.3s;
-}
-
-.hamburger.active div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-.hamburger.active div:nth-child(2) { opacity: 0; }
-.hamburger.active div:nth-child(3) { transform: rotate(-45deg) translate(7px,-6px); }
-
-/* ================== HERO ================== */
-.hero {
-    position: relative;
-    min-height: 40vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 60px 20px 40px;
-    overflow: hidden;
-}
-
-.hero-video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    z-index: -1;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 0;
-}
-
-.hero h1,
-.hero p { position: relative; z-index: 1; }
-
-.hero h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: #ffd700;
-}
-
-.hero p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    color: #ccc;
-    line-height: 1.6;
-}
-
-/* ================== CATEGORIES ================== */
-.categories-section {
-    padding: 60px 40px;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.categories-title {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.categories-title p {
-    color: #888;
-    font-size: 1rem;
-}
-
-.categories-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.category-card {
-    position: relative;
-    aspect-ratio: 4/5;
-    border-radius: 16px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.4s ease;
-    background: #111;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-.category-card:hover {
-    transform: translateY(-10px);
-    border-color: #ffd700;
-    box-shadow: 0 20px 40px rgba(255,215,0,0.15);
-}
-
-.category-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.category-card:hover img { transform: scale(1.1); }
-
-.category-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.3));
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 25px;
-}
-
-.category-overlay h3 {
-    font-size: 1.3rem;
-    color: #ffd700;
-    margin-bottom: 8px;
-    font-weight: 600;
-}
-
-.category-overlay p {
-    font-size: 0.9rem;
-    color: #aaa;
-    line-height: 1.4;
-}
-
-.category-count {
-    position: absolute;
-    top: 15px; right: 15px;
-    background: rgba(255,215,0,0.9);
-    color: #000;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.category-icon {
-    position: absolute;
-    top: 15px; left: 15px;
-    width: 45px; height: 45px;
-    background: rgba(0,0,0,0.6);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ffd700;
-    font-size: 18px;
-}
-
-/* ================== GALLERY MODAL ================== */
-.gallery-modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.98);
-    z-index: 2000;
-    display: none;
-    flex-direction: column;
-}
-
-.gallery-modal.active {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-}
-
-.gallery-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    background: rgba(10,10,10,0.9);
-}
-
-.gallery-header h2 {
-    color: #ffd700;
-    font-size: 1.5rem;
-}
-
-.gallery-close {
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 28px;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.gallery-close:hover {
-    background: rgba(255,255,255,0.1);
-    color: #ffd700;
-}
-
-.gallery-content {
-    flex: 1;
-    overflow-y: auto;
-    padding: 40px;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
-    gap: 20px;
-    max-width: 1600px;
-    margin: 0 auto;
-}
-
-.gallery-item {
-    position: relative;
-    aspect-ratio: 4/5;
-    border-radius: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    background: #111;
-    transition: all 0.3s ease;
-}
-
-.gallery-item:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.gallery-item img,
-.gallery-item video {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.item-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 20px;
-    transition: opacity 0.3s ease;
-}
-
-.gallery-item:hover .item-overlay { opacity: 1; }
-
-.item-overlay h4 { color: #ffd700; font-size: 1rem; margin-bottom: 5px; }
-.item-overlay p  { color: #aaa; font-size: 0.85rem; }
-
-.play-icon {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    width: 60px; height: 60px;
-    background: rgba(255,215,0,0.9);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.gallery-item:hover .play-icon { opacity: 1; }
-.play-icon i { color: #000; font-size: 22px; margin-left: 3px; }
-
-/* ================== LIGHTBOX ================== */
-.lightbox {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.98);
-    z-index: 3000;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-}
-
-.lightbox.active {
-    display: flex;
-    animation: fadeIn 0.3s ease;
-}
-
-.lightbox-container {
-    position: relative;
-    max-width: 95%;
-    max-height: 95%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.lightbox-media {
-    max-width: 100%;
-    max-height: 85vh;
-    border-radius: 8px;
-    box-shadow: 0 0 50px rgba(0,0,0,0.8);
-}
-
-.lightbox-media img,
-.lightbox-media video {
-    max-width: 100%;
-    max-height: 85vh;
-    border-radius: 8px;
-}
-
-.lightbox-close-btn {
-    position: absolute;
-    top: -50px; right: 0;
-    background: none;
-    border: none;
-    color: #fff;
-    font-size: 32px;
-    cursor: pointer;
-    transition: 0.3s;
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox-close-btn:hover {
-    background: rgba(255,255,255,0.1);
-    color: #ffd700;
-}
-
-.lightbox-nav-btns {
-    display: flex;
-    gap: 20px;
-    margin-top: 25px;
-}
-
-.lightbox-nav-btns button {
-    background: rgba(255,255,255,0.1);
-    border: none;
-    color: #fff;
-    width: 55px; height: 55px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: 0.3s;
-    font-size: 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox-nav-btns button:hover {
-    background: #ffd700;
-    color: #000;
-}
-
-.lightbox-caption { margin-top: 20px; text-align: center; }
-.lightbox-caption h3 { color: #ffd700; font-size: 1.3rem; margin-bottom: 8px; }
-.lightbox-caption p  { color: #aaa; font-size: 0.95rem; }
-
-/* ================== LOADING ================== */
-.loading-spinner { display: none; text-align: center; padding: 50px; }
-.loading-spinner.active { display: block; }
-
-.spinner {
-    width: 50px; height: 50px;
-    border: 4px solid rgba(255,255,255,0.1);
-    border-left-color: #ffd700;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    margin: 0 auto 20px;
-}
-
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* ================== FOOTER ================== */
-footer {
-    padding: 40px 20px;
-    text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    background: linear-gradient(180deg, #111 0%, #000 100%);
-    margin-top: 60px;
-}
-
-.footer-logo-wrap {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 14px;
-}
-
-/* الدائرة في الفوتر بنفس الكلاسات — فقط أصغر */
-.footer-logo-wrap .logo-icon-wrap {
-    width: 30px;
-    height: 30px;
-}
-
-.footer-logo-text {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #D4AF37;
-}
-
-footer p {
-    color: #C0C0C0;
-    font-size: 0.85rem;
-    margin-top: 6px;
-}
-
-/* ================== RESPONSIVE ================== */
-@media (max-width: 1200px) {
-    .categories-grid { grid-template-columns: repeat(2,1fr); }
-}
-
-@media (max-width: 800px) {
-    header { padding: 0 20px; }
-
-    nav ul {
-        position: fixed;
-        top: 0; right: -100%;
-        background: #111;
-        flex-direction: column;
-        width: 280px;
-        height: 100vh;
-        padding: 100px 30px 30px;
-        transition: 0.4s;
-        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
-    }
-
-    nav ul.show { right: 0; }
-    .hamburger { display: flex; }
-
-    .hero h1 { font-size: 2rem; }
-    .hero p  { font-size: 0.95rem; }
-
-    .categories-section { padding: 40px 20px; }
-    .categories-grid { grid-template-columns: 1fr; gap: 20px; }
-    .category-card { aspect-ratio: 16/9; }
-
-    .gallery-content { padding: 20px; }
-    .gallery-grid { grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 15px; }
-    .lightbox-nav-btns button { width: 45px; height: 45px; }
-}
-
-@media (max-width: 500px) {
-    .hero h1 { font-size: 1.6rem; }
-    .gallery-grid { grid-template-columns: repeat(2,1fr); }
-    .gallery-item { aspect-ratio: 1/1; }
-}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MHG Studio | Портфолио</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* ================== HEADER ================== */
+        header {
+            width: 100%;
+            padding: 0 60px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            height: 80px;
+        }
+
+        header.scrolled {
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ================== LOGO ================== */
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-text-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+        }
+
+        .logo-name {
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffd700;
+            line-height: 1;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .logo-sub {
+            font-size: 11px;
+            color: #aaa;
+            font-weight: 400;
+            line-height: 1;
+            opacity: 0.8;
+            white-space: nowrap;
+        }
+
+        /* ================== ANIMATED SPHERE ================== */
+        .logo-icon-wrap {
+            position: relative;
+            width: 38px;
+            height: 38px;
+            flex-shrink: 0;
+        }
+
+        .logo-ring {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 2px solid #D4AF37;
+            animation: ringPulse 2.8s ease-in-out infinite;
+        }
+
+        .logo-ring:nth-child(2) {
+            inset: -5px;
+            border-color: rgba(212, 175, 55, 0.35);
+            animation: ringPulse 2.8s ease-in-out infinite 0.4s;
+        }
+
+        .logo-ring:nth-child(3) {
+            inset: -10px;
+            border-color: rgba(212, 175, 55, 0.15);
+            animation: ringPulse 2.8s ease-in-out infinite 0.8s;
+        }
+
+        @keyframes ringPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.12);
+                opacity: 0.6;
+            }
+        }
+
+        .logo-sphere {
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 38% 35%, #F0CC55, #D4AF37 50%, #8a6f00 100%);
+            box-shadow:
+                0 0 12px rgba(212, 175, 55, 0.6),
+                0 0 30px rgba(212, 175, 55, 0.25),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            animation:
+                spherePopIn 0.7s cubic-bezier(.36, .07, .19, .97) both,
+                sphereGlow 3s ease-in-out 0.7s infinite,
+                sphereBounce 3.5s ease-in-out 1.2s infinite;
+        }
+
+        .logo-sphere::after {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 35%;
+            height: 30%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.35);
+            filter: blur(3px);
+            animation: shineMove 3s ease-in-out infinite;
+        }
+
+        .logo-orbit {
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            animation: orbitSpin 4s linear infinite;
+        }
+
+        .logo-orbit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: #F0CC55;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #D4AF37;
+        }
+
+        @keyframes orbitSpin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spherePopIn {
+            0% {
+                transform: scale(0) rotate(-30deg);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.15) rotate(5deg);
+                opacity: 1;
+            }
+
+            80% {
+                transform: scale(0.92) rotate(-2deg);
+            }
+
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes sphereGlow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 12px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.9), 0 0 50px rgba(212, 175, 55, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.35);
+            }
+        }
+
+        @keyframes sphereBounce {
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            30% {
+                transform: translateY(-8px) scale(1.06);
+            }
+
+            50% {
+                transform: translateY(0) scale(0.96);
+            }
+
+            65% {
+                transform: translateY(-4px) scale(1.02);
+            }
+
+            80% {
+                transform: translateY(0) scale(0.99);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes shineMove {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+                opacity: 0.35;
+            }
+
+            50% {
+                transform: translate(2px, 2px);
+                opacity: 0.55;
+            }
+        }
+
+        /* ================== NAV ================== */
+        nav ul {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: #ffd700;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::after,
+        nav ul li a.active::after {
+            width: 80%;
+        }
+
+        nav ul li a:hover,
+        nav ul li a.active {
+            color: #ffd700;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            transition: 0.3s;
+        }
+
+        .hamburger.active div:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        .hamburger.active div:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
+        /* ================== HERO ================== */
+        .hero {
+            position: relative;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 60px 20px 40px;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 0;
+        }
+
+        .hero h1,
+        .hero p {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #ffd700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* ================== CATEGORIES ================== */
+        .categories-section {
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .categories-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .categories-title p {
+            color: #888;
+            font-size: 1rem;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .category-card {
+            position: relative;
+            aspect-ratio: 4/5;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd700;
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.15);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.3));
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+        }
+
+        .category-overlay h3 {
+            font-size: 1.3rem;
+            color: #ffd700;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .category-overlay p {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        .category-count {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 215, 0, 0.9);
+            color: #000;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .category-icon {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 45px;
+            height: 45px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd700;
+            font-size: 18px;
+        }
+
+        /* ================== FOLDERS MODAL ================== */
+        .folders-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+        }
+
+        .folders-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .folders-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        .folders-header h2 {
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        .folders-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .folders-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffd700;
+        }
+
+        .folders-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        .folders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* تصميم المجلد الجديد - كفر صورة */
+        .folder-card {
+            position: relative;
+            aspect-ratio: 4/5;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            background: #111;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .folder-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: #ffd700;
+            box-shadow: 0 25px 50px rgba(255, 215, 0, 0.2);
+        }
+
+        .folder-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .folder-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .folder-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0.1) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .folder-card:hover .folder-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0.2) 100%);
+        }
+
+        .folder-name {
+            font-size: 1.5rem;
+            color: #ffd700;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .folder-count {
+            font-size: 1rem;
+            color: #ccc;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .folder-count i {
+            color: #ffd700;
+        }
+
+        .folder-icon-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 215, 0, 0.95);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+            transition: transform 0.3s ease;
+            z-index: 10;
+        }
+
+        .folder-card:hover .folder-icon-badge {
+            transform: scale(1.1) rotate(10deg);
+        }
+
+        /* ================== GALLERY MODAL ================== */
+        .gallery-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 2100;
+            display: none;
+            flex-direction: column;
+        }
+
+        .gallery-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 10, 0.9);
+        }
+
+        .gallery-header h2 {
+            color: #ffd700;
+            font-size: 1.5rem;
+        }
+
+        .gallery-close {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 28px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffd700;
+        }
+
+        .back-btn {
+            background: rgba(255, 215, 0, 0.2);
+            border: 1px solid #ffd700;
+            color: #ffd700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .gallery-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/5;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            background: #111;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            opacity: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .item-overlay h4 {
+            color: #ffd700;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .item-overlay p {
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 215, 0, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .play-icon {
+            opacity: 1;
+        }
+
+        .play-icon i {
+            color: #000;
+            font-size: 22px;
+            margin-left: 3px;
+        }
+
+        /* ================== LIGHTBOX ================== */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-container {
+            position: relative;
+            max-width: 95%;
+            max-height: 95%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-media {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-media img,
+        .lightbox-media video {
+            max-width: 100%;
+            max-height: 85vh;
+            border-radius: 8px;
+        }
+
+        .lightbox-close-btn {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 32px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffd700;
+        }
+
+        .lightbox-nav-btns {
+            display: flex;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .lightbox-nav-btns button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: #fff;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-nav-btns button:hover {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .lightbox-caption {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .lightbox-caption h3 {
+            color: #ffd700;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .lightbox-caption p {
+            color: #aaa;
+            font-size: 0.95rem;
+        }
+
+        /* ================== LOADING ================== */
+        .loading-spinner {
+            display: none;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .loading-spinner.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-left-color: #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* ================== FOOTER ================== */
+        footer {
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: linear-gradient(180deg, #111 0%, #000 100%);
+            margin-top: 60px;
+        }
+
+        .footer-logo-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .footer-logo-wrap .logo-icon-wrap {
+            width: 30px;
+            height: 30px;
+        }
+
+        .footer-logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #D4AF37;
+        }
+
+        footer p {
+            color: #C0C0C0;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+
+        /* ================== RESPONSIVE ================== */
+        @media (max-width: 1200px) {
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .folders-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 800px) {
+            header {
+                padding: 0 20px;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                background: #111;
+                flex-direction: column;
+                width: 280px;
+                height: 100vh;
+                padding: 100px 30px 30px;
+                transition: 0.4s;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            }
+
+            nav ul.show {
+                right: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 0.95rem;
+            }
+
+            .categories-section {
+                padding: 40px 20px;
+            }
+
+            .categories-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .category-card {
+                aspect-ratio: 16/9;
+            }
+
+            .folders-content {
+                padding: 20px;
+            }
+
+            .folders-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+
+            .folder-card {
+                aspect-ratio: 1/1;
+            }
+
+            .gallery-content {
+                padding: 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .lightbox-nav-btns button {
+                width: 45px;
+                height: 45px;
+            }
+
+            .gallery-header,
+            .folders-header {
+                padding: 15px 20px;
+                flex-wrap: wrap;
+            }
+
+            .back-btn {
+                margin-right: 10px;
+                padding: 8px 15px;
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-item {
+                aspect-ratio: 1/1;
+            }
+
+            .folders-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .folder-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<!-- ================== HEADER ================== -->
-<header id="header">
+    <!-- ================== HEADER ================== -->
+    <header id="header">
 
-    <div class="logo">
-        <a href="index.html">
-            <!-- الدائرة المتحركة -->
+        <div class="logo">
+            <a href="index.html">
+                <div class="logo-icon-wrap">
+                    <div class="logo-ring"></div>
+                    <div class="logo-ring"></div>
+                    <div class="logo-ring"></div>
+                    <div class="logo-sphere"></div>
+                    <div class="logo-orbit"></div>
+                </div>
+                <div class="logo-text-wrap">
+                    <span class="logo-name">Media Sphere</span>
+                    <span class="logo-sub">Контент для бизнеса</span>
+                </div>
+            </a>
+        </div>
+
+        <nav>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul id="nav-links">
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="portfolio.html" class="active">Портфолио</a></li>
+                <li><a href="services.html">Услуги</a></li>
+                <li><a href="about.html">О нас</a></li>
+                <li><a href="contact.html">Контакты</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <!-- ================== HERO ================== -->
+    <section class="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="corporate-video.mp4" type="video/mp4">
+        </video>
+        <h1>Наше Портфолио</h1>
+        <p>Откройте для себя наши лучшие работы в области видеопроизводства, фотографии и рекламы</p>
+    </section>
+
+    <!-- ================== CATEGORIES ================== -->
+    <section class="categories-section">
+        <div class="categories-title">
+            <p>Выберите категорию для просмотра всех работ</p>
+        </div>
+
+        <div class="categories-grid">
+
+            <div class="category-card" data-category="photosessions">
+                <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/132b22298-03b7-451a-bd83-31b17bf47c82.png"
+                    alt="Фотосессии" loading="lazy">
+                <div class="category-icon"><i class="fas fa-camera"></i></div>
+                <div class="category-count">28 работ</div>
+                <div class="category-overlay">
+                    <h3>Фотосессии</h3>
+                    <p>Портретная и студийная съёмка</p>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="videos">
+                <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/18854067a-91b1-4c51-bec0-04adb0cb910f.png"
+                    alt="Видео" loading="lazy">
+                <div class="category-icon"><i class="fas fa-video"></i></div>
+                <div class="category-count">15 работ</div>
+                <div class="category-overlay">
+                    <h3>Видео</h3>
+                    <p>Корпоративные ролики и клипы</p>
+                </div>
+            </div>
+
+            <div class="category-card" data-category="products">
+                <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/1cf47776e-2848-4f37-a1a4-65fbed392fcb.png"
+                    alt="Фото Продуктов" loading="lazy">
+                <div class="category-icon"><i class="fas fa-box"></i></div>
+                <div class="category-count">20 работ</div>
+                <div class="category-overlay">
+                    <h3>Фото Продуктов</h3>
+                    <p>Предметная и коммерческая съёмка</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ================== FOLDERS MODAL ================== -->
+    <div class="folders-modal" id="folders-modal">
+        <div class="folders-header">
+            <h2 id="folders-title">Папки</h2>
+            <button class="folders-close" onclick="closeFolders()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="folders-content">
+            <div class="loading-spinner" id="folders-loader">
+                <div class="spinner"></div>
+                <p>Загрузка папок...</p>
+            </div>
+            <div class="folders-grid" id="folders-grid"></div>
+        </div>
+    </div>
+
+    <!-- ================== GALLERY MODAL ================== -->
+    <div class="gallery-modal" id="gallery-modal">
+        <div class="gallery-header">
+            <div style="display: flex; align-items: center;">
+                <button class="back-btn" id="back-btn" onclick="goBackToFolders()">
+                    <i class="fas fa-arrow-left"></i> Назад к папкам
+                </button>
+                <h2 id="gallery-title">Галерея</h2>
+            </div>
+            <button class="gallery-close" onclick="closeGallery()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="gallery-content">
+            <div class="loading-spinner" id="gallery-loader">
+                <div class="spinner"></div>
+                <p>Загрузка работ...</p>
+            </div>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </div>
+    </div>
+
+    <!-- ================== LIGHTBOX ================== -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-container">
+            <button class="lightbox-close-btn" onclick="closeLightbox()">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="lightbox-media" id="lightbox-media"></div>
+            <div class="lightbox-nav-btns">
+                <button onclick="prevLightbox()"><i class="fas fa-chevron-left"></i></button>
+                <button onclick="nextLightbox()"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="lightbox-caption">
+                <h3 id="lightbox-title"></h3>
+                <p id="lightbox-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================== FOOTER ================== -->
+    <footer>
+        <div class="footer-logo-wrap">
             <div class="logo-icon-wrap">
                 <div class="logo-ring"></div>
                 <div class="logo-ring"></div>
@@ -694,136 +1237,15 @@ footer p {
                 <div class="logo-sphere"></div>
                 <div class="logo-orbit"></div>
             </div>
-            <!-- الاسم والنص تحته -->
-            <div class="logo-text-wrap">
-                <span class="logo-name">Медиа Сфера</span>
-                <span class="logo-sub">Контент для бизнеса</span>
-            </div>
-        </a>
-    </div>
-
-    <nav>
-        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-            <div></div>
-            <div></div>
-            <div></div>
+            <span class="footer-logo-text">Media Sphere</span>
         </div>
-        <ul id="nav-links">
-            <li><a href="index.html">Главная</a></li>
-            <li><a href="portfolio.html" class="active">Портфолио</a></li>
-            <li><a href="services.html">Услуги</a></li>
-            <li><a href="about.html">О нас</a></li>
-            <li><a href="contact.html">Контакты</a></li>
-        </ul>
-    </nav>
+        <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса.</p>
+        <p style="margin-top:10px">© 2026 MHG Studio. Все права защищены.</p>
+    </footer>
 
-</header>
-
-<!-- ================== HERO ================== -->
-<section class="hero">
-    <video class="hero-video" autoplay muted loop playsinline>
-        <source src="corporate-video.mp4" type="video/mp4">
-    </video>
-    <h1>Наше Портфолио</h1>
-    <p>Откройте для себя наши лучшие работы в области видеопроизводства, фотографии и рекламы</p>
-</section>
-
-<!-- ================== CATEGORIES ================== -->
-<section class="categories-section">
-    <div class="categories-title">
-        <p>Выберите категорию для просмотра всех работ</p>
-    </div>
-
-    <div class="categories-grid">
-
-        <div class="category-card" data-category="photosessions">
-            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/132b22298-03b7-451a-bd83-31b17bf47c82.png" alt="Фотосессии" loading="lazy">
-            <div class="category-icon"><i class="fas fa-camera"></i></div>
-            <div class="category-count">28 работ</div>
-            <div class="category-overlay">
-                <h3>Фотосессии</h3>
-                <p>Портретная и студийная съёмка</p>
-            </div>
-        </div>
-
-        <div class="category-card" data-category="videos">
-            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/18854067a-91b1-4c51-bec0-04adb0cb910f.png" alt="Видео" loading="lazy">
-            <div class="category-icon"><i class="fas fa-video"></i></div>
-            <div class="category-count">15 работ</div>
-            <div class="category-overlay">
-                <h3>Видео</h3>
-                <p>Корпоративные ролики и клипы</p>
-            </div>
-        </div>
-
-        <div class="category-card" data-category="products">
-            <img src="https://image.qwenlm.ai/public_source/4494f455-8747-4961-803b-b63bd159154a/1cf47776e-2848-4f37-a1a4-65fbed392fcb.png" alt="Фото Продуктов" loading="lazy">
-            <div class="category-icon"><i class="fas fa-box"></i></div>
-            <div class="category-count">20 работ</div>
-            <div class="category-overlay">
-                <h3>Фото Продуктов</h3>
-                <p>Предметная и коммерческая съёмка</p>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-<!-- ================== GALLERY MODAL ================== -->
-<div class="gallery-modal" id="gallery-modal">
-    <div class="gallery-header">
-        <h2 id="gallery-title">Галерея</h2>
-        <button class="gallery-close" onclick="closeGallery()">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-    <div class="gallery-content">
-        <div class="loading-spinner" id="gallery-loader">
-            <div class="spinner"></div>
-            <p>Загрузка работ...</p>
-        </div>
-        <div class="gallery-grid" id="gallery-grid"></div>
-    </div>
-</div>
-
-<!-- ================== LIGHTBOX ================== -->
-<div class="lightbox" id="lightbox">
-    <div class="lightbox-container">
-        <button class="lightbox-close-btn" onclick="closeLightbox()">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="lightbox-media" id="lightbox-media"></div>
-        <div class="lightbox-nav-btns">
-            <button onclick="prevLightbox()"><i class="fas fa-chevron-left"></i></button>
-            <button onclick="nextLightbox()"><i class="fas fa-chevron-right"></i></button>
-        </div>
-        <div class="lightbox-caption">
-            <h3 id="lightbox-title"></h3>
-            <p id="lightbox-desc"></p>
-        </div>
-    </div>
-</div>
-
-<!-- ================== FOOTER ================== -->
-<footer>
-    <div class="footer-logo-wrap">
-        <div class="logo-icon-wrap">
-            <div class="logo-ring"></div>
-            <div class="logo-ring"></div>
-            <div class="logo-ring"></div>
-            <div class="logo-sphere"></div>
-            <div class="logo-orbit"></div>
-        </div>
-        <span class="footer-logo-text">Медиа Сфера</span>
-    </div>
-    <p>Мы знаем, как работает телевидение. И используем этот опыт для вашего бизнеса.</p>
-    <p style="margin-top:10px">© 2026 Медиа Сфера. Все права защищены.</p>
-</footer>
-
-<script>
-/* ================== DATA ================== */
-
-       const portfolioData = {
+    <script>
+        /* ================== DATA ================== */
+        const portfolioData = {
             photosessions: {
                 folders: {
                     "1": {
@@ -1142,149 +1564,266 @@ footer p {
             products: 'Фото Продуктов'
         };
 
-let currentGallery = [];
-let currentLightboxIndex = 0;
+        let currentCategory = null;
+        let currentFolder = null;
+        let currentGallery = [];
+        let currentLightboxIndex = 0;
 
-/* ---- Header scroll ---- */
-window.addEventListener('scroll', () => {
-    document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
-});
+        /* ---- Header scroll ---- */
+        window.addEventListener('scroll', () => {
+            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+        });
 
-/* ---- Mobile menu ---- */
-function toggleMenu() {
-    document.getElementById('nav-links').classList.toggle('show');
-    document.getElementById('hamburger').classList.toggle('active');
-}
+        /* ---- Mobile menu ---- */
+        function toggleMenu() {
+            document.getElementById('nav-links').classList.toggle('show');
+            document.getElementById('hamburger').classList.toggle('active');
+        }
 
-document.querySelectorAll('#nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.getElementById('nav-links').classList.remove('show');
-        document.getElementById('hamburger').classList.remove('active');
-    });
-});
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-links').classList.remove('show');
+                document.getElementById('hamburger').classList.remove('active');
+            });
+        });
 
-/* ---- Open Gallery ---- */
-document.querySelectorAll('.category-card').forEach(card => {
-    card.addEventListener('click', () => openGallery(card.dataset.category));
-});
+        /* ---- Open Category ---- */
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const category = card.dataset.category;
+                if (category === 'photosessions') {
+                    openFolders(category);
+                } else {
+                    openGallery(category);
+                }
+            });
+        });
 
-function openGallery(category) {
-    const modal  = document.getElementById('gallery-modal');
-    const grid   = document.getElementById('gallery-grid');
-    const loader = document.getElementById('gallery-loader');
-    const title  = document.getElementById('gallery-title');
+        /* ---- Folders Modal Functions ---- */
+        function openFolders(category) {
+            currentCategory = category;
+            const modal = document.getElementById('folders-modal');
+            const grid = document.getElementById('folders-grid');
+            const loader = document.getElementById('folders-loader');
+            const title = document.getElementById('folders-title');
 
-    title.textContent = categoryTitles[category] || 'Галерея';
-    grid.innerHTML = '';
-    loader.classList.add('active');
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+            title.textContent = categoryTitles[category] || 'Папки';
+            grid.innerHTML = '';
+            loader.classList.add('active');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
 
-    setTimeout(() => {
-        currentGallery = portfolioData[category] || [];
+            // استخدام requestAnimationFrame بدلاً من setTimeout للتأكد من تحميل الـ DOM
+            requestAnimationFrame(() => {
+                const data = portfolioData[category];
+                if (data && data.folders) {
+                    Object.keys(data.folders).forEach(folderId => {
+                        const folder = data.folders[folderId];
+                        const el = document.createElement('div');
+                        el.className = 'folder-card';
+                        el.innerHTML = `
+                    <img src="${folder.thumbnail}" alt="${folder.name}" loading="lazy">
+                    <div class="folder-icon-badge">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <div class="folder-overlay">
+                        <div class="folder-name">${folder.name}</div>
+                        <div class="folder-count">
+                            <i class="fas fa-images"></i>
+                            ${folder.count} фото
+                        </div>
+                    </div>
+                `;
 
-        currentGallery.forEach((item, index) => {
-            const el = document.createElement('div');
-            el.className = 'gallery-item';
+                        // إضافة event listener مباشرة وواضح
+                        el.onclick = function (e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            console.log('Opening folder:', folderId); // للتأكد من أن النقر يعمل
+                            openFolder(folderId);
+                        };
 
-            if (item.type === 'video') {
-                el.innerHTML = `
+                        grid.appendChild(el);
+                    });
+                }
+                loader.classList.remove('active');
+            });
+        }
+
+        function closeFolders() {
+            const modal = document.getElementById('folders-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            // لا نمسح currentCategory هنا لأننا نحتاجه للعودة
+        }
+
+        function openFolder(folderId) {
+            console.log('openFolder called with:', folderId); // للتصحيح
+            currentFolder = folderId;
+
+            // إغلاق نافذة المجلدات أولاً
+            const foldersModal = document.getElementById('folders-modal');
+            foldersModal.classList.remove('active');
+
+            // فتح الـ Gallery مباشرة بدون تأخير
+            openGallery(currentCategory, folderId);
+        }
+
+        function goBackToFolders() {
+            closeGallery();
+            // إعادة فتح المجلدات
+            setTimeout(() => {
+                openFolders(currentCategory);
+            }, 100);
+        }
+
+        /* ---- Gallery Modal Functions ---- */
+        function openGallery(category, folderId = null) {
+            currentCategory = category;
+            currentFolder = folderId;
+
+            const modal = document.getElementById('gallery-modal');
+            const grid = document.getElementById('gallery-grid');
+            const loader = document.getElementById('gallery-loader');
+            const title = document.getElementById('gallery-title');
+            const backBtn = document.getElementById('back-btn');
+
+            const data = portfolioData[category];
+            let items = [];
+
+            if (folderId && data.folders && data.folders[folderId]) {
+                items = data.folders[folderId].items;
+                title.textContent = data.folders[folderId].name;
+                backBtn.style.display = 'flex';
+            } else if (data.items) {
+                items = data.items;
+                title.textContent = categoryTitles[category] || 'Галерея';
+                backBtn.style.display = 'none';
+            }
+
+            grid.innerHTML = '';
+            loader.classList.add('active');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            requestAnimationFrame(() => {
+                currentGallery = items;
+
+                currentGallery.forEach((item, index) => {
+                    const el = document.createElement('div');
+                    el.className = 'gallery-item';
+
+                    if (item.type === 'video') {
+                        el.innerHTML = `
                     <video muted loop playsinline preload="metadata">
                         <source src="${item.src}" type="video/mp4">
                     </video>
                     <div class="play-icon"><i class="fas fa-play"></i></div>
                     <div class="item-overlay"><h4>${item.title}</h4><p>${item.desc}</p></div>
                 `;
-                const v = el.querySelector('video');
-                el.addEventListener('mouseenter', () => v.play().catch(()=>{}));
-                el.addEventListener('mouseleave', () => { v.pause(); v.currentTime=0; });
-            } else {
-                el.innerHTML = `
+                        const v = el.querySelector('video');
+                        el.addEventListener('mouseenter', () => v.play().catch(() => { }));
+                        el.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+                    } else {
+                        el.innerHTML = `
                     <img src="${item.src}" alt="${item.title}" loading="lazy">
                     <div class="item-overlay"><h4>${item.title}</h4><p>${item.desc}</p></div>
                 `;
+                    }
+
+                    el.addEventListener('click', () => openLightbox(index));
+                    grid.appendChild(el);
+                });
+
+                loader.classList.remove('active');
+            });
+        }
+
+        function closeGallery() {
+            const modal = document.getElementById('gallery-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            modal.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime = 0; });
+            // لا نمسح currentFolder إذا كنا سنعود للمجلدات
+        }
+
+        /* ---- Lightbox ---- */
+        function openLightbox(index) {
+            const lb = document.getElementById('lightbox');
+            const media = document.getElementById('lightbox-media');
+            const titleEl = document.getElementById('lightbox-title');
+            const descEl = document.getElementById('lightbox-desc');
+
+            currentLightboxIndex = index;
+            const item = currentGallery[index];
+            if (!item) return;
+
+            media.innerHTML = '';
+
+            if (item.type === 'video') {
+                const v = document.createElement('video');
+                v.src = item.src;
+                v.controls = true;
+                v.autoplay = true;
+                v.className = 'lightbox-media';
+                media.appendChild(v);
+            } else {
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.alt = item.title;
+                img.className = 'lightbox-media';
+                media.appendChild(img);
             }
 
-            el.addEventListener('click', () => openLightbox(index));
-            grid.appendChild(el);
+            titleEl.textContent = item.title;
+            descEl.textContent = item.desc;
+            lb.classList.add('active');
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            const media = document.getElementById('lightbox-media');
+            const v = media.querySelector('video');
+            if (v) { v.pause(); v.src = ''; }
+            lb.classList.remove('active');
+        }
+
+        function prevLightbox() {
+            currentLightboxIndex = (currentLightboxIndex - 1 + currentGallery.length) % currentGallery.length;
+            openLightbox(currentLightboxIndex);
+        }
+
+        function nextLightbox() {
+            currentLightboxIndex = (currentLightboxIndex + 1) % currentGallery.length;
+            openLightbox(currentLightboxIndex);
+        }
+
+        document.getElementById('lightbox').addEventListener('click', e => {
+            if (e.target.id === 'lightbox') closeLightbox();
         });
 
-        loader.classList.remove('active');
-    }, 400);
-}
+        document.addEventListener('keydown', e => {
+            const lb = document.getElementById('lightbox');
+            const modal = document.getElementById('gallery-modal');
+            const foldersModal = document.getElementById('folders-modal');
 
-function closeGallery() {
-    const modal = document.getElementById('gallery-modal');
-    modal.classList.remove('active');
-    document.body.style.overflow = 'auto';
-    modal.querySelectorAll('video').forEach(v => { v.pause(); v.currentTime=0; });
-}
-
-/* ---- Lightbox ---- */
-function openLightbox(index) {
-    const lb      = document.getElementById('lightbox');
-    const media   = document.getElementById('lightbox-media');
-    const titleEl = document.getElementById('lightbox-title');
-    const descEl  = document.getElementById('lightbox-desc');
-
-    currentLightboxIndex = index;
-    const item = currentGallery[index];
-    if (!item) return;
-
-    media.innerHTML = '';
-
-    if (item.type === 'video') {
-        const v = document.createElement('video');
-        v.src = item.src;
-        v.controls = true;
-        v.autoplay = true;
-        v.className = 'lightbox-media';
-        media.appendChild(v);
-    } else {
-        const img = document.createElement('img');
-        img.src = item.src;
-        img.alt = item.title;
-        img.className = 'lightbox-media';
-        media.appendChild(img);
-    }
-
-    titleEl.textContent = item.title;
-    descEl.textContent  = item.desc;
-    lb.classList.add('active');
-}
-
-function closeLightbox() {
-    const lb    = document.getElementById('lightbox');
-    const media = document.getElementById('lightbox-media');
-    const v = media.querySelector('video');
-    if (v) { v.pause(); v.src=''; }
-    lb.classList.remove('active');
-}
-
-function prevLightbox() {
-    currentLightboxIndex = (currentLightboxIndex - 1 + currentGallery.length) % currentGallery.length;
-    openLightbox(currentLightboxIndex);
-}
-
-function nextLightbox() {
-    currentLightboxIndex = (currentLightboxIndex + 1) % currentGallery.length;
-    openLightbox(currentLightboxIndex);
-}
-
-document.getElementById('lightbox').addEventListener('click', e => {
-    if (e.target.id === 'lightbox') closeLightbox();
-});
-
-document.addEventListener('keydown', e => {
-    const lb    = document.getElementById('lightbox');
-    const modal = document.getElementById('gallery-modal');
-    if (lb.classList.contains('active')) {
-        if (e.key === 'Escape')      closeLightbox();
-        if (e.key === 'ArrowLeft')   prevLightbox();
-        if (e.key === 'ArrowRight')  nextLightbox();
-    }
-    if (modal.classList.contains('active') && e.key === 'Escape') closeGallery();
-});
-</script>
+            if (lb.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') prevLightbox();
+                if (e.key === 'ArrowRight') nextLightbox();
+            }
+            if (modal.classList.contains('active') && e.key === 'Escape') {
+                if (currentFolder) {
+                    goBackToFolders();
+                } else {
+                    closeGallery();
+                }
+            }
+            if (foldersModal.classList.contains('active') && e.key === 'Escape') {
+                closeFolders();
+            }
+        });
+    </script>
 </body>
+
 </html>
