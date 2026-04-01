@@ -1213,13 +1213,16 @@
         }
 
  
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
 
-.hero-overlay::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(212,175,55,0.08), transparent 60%);
-}
+            background:
+                linear-gradient(to bottom, rgba(0,0,0,0.75), rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.85)),
+                radial-gradient(circle at center, transparent 30%, rgba(0,0,0,0.9));
+        }
     </style>
 </head>
 
