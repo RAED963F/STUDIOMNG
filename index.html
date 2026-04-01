@@ -545,7 +545,7 @@
            ============================================ */
         .hero-section {
             position: relative;
-            min-height: calc(100vh - var(--topbar-height) - var(--header-height));
+            min-height: 100svh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -691,7 +691,6 @@
             display: flex;
             gap: 24px;
             justify-content: center;
-            flex-wrap: nowrap;
         }
 
         .mgh-card {
@@ -1169,6 +1168,43 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
+        }
+
+
+                /* FIX MOBILE HERO */
+        .hero-section {
+            min-height: 100svh;
+        }
+
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* FIX ICON */
+        .s-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* FIX HOVER ON MOBILE */
+        @media (hover: hover) {
+            .service-item:hover {
+                transform: translateY(-12px) scale(1.02);
+            }
+        }
+
+        /* FIX MENU */
+        .main-nav {
+            max-height: calc(100vh - var(--header-height));
+            overflow-y: auto;
+        }
+
+        /* OPTIONAL: FIX OLD SECTION IF USED */
+        .mgh-cards {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         }
     </style>
 </head>
