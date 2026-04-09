@@ -1681,18 +1681,7 @@
       });
     });
 
-    /* ---- Open Category ---- */
-    document.querySelectorAll('.category-card').forEach(card => {
-      card.addEventListener('click', () => {
-        const category = card.dataset.category;
-        if (category === 'photosessions') {
-          openFolders(category);
-        } else {
-          openGallery(category);
-        }
-      });
-    });
-
+  
     /* ---- Folders Modal Functions ---- */
     function openFolders(category) {
       currentCategory = category;
