@@ -1580,6 +1580,11 @@
   </footer>
 
   <script>
+
+    console.log('portfolioData structure:', Object.keys(portfolioData));
+    console.log('photosessions has folders?', 'folders' in portfolioData.photosessions);
+
+
     /* ================== DATA ================== */
     const portfolioData = {
       photosessions: {
@@ -1691,54 +1696,35 @@
 
     /* ---- Folders Modal Functions ---- */
     function openFolders(category) {
-      currentCategory = category;
-      const modal = document.getElementById('folders-modal');
-      const grid = document.getElementById('folders-grid');
-      const loader = document.getElementById('folders-loader');
-      const title = document.getElementById('folders-title');
+  currentCategory = category;
+  const modal = document.getElementById('folders-modal');
+  const grid = document.getElementById('folders-grid');
+  const loader = document.getElementById('folders-loader');
+  const title = document.getElementById('folders-title');
 
-      title.textContent = categoryTitles[category] || 'Папки';
-      grid.innerHTML = '';
-      loader.classList.add('active');
-      modal.classList.add('active');
-      document.body.style.overflow = 'hidden';
+  title.textContent = categoryTitles[category] || 'المعرض';
+  grid.innerHTML = '';
+  loader.classList.add('active');
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 
-      // استخدام requestAnimationFrame بدلاً من setTimeout للتأكد من تحميل الـ DOM
-      requestAnimationFrame(() => {
-        const data = portfolioData[category];
-        if (data && data.folders) {
-          Object.keys(data.folders).forEach(folderId => {
-            const folder = data.folders[folderId];
-            const el = document.createElement('div');
-            el.className = 'folder-card';
-            el.innerHTML = `
-                    <img src="${folder.thumbnail}" alt="${folder.name}" loading="lazy">
-                    <div class="folder-icon-badge">
-                        <i class="fas fa-folder-open"></i>
-                    </div>
-                    <div class="folder-overlay">
-                        <div class="folder-name">${folder.name}</div>
-                        <div class="folder-count">
-                            <i class="fas fa-images"></i>
-                            ${folder.count} фото
-                        </div>
-                    </div>
-                `;
-
-            // إضافة event listener مباشرة وواضح
-            el.onclick = function (e) {
-              e.preventDefault();
-              e.stopPropagation();
-              console.log('Opening folder:', folderId); // للتأكد من أن النقر يعمل
-              openFolder(folderId);
-            };
-
-            grid.appendChild(el);
-          });
-        }
-        loader.classList.remove('active');
-      });
+  requestAnimationFrame(() => {
+    const data = portfolioData[category];
+    
+    // ✅ التعامل مع items مباشرة إذا لم توجد folders
+    if (data && data.items) {
+      // فتح المعرض مباشرة بدلاً من عرض مجلدات فارغة
+      loader.classList.remove('active');
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+      openGallery(category);
+      return;
     }
+    
+    // ... باقي كود عرض المجلدات إذا وُجدت
+    loader.classList.remove('active');
+  });
+}
 
     function closeFolders() {
       const modal = document.getElementById('folders-modal');
